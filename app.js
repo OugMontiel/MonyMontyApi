@@ -3,12 +3,12 @@ const express = require("express");
 const session = require("express-session");
 const path = require("path");
 
-// configuracion para login
+// Configuración para login
 const passport = require("passport");
 // Cargar las configuraciones de Passport para Google
 require("./auth/infrastructure/config/passportGoogle");
 
-// Cargar middlewares y routers
+// Middlewares y routers
 const isAuthenticated = require("./auth/infrastructure/middleware/isAuthenticated");
 const authRouter = require("./auth/application/routes/authRouter");
 const userRoutes = require("./user/application/routes/userRoutes");
@@ -32,24 +32,15 @@ app.use(
   })
 );
 
-// Inicialización de Passport.js para autenticación
+// Inicialización de Passport.js
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Definir el directorio base global y servir archivos estáticos generados por Vite
-global.appRoot = path.resolve(__dirname, "..");
-app.use(express.static(path.join(global.appRoot, "dist")));
-
-// Configurar rutas
-app.use("/user", userRoutes); // Rutas para inicio de sesión local
-app.use("/auth", authRouter); // Rutas para inicio de sesión con Google
-// app.use('/product', isAuthenticated, productRoutes); // Rutas para inicio de sesión
+// Rutas API
+app.use("/user", userRoutes);
+app.use("/auth", authRouter);
+// app.use('/product', isAuthenticated, productRoutes);
 app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: "Ruta protegida"}));
-
-// Servir el archivo index.html para cualquier otra ruta (React Single Page App)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(global.appRoot, "dist", "index.html"));
-});
 
 // Configuración del servidor
 const config = {
