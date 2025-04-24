@@ -1,5 +1,5 @@
 // Gestiona las peticiones HTTP y las respuestas, delegando la lógica de negocio a los servicios.
-const { validationResult } = require("express-validator");
+const {validationResult} = require("express-validator");
 const ProductService = require("../services/productService");
 
 class ProductController {
@@ -10,8 +10,8 @@ class ProductController {
   validarExpres(req, res) {
     const errors = validationResult(req);
     // console.error("errors:", errors);
-    if (!errors.isEmpty()){
-      res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty()) {
+      res.status(400).json({errors: errors.array()});
       return; // Detener la ejecución si hay errores
     }
     return true;
@@ -31,7 +31,7 @@ class ProductController {
       // console.error("Error:", error);
 
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   // obtener un Product
@@ -45,7 +45,7 @@ class ProductController {
       res.status(200).json(product);
     } catch (error) {
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   // actualizar un Usuario
@@ -59,7 +59,7 @@ class ProductController {
       res.status(200).json(product);
     } catch (error) {
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   async deleteProduct(req, res) {
@@ -74,16 +74,16 @@ class ProductController {
       // res.status(200).json(user);
     } catch (error) {
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   async getAllProducts(req, res) {
     try {
-        const products = await this.productService.getAllProducts(); // Cambia aquí
-        res.status(200).json(products);    
+      const products = await this.productService.getAllProducts(); // Cambia aquí
+      res.status(200).json(products);
     } catch (error) {
-        console.error('Error al obtener productos:', error); // Agrega un log para el error
-        res.status(500).json({ error: error.message });
+      console.error("Error al obtener productos:", error); // Agrega un log para el error
+      res.status(500).json({error: error.message});
     }
   }
 }

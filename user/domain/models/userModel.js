@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongodb");
+const {ObjectId} = require("mongodb");
 const ConnectToDatabase = require("../../infrastructure/mongodb");
 
 class User {
@@ -22,7 +22,7 @@ class User {
     try {
       await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
       const collection = this.dbConnection.db.collection("user");
-      const [res] = await collection.find({ _id: new ObjectId(id) }).toArray();
+      const [res] = await collection.find({_id: new ObjectId(id)}).toArray();
       return res;
     } catch (error) {
       throw new Error(`Error al insertar usuario: ${error.message}`);
@@ -34,16 +34,10 @@ class User {
     try {
       await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
       const collection = this.dbConnection.db.collection("user");
-      const res = await collection.updateOne(
-        { _id: new ObjectId(id) },
-        { $set: updateData },
-        { upsert: false }
-      );
+      const res = await collection.updateOne({_id: new ObjectId(id)}, {$set: updateData}, {upsert: false});
       return res;
     } catch (error) {
-      throw new Error(
-        JSON.stringify({ status: 500, message: "Error updating user" })
-      );
+      throw new Error(JSON.stringify({status: 500, message: "Error updating user"}));
     } finally {
       await this.dbConnection.connectClose(); // Cerrar la conexión en el bloque finally
     }
@@ -52,12 +46,10 @@ class User {
     try {
       await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
       const collection = this.dbConnection.db.collection("user");
-      const res = await collection.deleteMany({ _id: new ObjectId(id) });
+      const res = await collection.deleteMany({_id: new ObjectId(id)});
       return res;
     } catch (error) {
-      throw new Error(
-        JSON.stringify({ status: 500, message: "Error updating user" })
-      );
+      throw new Error(JSON.stringify({status: 500, message: "Error updating user"}));
     } finally {
       await this.dbConnection.connectClose(); // Cerrar la conexión en el bloque finally
     }

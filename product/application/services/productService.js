@@ -6,7 +6,7 @@ class UserService {
     this.productRepository = new ProductRepository();
   }
   async prueva(req, res) {
-    return { message: "¡entrando a productRepository de ruraqMaki!" };
+    return {message: "¡entrando a productRepository de ruraqMaki!"};
   }
   async createProduct(data) {
     try {
@@ -15,19 +15,15 @@ class UserService {
       return await this.productRepository.createProduct(data);
     } catch (error) {
       // console.error("Error:", error);
-      throw new Error(
-        JSON.stringify({ status: 500, message: "Error al crear el usuario" })
-      );
+      throw new Error(JSON.stringify({status: 500, message: "Error al crear el usuario"}));
     }
   }
   async getProductById(id) {
     const product = await this.productRepository.getById(id);
     if (!product) {
-      throw new Error(
-        JSON.stringify({ status: 404, message: "User not found" })
-      );
+      throw new Error(JSON.stringify({status: 404, message: "User not found"}));
     }
-    
+
     return product;
   }
   async updateProduct(id, data) {
@@ -43,9 +39,7 @@ class UserService {
 
     // Verificar si se actualizó algún documento
     if (res.modifiedCount === 0) {
-      throw new Error(
-        JSON.stringify({ status: 404, message: "User not found" })
-      );
+      throw new Error(JSON.stringify({status: 404, message: "User not found"}));
     }
     return updatedProduct;
   }
@@ -55,7 +49,7 @@ class UserService {
       throw new Error(
         JSON.stringify({
           status: 404,
-          message: 'User not found or could not be deleted',
+          message: "User not found or could not be deleted",
         })
       );
     }
@@ -63,10 +57,10 @@ class UserService {
   }
   async getAllProducts(req, res) {
     try {
-        return await this.productRepository.getAllProducts(); // Cambia aquí  
+      return await this.productRepository.getAllProducts(); // Cambia aquí
     } catch (error) {
-        console.error('Error al obtener productos:', error); // Agrega un log para el error
-        res.status(500).json({ error: error.message });
+      console.error("Error al obtener productos:", error); // Agrega un log para el error
+      res.status(500).json({error: error.message});
     }
   }
 }

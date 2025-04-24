@@ -1,4 +1,4 @@
-const ConnectToDatabase = require('../../infrastructure/mongodb');
+const ConnectToDatabase = require("../../infrastructure/mongodb");
 
 class authModel {
   constructor() {
@@ -10,7 +10,7 @@ class authModel {
     try {
       await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
       const collection = this.dbConnection.db.collection("user");
-      const [res] = await collection.find({ email: Email }).toArray();
+      const [res] = await collection.find({email: Email}).toArray();
       // console.log('en modelo',res);
       return res;
     } catch (error) {

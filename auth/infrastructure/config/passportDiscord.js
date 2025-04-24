@@ -1,5 +1,5 @@
-const passport = require('passport');
-const DiscordStrategy = require('passport-discord').Strategy;
+const passport = require("passport");
+const DiscordStrategy = require("passport-discord").Strategy;
 
 // Discord Strategy
 passport.use(
@@ -7,8 +7,8 @@ passport.use(
     {
       clientID: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      callbackURL: '/auth/discord/callback',
-      scope: ['identify', 'email'],
+      callbackURL: "/auth/discord/callback",
+      scope: ["identify", "email"],
     },
     (accessToken, refreshToken, profile, done) => {
       // Aquí puedes buscar o crear un usuario en tu base de datos

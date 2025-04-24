@@ -1,5 +1,5 @@
 // Gestiona las peticiones HTTP y las respuestas, delegando la lógica de negocio a los servicios.
-const { validationResult } = require("express-validator");
+const {validationResult} = require("express-validator");
 const UserService = require("../services/userService");
 
 class UserController {
@@ -10,8 +10,8 @@ class UserController {
   validarExpres(req, res) {
     const errors = validationResult(req);
     // console.error("errors:", errors);
-    if (!errors.isEmpty()){
-      res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty()) {
+      res.status(400).json({errors: errors.array()});
       return; // Detener la ejecución si hay errores
     }
     return true;
@@ -31,7 +31,7 @@ class UserController {
       // console.error("Error:", error);
 
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   // obtener un Usuario
@@ -45,7 +45,7 @@ class UserController {
       res.status(200).json(user);
     } catch (error) {
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   // actualizar un Usuario
@@ -59,7 +59,7 @@ class UserController {
       res.status(200).json(user);
     } catch (error) {
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
   async deleteUser(req, res) {
@@ -74,7 +74,7 @@ class UserController {
       // res.status(200).json(user);
     } catch (error) {
       const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
+      res.status(errorObj.status).json({message: errorObj.message});
     }
   }
 

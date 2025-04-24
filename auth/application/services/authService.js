@@ -1,7 +1,7 @@
 // Implementa la lógica de negocio y coordina las interacciones entre el dominio y la infraestructura.
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const AuthRepository = require('../../domain/repositories/authRepository');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const AuthRepository = require("../../domain/repositories/authRepository");
 
 class authService {
   constructor() {
@@ -18,7 +18,7 @@ class authService {
         throw new Error(
           JSON.stringify({
             status: 404,
-            message: 'Usuario no encontrado o credenciales inválidas',
+            message: "Usuario no encontrado o credenciales inválidas",
           })
         );
       }
@@ -29,7 +29,7 @@ class authService {
         throw new Error(
           JSON.stringify({
             status: 401,
-            message: 'No autorizado, contraseña incorrecta',
+            message: "No autorizado, contraseña incorrecta",
           })
         );
       }
@@ -46,7 +46,7 @@ class authService {
         throw new Error(
           JSON.stringify({
             status: 400,
-            message: 'Error en el repositorio de autenticación',
+            message: "Error en el repositorio de autenticación",
           })
         );
       }

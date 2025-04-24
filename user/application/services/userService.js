@@ -7,7 +7,7 @@ class UserService {
     this.userRepository = new UserRepository();
   }
   async prueva(req, res) {
-    return { message: "¡entrando a userRepository de ruraqMaki!" };
+    return {message: "¡entrando a userRepository de ruraqMaki!"};
   }
   async createUser(data) {
     try {
@@ -20,17 +20,13 @@ class UserService {
       return await this.userRepository.createUser(data);
     } catch (error) {
       // console.error("Error:", error);
-      throw new Error(
-        JSON.stringify({ status: 500, message: "Error al crear el usuario" })
-      );
+      throw new Error(JSON.stringify({status: 500, message: "Error al crear el usuario"}));
     }
   }
   async getUserById(id) {
     const user = await this.userRepository.getById(id);
     if (!user) {
-      throw new Error(
-        JSON.stringify({ status: 404, message: "User not found" })
-      );
+      throw new Error(JSON.stringify({status: 404, message: "User not found"}));
     }
     delete user.password;
     return user;
@@ -48,9 +44,7 @@ class UserService {
 
     // Verificar si se actualizó algún documento
     if (res.modifiedCount === 0) {
-      throw new Error(
-        JSON.stringify({ status: 404, message: "User not found" })
-      );
+      throw new Error(JSON.stringify({status: 404, message: "User not found"}));
     }
     return updatedUser;
   }
@@ -60,7 +54,7 @@ class UserService {
       throw new Error(
         JSON.stringify({
           status: 404,
-          message: 'User not found or could not be deleted',
+          message: "User not found or could not be deleted",
         })
       );
     }
@@ -98,7 +92,6 @@ class UserService {
   //     );
   //   return token;
   // }
-
 
   // async searchUsersByName(name) {
   //   return await this.userRepository.searchByName(name);

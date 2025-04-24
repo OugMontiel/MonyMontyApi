@@ -1,6 +1,5 @@
 // Contiene la interfaz para interactuar con la base de datos o cualquier otro tipo de almacenamiento de datos.
-const UserModelo = require('../models/userModel');
-
+const UserModelo = require("../models/userModel");
 
 class UserRepository {
   constructor() {
@@ -11,27 +10,21 @@ class UserRepository {
       return await this.insUserModelo.createUser(userData);
     } catch (error) {
       // console.error("Error:", error);
-      throw new Error(
-        JSON.stringify({ status: 500, message: 'Error saving user' })
-      );
+      throw new Error(JSON.stringify({status: 500, message: "Error saving user"}));
     }
   }
   async getById(id) {
     try {
       return await this.insUserModelo.findById(id);
     } catch (error) {
-      throw new Error(
-        JSON.stringify({ status: 400, message: 'Error retrieving user' })
-      );
+      throw new Error(JSON.stringify({status: 400, message: "Error retrieving user"}));
     }
   }
   async updateById(id, updateData) {
     try {
       return await this.insUserModelo.updateById(id, updateData);
     } catch (error) {
-      throw new Error(
-        JSON.stringify({ status: 500, message: 'Error updating user' })
-      );
+      throw new Error(JSON.stringify({status: 500, message: "Error updating user"}));
     }
   }
   async deleteUser(id) {
@@ -39,15 +32,13 @@ class UserRepository {
       return await this.insUserModelo.deleteUser(id);
     } catch (error) {
       console.error("Error:", error);
-      throw new Error(
-        JSON.stringify({ status: 404, message: 'Error deleting user' })
-      );
+      throw new Error(JSON.stringify({status: 404, message: "Error deleting user"}));
     }
   }
   // async getNickByNickAndPassword(nick, password) {
   //   try {
   //     const user = new User();
-      
+
   //     // Definimos el pipeline para la agregación
   //     let query = [
   //       {

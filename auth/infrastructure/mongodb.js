@@ -1,12 +1,12 @@
 // Configuración y conexión a MongoDB.
-const { MongoClient } = require('mongodb');
+const {MongoClient} = require("mongodb");
 class ConnectToDatabase {
   static instanceConnect;
   db;
   connection;
   user;
   #password;
-  constructor({ user, pwd } = { user: process.env.MONGO_USER, pwd: process.env.MONGO_PWD }) {
+  constructor({user, pwd} = {user: process.env.MONGO_USER, pwd: process.env.MONGO_PWD}) {
     if (ConnectToDatabase.instanceConnect && this.connection) {
       return ConnectToDatabase.instanceConnect;
     }
@@ -26,7 +26,7 @@ class ConnectToDatabase {
     } catch (error) {
       // console.log('error al conectar', error);
       this.connection = undefined;
-      throw new Error('Error connecting');
+      throw new Error("Error connecting");
     }
   }
   async connectClose() {

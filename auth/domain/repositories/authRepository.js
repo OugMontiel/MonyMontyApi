@@ -1,4 +1,4 @@
-const AuthModel = require('../models/authModel.js');
+const AuthModel = require("../models/authModel.js");
 
 class authRepository {
   constructor() {
@@ -16,7 +16,7 @@ class authRepository {
       }
       // console.log('resultado Encontrado', usuario.length);
       if (usuario.length === 0) {
-        throw new Error(JSON.stringify({ status: 404, message: 'Invalid credentials' }));
+        throw new Error(JSON.stringify({status: 404, message: "Invalid credentials"}));
       }
 
       // validación usuarios duplicados
@@ -24,7 +24,7 @@ class authRepository {
         throw new Error(
           JSON.stringify({
             status: 500,
-            message: 'Multiple users found with the same email. Contact support.',
+            message: "Multiple users found with the same email. Contact support.",
           })
         );
       }
@@ -36,7 +36,7 @@ class authRepository {
         throw new Error(error.message); // Re-lanzamos el error original
       } else {
         // Si ocurre otro tipo de error, lanzamos uno genérico
-        throw new Error(JSON.stringify({ status: 400, message: 'Error in auth repository' }));
+        throw new Error(JSON.stringify({status: 400, message: "Error in auth repository"}));
       }
     }
   }
