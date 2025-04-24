@@ -1,0 +1,36 @@
+{
+  "name": "monymontyapi",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Api de MonyMonty",
+  "main": "app.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node --watch --env-file .env app.js",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OugMontiel/MonyMontyApi.git"
+  },
+  "keywords": [
+    "MonyMonty",
+    "Finanzas"
+  ],
+  "author": "OugMontiel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OugMontiel/MonyMontyApi/issues"
+  },
+  "homepage": "https://github.com/OugMontiel/MonyMontyApi#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.16.0",
+    "passport": "^0.7.0",
+    "prettier": "^3.5.3"
+  }
+}
