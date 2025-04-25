@@ -1,0 +1,5218 @@
+[
+  {
+    "transacciones": [
+      {
+        "fecha": "14/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$96.910,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/03/2023",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$82.493,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$200.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$18.300,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$9.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "administracion ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$267.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "Administracion"
+        },
+        "concepto": {
+          "mes Marzo": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$266.500,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "7/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$86.354,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/03/2023",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$73.290,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/03/2023",
+        "categoria": {
+          "Atencion_Medica": "Consultas"
+        },
+        "concepto": {
+          "Braket": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$60.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/03/2023",
+        "categoria": {
+          "Atencion_Medica": "Deducciones de nomina"
+        },
+        "concepto": {
+          "Nona": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$64.400,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/03/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Braket": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$60.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$19.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/03/2023",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$62.820,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/03/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Inscripcion Simo": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$58.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/03/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Ni idea": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$65.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Sueldo": "Cuota de alimentos"
+        },
+        "concepto": {
+          "mes febrero": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$550.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/03/2023",
+        "categoria": {
+          "Gastos_Varios": "Sin subcategoría"
+        },
+        "concepto": {
+          "Incripcion Simo": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$58.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$12.300,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/02/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Diver": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$50.383,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "27/02/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Diver": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$118.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "27/02/2023",
+        "categoria": {
+          "Transporte": "Reparaciones"
+        },
+        "concepto": {
+          "Manji y motor": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$80.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "27/02/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "Agua"
+        },
+        "concepto": {
+          "Febrero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$47.580,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "27/02/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "Electricidad"
+        },
+        "concepto": {
+          "Enero-Ferero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$70.558,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/03/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A efectivo"
+        },
+        "concepto": {
+          "Pago mama": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$400.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/03/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A cuentas Propias"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$18.300,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Ube Drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$12.300,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Ube Drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$6.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/03/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A cuentas Propias"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$19.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/03/2023",
+        "categoria": {
+          "Sueldo": "Intereses"
+        },
+        "concepto": {
+          "mes febrero": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$8,26",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/03/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$8.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/02/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Diver": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$11.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A cuentas Propias"
+        },
+        "concepto": {
+          "Uber Dive ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$38.200,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/02/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Diver": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$9.200,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A efectivo"
+        },
+        "concepto": {
+          "Couta alimetos": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$500.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/02/2023",
+        "categoria": {
+          "Sueldo": "Intereses"
+        },
+        "concepto": {
+          "Interes nequi": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$6,65",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "17/02/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Uber drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$12.800,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/02/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$103.153,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/02/2023",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$60.420,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/02/2023",
+        "categoria": {
+          "Sueldo": "Pagos"
+        },
+        "concepto": {
+          "Uber Drive": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$38.200,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "17/02/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Uber drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$9.700,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/02/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Uber drive": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$6.700,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/02/2023",
+        "categoria": {
+          "Sueldo": "Cuota de alimentos"
+        },
+        "concepto": {
+          "Mes Febrero": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$550.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "7/02/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "Administracion"
+        },
+        "concepto": {
+          "Febrero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$266.500,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A efectivo"
+        },
+        "concepto": {
+          "sin efectivo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$50.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/02/2023",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "no recuerdo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$4.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A otras cuentas"
+        },
+        "concepto": {
+          "prestamo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$15.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/02/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "prestamo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$15.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A otras cuentas"
+        },
+        "concepto": {
+          "No recuerdo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$7.400,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A efectivo"
+        },
+        "concepto": {
+          "Ninguno": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$50.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A otras cuentas"
+        },
+        "concepto": {
+          "No recuerdo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$10.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/02/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "administracion": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$274.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/02/2023",
+        "categoria": {
+          "Atencion_Medica": "Deducciones de nomina"
+        },
+        "concepto": {
+          "Nona": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$64.400,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/02/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A otras cuentas"
+        },
+        "concepto": {
+          "Ninguno": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$3.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/01/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A otras cuentas"
+        },
+        "concepto": {
+          "Valeria": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$10.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De Efectivo"
+        },
+        "concepto": {
+          "Compra Andes 22": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$44.950,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Ninguno": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$65.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/01/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A cuentas Propias"
+        },
+        "concepto": {
+          "Ninguno": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$65.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Telefonia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$30.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Valeria": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$10.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "27/01/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "Telefonia"
+        },
+        "concepto": {
+          "De mi madre": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$29.022,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "25/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De Efectivo"
+        },
+        "concepto": {
+          "Prestamo a un amigo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$32.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/01/2023",
+        "categoria": {
+          "Sueldo": "Intereses"
+        },
+        "concepto": {
+          "Ninguno": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$15,95",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/01/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A efectivo"
+        },
+        "concepto": {
+          "Pago Nona": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$140.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Nona": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$100.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De cuentas propias"
+        },
+        "concepto": {
+          "Pago Salud Nona": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$65.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/01/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "Agua"
+        },
+        "concepto": {
+          "Acueducto- Enero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$71.630,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "25/01/2023",
+        "categoria": {
+          "Trasferencias_Ingreso": "De otras cuentas"
+        },
+        "concepto": {
+          "Pago acueducto": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$72.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "7/01/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A efectivo"
+        },
+        "concepto": {
+          "Retiro pago mama": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$110.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/01/2023",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "Trasporte oficina seguro": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$4.320,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/01/2023",
+        "categoria": {
+          "Relativos_a_la_casa": "gas"
+        },
+        "concepto": {
+          "Enero": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$6.620,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "15/01/2023",
+        "categoria": {
+          "Trasferencias_Gasto": "A otras cuentas"
+        },
+        "concepto": {
+          "couta de aliemtos": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$465.000,00",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Braques Ortodoncia": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Pluma-regalo": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 42.300",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 156.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "compra valeria": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 27.450",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Pantalon Valeria": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 139.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "7/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 110.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.800",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 325.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 4.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Administracion": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 266.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "15/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 57.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 12.850",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber -propina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Compra santamarta": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 193.700",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "papa o valeria": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 200.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "pse": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 101.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Retiro": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Retiro": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "para el seguro": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 470.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "servicios": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 300.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 7.360",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.640",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Soat": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 479.100",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Almuerzo-": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 23.800",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 6.170",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.910",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/12/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 13.870",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/07/2022",
+        "categoria": {
+          "Inicio": "Inicio"
+        },
+        "concepto": {
+          "Inicio": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 7.240",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/07/2022",
+        "categoria": {
+          "Inicio": "Inicio"
+        },
+        "concepto": {
+          "Inicio": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 105.329",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/08/2022",
+        "categoria": {
+          "Trasferencia": "A efectivo"
+        },
+        "concepto": {
+          "Retiro": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/08/2022",
+        "categoria": {
+          "Trasferencia": "A efectivo"
+        },
+        "concepto": {
+          "Retiro": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/08/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Cuota papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 700.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/08/2022",
+        "categoria": {
+          "Trasferencia": "A otras cuentas"
+        },
+        "concepto": {
+          "Rifa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 6.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/08/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 400.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 272.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "visa oro": ""
+        },
+        "ingreso": "$ 87.604",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "visa oro": ""
+        },
+        "egreso": "$ 3.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 78.100",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 374.300",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 266.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 30.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 17.640",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 44.950",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/08/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 80.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 18.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 45.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 57.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 43.950",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "17/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 80.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "17/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 28.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/08/2022",
+        "categoria": {
+          "Trasferencia": "A cuentas Propias"
+        },
+        "concepto": {
+          "recarga": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 5.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 26.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "25/08/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "Billar": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 15.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/08/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 6.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 6.400",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 4.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 6.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 40.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 40.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/08/2022",
+        "categoria": {
+          "Relativos a la casa": "Acueducto"
+        },
+        "concepto": {
+          "Acueducto": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 54.780",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/08/2022",
+        "categoria": {
+          "Inicio": "Inicio"
+        },
+        "concepto": {
+          "Ajuste": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 413.239",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/08/2022",
+        "categoria": {
+          "Inicio": "Inicio"
+        },
+        "concepto": {
+          "Inicio": ""
+        },
+        "entidad": {
+          "cooprofesores Belcy": ""
+        },
+        "ingreso": "$ 10.039",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/08/2022",
+        "categoria": {
+          "Inicio": "Inicio"
+        },
+        "concepto": {
+          "Inicio": ""
+        },
+        "entidad": {
+          "Cooprofesores ": ""
+        },
+        "ingreso": "$ 238.447",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 114.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 108.359",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/08/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 300.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 58.100",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/08/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ -",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/09/2022",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 18.220",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/09/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Ida al medico": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 8.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/09/2022",
+        "categoria": {
+          "ingreso": "Sin subcategoría"
+        },
+        "concepto": {
+          "Abono": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 12.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 18.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/09/2022",
+        "categoria": {
+          "ingreso": "Trasferencia"
+        },
+        "concepto": {
+          "para efectivo": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/09/2022",
+        "categoria": {
+          "Alimentos": "Tienda de barrio"
+        },
+        "concepto": {
+          "empanadas ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 4.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/09/2022",
+        "categoria": {
+          "Milicia ": "Proceso de incorporacion"
+        },
+        "concepto": {
+          "inscripcion ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 145.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/09/2022",
+        "categoria": {
+          "Transporte": "Reparaciones"
+        },
+        "concepto": {
+          "Arreglo Carro": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 295.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/09/2022",
+        "categoria": {
+          "Sin categoría": "Tarjeta de credito"
+        },
+        "concepto": {
+          "Seguro": ""
+        },
+        "entidad": {
+          "visa oro": ""
+        },
+        "egreso": "$ 3.900",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/09/2022",
+        "categoria": {
+          "Atencion Medica": "Deducionde nomina"
+        },
+        "concepto": {
+          "Salud nona ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 57.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/09/2022",
+        "categoria": {
+          "ingreso": "mensualidad"
+        },
+        "concepto": {
+          "mensualidad papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 550.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/09/2022",
+        "categoria": {
+          "Ingreso": "Braket"
+        },
+        "concepto": {
+          "Abono papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/09/2022",
+        "categoria": {
+          "Ingreso": "Cuota de alimentos"
+        },
+        "concepto": {
+          "Cuota papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 550.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/09/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 3.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/09/2022",
+        "categoria": {
+          "Transporte": "bus"
+        },
+        "concepto": {
+          "Bus-Barranca": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 40.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/09/2022",
+        "categoria": {
+          "Atencion Medica": "Deducionde nomina"
+        },
+        "concepto": {
+          "eps Nona": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 57.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/09/2022",
+        "categoria": {
+          "Sin categoría": "Tarjeta de credito"
+        },
+        "concepto": {
+          "Pago Tarjeta": ""
+        },
+        "entidad": {
+          "visa oro": ""
+        },
+        "ingreso": "$ 126.630",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "6/09/2022",
+        "categoria": {
+          "Entretenimiento": "Plataformas"
+        },
+        "concepto": {
+          "Spotify": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/09/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "Uber Terminal": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 7.700",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/09/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "Uber Terminal": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 9.600",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/09/2022",
+        "categoria": {
+          "Alimentos": "Tienda de barrio"
+        },
+        "concepto": {
+          "Agua-Barranca": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 2.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/09/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "Desayuno Cita medica Valeria": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 14.150",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/09/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "Uber Casa Valeria": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.900",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/09/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "Desbaratada": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 2.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/09/2022",
+        "categoria": {
+          "Alimentos": "Plaza de mercado"
+        },
+        "concepto": {
+          "mercado ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 200.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Efectivo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 300.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/09/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "Mesa de los santo": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/09/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "Mesa de los santo": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 18.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/09/2022",
+        "categoria": {
+          "Ingreso": "Salario"
+        },
+        "concepto": {
+          "Pago de un dia ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 120.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/09/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "realidad virtual ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 5.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/09/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "realidad virtual ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 15.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/09/2022",
+        "categoria": {
+          "Sin categoría": "Funerarios"
+        },
+        "concepto": {
+          "Seguro funerario": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 45.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Ida al medico": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 17.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Cuidado personal": "Articulos"
+        },
+        "concepto": {
+          "Tapabocas": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Nequi": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 120.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Nequi Belcy": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 37.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Relativos a la casa": "Administracion"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 266.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Itau": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 120.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Nequi Belcy": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 33.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "15/09/2022",
+        "categoria": {
+          "Relativos a la casa": "gas"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 36.710",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/09/2022",
+        "categoria": {
+          "Ingreso": "Auxilios"
+        },
+        "concepto": {
+          "homenaje cenadora": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "16/09/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "homenaje cenadora": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 8.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "17/09/2022",
+        "categoria": {
+          "Alimentos": "Supermercado"
+        },
+        "concepto": {
+          "D1": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/09/2022",
+        "categoria": {
+          "Alimentos": "Plaza de mercado"
+        },
+        "concepto": {
+          "mercado ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 200.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "BBVA": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 300.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/09/2022",
+        "categoria": {
+          "ingreso": "Intereses"
+        },
+        "concepto": {
+          "Septiembre": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 68",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/09/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "uber ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/09/2022",
+        "categoria": {
+          "Relativos a la casa": "Telefonia"
+        },
+        "concepto": {
+          "Telefonia Diego": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 28.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/09/2022",
+        "categoria": {
+          "Gastos Varios": "Regalos"
+        },
+        "concepto": {
+          "rosas ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 5.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/09/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "cena valeria ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 7.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "BBVA": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 56.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/09/2022",
+        "categoria": {
+          "Entretenimiento": "Visitas"
+        },
+        "concepto": {
+          "ponque visita tia": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 5.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/09/2022",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 27.330",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/09/2022",
+        "categoria": {
+          "Atencion Medica": "Consultas"
+        },
+        "concepto": {
+          "Braket ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/09/2022",
+        "categoria": {
+          "Relativos a la casa": "Telefonia"
+        },
+        "concepto": {
+          "Telefonia Belcy": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 26.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "BBVA": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/09/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "cena valeria ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 17.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Nequi": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Efectivo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Transporte": "Manteniminetos"
+        },
+        "concepto": {
+          "Aire": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 2.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Trasferencia": "A otras cuentas"
+        },
+        "concepto": {
+          "gato": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 11.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Ingreso": "Auxilios"
+        },
+        "concepto": {
+          "gato": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 11.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Ingreso": "Auxilios"
+        },
+        "concepto": {
+          "gato": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Trasferencia": "A otras cuentas"
+        },
+        "concepto": {
+          "gato": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Ida al medico": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 3.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Ida al medico": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "22/09/2022",
+        "categoria": {
+          "Alimentos": "Plaza de mercado"
+        },
+        "concepto": {
+          "Pan": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 5.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/09/2022",
+        "categoria": {
+          "Ingreso": "Pagos"
+        },
+        "concepto": {
+          "media tarde": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 7.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/09/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "media tarde": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 7.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/09/2022",
+        "categoria": {
+          "Alimentos": "Supermercado"
+        },
+        "concepto": {
+          "Compra de verduras": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 8.750",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/09/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "BBVA": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 97.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/09/2022",
+        "categoria": {
+          "Relativos a la casa": "Electrificadora"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 55.460",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/10/2022",
+        "categoria": {
+          "ingreso": "Cuota de alimentos"
+        },
+        "concepto": {
+          "mensualidad papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 550.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/10/2022",
+        "categoria": {
+          "Transporte ": "Gasolina"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 36.440",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/10/2022",
+        "categoria": {
+          "ingreso": "cuentas por pagar"
+        },
+        "concepto": {
+          "Salud nona ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 57.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/10/2022",
+        "categoria": {
+          "Trasferencia": "A efectivo"
+        },
+        "concepto": {
+          "Boleta- meme fest": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 30.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/10/2022",
+        "categoria": {
+          "Cuidado personal": "Articulos de Tocador"
+        },
+        "concepto": {
+          "jabon": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 30.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/10/2022",
+        "categoria": {
+          "Trasferencia": "A otras cuentas"
+        },
+        "concepto": {
+          "pago madre- Cuota de alimentos": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 500.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Nequi": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/10/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "compra de boleta meme fest": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 35.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Parqueos": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 8.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/10/2022",
+        "categoria": {
+          "Atencion Medica": "Deducciones de nomina"
+        },
+        "concepto": {
+          "Salud nona ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 57.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/10/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "Pool ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 25.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/10/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "Cress and wafler": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 19.600",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/10/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "Desayuno valeria ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 7.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/10/2022",
+        "categoria": {
+          "Parqueadero ": "Trasporte"
+        },
+        "concepto": {
+          "Parqueo": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 3.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/10/2022",
+        "categoria": {
+          "ingreso": "cuentas por pagar"
+        },
+        "concepto": {
+          "Administracion": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 267.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/10/2022",
+        "categoria": {
+          "ingreso": "cuentas por pagar"
+        },
+        "concepto": {
+          "tigo": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 112.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Parqueaderos ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 6.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/10/2022",
+        "categoria": {
+          "Trasferencia": "A efectivo"
+        },
+        "concepto": {
+          "Retiro-pago parqueadero": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 30.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Administracion"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 266.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Internet"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 111.917",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "Patin": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "Patineta": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/10/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "Casa vale": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.100",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Itau": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "Patines ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "Patineta": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "ingreso": "Abono"
+        },
+        "concepto": {
+          "Abono madre": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "Atencion Medica": "Consultas"
+        },
+        "concepto": {
+          "Quinto control- Brakes": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "ingreso": "Abono"
+        },
+        "concepto": {
+          "Abono papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 100.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "Trasferencia": "A cuentas"
+        },
+        "concepto": {
+          "Pago a madre": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "Trasferencia": "A cuentas"
+        },
+        "concepto": {
+          "Itau": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 23.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "Trasferencia": "A cuentas"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 23.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "14/10/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "Billar": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 13.300",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Parqueadero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 3.600",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/10/2022",
+        "categoria": {
+          "ingreso": "cuentas por pagar"
+        },
+        "concepto": {
+          "gas": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 44.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Gas"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 43.419",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Abono papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "18/10/2022",
+        "categoria": {
+          "Milicia ": "Proceso de incorporacion"
+        },
+        "concepto": {
+          "Pruaba sigma": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 40.250",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "moto": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 3.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "multa patineta ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 3.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/10/2022",
+        "categoria": {
+          "Transporte": "Clobi"
+        },
+        "concepto": {
+          "patin": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 1.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/10/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "media mañana ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 2.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "20/10/2022",
+        "categoria": {
+          "Entretenimiento": "Plataformas"
+        },
+        "concepto": {
+          "Spotify": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "parqueadero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 7.200",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "primera semana": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "23/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 15.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "24/10/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "cine": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 30.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "24/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Telefonia"
+        },
+        "concepto": {
+          "Diego": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 28.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "24/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "parqueadero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 7.200",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "24/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "parqueadero": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 7.200",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "25/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Pa los celulares": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "25/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Telefonia"
+        },
+        "concepto": {
+          "Belcy": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 26.990",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "26/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 6.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Servicios": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 195.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Acueducto"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 65.070",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Relativos a la casa": "Electrificadora"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 72.807",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Trasferencia": "Trasferencia"
+        },
+        "concepto": {
+          "Trasferencia": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 90.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 45.550",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Trasferencia": "De otras cuentas"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 45.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "28/10/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "segunda semana": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 20.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/10/2022",
+        "categoria": {
+          "ingreso": "Cuota de alimentos"
+        },
+        "concepto": {
+          "papa": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 550.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/10/2022",
+        "categoria": {
+          "ingreso": "Auxilios"
+        },
+        "concepto": {
+          "pago trabajo": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 150.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/10/2022",
+        "categoria": {
+          "Trasferencia": "De cuentas propias"
+        },
+        "concepto": {
+          "de nequi": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 90.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/10/2022",
+        "categoria": {
+          "Transferencia ": "A efectivo"
+        },
+        "concepto": {
+          "compra D1 Valeria": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 64.790",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/10/2022",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 54.660",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/10/2022",
+        "categoria": {
+          "ingreso": "Intereses"
+        },
+        "concepto": {
+          "intereses": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 0",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "31/10/2022",
+        "categoria": {
+          "Trasferencia": "De otras cuentas"
+        },
+        "concepto": {
+          "compra D1 Valeria": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "1/11/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 6.600",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "2/11/2022",
+        "categoria": {
+          "Transporte": "Reparaciones"
+        },
+        "concepto": {
+          "aire llanta": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 10.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/11/2022",
+        "categoria": {
+          "Trasferencia": "De otras cuentas"
+        },
+        "concepto": {
+          "Dayana nona": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 150.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/11/2022",
+        "categoria": {
+          "Entretenimiento": "Salidas"
+        },
+        "concepto": {
+          "compra helados": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 15.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "3/11/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "Casa vale": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 4.800",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/11/2022",
+        "categoria": {
+          "Trasferencia": "A efectivo"
+        },
+        "concepto": {
+          "retiro- pago nona y mama": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 700.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "4/11/2022",
+        "categoria": {
+          "Trasferencia": "De cuentas propias"
+        },
+        "concepto": {
+          "retiro papa": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/11/2022",
+        "categoria": {
+          "Atencion Medica": "Deducciones de nomina"
+        },
+        "concepto": {
+          "Salud nona ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 57.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "5/11/2022",
+        "categoria": {
+          "Transporte": "Parqueadero"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "egreso": "$ 9.900",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "7/11/2022",
+        "categoria": {
+          "Transporte": "Gasolina"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 37.744",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/11/2022",
+        "categoria": {
+          "ingreso": "Auxilios"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 150.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/11/2022",
+        "categoria": {
+          "ingreso": "Escalas"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 468.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "8/11/2022",
+        "categoria": {
+          "Transferencia ": "De otras cuentas"
+        },
+        "concepto": {
+          "servicios ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 445.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/11/2022",
+        "categoria": {
+          "Relativos a la casa": "Administracion"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 266.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/11/2022",
+        "categoria": {
+          "Relativos a la casa": "Internet"
+        },
+        "concepto": {
+          "Andes 22": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 69.900",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/11/2022",
+        "categoria": {
+          "Trasferencia": "De otras cuentas"
+        },
+        "concepto": {
+          "faltante para intenet": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 9.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/11/2022",
+        "categoria": {
+          "Atencion Medica": "Consultas"
+        },
+        "concepto": {
+          "Brakes": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "9/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "X identificar": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 60.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "al trabajo ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 6.700",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "a los zapatos": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 4.500",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "al restaurante": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 5.900",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "restaurante 1": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 66.700",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Alimentos": "Restaurantes"
+        },
+        "concepto": {
+          "restaurante 2": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 50.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "al trabajo ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 9.200",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Transporte": "Uber"
+        },
+        "concepto": {
+          "a la casa": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 4.900",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "10/11/2022",
+        "categoria": {
+          "Trasferencia": "A cuentas propias"
+        },
+        "concepto": {
+          "saco ": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 350.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "11/11/2022",
+        "categoria": {
+          "Trasferencia": "De cuentas propias"
+        },
+        "concepto": {
+          "saco ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "ingreso": "$ 350.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/11/2022",
+        "categoria": {
+          "Trasferencia": "De cuentas propias"
+        },
+        "concepto": {
+          "saco ": ""
+        },
+        "entidad": {
+          "Efectivo": ""
+        },
+        "ingreso": "$ 350.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "12/11/2022",
+        "categoria": {
+          "Trasferencia": "A efectivo"
+        },
+        "concepto": {
+          "saco ": ""
+        },
+        "entidad": {
+          "Nequi": ""
+        },
+        "egreso": "$ 350.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "13/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 37.030",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "15/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 150.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "19/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Retiro": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 200.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 67.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "pse": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 38.041",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "21/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 27.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "24/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "pse": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 65.090",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "24/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Por definir": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "ingreso": "$ 66.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "29/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 17.000",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Uber": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 4.300",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      },
+      {
+        "fecha": "30/11/2022",
+        "categoria": {
+          "Sin categoría": "Sin subcategoría"
+        },
+        "concepto": {
+          "Gasolina": ""
+        },
+        "entidad": {
+          "Itau": ""
+        },
+        "egreso": "$ 45.450",
+        "divisa": {
+          "COP": "Pesos Colombianos"
+        }
+      }
+    ],
+    "nombre": "Diego Montiel",
+    "categorias": {
+      "Sueldo": ["Pagos", "Intereses", "Cuota de alimentos"],
+      "Transporte": ["Gasolina", "Parqueadero", "Clobi", "Reparaciones", "bus", "Manteniminetos", "Uber"],
+      "Trasferencias_Ingreso": ["De Efectivo", "De cuentas propias", "De otras cuentas"],
+      "Relativos_a_la_casa": ["Electricidad", "Telefonia", "Agua", "gas", "Administracion"],
+      "Atencion_Medica": ["Deducciones de nomina", "Consultas"],
+      "Gastos_Varios": [],
+      "Trasferencias_Gasto": ["A efectivo", "A otras cuentas", "A cuentas Propias"],
+      "Alimentos": ["Restaurantes", "Tienda de barrio", "Plaza de mercado", "Supermercado"],
+      "Inicio": ["Inicio"],
+      "Trasferencia": [
+        "A efectivo",
+        "A cuentas",
+        "A cuentas propias",
+        "Trasferencia",
+        "A otras cuentas",
+        "A cuentas Propias",
+        "De cuentas propias",
+        "De otras cuentas"
+      ],
+      "Entretenimiento": ["Plataformas", "Visitas", "Salidas"],
+      "Relativos a la casa": ["Telefonia", "Acueducto", "Internet", "gas", "Electrificadora", "Administracion", "Gas"],
+      "ingreso": ["cuentas por pagar", "Trasferencia", "Abono", "Auxilios", "Intereses", "mensualidad", "Escalas", "Cuota de alimentos"],
+      "Milicia ": ["Proceso de incorporacion"],
+      "Atencion Medica": ["Deducionde nomina", "Deducciones de nomina", "Consultas"],
+      "Ingreso": ["Auxilios", "Pagos", "Salario", "Braket", "Cuota de alimentos"],
+      "Cuidado personal": ["Articulos de Tocador", "Articulos"],
+      "Gastos Varios": ["Regalos"],
+      "Transporte ": ["Gasolina"],
+      "Parqueadero ": ["Trasporte"],
+      "Transferencia ": ["A efectivo", "De otras cuentas"]
+    },
+    "entidades": {
+      "Nequi": [318],
+      "Itau": [7416],
+      "Visa Oro": [],
+      "Cooprofesores Belcy": [],
+      "Cooprofesores": [],
+      "Efectivo": ["Cartera"]
+    },
+    "divisas": {
+      "COP": ["Pesos Colombianos"]
+    }
+  }
+]

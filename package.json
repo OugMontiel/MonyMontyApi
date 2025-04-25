@@ -9,20 +9,6 @@
     "dev": "node --watch --env-file .env app.js",
     "format": "prettier --write ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OugMontiel/MonyMontyApi.git"
-  },
-  "keywords": [
-    "MonyMonty",
-    "Finanzas"
-  ],
-  "author": "OugMontiel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/OugMontiel/MonyMontyApi/issues"
-  },
-  "homepage": "https://github.com/OugMontiel/MonyMontyApi#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
@@ -36,5 +22,19 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "prettier": "^3.5.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OugMontiel/MonyMontyApi.git"
+  },
+  "keywords": [
+    "MonyMonty",
+    "Finanzas"
+  ],
+  "author": "OugMontiel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OugMontiel/MonyMontyApi/issues"
+  },
+  "homepage": "https://github.com/OugMontiel/MonyMontyApi#readme"
 }
