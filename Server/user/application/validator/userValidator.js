@@ -45,9 +45,9 @@ class UserValidator {
         return true;
       }),
 
-      // Validación para asegurarse de que no haya ningún dato en el body
+      // Validación para asegurarse de que no haya ningún dato en el body o es undefined
       body().custom((value, {req}) => {
-        if (Object.keys(req.body).length > 0) {
+        if (req.body && Object.keys(req.body).length > 0) {
           throw new Error("Do not send anything in the body");
         }
         return true;

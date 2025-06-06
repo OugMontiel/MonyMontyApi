@@ -17,12 +17,10 @@ class ConnectToDatabase {
   }
   async connectOpen() {
     const isSrv = process.env.MONGO_ACCESS.includes("+srv");
-    
-    if (isSrv){
+
+    if (isSrv) {
       // MongoDB Atlas (sin puerto)
-      this.connection = new MongoClient(
-        `${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}`
-      );
+      this.connection = new MongoClient(`${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}`);
     } else {
       // MongoDB local (con puerto)
       this.connection = new MongoClient(
