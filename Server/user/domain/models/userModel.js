@@ -8,7 +8,9 @@ class User {
   }
   async createUser(userData) {
     try {
+      // console.log("Datos del usuario a insertar:", userData);
       await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
+      // console.log("Conexión abierta:", this.dbConnection.db?.databaseName);
       const collection = this.dbConnection.db.collection("user");
       const res = await collection.insertMany([userData]);
       return res;

@@ -17,9 +17,11 @@ class UserService {
       const newpassword = await bcrypt.hash(data.password, 10);
       // Reemplazar la contraseña original con el hash
       data.password = newpassword;
+
+      // console.log('data.password', data.password);
       return await this.userRepository.createUser(data);
     } catch (error) {
-      // console.error("Error:", error);
+      // console.error("Error:", error.message);
       throw new Error(JSON.stringify({status: 500, message: "Error al crear el usuario"}));
     }
   }

@@ -6,12 +6,12 @@ const path = require("path");
 // Configuración para login
 const passport = require("passport");
 // Cargar las configuraciones de Passport para Google
-require("./auth/infrastructure/config/passportGoogle");
+require("./server/auth/infrastructure/config/passportGoogle");
 
 // Middlewares y routers
-const isAuthenticated = require("./auth/infrastructure/middleware/isAuthenticated");
-const authRouter = require("./auth/application/routes/authRouter");
-const userRoutes = require("./user/application/routes/userRoutes");
+const isAuthenticated = require("./server/auth/infrastructure/middleware/isAuthenticated");
+const authRouter = require("./server/auth/application/routes/authRouter");
+const userRoutes = require("./server/user/application/routes/userRoutes");
 // const productRoutes = require('./product/application/routes/productRoutes');
 
 // Inicializar la app Express

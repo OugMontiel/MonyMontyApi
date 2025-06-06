@@ -8,7 +8,7 @@ const UserValidator = require("../validator/userValidator"); // Importa el valid
 const insUserValidator = new UserValidator(); // Instancia el validador de usuarios
 
 router.get("/", (req, res) => {
-  res.send("¡Bienvenido a ruraqMaki! User");
+  res.send("¡Bienvenido a MonyMonty!");
 });
 
 // Define la ruta para obtener un usuario por ID.

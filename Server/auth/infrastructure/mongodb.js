@@ -24,7 +24,7 @@ class ConnectToDatabase {
       await this.connection.connect();
       this.db = this.connection.db(process.env.MONGO_DB_NAME);
     } catch (error) {
-      // console.log('error al conectar', error);
+      console.log("error al conectar", error);
       this.connection = undefined;
       throw new Error("Error connecting");
     }
