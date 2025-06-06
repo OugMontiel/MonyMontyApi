@@ -54,7 +54,7 @@ class authController {
       // Enviar respuesta de éxito con el token
       res.status(201).json({token});
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // Si el error contiene un mensaje específico
       if (error.message) {
         try {

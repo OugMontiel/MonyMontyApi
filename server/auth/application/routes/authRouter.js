@@ -9,6 +9,7 @@ const authController = new AuthController();
 const Authvalidator = require("../validator/authValidator.js");
 const authvalidator = new Authvalidator();
 
+// Ruta raíz
 router.get("/", (req, res) => {
   res.send("¡Bienvenido a MonyMonty auth!");
 });

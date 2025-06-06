@@ -16,21 +16,40 @@ class ConnectToDatabase {
     ConnectToDatabase.instanceConnect = this;
   }
   async connectOpen() {
-    // console.log(`${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`);
-    this.connection = new MongoClient(
-      `${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
-    );
+    const isSrv = process.env.MONGO_ACCESS.includes("+srv");
+
+    if (isSrv) {
+      // MongoDB Atlas (sin puerto)
+      this.connection = new MongoClient(`${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}`);
+    } else {
+      // MongoDB local (con puerto)
+      this.connection = new MongoClient(
+        `${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
+      );
+    }
+
     try {
       await this.connection.connect();
       this.db = this.connection.db(process.env.MONGO_DB_NAME);
     } catch (error) {
-      console.log("error al conectar", error);
+      console.error("Error al conectar a MongoDB:", error.message);
       this.connection = undefined;
-      throw new Error("Error connecting");
+      throw new Error("Error connecting: " + error.message);
     }
   }
   async connectClose() {
-    this.connection.close();
+    if (this.connection) {
+      try {
+        await this.connection.close();
+      } catch (error) {
+        console.error("Error al cerrar la conexión:", error.message);
+      } finally {
+        this.connection = undefined;
+        this.db = undefined;
+      }
+    } else {
+      console.warn("Intento de cerrar una conexión inexistente.");
+    }
   }
   get getPassword() {
     return this.#password;
