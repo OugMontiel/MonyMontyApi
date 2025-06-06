@@ -15,7 +15,7 @@ class UserService {
       return await this.productRepository.createProduct(data);
     } catch (error) {
       // console.error("Error:", error);
-      throw new Error(JSON.stringify({status: 500, message: "Error al crear el usuario"}));
+      throw new Error(JSON.stringify({status: 500, message: "Error al crear el Producto createProduct"}));
     }
   }
   async getProductById(id) {
