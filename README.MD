@@ -101,21 +101,19 @@ Aquí encontrarás los endpoints para:
   - `matchedCount` muestra cuántos documentos coincidieron con el ID proporcionado.
   - Si `modifiedCount` es 0, el usuario pudo no haber sido modificado porque los datos enviados son iguales a los actuales.
 
-
 ### 🗑️ Eliminar usuario
 
-* **📍 URL del endpoint:**
-  `http://localhost:3000/user/{id}`
-  *Reemplaza `{id}` por el ID válido del usuario a eliminar (ejemplo: `684318f26166601f0b5d115b`).*
+- **📍 URL del endpoint:** `http://localhost:3000/user/{id}` _Reemplaza `{id}` por el ID válido del usuario a eliminar (ejemplo:
+  `684318f26166601f0b5d115b`)._
 
-* **🧾 Método HTTP:**
-  `DELETE`
+- **🧾 Método HTTP:** `DELETE`
 
-* **📦 Cuerpo de la solicitud:**
-  No se requiere body.
+- **📦 Cuerpo de la solicitud:** No se requiere body.
 
-* **📝 Descripción:**
-  Elimina un usuario existente identificado por su ID. La solicitud no debe incluir ningún dato adicional en el cuerpo ni en la URL (excepto el ID).
+- **📝 Descripción:** Elimina un usuario existente identificado por su ID. La solicitud no debe incluir ningún dato adicional en el cuerpo
+  ni en la URL (excepto el ID).
 
-* **📤 Respuesta exitosa:**
-  Código HTTP `204 No Content` indicando que la eliminación fue exitosa y que no se devuelve contenido en la respuesta.
+- **📤 Respuesta exitosa:** Código HTTP `204 No Content` indicando que la eliminación fue exitosa y que no se devuelve contenido en la
+  respuesta.
+
+## Módulo de Auth

@@ -2,13 +2,16 @@
 
 const express = require("express");
 const passport = require("passport");
+const router = express.Router();
 
 const AuthController = require("../controllers/authController.js");
 const authController = new AuthController();
 const Authvalidator = require("../validator/authValidator.js");
 const authvalidator = new Authvalidator();
 
-const router = express.Router();
+router.get("/", (req, res) => {
+  res.send("¡Bienvenido a MonyMonty auth!");
+});
 
 // Ruta para validar la sesión
 router.get("/check", (req, res) => {

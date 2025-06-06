@@ -41,6 +41,10 @@ app.use("/user", userRoutes);
 app.use("/auth", authRouter);
 // app.use('/product', isAuthenticated, productRoutes);
 app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: "Ruta protegida"}));
+// Ruta raíz (debe ir al final)
+app.use("/", (req, res) => {
+  res.send("¡Bienvenido a MonyMonty!");
+});
 
 // Configuración del servidor
 const config = {
