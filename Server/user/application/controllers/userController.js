@@ -58,6 +58,7 @@ class UserController {
       // Responder con éxito
       res.status(200).json(user);
     } catch (error) {
+      // console.error("Error:", error);
       const errorObj = JSON.parse(error.message);
       res.status(errorObj.status).json({message: errorObj.message});
     }

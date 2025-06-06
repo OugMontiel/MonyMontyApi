@@ -37,6 +37,7 @@ class User {
       await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
       const collection = this.dbConnection.db.collection("user");
       const res = await collection.updateOne({_id: new ObjectId(id)}, {$set: updateData}, {upsert: false});
+      // console.log("Resultado de la actualización:", res);
       return res;
     } catch (error) {
       throw new Error(JSON.stringify({status: 500, message: "Error updating user"}));

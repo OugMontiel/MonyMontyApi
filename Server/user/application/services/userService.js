@@ -45,7 +45,7 @@ class UserService {
     }
 
     // Verificar si se actualizó algún documento
-    if (res.modifiedCount === 0) {
+    if (updatedUser.modifiedCount === 0) {
       throw new Error(JSON.stringify({status: 404, message: "User not found"}));
     }
     return updatedUser;
