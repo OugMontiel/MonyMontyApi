@@ -24,19 +24,19 @@ router.post("/login", authvalidator.validatorSessionLogin(), (req, res) => authC
 
 // Rutas para autenticación con Google
 router.get("/google", passport.authenticate("google", {scope: ["profile", "email"]}));
-router.get("/google/callback", passport.authenticate("google", {failureRedirect: "/home"}), (req, res) =>
+router.get("/google/callback", passport.authenticate("google", {failureRedirect: "/login"}), (req, res) =>
   authController.callback(req, res)
 );
 
 // Rutas para autenticación con GitHub
 router.get("/github", passport.authenticate("github"));
-router.get("/github/callback", passport.authenticate("github", {failureRedirect: "/home"}), (req, res) =>
+router.get("/github/callback", passport.authenticate("github", {failureRedirect: "/login"}), (req, res) =>
   authController.callback(req, res)
 );
 
 // Rutas para autenticación con Discord
 router.get("/discord", passport.authenticate("discord"));
-router.get("/discord/callback", passport.authenticate("discord", {failureRedirect: "/home"}), (req, res) =>
+router.get("/discord/callback", passport.authenticate("discord", {failureRedirect: "/login"}), (req, res) =>
   authController.callback(req, res)
 );
 
