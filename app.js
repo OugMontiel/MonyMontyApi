@@ -12,6 +12,7 @@ require("./server/auth/infrastructure/config/passportGoogle");
 const isAuthenticated = require("./server/auth/infrastructure/middleware/isAuthenticated");
 const authRouter = require("./server/auth/application/routes/authRouter");
 const userRoutes = require("./server/user/application/routes/userRoutes");
+const movRoutes = require("./server/movimiento/application/routes/movRoutes");
 // const productRoutes = require('./product/application/routes/productRoutes');
 
 // Inicializar la app Express
@@ -39,8 +40,9 @@ app.use(passport.session());
 // Rutas API
 app.use("/user", userRoutes);
 app.use("/auth", authRouter);
+app.use("/movimiento", isAuthenticated, movRoutes);
 // app.use('/product', isAuthenticated, productRoutes);
-app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: "Ruta protegida"}));
+app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: " accedio a Ruta protegida"}));
 // Ruta raíz (debe ir al final)
 app.use("/", (req, res) => {
   res.send("¡Bienvenido a MonyMonty!");
