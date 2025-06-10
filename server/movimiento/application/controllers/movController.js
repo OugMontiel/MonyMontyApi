@@ -22,18 +22,32 @@ class transaccionesController {
       // Validar si hay errores
       if (!this.validarExpres(req, res)) return;
 
-      // Crear el usuario
+      // Crear el Nueva transaccion
       const product = await this.TransaccionService.createProduct(req.body);
 
       // Responder con éxito
       res.status(201).json(product);
+      
     } catch (error) {
-      // console.error("Error:", error);
-
-      const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({message: errorObj.message});
+      console.error("Error:", error);
+      // const errorObj = JSON.parse(error.message);
+      res.status(error.status || 500 ).json(
+        {
+          success: false,
+          message: error.message || "Error en el controlador al crear la transacción",
+          data: null
+        }
+      );
     }
   }
+
+  // ------------------------
+  // ------------------------
+  // ------- aqui voy -------
+  // ------------------------
+  // ------------------------
+
+   
   // obtener un Product
   async getProduct(req, res) {
     try {
