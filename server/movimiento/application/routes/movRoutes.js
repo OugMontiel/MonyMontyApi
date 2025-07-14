@@ -12,28 +12,20 @@ router.get("/", (req, res) => {
 });
 
 // Obtener todas transacciones para un usuario específico
-router.get("/user/:id", 
-  transaccionValidator.validateIdTransacciones(), 
-  (req, res) => transaccionController.getAllTransaccionesByUser(req, res));
+router.get("/user/:id", transaccionValidator.validateIdTransacciones(), (req, res) =>
+  transaccionController.getAllTransaccionesByUser(req, res)
+);
 
 // Define la ruta para obtener un product por ID.
-router.get("/:id", 
-  transaccionValidator.validateIdTransacciones(),
-  (req, res) => transaccionController.getProduct(req, res));
+router.get("/:id", transaccionValidator.validateIdTransacciones(), (req, res) => transaccionController.getProduct(req, res));
 
 // Define la ruta para crear un nuevo product.
-router.post("/", 
-  transaccionValidator.validateNewTransacciones(), 
-  (req, res) => transaccionController.createProduct(req, res));
+router.post("/", transaccionValidator.validateNewTransacciones(), (req, res) => transaccionController.createProduct(req, res));
 
 // Define la ruta para actualizar un product por ID.
-router.put("/:id", 
-  transaccionValidator.validateIdTransacciones(),
-  (req, res) => transaccionController.updateProduct(req, res));
+router.put("/:id", transaccionValidator.validateIdTransacciones(), (req, res) => transaccionController.updateProduct(req, res));
 
 // Define la ruta para eliminar un product por ID.
-router.delete("/:id", 
-  transaccionValidator.validateIdTransacciones(),
-  (req, res) => transaccionController.deleteProduct(req, res));
+router.delete("/:id", transaccionValidator.validateIdTransacciones(), (req, res) => transaccionController.deleteProduct(req, res));
 
 module.exports = router;

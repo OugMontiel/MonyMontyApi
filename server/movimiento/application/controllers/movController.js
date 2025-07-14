@@ -16,7 +16,7 @@ class transaccionesController {
     }
     return true;
   }
-  // crear un transaccion 
+  // crear un transaccion
   async newTransaccion(req, res) {
     try {
       // Validar si hay errores
@@ -27,17 +27,14 @@ class transaccionesController {
 
       // Responder con éxito
       res.status(201).json(product);
-      
     } catch (error) {
       console.error("Error:", error);
       // const errorObj = JSON.parse(error.message);
-      res.status(error.status || 500 ).json(
-        {
-          success: false,
-          message: error.message || "Error en el controlador al crear la transacción",
-          data: null
-        }
-      );
+      res.status(error.status || 500).json({
+        success: false,
+        message: error.message || "Error en el controlador al crear la transacción",
+        data: null,
+      });
     }
   }
 
@@ -47,7 +44,6 @@ class transaccionesController {
   // ------------------------
   // ------------------------
 
-   
   // obtener un Product
   async getProduct(req, res) {
     try {

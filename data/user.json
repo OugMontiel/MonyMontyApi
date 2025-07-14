@@ -1,0 +1,50 @@
+[
+  {
+    "_id": {
+      "$oid": "6842fbf0bac8bf1ebaca56ca"
+    },
+    "nombre": "Diego Montiel",
+    "email": "prueva@gmail.com",
+    "password": "$2b$10$Nb9Zrv6h0fOIGduqCuh9T.Ws.bfc7bBPY24aaPPot8ZKGVTaMvTQS"
+  },
+  {
+    "_id": {
+      "$oid": "6843114a928b3f3d4b5f6da9"
+    },
+    "nombre": "Cambio Tres",
+    "email": "prueba@prueba.com",
+    "password": "123456789"
+  },
+  {
+    "_id": {
+      "$oid": "684318f26166601f0b5d115b"
+    },
+    "nombre": "Diego prueva Eliminable",
+    "email": "prueva@gmail.com",
+    "password": "$2b$10$F.MsUrqdpuoTK6sWAJdEoeguEs.UpFTtrQEj3jXy74bOgJwzuF4KG"
+  },
+  {
+    "_id": {
+      "$oid": "68434b045fb490b9cb65bef1"
+    },
+    "nombre": "Montiel",
+    "email": "prueba@casa.com",
+    "password": "$2b$10$aGvt3XibNF8ZPpq4oVmbpu1qelMprAlGKEa2G032h4yoIjIVF6/hC"
+  },
+  {
+    "_id": {
+      "$oid": "684489a8824dba92f11dcbb9"
+    },
+    "nombre": "Montiel",
+    "email": "prueba@casa.com",
+    "password": "$2b$10$3A68Z9lrOMj21G1GPIwLlOlLQObBXUvfjzNuZVnZd4sq8ywO0rMi."
+  },
+  {
+    "_id": {
+      "$oid": "68448ae4824dba92f11dcbba"
+    },
+    "nombre": "Diego Alejandro Montiel Flore",
+    "email": "go.edy.go@gmail.com",
+    "password": "$2b$10$jAP0xB0vJFdfFfYalad.Cu6f6FyQOFXKkN8KckVqSfXfkC1.c7XUu"
+  }
+]
