@@ -70,10 +70,7 @@ class MovimientoService {
 
       return resultado;
     } catch (error) {
-      console.error(
-        `Error en servicio - actualizar movimiento ID ${id}:`,
-        error,
-      );
+      console.error(`Error en servicio - actualizar movimiento ID ${id}:`, error);
       throw {
         status: error.status || 500,
         message: error.message || "Error interno al actualizar el movimiento",
@@ -117,10 +114,7 @@ class MovimientoService {
     try {
       return await this.movimientoRepository.obtenerTodos();
     } catch (error) {
-      console.error(
-        "Error en servicio - obtener todos los movimientos:",
-        error,
-      );
+      console.error("Error en servicio - obtener todos los movimientos:", error);
       throw {
         status: 500,
         message: "Error interno al obtener los movimientos",
@@ -136,8 +130,7 @@ class MovimientoService {
    */
   async obtenerPorUsuario(usuarioId) {
     try {
-      const movimientos =
-        await this.movimientoRepository.obtenerPorUsuario(usuarioId);
+      const movimientos = await this.movimientoRepository.obtenerPorUsuario(usuarioId);
 
       if (!movimientos || movimientos.length === 0) {
         throw {
@@ -148,14 +141,10 @@ class MovimientoService {
 
       return movimientos;
     } catch (error) {
-      console.error(
-        `Error en servicio - obtener movimientos usuario ID ${usuarioId}:`,
-        error,
-      );
+      console.error(`Error en servicio - obtener movimientos usuario ID ${usuarioId}:`, error);
       throw {
         status: error.status || 500,
-        message:
-          error.message || "Error interno al obtener movimientos del usuario",
+        message: error.message || "Error interno al obtener movimientos del usuario",
       };
     }
   }

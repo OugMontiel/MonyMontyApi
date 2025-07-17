@@ -56,11 +56,7 @@ class MovimientoRepository {
     // Si ya es un error normalizado
     if (error.status) return error;
 
-    return this.crearError(
-      error.status || 500,
-      error.message || mensajeDefault,
-      { originalError: error },
-    );
+    return this.crearError(error.status || 500, error.message || mensajeDefault, {originalError: error});
   }
 
   /**
@@ -72,10 +68,7 @@ class MovimientoRepository {
    */
   async actualizar(id, datosActualizacion) {
     try {
-      const resultado = await this.movimientoModel.actualizar(
-        id,
-        datosActualizacion,
-      );
+      const resultado = await this.movimientoModel.actualizar(id, datosActualizacion);
       if (!resultado) {
         throw {
           status: 404,
@@ -84,10 +77,7 @@ class MovimientoRepository {
       }
       return resultado;
     } catch (error) {
-      console.error(
-        `Error en repositorio - actualizar movimiento ID ${id}:`,
-        error,
-      );
+      console.error(`Error en repositorio - actualizar movimiento ID ${id}:`, error);
       throw {
         status: error.status || 500,
         message: error.message || "Error al actualizar el movimiento",
@@ -112,10 +102,7 @@ class MovimientoRepository {
       }
       return resultado;
     } catch (error) {
-      console.error(
-        `Error en repositorio - eliminar movimiento ID ${id}:`,
-        error,
-      );
+      console.error(`Error en repositorio - eliminar movimiento ID ${id}:`, error);
       throw {
         status: error.status || 500,
         message: error.message || "Error al eliminar el movimiento",
@@ -132,10 +119,7 @@ class MovimientoRepository {
     try {
       return await this.movimientoModel.buscarTodos();
     } catch (error) {
-      console.error(
-        "Error en repositorio - obtener todos los movimientos:",
-        error,
-      );
+      console.error("Error en repositorio - obtener todos los movimientos:", error);
       throw {
         status: 500,
         message: "Error al obtener los movimientos de la base de datos",
@@ -151,8 +135,7 @@ class MovimientoRepository {
    */
   async obtenerPorUsuario(usuarioId) {
     try {
-      const movimientos =
-        await this.movimientoModel.buscarPorUsuario(usuarioId);
+      const movimientos = await this.movimientoModel.buscarPorUsuario(usuarioId);
       if (!movimientos || movimientos.length === 0) {
         throw {
           status: 404,
@@ -161,10 +144,7 @@ class MovimientoRepository {
       }
       return movimientos;
     } catch (error) {
-      console.error(
-        `Error en repositorio - obtener movimientos usuario ID ${usuarioId}:`,
-        error,
-      );
+      console.error(`Error en repositorio - obtener movimientos usuario ID ${usuarioId}:`, error);
       throw {
         status: error.status || 500,
         message: error.message || "Error al buscar movimientos del usuario",

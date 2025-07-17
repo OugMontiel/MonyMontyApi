@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+const {validationResult} = require("express-validator");
 const movimientoService = require("../services/movService");
 
 class MovimientoController {
@@ -13,17 +13,27 @@ class MovimientoController {
    * @returns {boolean} - True si la validación es exitosa
    */
   validarResultados(req, res) {
-    const errores = validationResult(req);
-    if (!errores.isEmpty()) {
-      res.status(400).json({
+    try {
+      const errores = validationResult(req);
+      if (!errores.isEmpty()) {
+        res.status(400).json({
+          success: false,
+          message: "Errores de validación",
+          errors: errores.array(),
+          data: null,
+        });
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error("Error en validarResultados:", error);
+      res.status(500).json({
         success: false,
-        message: "Errores de validación",
-        errors: errores.array(),
+        message: "Error interno al validar los datos",
         data: null,
       });
       return false;
     }
-    return true;
   }
 
   /**
@@ -73,9 +83,7 @@ class MovimientoController {
     try {
       if (!this.validarResultados(req, res)) return;
 
-      const movimiento = await this.movimientoService.obtenerPorId(
-        req.params.id,
-      );
+      const movimiento = await this.movimientoService.obtenerPorId(req.params.id);
 
       res.status(200).json({
         success: true,
@@ -91,10 +99,7 @@ class MovimientoController {
     try {
       if (!this.validarResultados(req, res)) return;
 
-      const movimiento = await this.movimientoService.actualizar(
-        req.params.id,
-        req.body,
-      );
+      const movimiento = await this.movimientoService.actualizar(req.params.id, req.body);
 
       res.status(200).json({
         success: true,

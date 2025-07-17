@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const {MongoClient} = require("mongodb");
 
 /**
  * Clase para manejar conexiones a MongoDB con patrón Singleton
@@ -10,10 +10,10 @@ class ConnectToDatabase {
   #password;
 
   constructor(
-    { usuario, password } = {
+    {usuario, password} = {
       usuario: process.env.MONGO_USER,
       password: process.env.MONGO_PWD,
-    },
+    }
   ) {
     if (ConnectToDatabase.instancia) {
       return ConnectToDatabase.instancia;

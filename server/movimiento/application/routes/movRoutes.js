@@ -10,39 +10,23 @@ router.get("/", (req, res) => {
 });
 
 // Obtener todos los movimientos de un usuario
-router.get(
-  "/user/:id",
-  movimientoValidator.validarId(),
-  movimientoController.obtenerTodosLosMovimientos,
-);
+router.get("/user/:id", movimientoValidator.validarId(), movimientoController.obtenerTodosLosMovimientos);
 
 // Obtener un movimiento específico
-router.get(
-  "/:id",
-  movimientoValidator.validarId(),
-  movimientoController.obtenerMovimiento,
-);
+router.get("/:id", movimientoValidator.validarId(), movimientoController.obtenerMovimiento);
 
 // Crear nuevo movimiento
-router.post(
-  "/",
-  movimientoValidator.validarCreacion(),
-  movimientoController.crearMovimiento(),
-);
+router.post("/", movimientoValidator.validarCreacion(), (req, res) => movimientoController.crearMovimiento(req, res));
 
 // Actualizar movimiento
 router.put(
   "/:id",
   movimientoValidator.validarId(),
   movimientoValidator.validarActualizacionMovimiento(),
-  movimientoController.actualizarMovimiento(),
+  movimientoController.actualizarMovimiento()
 );
 
 // Eliminar movimiento
-router.delete(
-  "/:id",
-  movimientoValidator.validarId(),
-  movimientoController.eliminarMovimiento,
-);
+router.delete("/:id", movimientoValidator.validarId(), movimientoController.eliminarMovimiento);
 
 module.exports = router;
