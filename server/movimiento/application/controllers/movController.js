@@ -1,101 +1,136 @@
-// Gestiona las peticiones HTTP y las respuestas, delegando la lógica de negocio a los servicios.
-const {validationResult} = require("express-validator");
-const TransaccionService = require("../services/movService");
+const { validationResult } = require("express-validator");
+const movimientoService = require("../services/movService");
 
-class transaccionesController {
+class MovimientoController {
   constructor() {
-    this.TransaccionService = new TransaccionService();
+    this.movimientoService = movimientoService;
   }
-  // validar generico
-  validarExpres(req, res) {
-    const errors = validationResult(req);
-    // console.error("errors:", errors);
-    if (!errors.isEmpty()) {
-      res.status(400).json({errors: errors.array()});
-      return; // Detener la ejecución si hay errores
+
+  /**
+   * Valida los resultados de express-validator
+   * @param {object} req - Objeto de petición
+   * @param {object} res - Objeto de respuesta
+   * @returns {boolean} - True si la validación es exitosa
+   */
+  validarResultados(req, res) {
+    const errores = validationResult(req);
+    if (!errores.isEmpty()) {
+      res.status(400).json({
+        success: false,
+        message: "Errores de validación",
+        errors: errores.array(),
+        data: null,
+      });
+      return false;
     }
     return true;
   }
-  // crear un transaccion
-  async newTransaccion(req, res) {
+
+  /**
+   * Maneja errores y envía respuesta consistente
+   * @param {object} res - Objeto de respuesta
+   * @param {Error} error - Objeto de error
+   * @param {string} accion - Descripción de la acción fallida
+   */
+  manejarError(res, error, accion) {
+    console.error(`Error al ${accion}:`, error);
+
+    let status = 500;
+    let message = error.message || `Error interno al ${accion}`;
+
+    if (error.status) {
+      status = error.status;
+    } else if (error.name === "ValidationError") {
+      status = 400;
+    } else if (error.name === "NotFoundError") {
+      status = 404;
+    }
+
+    res.status(status).json({
+      success: false,
+      message,
+      data: null,
+    });
+  }
+
+  async crearMovimiento(req, res) {
     try {
-      // Validar si hay errores
-      if (!this.validarExpres(req, res)) return;
+      if (!this.validarResultados(req, res)) return;
 
-      // Crear el Nueva transaccion
-      const product = await this.TransaccionService.createProduct(req.body);
+      const movimiento = await this.movimientoService.crear(req.body);
 
-      // Responder con éxito
-      res.status(201).json(product);
-    } catch (error) {
-      console.error("Error:", error);
-      // const errorObj = JSON.parse(error.message);
-      res.status(error.status || 500).json({
-        success: false,
-        message: error.message || "Error en el controlador al crear la transacción",
-        data: null,
+      res.status(201).json({
+        success: true,
+        message: "Movimiento creado exitosamente",
+        data: movimiento,
       });
+    } catch (error) {
+      this.manejarError(res, error, "crear movimiento");
     }
   }
 
-  // ------------------------
-  // ------------------------
-  // ------- aqui voy -------
-  // ------------------------
-  // ------------------------
+  async obtenerMovimiento(req, res) {
+    try {
+      if (!this.validarResultados(req, res)) return;
 
-  // obtener un Product
-  async getProduct(req, res) {
-    try {
-      // Validar si hay errores
-      if (!this.validarExpres(req, res)) return;
-      // Optner el Product
-      const product = await this.TransaccionService.getProductById(req.params.id);
-      // respoder con exito
-      res.status(200).json(product);
+      const movimiento = await this.movimientoService.obtenerPorId(
+        req.params.id,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Movimiento obtenido exitosamente",
+        data: movimiento,
+      });
     } catch (error) {
-      const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({message: errorObj.message});
+      this.manejarError(res, error, "obtener movimiento");
     }
   }
-  // actualizar un Usuario
-  async updateProduct(req, res) {
+
+  async actualizarMovimiento(req, res) {
     try {
-      // Validar si hay errores
-      if (!this.validarExpres(req, res)) return;
-      // Actualizar el Usuario
-      const product = await this.TransaccionService.updateProduct(req.params.id, req.body);
-      // Responder con éxito
-      res.status(200).json(product);
+      if (!this.validarResultados(req, res)) return;
+
+      const movimiento = await this.movimientoService.actualizar(
+        req.params.id,
+        req.body,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Movimiento actualizado exitosamente",
+        data: movimiento,
+      });
     } catch (error) {
-      const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({message: errorObj.message});
+      this.manejarError(res, error, "actualizar movimiento");
     }
   }
-  async deleteProduct(req, res) {
+
+  async eliminarMovimiento(req, res) {
     try {
-      // Validar si hay errores
-      if (!this.validarExpres(req, res)) return;
-      // Borrar el Usuario
-      const product = await this.TransaccionService.deleteProduct(req.params.id);
-      // Este código indica que la solicitud fue exitosa y que el recurso ha sido eliminado, pero no hay contenido adicional para enviar en la respuesta.
-      res.status(204).json(product);
-      // En algunos casos, 200 OK también puede ser utilizado si la respuesta incluye información adicional o confirmación sobre la eliminación. Sin embargo, 204 No Content es la opción más estándar para indicar que un recurso ha sido eliminado y no hay contenido adicional en la respuesta.
-      // res.status(200).json(user);
+      if (!this.validarResultados(req, res)) return;
+
+      await this.movimientoService.eliminar(req.params.id);
+
+      res.status(204).end();
     } catch (error) {
-      const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({message: errorObj.message});
+      this.manejarError(res, error, "eliminar movimiento");
     }
   }
-  async getAllProducts(req, res) {
+
+  async obtenerTodosLosMovimientos(req, res) {
     try {
-      const products = await this.TransaccionService.getAllProducts(); // Cambia aquí
-      res.status(200).json(products);
+      const movimientos = await this.movimientoService.obtenerTodos();
+
+      res.status(200).json({
+        success: true,
+        message: "Movimientos obtenidos exitosamente",
+        data: movimientos,
+      });
     } catch (error) {
-      console.error("Error al obtener productos:", error); // Agrega un log para el error
-      res.status(500).json({error: error.message});
+      this.manejarError(res, error, "obtener movimientos");
     }
   }
 }
 
-module.exports = transaccionesController;
+module.exports = new MovimientoController();

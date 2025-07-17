@@ -1,31 +1,48 @@
-// Define las rutas de la aplicación y mapea las URLs a los controladores.
 const express = require("express");
-const router = express.Router(); // Crea un enrutador de Express que manejará las sub rutas específicas para la ruta /users
+const router = express.Router();
 
-const TransaccionController = require("../controllers/movController"); // Importa el controlador
-const transaccionController = new TransaccionController(); // Instancia el controlador de usuarios
-const TransaccionValidator = require("../validator/movValidator"); // Importa el validador
-const transaccionValidator = new TransaccionValidator(); // Instancia el validador de usuarios
+const movimientoValidator = require("../validator/movValidator");
+const movimientoController = require("../controllers/movController");
 
+// Ruta raíz
 router.get("/", (req, res) => {
-  res.send("¡Bienvenido a MonyMonty transacciones !");
+  res.send("¡Bienvenido a MonyMonty Movimientos!");
 });
 
-// Obtener todas transacciones para un usuario específico
-router.get("/user/:id", transaccionValidator.validateIdTransacciones(), (req, res) =>
-  transaccionController.getAllTransaccionesByUser(req, res)
+// Obtener todos los movimientos de un usuario
+router.get(
+  "/user/:id",
+  movimientoValidator.validarId(),
+  movimientoController.obtenerTodosLosMovimientos,
 );
 
-// Define la ruta para obtener un product por ID.
-router.get("/:id", transaccionValidator.validateIdTransacciones(), (req, res) => transaccionController.getProduct(req, res));
+// Obtener un movimiento específico
+router.get(
+  "/:id",
+  movimientoValidator.validarId(),
+  movimientoController.obtenerMovimiento,
+);
 
-// Define la ruta para crear un nuevo product.
-router.post("/", transaccionValidator.validateNewTransacciones(), (req, res) => transaccionController.createProduct(req, res));
+// Crear nuevo movimiento
+router.post(
+  "/",
+  movimientoValidator.validarCreacion(),
+  movimientoController.crearMovimiento(),
+);
 
-// Define la ruta para actualizar un product por ID.
-router.put("/:id", transaccionValidator.validateIdTransacciones(), (req, res) => transaccionController.updateProduct(req, res));
+// Actualizar movimiento
+router.put(
+  "/:id",
+  movimientoValidator.validarId(),
+  movimientoValidator.validarActualizacionMovimiento(),
+  movimientoController.actualizarMovimiento(),
+);
 
-// Define la ruta para eliminar un product por ID.
-router.delete("/:id", transaccionValidator.validateIdTransacciones(), (req, res) => transaccionController.deleteProduct(req, res));
+// Eliminar movimiento
+router.delete(
+  "/:id",
+  movimientoValidator.validarId(),
+  movimientoController.eliminarMovimiento,
+);
 
 module.exports = router;
