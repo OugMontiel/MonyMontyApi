@@ -1,82 +1,82 @@
 const {body, query, param} = require("express-validator");
 const {ObjectId} = require("mongodb");
 
-class TransaccionValidator {
-  validateNewTransacciones = () => {
+class MovimientoValidator {
+  validarCreacion() {
     return [
-      // Validación de nombre
-      body("usuario").notEmpty().withMessage("The usuario is mandatory").isString(),
+      // Validación de usuario
+      body("usuario").notEmpty().withMessage("El usuario es obligatorio").isString().withMessage("El usuario debe ser texto"),
 
-      // validación de fecha
-      body("fecha").notEmpty().withMessage("La fecha es obligatoria").isString().withMessage("La fecha debe ser un string"),
+      // Validación de fecha
+      body("fecha").notEmpty().withMessage("La fecha es obligatoria").isISO8601().withMessage("La fecha debe tener formato ISO8601"),
 
       // Validación de categoría
-      body("categoría").notEmpty().withMessage("The categoría is mandatory").isObject(),
+      body("categoria").notEmpty().withMessage("La categoría es obligatoria").isObject().withMessage("La categoría debe ser un objeto"),
 
       // Validación de entidad
-      body("entidad").notEmpty().withMessage("The entidad is mandatory").isObject(),
+      body("entidad").notEmpty().withMessage("La entidad es obligatoria").isObject().withMessage("La entidad debe ser un objeto"),
 
-      // Validación de ingreso o egreso
+      // Validación de ingreso/egreso
       body().custom((body) => {
         const {ingreso, egreso} = body;
 
         if (!ingreso && !egreso) {
-          throw new Error("Debe existir ingreso o egreso");
+          throw new Error("Debe especificar un ingreso o egreso");
         }
 
         if (ingreso && egreso) {
-          throw new Error("No se permite tener ingreso y egreso al mismo tiempo");
+          throw new Error("No puede tener ingreso y egreso simultáneamente");
         }
 
-        const valor = ingreso || egreso;
+        const monto = ingreso || egreso;
 
-        if (isNaN(valor)) {
-          throw new Error("El valor de ingreso o egreso debe ser numérico");
+        if (typeof monto !== "number" || monto <= 0) {
+          throw new Error("El monto debe ser un número positivo");
         }
 
         return true;
       }),
 
-      // validacion de divisa
-      body("divisa").notEmpty().withMessage("The divisa is mandatory").isObject(),
+      // Validación de divisa
+      body("divisa").notEmpty().withMessage("La divisa es obligatoria").isObject().withMessage("La divisa debe ser un objeto"),
 
-      // Validación para asegurarse de que no haya ningún query en la URL
+      // Validación de query vacío
       query().custom((value, {req}) => {
         if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
+          throw new Error("No se permiten parámetros en la URL");
         }
         return true;
       }),
     ];
-  };
+  }
 
-  validateIdTransacciones = () => {
+  validarActualizacionMovimiento() {
     return [
-      // Validación del ID
-      param("id").custom((value, {req}) => {
-        if (!ObjectId.isValid(value)) {
-          throw new Error("Submit a valid ID");
-        }
-        return true;
-      }),
 
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
+      // Validación de campos opcionales para actualización
+      body("usuario").optional().isString().withMessage("El usuario debe ser texto"),
 
-      // Validación para asegurarse de que no haya ningún dato en el body
-      body().custom((value, {req}) => {
-        if (Object.keys(req.body).length > 0) {
-          throw new Error("Do not send anything in the body");
+      body("fecha").optional().isISO8601().withMessage("La fecha debe tener formato ISO8601"),
+
+      body().custom((body) => {
+        if (body.ingreso && body.egreso) {
+          throw new Error("No puede actualizar a ingreso y egreso simultáneamente");
         }
         return true;
       }),
     ];
-  };
+  }
+
+  validarId() {
+    return [
+      param("id").custom((value) => {
+        if (!ObjectId.isValid(value)) {
+          throw new Error("El ID de usuario no es válido");
+        }
+        return true;
+      }),
+    ];
+  }
 }
 
-module.exports = TransaccionValidator;
+module.exports = new MovimientoValidator();

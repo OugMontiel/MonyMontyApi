@@ -1,11 +1,57 @@
-// un .md para todo los EndPoints Tipo Documentacion 
+<!-- un .md para todo los EndPoints Tipo Documentacion -->
 
+# Modulo Movimientos
 
-## Módulo Usuarios
+* **Base URL:** `http://localhost:3000/movimiento`
+* **Formato de respuesta:** JSON
+* **Autenticación requerida:** Sí (Bearer Token)
+
+## Obtener todos los Movimientos de un Usuario
+  - **URL del endPoint:** `http://localhost:3000/movimiento/user/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `GET`
+  - **Parametros de la URL:** Id del usuario
+  - **Cuerpo de la solicitud:** No
+  - **Respuesta Exitosa:** 
+  - **Respuesta Fallida:**
+## Obtener todos los Movimientos de un ID
+  - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `GET`
+  - **Parametros de la URL:** Id del movimiento
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+## Crear Movimiento
+  - **URL del endPoint:** `http://localhost:3000/movimiento/`
+  - **Descripción:**
+  - **Metodo HTTP:** `POST`
+  - **Parametros de la URL:** No
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+## Actualizar Movimiento
+  - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `PUT`
+  - **Parametros de la URL:** Id del movimiento
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+## Eliminar Movimiento
+  - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `DELETE`
+  - **Parametros de la URL:** Id del movimiento
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+
+# Módulo Usuarios
 
 Aquí encontrarás los endpoints para:
 
-### 🚀 Crear usuario
+## 🚀 Crear usuario
 
 - **📍 URL del endpoint:** `http://localhost:3000/user/`
 
@@ -23,7 +69,7 @@ Aquí encontrarás los endpoints para:
 
 - **📝 Descripción:** Registra un nuevo usuario en el sistema. Los datos deben enviarse en formato JSON a través de un método `POST`.
 
-### 🔎 Consultar usuario por ID
+## 🔎 Consultar usuario por ID
 
 - **📍 URL del endpoint:** `http://localhost:3000/user/{id}` _Reemplaza `{id}` por el ID válido del usuario (ejemplo:
   `6842fbf0bac8bf1ebaca56ca`)._
@@ -34,7 +80,7 @@ Aquí encontrarás los endpoints para:
 
 - **📝 Descripción:** Obtiene la información de un usuario específico usando su ID. El ID debe ser un `ObjectId` válido de MongoDB.
 
-### ✏️ Actualizar usuario
+## ✏️ Actualizar usuario
 
 - **📍 URL del endpoint:** `http://localhost:3000/user/{id}` _Reemplaza `{id}` por el ID válido del usuario (ejemplo:
   `6843114a928b3f3d4b5f6da9`)._
@@ -72,7 +118,7 @@ Aquí encontrarás los endpoints para:
   - `matchedCount` muestra cuántos documentos coincidieron con el ID proporcionado.
   - Si `modifiedCount` es 0, el usuario pudo no haber sido modificado porque los datos enviados son iguales a los actuales.
 
-### 🗑️ Eliminar usuario
+## 🗑️ Eliminar usuario
 
 - **📍 URL del endpoint:** `http://localhost:3000/user/{id}` _Reemplaza `{id}` por el ID válido del usuario a eliminar (ejemplo:
   `684318f26166601f0b5d115b`)._
@@ -87,11 +133,11 @@ Aquí encontrarás los endpoints para:
 - **📤 Respuesta exitosa:** Código HTTP `204 No Content` indicando que la eliminación fue exitosa y que no se devuelve contenido en la
   respuesta.
 
-## Módulo de Auth
+# Módulo de Auth
 
 Aquí encontrarás los endpoints para:
 
-### ✅ Verificar autenticación
+## ✅ Verificar autenticación
 
 - **📍 URL del endpoint:** `http://localhost:3000/auth/check`
 
@@ -110,7 +156,7 @@ Aquí encontrarás los endpoints para:
   }
   ```
 
-### 🔐 Iniciar sesión
+## 🔐 Iniciar sesión
 
 - **📍 URL del endpoint:** `http://localhost:3000/auth/login`
 
