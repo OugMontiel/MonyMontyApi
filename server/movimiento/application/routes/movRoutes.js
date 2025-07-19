@@ -22,8 +22,8 @@ router.post("/", movimientoValidator.validarCreacion(), (req, res) => movimiento
 router.put(
   "/:id",
   movimientoValidator.validarId(),
-  movimientoValidator.validarActualizacionMovimiento(),
-  movimientoController.actualizarMovimiento()
+  movimientoValidator.validarActualizacionMovimiento(),(req, res) =>
+  movimientoController.actualizarMovimiento(req, res)
 );
 
 // Eliminar movimiento

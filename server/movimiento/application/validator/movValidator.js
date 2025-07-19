@@ -52,7 +52,6 @@ class MovimientoValidator {
 
   validarActualizacionMovimiento() {
     return [
-      ...this.validarIdMovimiento(),
 
       // Validación de campos opcionales para actualización
       body("usuario").optional().isString().withMessage("El usuario debe ser texto"),
