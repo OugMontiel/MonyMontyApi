@@ -1,5 +1,52 @@
 <!-- un .md para todo los EndPoints Tipo Documentacion -->
 
+# Modulo Movimientos
+
+* **Base URL:** `http://localhost:3000/movimiento`
+* **Formato de respuesta:** JSON
+* **Autenticación requerida:** Sí (Bearer Token)
+
+## Obtener todos los Movimientos de un Usuario
+  - **URL del endPoint:** `http://localhost:3000/movimiento/user/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `GET`
+  - **Parametros de la URL:** Id del usuario
+  - **Cuerpo de la solicitud:** No
+  - **Respuesta Exitosa:** 
+  - **Respuesta Fallida:**
+## Obtener todos los Movimientos de un ID
+  - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `GET`
+  - **Parametros de la URL:** Id del movimiento
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+## Crear Movimiento
+  - **URL del endPoint:** `http://localhost:3000/movimiento/`
+  - **Descripción:**
+  - **Metodo HTTP:** `POST`
+  - **Parametros de la URL:** No
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+## Actualizar Movimiento
+  - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `PUT`
+  - **Parametros de la URL:** Id del movimiento
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+## Eliminar Movimiento
+  - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+  - **Descripción:**
+  - **Metodo HTTP:** `DELETE`
+  - **Parametros de la URL:** Id del movimiento
+  - **Cuerpo de la solicitud:**
+  - **Respuesta Exitosa:**
+  - **Respuesta Fallida:**
+
 # Módulo Usuarios
 
 Aquí encontrarás los endpoints para:
