@@ -6,8 +6,7 @@
 const {MongoClient} = require("mongodb");
 
 /**
- * Clase para gestionar la conexión a la base de datos MongoDB.
- * 
+ * Clase para manejar conexiones a MongoDB con patrón Singleton
  */
 class ConnectToDatabase {
   /**
@@ -15,84 +14,111 @@ class ConnectToDatabase {
    * Utiliza el patrón Singleton para evitar múltiples conexiones.
    * @type {ConnectToDatabase}
    */
-  static instanceConnect;
+  static instancia;
   db;
-  connection;
-  user;
-  #password;
+  cliente;
+  #usuario;
+  #contraseña;
 
-  /**
-   * Crea una instancia de la clase ConnectToDatabase.
-   * @param {user} param - Usuario para la conexión a MongoDB.
-   * @param {pwd} param - Contraseña para la conexión a MongoDB.
-   * se toman de las variables de entorno MONGO_USER y MONGO_PWD.
-   * @returns 
+   /**
+   * Crea una instancia única
+   * @param {object} credenciales - Credenciales de conexión.
+   * @param {string} credenciales.usuario - Usuario para la conexión.
+   * @param {string} credenciales.contraseña - Contraseña para la conexión.
+   * @returns
    */
-  constructor({user, pwd} = {user: process.env.MONGO_USER, pwd: process.env.MONGO_PWD}) {
-    if (ConnectToDatabase.instanceConnect && this.connection) {
-      return ConnectToDatabase.instanceConnect;
+  constructor(
+    {usuario, contraseña} = {
+      usuario: process.env.MONGO_USER,
+      contraseña: process.env.MONGO_PWD,
     }
-    this.user = user;
-    this.setPassword = pwd;
-    
-    // this.open();
-    ConnectToDatabase.instanceConnect = this;
+  ) {
+    if (ConnectToDatabase.instancia) {
+      return ConnectToDatabase.instancia;
+    }
+
+    this.#usuario = usuario;
+    this.#contraseña = contraseña;
+
+    ConnectToDatabase.instancia = this;
   }
 
   /**
-   * Abre una conexión a la base de datos MongoDB.
+   * Abre la conexión con la base de datos
+   * @throws {object} - Error con formato {status, message, metadata}
    */
-  async connectOpen() {
-    if (this.connection) {
+  async conectar() {
+    if (this.estaConectado()) return this.db;
+
+    try {
+      const usaSrv = process.env.MONGO_ACCESS.includes("+srv");
+      const urlConexion = usaSrv
+        ? `${process.env.MONGO_ACCESS}${this.#usuario}:${this.#contraseña}@${process.env.MONGO_HOST}`
+        : `${process.env.MONGO_ACCESS}${this.#usuario}:${this.#contraseña}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
+
+      this.cliente = new MongoClient(urlConexion, {
+        connectTimeoutMS: 5000,
+        serverSelectionTimeoutMS: 5000,
+      });
+
+      await this.cliente.connect();
+      this.db = this.cliente.db(process.env.MONGO_DB_NAME);
+
+      console.log("Conexión a MongoDB establecida correctamente");
       return this.db;
+    } catch (error) {
+      console.error("Error al conectar a MongoDB:", error);
+      this.cliente = undefined;
+      this.db = undefined;
+
+      throw {
+        status: 503,
+        message: "Error al conectar con la base de datos",
+        metadata: {
+          tipo: "conexion_bd",
+          errorOriginal: error.message,
+          host: process.env.MONGO_HOST,
+        },
+      };
     }
+  }
 
-    const isSrv = process.env.MONGO_ACCESS.includes("+srv");
-
-    if (isSrv) {
-      // MongoDB Atlas (sin puerto)
-      this.connection = new MongoClient(`${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}`);
-    } else {
-      // MongoDB local (con puerto)
-      this.connection = new MongoClient(
-        `${process.env.MONGO_ACCESS}${this.user}:${this.getPassword}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
-      );
+  /**
+   * Cierra la conexión con la base de datos
+   * @throws {object} - Error con formato {status, message, metadata}
+   */
+  async desconectar() {
+    if (!this.cliente) {
+      console.warn("No hay conexión activa para cerrar");
+      return;
     }
 
     try {
-      await this.connection.connect();
-      this.db = this.connection.db(process.env.MONGO_DB_NAME);
+      await this.cliente.close();
+      console.log("Conexión a MongoDB cerrada correctamente");
     } catch (error) {
-      console.error("Error al conectar a MongoDB:", error.message);
-      this.connection = undefined;
-      throw new Error("Error connecting: " + error.message);
+      console.error("Error al cerrar conexión con MongoDB:", error);
+      throw {
+        status: 500,
+        message: "Error al cerrar la conexión con la base de datos",
+        metadata: {
+          tipo: "desconexion_bd",
+          errorOriginal: error.message,
+        },
+      };
+    } finally {
+      this.cliente = undefined;
+      this.db = undefined;
     }
   }
 
   /**
-   * Cierra la conexión a la base de datos MongoDB.
-   * Si no hay conexión abierta, muestra un mensaje de advertencia.
+   * Verifica el estado de la conexión
+   * @returns {boolean} - True si hay conexión activa
    */
-  async connectClose() {
-    if (this.connection) {
-      try {
-        await this.connection.close();
-      } catch (error) {
-        console.error("Error al cerrar la conexión:", error.message);
-      } finally {
-        this.connection = undefined;
-        this.db = undefined;
-      }
-    } else {
-      console.warn("Intento de cerrar una conexión inexistente.");
-    }
-  }
-  
-  get getPassword() {
-    return this.#password;
-  }
-  set setPassword(pwd) {
-    this.#password = pwd;
+  estaConectado() {
+    return !!this.cliente && !!this.db;
   }
 }
-module.exports = ConnectToDatabase;
+
+module.exports = new ConnectToDatabase();

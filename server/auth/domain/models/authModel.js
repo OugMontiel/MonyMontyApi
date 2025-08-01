@@ -1,9 +1,9 @@
-const ConnectToDatabase = require("../../infrastructure/mongodb");
+const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
 
 class authModel {
   constructor() {
     // Crear una única instancia de conexión a la base de datos
-    this.dbConnection = new ConnectToDatabase();
+    this.dbConnection = ConnectToDatabase;
   }
   // Obtener un usuario por su 'email'
   async getUserByEmail(Email) {
