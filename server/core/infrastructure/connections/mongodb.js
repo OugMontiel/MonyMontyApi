@@ -20,7 +20,7 @@ class ConnectToDatabase {
   #usuario;
   #contraseña;
 
-   /**
+  /**
    * Crea una instancia única
    * @param {object} credenciales - Credenciales de conexión.
    * @param {string} credenciales.usuario - Usuario para la conexión.
