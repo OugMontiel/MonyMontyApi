@@ -10,7 +10,7 @@ class MovimientoValidator {
       validador.requiredObject("categoria"),
       validador.requiredObject("entidad"),
       validador.requiredObject("divisa"),
-      validador.noQueryData(),
+      validador.noQueryParams(),
 
       // Validación de ingreso/egreso
       body().custom((body) => {
