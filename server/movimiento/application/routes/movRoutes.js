@@ -19,10 +19,7 @@ router.get("/:id", movimientoValidator.validarId(), movimientoController.obtener
 router.post("/", movimientoValidator.validarCreacion(), (req, res) => movimientoController.crearMovimiento(req, res));
 
 // Actualizar movimiento
-router.put(
-  "/:id",
-  movimientoValidator.validarId(),
-  movimientoValidator.validarActualizacionMovimiento(),(req, res) =>
+router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarActualizacionMovimiento(), (req, res) =>
   movimientoController.actualizarMovimiento(req, res)
 );
 

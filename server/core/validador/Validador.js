@@ -70,6 +70,61 @@ class Validador {
       }
       return true;
     });
+
+  /**
+   * Valida que un campo obligatorio sea de tipo string y no esté vacío.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {string} [mensaje=`El campo ${field} es obligatorio`] - Mensaje de error personalizado.
+   * @param {string} [mensajeTipo=`El campo ${field} debe ser string`] - Mensaje de error si el valor no es string.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
+   */
+  requiredString = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser texto`) =>
+    body(field).notEmpty().withMessage(mensaje).isString().withMessage(mensajeTipo);
+
+  /**
+   * Valida que un campo obligatorio sea numérico.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {string} [mensaje=`El campo ${field} es obligatorio`] - Mensaje de error si el campo está vacío.
+   * @param {string} [mensajeTipo=`El campo ${field} debe ser numérico`] - Mensaje de error si el valor no es numérico.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
+   */
+  requiredNumber = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser numérico`) =>
+    body(field).notEmpty().withMessage(mensaje).isNumeric().withMessage(mensajeTipo);
+
+  /**
+   * Valida que un campo obligatorio sea un array.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {string} [mensaje=`El campo ${field} es obligatorio`] - Mensaje de error si el campo está vacío.
+   * @param {string} [mensajeTipo=`El campo ${field} debe ser un array`] - Mensaje de error si el valor no es un array.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
+   */
+  requiredArray = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser un array`) =>
+    body(field).notEmpty().withMessage(mensaje).isArray().withMessage(mensajeTipo);
+
+  /**
+   * Valida que un campo obligatorio sea una fecha en formato ISO8601.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {string} [mensaje=`El campo ${field} es obligatorio`] - Mensaje de error si el campo está vacío.
+   * @param {string} [mensajeTipo=`El campo ${field} debe tener formato ISO8601`] - Mensaje de error si el valor no es una fecha válida.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
+   */
+  requiredDate = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe tener formato ISO8601`) =>
+    body(field).notEmpty().withMessage(mensaje).isISO8601().withMessage(mensajeTipo);
+
+  /**
+   * Valida que un campo obligatorio sea un objeto.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {string} [mensaje=`El campo ${field} es obligatorio`] - Mensaje de error si el campo está vacío.
+   * @param {string} [mensajeTipo=`El campo ${field} debe ser un objeto`] - Mensaje de error si el valor no es un objeto.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
+   */
+  requiredObject = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser un objeto`) =>
+    body(field).notEmpty().withMessage(mensaje).isObject().withMessage(mensajeTipo);
 }
 // Exportamos una sola instancia (Singleton)
 module.exports = new Validador();
