@@ -1,10 +1,10 @@
 const {ObjectId} = require("mongodb");
-const ConnectToDatabase = require("../../infrastructure/mongodb");
+const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
 
 class User {
   constructor() {
     // Crear una única instancia de conexión a la base de datos
-    this.dbConnection = new ConnectToDatabase();
+    this.dbConnection = ConnectToDatabase;
   }
   async createUser(userData) {
     try {

@@ -4,8 +4,7 @@ const router = express.Router(); // Crea un enrutador de Express que manejará l
 
 const ProductController = require("../controllers/productController"); // Importa el controlador
 const productController = new ProductController(); // Instancia el controlador de usuarios
-const ProductValidator = require("../validator/productValidator"); // Importa el validador
-const productValidator = new ProductValidator(); // Instancia el validador de usuarios
+const productValidator = require("../validator/productValidator"); // Importa el validador
 
 // Obtener todos los productos  (GET /api/products)
 router.get("/", (req, res) => productController.getAllProducts(req, res));

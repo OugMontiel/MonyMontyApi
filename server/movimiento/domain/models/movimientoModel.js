@@ -1,5 +1,5 @@
 const {ObjectId} = require("mongodb");
-const ConnectToDatabase = require("../../infrastructure/mongodb");
+const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
 
 class MovimientoModel {
   constructor() {

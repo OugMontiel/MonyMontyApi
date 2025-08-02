@@ -1,43 +1,46 @@
+/**
+ * Componente para conectar a MongoDB.
+ * Utiliza el patrón Singleton para asegurar una única instancia de conexión.
+ * Permite abrir y cerrar la conexión de forma controlada.
+ */
 const {MongoClient} = require("mongodb");
 
 /**
  * Clase para manejar conexiones a MongoDB con patrón Singleton
  */
 class ConnectToDatabase {
+  /**
+   * Instancia única de la clase ConnectToDatabase.
+   * Utiliza el patrón Singleton para evitar múltiples conexiones.
+   * @type {ConnectToDatabase}
+   */
   static instancia;
   db;
   cliente;
-  #password;
+  #usuario;
+  #contraseña;
 
+  /**
+   * Crea una instancia única
+   * @param {object} credenciales - Credenciales de conexión.
+   * @param {string} credenciales.usuario - Usuario para la conexión.
+   * @param {string} credenciales.contraseña - Contraseña para la conexión.
+   * @returns
+   */
   constructor(
-    {usuario, password} = {
+    {usuario, contraseña} = {
       usuario: process.env.MONGO_USER,
-      password: process.env.MONGO_PWD,
+      contraseña: process.env.MONGO_PWD,
     }
   ) {
     if (ConnectToDatabase.instancia) {
       return ConnectToDatabase.instancia;
     }
 
-    this.usuario = usuario;
-    this.password = password;
+    this.#usuario = usuario;
+    this.#contraseña = contraseña;
+
     ConnectToDatabase.instancia = this;
-  }
-
-  /**
-   * Establece/actualiza la contraseña de conexión
-   * @param {string} valor - Nueva contraseña
-   */
-  set password(valor) {
-    this.#password = valor;
-  }
-
-  /**
-   * Obtiene la contraseña de conexión
-   * @returns {string} - Contraseña actual
-   */
-  get password() {
-    return this.#password;
   }
 
   /**
@@ -45,11 +48,13 @@ class ConnectToDatabase {
    * @throws {object} - Error con formato {status, message, metadata}
    */
   async conectar() {
+    if (this.estaConectado()) return this.db;
+
     try {
       const usaSrv = process.env.MONGO_ACCESS.includes("+srv");
       const urlConexion = usaSrv
-        ? `${process.env.MONGO_ACCESS}${this.usuario}:${this.password}@${process.env.MONGO_HOST}`
-        : `${process.env.MONGO_ACCESS}${this.usuario}:${this.password}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
+        ? `${process.env.MONGO_ACCESS}${this.#usuario}:${this.#contraseña}@${process.env.MONGO_HOST}`
+        : `${process.env.MONGO_ACCESS}${this.#usuario}:${this.#contraseña}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
 
       this.cliente = new MongoClient(urlConexion, {
         connectTimeoutMS: 5000,
@@ -60,6 +65,7 @@ class ConnectToDatabase {
       this.db = this.cliente.db(process.env.MONGO_DB_NAME);
 
       console.log("Conexión a MongoDB establecida correctamente");
+      return this.db;
     } catch (error) {
       console.error("Error al conectar a MongoDB:", error);
       this.cliente = undefined;
