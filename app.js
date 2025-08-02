@@ -1,8 +1,7 @@
 // server/app.js
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
 const session = require("express-session");
-
 
 // Configuración para login
 const passport = require("passport");
@@ -21,12 +20,14 @@ const app = express();
 app.use(express.json());
 
 // Configuración básica (cors)
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: 'Content-Type, Authorization',
-  credentials: true, // Permitir cookies y autenticación
-}));
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: "Content-Type, Authorization",
+    credentials: true, // Permitir cookies y autenticación
+  })
+);
 
 // Configurar la sesión
 app.use(

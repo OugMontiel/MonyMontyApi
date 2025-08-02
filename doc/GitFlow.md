@@ -23,7 +23,6 @@ brew install git-flow-avh
 scoop install git-flow
 ```
 
-
 ## 🚀 2. Inicialización del repositorio con Git Flow
 
 Ubícate dentro del proyecto:

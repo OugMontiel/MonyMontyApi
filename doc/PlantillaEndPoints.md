@@ -4,17 +4,17 @@
 
 Breve descripción de lo que hace la API.
 
-* **Base URL:** `https://api.ejemplo.com/v1`
-* **Formato de respuesta:** JSON
-* **Versión:** 1.0.0
-* **Autenticación requerida:** Sí (Bearer Token)
+- **Base URL:** `https://api.ejemplo.com/v1`
+- **Formato de respuesta:** JSON
+- **Versión:** 1.0.0
+- **Autenticación requerida:** Sí (Bearer Token)
 
 ---
 
 ## 🔐 Autenticación
 
-* **Método:** Token Bearer
-* **Header:** `Authorization: Bearer <token>`
+- **Método:** Token Bearer
+- **Header:** `Authorization: Bearer <token>`
 
 ```http
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
@@ -26,28 +26,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
 
 ### 🟢 `GET /recurso`
 
-* **Descripción:** Recupera una lista de recursos.
-* **Autenticación:** ✅ Sí
+- **Descripción:** Recupera una lista de recursos.
+- **Autenticación:** ✅ Sí
 
 #### Parámetros de URL
 
 | Parámetro | Tipo   | Requerido | Descripción               |
 | --------- | ------ | --------- | ------------------------- |
-| `id`      | string | ❌         | ID específico del recurso |
+| `id`      | string | ❌        | ID específico del recurso |
 
 #### Parámetros de consulta (Query Params)
 
 | Parámetro | Tipo | Requerido | Descripción                      |
 | --------- | ---- | --------- | -------------------------------- |
-| `page`    | int  | ❌         | Página actual                    |
-| `limit`   | int  | ❌         | Cantidad de elementos por página |
+| `page`    | int  | ❌        | Página actual                    |
+| `limit`   | int  | ❌        | Cantidad de elementos por página |
 
 #### Headers
 
 | Nombre          | Valor            | Requerido |
 | --------------- | ---------------- | --------- |
-| `Authorization` | Bearer `<token>` | ✅         |
-| `Accept`        | application/json | ❌         |
+| `Authorization` | Bearer `<token>` | ✅        |
+| `Accept`        | application/json | ❌        |
 
 #### Ejemplo de solicitud
 
@@ -87,22 +87,22 @@ Authorization: Bearer <token>
 
 ### 🟡 `POST /recurso`
 
-* **Descripción:** Crea un nuevo recurso.
-* **Autenticación:** ✅ Sí
+- **Descripción:** Crea un nuevo recurso.
+- **Autenticación:** ✅ Sí
 
 #### Headers
 
 | Nombre          | Valor            | Requerido |
 | --------------- | ---------------- | --------- |
-| `Content-Type`  | application/json | ✅         |
-| `Authorization` | Bearer `<token>` | ✅         |
+| `Content-Type`  | application/json | ✅        |
+| `Authorization` | Bearer `<token>` | ✅        |
 
 #### Cuerpo de la solicitud (JSON)
 
 | Campo    | Tipo    | Requerido | Descripción         |
 | -------- | ------- | --------- | ------------------- |
-| `nombre` | string  | ✅         | Nombre del recurso  |
-| `activo` | boolean | ❌         | Si está activo o no |
+| `nombre` | string  | ✅        | Nombre del recurso  |
+| `activo` | boolean | ❌        | Si está activo o no |
 
 #### Ejemplo de solicitud
 
@@ -144,8 +144,8 @@ Authorization: Bearer <token>
 
 ### 🔴 `DELETE /recurso/:id`
 
-* **Descripción:** Elimina un recurso específico.
-* **Autenticación:** ✅ Sí
+- **Descripción:** Elimina un recurso específico.
+- **Autenticación:** ✅ Sí
 
 #### Ejemplo de solicitud
 
@@ -201,16 +201,16 @@ curl -X POST https://api.ejemplo.com/v1/recurso \
 
 ## 🧼 Buenas prácticas
 
-* Usa HTTPS siempre.
-* Usa status codes adecuados.
-* No expongas datos sensibles.
-* Valida el input del cliente.
-* Usa paginación y filtros en consultas masivas.
+- Usa HTTPS siempre.
+- Usa status codes adecuados.
+- No expongas datos sensibles.
+- Valida el input del cliente.
+- Usa paginación y filtros en consultas masivas.
 
 ---
 
 ## 📞 Contacto del desarrollador
 
-* Email: [soporte@ejemplo.com](mailto:soporte@ejemplo.com)
-* Teléfono: +57 300 000 0000
-* Documentación adicional: [docs.api.ejemplo.com](https://docs.api.ejemplo.com)
+- Email: [soporte@ejemplo.com](mailto:soporte@ejemplo.com)
+- Teléfono: +57 300 000 0000
+- Documentación adicional: [docs.api.ejemplo.com](https://docs.api.ejemplo.com)

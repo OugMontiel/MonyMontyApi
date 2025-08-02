@@ -12,15 +12,11 @@ class AuthValidator {
         .withMessage("password must be at least 8 characters long"),
 
       // Validación de email
-      body("email")
-        .notEmpty()
-        .withMessage("send a email")
-        .isEmail()
-        .withMessage("Please enter a valid email address"),
+      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
-      Validador.noQueryParams(), 
+      Validador.noQueryParams(),
     ];
   };
 }
 
-module.exports = new AuthValidator;
+module.exports = new AuthValidator();
