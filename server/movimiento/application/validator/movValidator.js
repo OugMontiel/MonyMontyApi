@@ -5,7 +5,7 @@ const validador = require("../../../core/validador/Validador"); // Importa el va
 class MovimientoValidator {
   validarCreacion() {
     return [
-      validador.requiredString("usuario"),
+      validador.requiredObjectId("IdUsuario"),
       validador.requiredDate("fecha"),
       validador.requiredObject("categoria"),
       validador.requiredObject("entidad"),

@@ -33,7 +33,33 @@
 - **Metodo HTTP:** `POST`
 - **Parametros de la URL:** No
 - **Cuerpo de la solicitud:**
+
+```json
+{
+  "IdUsuario": "688f832d787665c3988b8ea6",
+  "fecha": "2025-08-01",
+  "categoria": {
+    "Sueldo": "Okorum"
+  },
+  "concepto": {
+    "Ingreso": ""
+  },
+  "entidad": {
+    "Itau": "7416"
+  },
+  "ingreso": 1509620,
+  "divisa": {
+    "COP": "Pesos Colombianos"
+  }
+}
+```
+
 - **Respuesta Exitosa:**
+
+```json
+{"success": true, "message": "Movimiento creado exitosamente", "data": {"acknowledged": true, "insertedId": "68918e8e84dc11191ca408c9"}}
+```
+
 - **Respuesta Fallida:**
 
 ### Actualizar Movimiento
