@@ -108,11 +108,14 @@ class MovimientoModel {
    * @returns {Promise<Array>} - Lista de movimientos
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarTodos() {
+  async buscarTodos(id) {
     try {
       await this.dbConnection.conectar();
+      const newID = id.toString();
+      console.log(newID);
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection.find().toArray();
+      const movimientos = await collection.find({IdUsuario: newID}).toArray();
+
       return movimientos;
     } catch (error) {
       console.error("ErrorModelo: buscarTodos movimientos", error);
