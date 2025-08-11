@@ -72,6 +72,21 @@ class Validador {
     });
 
   /**
+   * Valida que un campo en el cuerpo sea un ObjectId válido.
+   *
+   * @param {string} field - Nombre del campo en el cuerpo a validar.
+   * @param {string} [mensaje="Envía un ID válido"] - Mensaje de error personalizado.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación para Express.
+   */
+  requiredObjectId = (field, mensaje = "Envía un ID válido") =>
+    body(field).custom((value) => {
+      if (!ObjectId.isValid(value)) {
+        throw new Error(mensaje);
+      }
+      return true;
+    });
+
+  /**
    * Valida que un campo obligatorio sea de tipo string y no esté vacío.
    *
    * @param {string} field - Nombre del campo a validar.

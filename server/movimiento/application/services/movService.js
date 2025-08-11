@@ -110,9 +110,9 @@ class MovimientoService {
    * @returns {Promise<Array>} - Lista de movimientos
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerTodos() {
+  async obtenerTodos(id) {
     try {
-      return await this.movimientoRepository.obtenerTodos();
+      return await this.movimientoRepository.obtenerTodos(id);
     } catch (error) {
       console.error("Error en servicio - obtener todos los movimientos:", error);
       throw {

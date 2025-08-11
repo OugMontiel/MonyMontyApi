@@ -14,16 +14,50 @@
 - **Parametros de la URL:** Id del usuario
 - **Cuerpo de la solicitud:** No
 - **Respuesta Exitosa:**
+```json 
+{
+  "success": true,
+  "message": "Movimientos obtenidos exitosamente",
+  "data": [
+    {
+      "_id": "68918e8e84dc11191ca408c9",
+      "IdUsuario": "688f832d787665c3988b8ea6",
+      "fecha": "2025-08-01",
+      "categoria": { "Sueldo": "Okorum" },
+      "concepto": { "Ingreso": "" },
+      "entidad": { "Itau": "7416" },
+      "ingreso": 1509620,
+      "divisa": { "COP": "Pesos Colombianos" }
+    }
+  ]
+}
+```
 - **Respuesta Fallida:**
 
-### Obtener todos los Movimientos de un ID
+### Obtener un Movimientos por IdMovimiento
 
 - **URL del endPoint:** `http://localhost:3000/movimiento/:id`
-- **Descripción:**
+- **Descripción:** Para traer un solo Documnto Un movimiento
 - **Metodo HTTP:** `GET`
 - **Parametros de la URL:** Id del movimiento
-- **Cuerpo de la solicitud:**
+- **Cuerpo de la solicitud:** No 
 - **Respuesta Exitosa:**
+```json
+{
+  "success": true,
+  "message": "Movimiento obtenido exitosamente",
+  "data": {
+    "_id": "68918e8e84dc11191ca408c9",
+    "IdUsuario": "688f832d787665c3988b8ea6",
+    "fecha": "2025-08-01",
+    "categoria": { "Sueldo": "Okorum" },
+    "concepto": { "Ingreso": "" },
+    "entidad": { "Itau": "7416" },
+    "ingreso": 1509620,
+    "divisa": { "COP": "Pesos Colombianos" }
+  }
+}
+```
 - **Respuesta Fallida:**
 
 ### Crear Movimiento
@@ -33,7 +67,33 @@
 - **Metodo HTTP:** `POST`
 - **Parametros de la URL:** No
 - **Cuerpo de la solicitud:**
+
+```json
+{
+  "IdUsuario": "688f832d787665c3988b8ea6",
+  "fecha": "2025-08-01",
+  "categoria": {
+    "Sueldo": "Okorum"
+  },
+  "concepto": {
+    "Ingreso": ""
+  },
+  "entidad": {
+    "Itau": "7416"
+  },
+  "ingreso": 1509620,
+  "divisa": {
+    "COP": "Pesos Colombianos"
+  }
+}
+```
+
 - **Respuesta Exitosa:**
+
+```json
+{"success": true, "message": "Movimiento creado exitosamente", "data": {"acknowledged": true, "insertedId": "68918e8e84dc11191ca408c9"}}
+```
+
 - **Respuesta Fallida:**
 
 ### Actualizar Movimiento
@@ -54,6 +114,7 @@
 - **Parametros de la URL:** Id del movimiento
 - **Cuerpo de la solicitud:**
 - **Respuesta Exitosa:**
+204 
 - **Respuesta Fallida:**
 
 ## Módulo Usuarios

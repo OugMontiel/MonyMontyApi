@@ -4,16 +4,11 @@ const router = express.Router();
 const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
 
-// Ruta raíz
-router.get("/", (req, res) => {
-  res.send("¡Bienvenido a MonyMonty Movimientos!");
-});
-
 // Obtener todos los movimientos de un usuario
-router.get("/user/:id", movimientoValidator.validarId(), movimientoController.obtenerTodosLosMovimientos);
+router.get("/user/:id", movimientoValidator.validarId(),(req, res)=> movimientoController.obtenerTodosLosMovimientos(req, res));
 
 // Obtener un movimiento específico
-router.get("/:id", movimientoValidator.validarId(), movimientoController.obtenerMovimiento);
+router.get("/:id", movimientoValidator.validarId(),(req, res) => movimientoController.obtenerMovimiento(req, res));
 
 // Crear nuevo movimiento
 router.post("/", movimientoValidator.validarCreacion(), (req, res) => movimientoController.crearMovimiento(req, res));
@@ -24,6 +19,11 @@ router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarA
 );
 
 // Eliminar movimiento
-router.delete("/:id", movimientoValidator.validarId(), movimientoController.eliminarMovimiento);
+router.delete("/:id", movimientoValidator.validarId(),(req, res)=> movimientoController.eliminarMovimiento(req, res));
+
+// Ruta raíz al Final siempre 
+router.get("/", (req, res) => {
+  res.send("¡Bienvenido a MonyMonty Movimientos!");
+});
 
 module.exports = router;

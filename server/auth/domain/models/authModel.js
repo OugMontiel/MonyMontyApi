@@ -8,7 +8,7 @@ class authModel {
   // Obtener un usuario por su 'email'
   async getUserByEmail(Email) {
     try {
-      await this.dbConnection.connectOpen(); // Abrir la conexión a la BD
+      await this.dbConnection.conectar(); // Abrir la conexión a la BD
       const collection = this.dbConnection.db.collection("user");
       const [res] = await collection.find({email: Email}).toArray();
       // console.log('en modelo',res);
@@ -16,7 +16,7 @@ class authModel {
     } catch (error) {
       throw new Error(`Error al insertar usuario: ${error.message}`);
     } finally {
-      await this.dbConnection.connectClose(); // Cerrar la conexión en el bloque finally
+      await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
     }
   }
 }

@@ -14,7 +14,7 @@ class MovimientoModel {
    */
   async crear(movimientoData) {
     try {
-      await this.dbConnection.connectOpen();
+      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.insertOne(movimientoData);
       return resultado;
@@ -26,7 +26,7 @@ class MovimientoModel {
         metadata: {errorOriginal: error.message},
       };
     } finally {
-      await this.dbConnection.connectClose();
+      await this.dbConnection.desconectar();
     }
   }
 
@@ -38,7 +38,7 @@ class MovimientoModel {
    */
   async buscarPorId(id) {
     try {
-      await this.dbConnection.connectOpen();
+      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimiento = await collection.findOne({_id: new ObjectId(id)});
       return movimiento;
@@ -50,7 +50,7 @@ class MovimientoModel {
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
     } finally {
-      await this.dbConnection.connectClose();
+      await this.dbConnection.desconectar();
     }
   }
 
@@ -63,7 +63,7 @@ class MovimientoModel {
    */
   async actualizar(id, datosActualizacion) {
     try {
-      await this.dbConnection.connectOpen();
+      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.updateOne({_id: new ObjectId(id)}, {$set: datosActualizacion});
       return resultado;
@@ -75,7 +75,7 @@ class MovimientoModel {
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
     } finally {
-      await this.dbConnection.connectClose();
+      await this.dbConnection.desconectar();
     }
   }
 
@@ -87,7 +87,7 @@ class MovimientoModel {
    */
   async eliminar(id) {
     try {
-      await this.dbConnection.connectOpen();
+      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.deleteOne({_id: new ObjectId(id)});
       return resultado;
@@ -99,7 +99,7 @@ class MovimientoModel {
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
     } finally {
-      await this.dbConnection.connectClose();
+      await this.dbConnection.desconectar();
     }
   }
 
@@ -108,11 +108,13 @@ class MovimientoModel {
    * @returns {Promise<Array>} - Lista de movimientos
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarTodos() {
+  async buscarTodos(id) {
     try {
-      await this.dbConnection.connectOpen();
+      await this.dbConnection.conectar();
+      const newID = id.toString();
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection.find().toArray();
+      const movimientos = await collection.find({IdUsuario: newID}).toArray();
+
       return movimientos;
     } catch (error) {
       console.error("ErrorModelo: buscarTodos movimientos", error);
@@ -122,7 +124,7 @@ class MovimientoModel {
         metadata: {errorOriginal: error.message},
       };
     } finally {
-      await this.dbConnection.connectClose();
+      await this.dbConnection.desconectar();
     }
   }
 
@@ -134,7 +136,7 @@ class MovimientoModel {
    */
   async buscarPorUsuario(usuarioId) {
     try {
-      await this.dbConnection.connectOpen();
+      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection.find({usuarioId}).toArray();
       return movimientos;
@@ -146,7 +148,7 @@ class MovimientoModel {
         metadata: {usuarioId, errorOriginal: error.message},
       };
     } finally {
-      await this.dbConnection.connectClose();
+      await this.dbConnection.desconectar();
     }
   }
 }
