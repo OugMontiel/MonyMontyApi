@@ -112,7 +112,6 @@ class MovimientoModel {
     try {
       await this.dbConnection.conectar();
       const newID = id.toString();
-      console.log(newID);
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection.find({IdUsuario: newID}).toArray();
 
