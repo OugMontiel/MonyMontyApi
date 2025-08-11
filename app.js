@@ -1,7 +1,7 @@
 // server/app.js
 const express = require("express");
+const cors = require("cors");
 const session = require("express-session");
-const path = require("path");
 
 // Configuración para login
 const passport = require("passport");
@@ -18,6 +18,16 @@ const movRoutes = require("./server/movimiento/application/routes/movRoutes");
 // Inicializar la app Express
 const app = express();
 app.use(express.json());
+
+// Configuración básica (cors)
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: "Content-Type, Authorization",
+    credentials: true, // Permitir cookies y autenticación
+  })
+);
 
 // Configurar la sesión
 app.use(

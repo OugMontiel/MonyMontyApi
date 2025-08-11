@@ -1,7 +1,29 @@
-const {body, query, param} = require("express-validator");
-const {ObjectId} = require("mongodb");
+const {body} = require("express-validator");
+
+const Validador = require("../../../core/validador/Validador"); // Importa el validador genérico
 
 class UserValidator {
+  /**
+   * Instancia única de la clase (Singleton).
+   * @type {Validador}
+   * @private
+   */
+  static instancia;
+
+  /**
+   * Si ya existe una instancia, devuelve la misma.
+   * @constructor
+   * @returns {Validador} Instancia única de la clase
+   */
+  constructor() {
+    if (Validador.instancia) return Validador.instancia;
+    Validador.instancia = this;
+  }
+
+  /**
+   * Valida datos para crear un usuario
+   * @returns {import("express-validator").ValidationChain[]} Lista de validaciones
+   */
   validateUserData = () => {
     return [
       // Validación de FullName
@@ -17,54 +39,22 @@ class UserValidator {
         .isLength({min: 8})
         .withMessage("password must be at least 8 characters long"),
 
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
+      // Reglas reutilizables desde el Validador global
+      Validador.noQueryParams(),
     ];
   };
 
   validateUserId = () => {
     return [
-      // Validación del ID
-      param("id").custom((value, {req}) => {
-        if (!ObjectId.isValid(value)) {
-          throw new Error("Submit a valid ID");
-        }
-        return true;
-      }),
-
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
-
-      // Validación para asegurarse de que no haya ningún dato en el body o es undefined
-      body().custom((value, {req}) => {
-        if (req.body && Object.keys(req.body).length > 0) {
-          throw new Error("Do not send anything in the body");
-        }
-        return true;
-      }),
+      // Reglas reutilizables desde el Validador global
+      Validador.noBodyData(),
+      Validador.noQueryParams(),
+      Validador.isValidObjectId(),
     ];
   };
 
   validateUserUpdateById = () => {
     return [
-      // Validación del ID
-      param("id").custom((value, {req}) => {
-        if (!ObjectId.isValid(value)) {
-          throw new Error("Submit a valid ID");
-        }
-        return true;
-      }),
-
       // Validación de password
       body("password")
         .notEmpty()
@@ -75,15 +65,12 @@ class UserValidator {
       // Validación de email
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
+      // Reglas reutilizables desde el Validador global
+      Validador.noBodyData(),
+      Validador.noQueryParams(),
+      Validador.isValidObjectId(),
     ];
   };
 }
 
-module.exports = UserValidator;
+module.exports = new UserValidator();

@@ -1,82 +1,57 @@
-const {body, query, param} = require("express-validator");
-const {ObjectId} = require("mongodb");
+const {body} = require("express-validator");
 
-class TransaccionValidator {
-  validateNewTransacciones = () => {
+const validador = require("../../../core/validador/Validador"); // Importa el validador genérico
+
+class MovimientoValidator {
+  validarCreacion() {
     return [
-      // Validación de nombre
-      body("usuario").notEmpty().withMessage("The usuario is mandatory").isString(),
+      validador.requiredObjectId("IdUsuario"),
+      validador.requiredDate("fecha"),
+      validador.requiredObject("categoria"),
+      validador.requiredObject("entidad"),
+      validador.requiredObject("divisa"),
+      validador.noQueryParams(),
 
-      // validación de fecha
-      body("fecha").notEmpty().withMessage("La fecha es obligatoria").isString().withMessage("La fecha debe ser un string"),
-
-      // Validación de categoría
-      body("categoría").notEmpty().withMessage("The categoría is mandatory").isObject(),
-
-      // Validación de entidad
-      body("entidad").notEmpty().withMessage("The entidad is mandatory").isObject(),
-
-      // Validación de ingreso o egreso
+      // Validación de ingreso/egreso
       body().custom((body) => {
         const {ingreso, egreso} = body;
 
         if (!ingreso && !egreso) {
-          throw new Error("Debe existir ingreso o egreso");
+          throw new Error("Debe especificar un ingreso o egreso");
         }
 
         if (ingreso && egreso) {
-          throw new Error("No se permite tener ingreso y egreso al mismo tiempo");
+          throw new Error("No puede tener ingreso y egreso simultáneamente");
         }
 
-        const valor = ingreso || egreso;
+        const monto = ingreso || egreso;
 
-        if (isNaN(valor)) {
-          throw new Error("El valor de ingreso o egreso debe ser numérico");
+        if (typeof monto !== "number" || monto <= 0) {
+          throw new Error("El monto debe ser un número positivo");
         }
 
-        return true;
-      }),
-
-      // validacion de divisa
-      body("divisa").notEmpty().withMessage("The divisa is mandatory").isObject(),
-
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
         return true;
       }),
     ];
-  };
+  }
 
-  validateIdTransacciones = () => {
+  validarActualizacionMovimiento() {
     return [
-      // Validación del ID
-      param("id").custom((value, {req}) => {
-        if (!ObjectId.isValid(value)) {
-          throw new Error("Submit a valid ID");
-        }
-        return true;
-      }),
+      validador.requiredString("usuario"),
+      validador.requiredDate("fecha"),
 
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
-
-      // Validación para asegurarse de que no haya ningún dato en el body
-      body().custom((value, {req}) => {
-        if (Object.keys(req.body).length > 0) {
-          throw new Error("Do not send anything in the body");
+      body().custom((body) => {
+        if (body.ingreso && body.egreso) {
+          throw new Error("No puede actualizar a ingreso y egreso simultáneamente");
         }
         return true;
       }),
     ];
-  };
+  }
+
+  validarId() {
+    return [validador.isValidObjectId("id")];
+  }
 }
 
-module.exports = TransaccionValidator;
+module.exports = new MovimientoValidator();
