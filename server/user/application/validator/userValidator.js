@@ -71,6 +71,13 @@ class UserValidator {
       Validador.isValidObjectId(),
     ];
   };
-}
+
+  validateUser = () => {
+    return [
+      Validador.noBodyData(),
+      Validador.noQueryParams(),
+    ];
+  };
+};
 
 module.exports = new UserValidator();

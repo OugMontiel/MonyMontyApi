@@ -10,6 +10,9 @@ router.get("/", (req, res) => {
   res.send("¡Bienvenido a MonyMonty user!");
 });
 
+// Define la ruta para obtener el usuario actual (por ejemplo, el usuario autenticado).
+router.get("/me", UserValidator.validateUser(), (req, res) => insUserController.getCurrentUser(req, res));
+
 // Define la ruta para obtener un usuario por ID.
 router.get("/:id", UserValidator.validateUserId(), (req, res) => insUserController.getUser(req, res));
 
