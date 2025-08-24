@@ -92,6 +92,11 @@ class UserController {
     try {
       // Validar si hay errores
       if (!this.validarExpres(req, res)) return;
+
+      if (!req.body.avatar) {
+        req.body.avatar = null;
+      }
+
       // Actualizar el Usuario
       const user = await this.insUserService.updateUser(req.params.id, req.body);
       // Responder con éxito
