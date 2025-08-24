@@ -32,6 +32,21 @@ class UserValidator {
       // Validación de email
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
+      // para el plan
+      body("plan")
+        .exists()
+        .withMessage("plan is required")
+        .isIn(["free", "basic", "premium"])
+        .withMessage("Plan debe ser una Opcion valida"),
+
+      // para el avatar
+      body("avatar")
+        .optional()
+        .isURL({protocols: ["http", "https"], require_protocol: true})
+        .withMessage("avatar must be a valid URL")
+        .matches(/\.(jpg|jpeg|png|gif|webp)$/i)
+        .withMessage("avatar must be an image link"),
+
       // Validación de password (asegurarse que la contraseña no esté en texto plano)
       body("password")
         .notEmpty()
@@ -55,21 +70,41 @@ class UserValidator {
 
   validateUserUpdateById = () => {
     return [
-      // Validación de password
+      // Validación de FullName
+      body("nombre").notEmpty().withMessage("The name is mandatory").isString(),
+
+      // Validación de email
+      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
+
+      // para el plan
+      body("plan")
+        .exists()
+        .withMessage("plan is required")
+        .isIn(["free", "basic", "premium"])
+        .withMessage("Plan debe ser una Opcion valida"),
+
+      // para el avatar
+      body("avatar")
+        .optional()
+        .isURL({protocols: ["http", "https"], require_protocol: true})
+        .withMessage("avatar must be a valid URL")
+        .matches(/\.(jpg|jpeg|png|gif|webp)$/i)
+        .withMessage("avatar must be an image link"),
+
+      // Validación de password (asegurarse que la contraseña no esté en texto plano)
       body("password")
         .notEmpty()
         .withMessage("send a password")
         .isLength({min: 8})
         .withMessage("password must be at least 8 characters long"),
 
-      // Validación de email
-      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
-
       // Reglas reutilizables desde el Validador global
-      Validador.noBodyData(),
-      Validador.noQueryParams(),
       Validador.isValidObjectId(),
     ];
+  };
+
+  validateUser = () => {
+    return [Validador.noBodyData(), Validador.noQueryParams()];
   };
 }
 
