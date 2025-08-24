@@ -24,6 +24,10 @@ class UserController {
       // Validar si hay errores
       if (!this.validarExpres(req, res)) return;
 
+      if (!req.body.avatar) {
+        req.body.avatar = null;
+      }
+
       // Crear el usuario
       const user = await this.insUserService.createUser(req.body);
 

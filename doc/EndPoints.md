@@ -133,7 +133,9 @@ Aquí encontrarás los endpoints para:
 {
   "nombre": "Diego Montiel",
   "email": "prueba@prueba.com",
-  "password": "123456789"
+  "password": "123456789",
+  "plan":"free",
+  "avatar":"https://algo.png", //Opcional, de no tener un url no enviar campo 
 }
 ```
 

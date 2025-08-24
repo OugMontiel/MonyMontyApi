@@ -32,6 +32,21 @@ class UserValidator {
       // Validación de email
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
+      // para el plan
+      body("plan")
+        .exists()
+        .withMessage("plan is required")
+        .isIn(["free", "basic", "premium"])
+        .withMessage("Plan debe ser una Opcion valida"),
+
+      // para el avatar
+      body("avatar")
+        .optional()
+        .isURL({protocols: ["http", "https"], require_protocol: true})
+        .withMessage("avatar must be a valid URL")
+        .matches(/\.(jpg|jpeg|png|gif|webp)$/i)
+        .withMessage("avatar must be an image link"),
+
       // Validación de password (asegurarse que la contraseña no esté en texto plano)
       body("password")
         .notEmpty()
@@ -73,11 +88,8 @@ class UserValidator {
   };
 
   validateUser = () => {
-    return [
-      Validador.noBodyData(),
-      Validador.noQueryParams(),
-    ];
+    return [Validador.noBodyData(), Validador.noQueryParams()];
   };
-};
+}
 
 module.exports = new UserValidator();
