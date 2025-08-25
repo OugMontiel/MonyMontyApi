@@ -1,4 +1,6 @@
-const {body, query} = require("express-validator");
+const {body} = require("express-validator");
+
+const Validador = require("../../../core/validador/Validador.js");
 class AuthValidator {
   validatorSessionLogin = () => {
     return [
@@ -12,15 +14,9 @@ class AuthValidator {
       // Validación de email
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
+      Validador.noQueryParams(),
     ];
   };
 }
 
-module.exports = AuthValidator;
+module.exports = new AuthValidator();

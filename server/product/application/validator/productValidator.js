@@ -1,64 +1,50 @@
-const {body, query, param} = require("express-validator");
-const {ObjectId} = require("mongodb");
+const {body} = require("express-validator");
+
+const Validador = require("../../../core/validador/Validador"); // Importa el validador genérico
 
 class UserValidator {
+  /**
+   * Instancia única de la clase (Singleton).
+   * @type {Validador}
+   * @private
+   */
+  static instancia;
+
+  /**
+   * Si ya existe una instancia, devuelve la misma.
+   * @constructor
+   * @returns {Validador} Instancia única de la clase
+   */
+  constructor() {
+    if (Validador.instancia) return Validador.instancia;
+    Validador.instancia = this;
+  }
+
   validateProductData = () => {
     return [
-      // Validación de nombre
-      body("nombre").notEmpty().withMessage("The nombre is mandatory").isString(),
-
-      // Validación de categoría
-      body("categoría").notEmpty().withMessage("The categoría is mandatory").isString(),
-
-      // Validación de calorías
-      body("calorías").notEmpty().withMessage("send a calorías").isNumeric(),
+      // Reglas reutilizables desde el Validador global
+      Validador.requiredString("nombre"),
+      Validador.requiredString("categoría"),
+      Validador.requiredNumber("calorías", "send a calorías"),
+      Validador.requiredNumber("promedioValoración", "send a promedioValoración"),
+      Validador.noQueryParams(),
 
       // Validación de ingredientes
       body("ingredientes").optional().isArray().withMessage("ingredientes must be an array"),
 
       // Validación de valoraciones
       body("valoraciones").optional().isArray().withMessage("valoraciones must be an array"),
-
-      // Validación de promedioValoración
-      body("promedioValoración").notEmpty().withMessage("send a promedioValoración").isNumeric(),
-
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
     ];
   };
 
   validateProductId = () => {
     return [
-      // Validación del ID
-      param("id").custom((value, {req}) => {
-        if (!ObjectId.isValid(value)) {
-          throw new Error("Submit a valid ID");
-        }
-        return true;
-      }),
-
-      // Validación para asegurarse de que no haya ningún query en la URL
-      query().custom((value, {req}) => {
-        if (Object.keys(req.query).length > 0) {
-          throw new Error(`Don't send anything in the url`);
-        }
-        return true;
-      }),
-
-      // Validación para asegurarse de que no haya ningún dato en el body
-      body().custom((value, {req}) => {
-        if (Object.keys(req.body).length > 0) {
-          throw new Error("Do not send anything in the body");
-        }
-        return true;
-      }),
+      // Reglas reutilizables desde el Validador global
+      Validador.noBodyData(),
+      Validador.noQueryParams(),
+      Validador.isValidObjectId(),
     ];
   };
 }
 
-module.exports = UserValidator;
+module.exports = new UserValidator();

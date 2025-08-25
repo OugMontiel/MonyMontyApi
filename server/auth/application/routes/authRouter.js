@@ -6,8 +6,7 @@ const router = express.Router();
 
 const AuthController = require("../controllers/authController.js");
 const authController = new AuthController();
-const Authvalidator = require("../validator/authValidator.js");
-const authvalidator = new Authvalidator();
+const authvalidator = require("../validator/authValidator.js");
 
 // Ruta raíz
 router.get("/", (req, res) => {

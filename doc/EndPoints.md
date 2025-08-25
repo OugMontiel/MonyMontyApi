@@ -1,5 +1,121 @@
-// un .md para todo los EndPoints Tipo Documentacion 
+# los EndPoints Tipo Documentacion
 
+## Modulo Movimientos
+
+- **Base URL:** `http://localhost:3000/movimiento`
+- **Formato de respuesta:** JSON
+- **Autenticación requerida:** Sí (Bearer Token)
+
+### Obtener todos los Movimientos de un Usuario
+
+- **URL del endPoint:** `http://localhost:3000/movimiento/user/:id`
+- **Descripción:**
+- **Metodo HTTP:** `GET`
+- **Parametros de la URL:** Id del usuario
+- **Cuerpo de la solicitud:** No
+- **Respuesta Exitosa:**
+```json 
+{
+  "success": true,
+  "message": "Movimientos obtenidos exitosamente",
+  "data": [
+    {
+      "_id": "68918e8e84dc11191ca408c9",
+      "IdUsuario": "688f832d787665c3988b8ea6",
+      "fecha": "2025-08-01",
+      "categoria": { "Sueldo": "Okorum" },
+      "concepto": { "Ingreso": "" },
+      "entidad": { "Itau": "7416" },
+      "ingreso": 1509620,
+      "divisa": { "COP": "Pesos Colombianos" }
+    }
+  ]
+}
+```
+- **Respuesta Fallida:**
+
+### Obtener un Movimientos por IdMovimiento
+
+- **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+- **Descripción:** Para traer un solo Documnto Un movimiento
+- **Metodo HTTP:** `GET`
+- **Parametros de la URL:** Id del movimiento
+- **Cuerpo de la solicitud:** No 
+- **Respuesta Exitosa:**
+```json
+{
+  "success": true,
+  "message": "Movimiento obtenido exitosamente",
+  "data": {
+    "_id": "68918e8e84dc11191ca408c9",
+    "IdUsuario": "688f832d787665c3988b8ea6",
+    "fecha": "2025-08-01",
+    "categoria": { "Sueldo": "Okorum" },
+    "concepto": { "Ingreso": "" },
+    "entidad": { "Itau": "7416" },
+    "ingreso": 1509620,
+    "divisa": { "COP": "Pesos Colombianos" }
+  }
+}
+```
+- **Respuesta Fallida:**
+
+### Crear Movimiento
+
+- **URL del endPoint:** `http://localhost:3000/movimiento/`
+- **Descripción:**
+- **Metodo HTTP:** `POST`
+- **Parametros de la URL:** No
+- **Cuerpo de la solicitud:**
+
+```json
+{
+  "IdUsuario": "688f832d787665c3988b8ea6",
+  "fecha": "2025-08-01",
+  "categoria": {
+    "Sueldo": "Okorum"
+  },
+  "concepto": {
+    "Ingreso": ""
+  },
+  "entidad": {
+    "Itau": "7416"
+  },
+  "ingreso": 1509620,
+  "divisa": {
+    "COP": "Pesos Colombianos"
+  }
+}
+```
+
+- **Respuesta Exitosa:**
+
+```json
+{"success": true, "message": "Movimiento creado exitosamente", "data": {"acknowledged": true, "insertedId": "68918e8e84dc11191ca408c9"}}
+```
+
+- **Respuesta Fallida:**
+
+### Actualizar Movimiento
+
+- **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+- **Descripción:**
+- **Metodo HTTP:** `PUT`
+- **Parametros de la URL:** Id del movimiento
+- **Cuerpo de la solicitud:**
+- **Respuesta Exitosa:**
+- **Respuesta Fallida:**
+
+### Eliminar Movimiento
+
+- **URL del endPoint:** `http://localhost:3000/movimiento/:id`
+- **Descripción:**
+- **Metodo HTTP:** `DELETE`
+- **Parametros de la URL:** Id del movimiento
+- **Cuerpo de la solicitud:**
+- **Respuesta Exitosa:**
+204 
+- **Respuesta Fallida:**
 
 ## Módulo Usuarios
 
