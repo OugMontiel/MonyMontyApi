@@ -22,7 +22,7 @@ app.use(express.json());
 // Configuración básica (cors)
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN?.split(',') || "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: "Content-Type, Authorization",
     credentials: true, // Permitir cookies y autenticación
@@ -53,6 +53,9 @@ app.use("/user", isAuthenticated, userRoutes);
 app.use("/movimiento", isAuthenticated, movRoutes);
 // app.use('/product', isAuthenticated, productRoutes);
 app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: " accedio a Ruta protegida"}));
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
 // Ruta raíz (debe ir al final)
 app.use("/", (req, res) => {
   res.send("¡Bienvenido a MonyMonty!");
@@ -61,7 +64,7 @@ app.use("/", (req, res) => {
 // Configuración del servidor
 const config = {
   port: process.env.EXPRESS_PORT || 3000,
-  host: process.env.EXPRESS_HOST || "localhost",
+  host: process.env.EXPRESS_HOST || "0.0.0.0",
 };
 
 // Iniciar el servidor
