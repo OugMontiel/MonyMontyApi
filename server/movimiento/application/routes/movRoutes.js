@@ -5,10 +5,10 @@ const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
 
 // Obtener todos los movimientos de un usuario
-router.get("/user/:id", movimientoValidator.validarId(),(req, res)=> movimientoController.obtenerTodosLosMovimientos(req, res));
+router.get("/user/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerTodosLosMovimientos(req, res));
 
 // Obtener un movimiento específico
-router.get("/:id", movimientoValidator.validarId(),(req, res) => movimientoController.obtenerMovimiento(req, res));
+router.get("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerMovimiento(req, res));
 
 // Crear nuevo movimiento
 router.post("/", movimientoValidator.validarCreacion(), (req, res) => movimientoController.crearMovimiento(req, res));
@@ -19,9 +19,9 @@ router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarA
 );
 
 // Eliminar movimiento
-router.delete("/:id", movimientoValidator.validarId(),(req, res)=> movimientoController.eliminarMovimiento(req, res));
+router.delete("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.eliminarMovimiento(req, res));
 
-// Ruta raíz al Final siempre 
+// Ruta raíz al Final siempre
 router.get("/", (req, res) => {
   res.send("¡Bienvenido a MonyMonty Movimientos!");
 });

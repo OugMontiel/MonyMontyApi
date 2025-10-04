@@ -1,4 +1,6 @@
 // Gestiona las peticiones HTTP y las respuestas, delegando la lógica de negocio a los servicios.
+const jwt = require("jsonwebtoken");
+
 const {validationResult} = require("express-validator");
 const UserService = require("../services/userService");
 
@@ -22,6 +24,10 @@ class UserController {
       // Validar si hay errores
       if (!this.validarExpres(req, res)) return;
 
+      if (!req.body.avatar) {
+        req.body.avatar = null;
+      }
+
       // Crear el usuario
       const user = await this.insUserService.createUser(req.body);
 
@@ -34,7 +40,7 @@ class UserController {
       res.status(errorObj.status).json({message: errorObj.message});
     }
   }
-  // obtener un Usuario
+  // obtener un Usuario por ID
   async getUser(req, res) {
     try {
       // Validar si hay errores
@@ -48,11 +54,49 @@ class UserController {
       res.status(errorObj.status).json({message: errorObj.message});
     }
   }
+  // obtener un Usuario actual
+  async getCurrentUser(req, res) {
+    try {
+      // Validar si hay errores
+      if (!this.validarExpres(req, res)) return;
+      // Verificar token y extraer payload
+      const decoded = jwt.verify(req.session.token, process.env.KEY_SECRET);
+      console.log("decoded:", decoded);
+      // Optner el Usuario
+      const user = await this.insUserService.getUserById(decoded._id);
+      // respoder con exito
+      res.status(200).json(user);
+    } catch (error) {
+      console.error("Error en getCurrentUser:", error);
+
+      // Si el error tiene status y message en JSON, los usamos
+      let status = 500;
+      let message = "Error interno";
+
+      try {
+        const errorObj = JSON.parse(error.message);
+        status = errorObj.status || 500;
+        message = errorObj.message || message;
+      } catch {
+        // No era JSON, usamos el mensaje plano
+        message = error.message;
+        if (error.name === "TokenExpiredError") status = 401;
+        if (error.name === "JsonWebTokenError") status = 401;
+      }
+
+      res.status(status).json({message});
+    }
+  }
   // actualizar un Usuario
   async updateUser(req, res) {
     try {
       // Validar si hay errores
       if (!this.validarExpres(req, res)) return;
+
+      if (!req.body.avatar) {
+        req.body.avatar = null;
+      }
+
       // Actualizar el Usuario
       const user = await this.insUserService.updateUser(req.params.id, req.body);
       // Responder con éxito

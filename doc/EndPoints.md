@@ -14,7 +14,8 @@
 - **Parametros de la URL:** Id del usuario
 - **Cuerpo de la solicitud:** No
 - **Respuesta Exitosa:**
-```json 
+
+```json
 {
   "success": true,
   "message": "Movimientos obtenidos exitosamente",
@@ -23,15 +24,16 @@
       "_id": "68918e8e84dc11191ca408c9",
       "IdUsuario": "688f832d787665c3988b8ea6",
       "fecha": "2025-08-01",
-      "categoria": { "Sueldo": "Okorum" },
-      "concepto": { "Ingreso": "" },
-      "entidad": { "Itau": "7416" },
+      "categoria": {"Sueldo": "Okorum"},
+      "concepto": {"Ingreso": ""},
+      "entidad": {"Itau": "7416"},
       "ingreso": 1509620,
-      "divisa": { "COP": "Pesos Colombianos" }
+      "divisa": {"COP": "Pesos Colombianos"}
     }
   ]
 }
 ```
+
 - **Respuesta Fallida:**
 
 ### Obtener un Movimientos por IdMovimiento
@@ -40,8 +42,9 @@
 - **Descripción:** Para traer un solo Documnto Un movimiento
 - **Metodo HTTP:** `GET`
 - **Parametros de la URL:** Id del movimiento
-- **Cuerpo de la solicitud:** No 
+- **Cuerpo de la solicitud:** No
 - **Respuesta Exitosa:**
+
 ```json
 {
   "success": true,
@@ -50,14 +53,15 @@
     "_id": "68918e8e84dc11191ca408c9",
     "IdUsuario": "688f832d787665c3988b8ea6",
     "fecha": "2025-08-01",
-    "categoria": { "Sueldo": "Okorum" },
-    "concepto": { "Ingreso": "" },
-    "entidad": { "Itau": "7416" },
+    "categoria": {"Sueldo": "Okorum"},
+    "concepto": {"Ingreso": ""},
+    "entidad": {"Itau": "7416"},
     "ingreso": 1509620,
-    "divisa": { "COP": "Pesos Colombianos" }
+    "divisa": {"COP": "Pesos Colombianos"}
   }
 }
 ```
+
 - **Respuesta Fallida:**
 
 ### Crear Movimiento
@@ -113,8 +117,7 @@
 - **Metodo HTTP:** `DELETE`
 - **Parametros de la URL:** Id del movimiento
 - **Cuerpo de la solicitud:**
-- **Respuesta Exitosa:**
-204 
+- **Respuesta Exitosa:** 204
 - **Respuesta Fallida:**
 
 ## Módulo Usuarios
@@ -133,7 +136,9 @@ Aquí encontrarás los endpoints para:
 {
   "nombre": "Diego Montiel",
   "email": "prueba@prueba.com",
-  "password": "123456789"
+  "password": "123456789",
+  "plan": "free",
+  "avatar": "https://algo.png" //Opcional, de no tener un url no enviar campo
 }
 ```
 
@@ -163,7 +168,9 @@ Aquí encontrarás los endpoints para:
 {
   "nombre": "Cambio Dos",
   "email": "prueba@prueba.com",
-  "password": "123456789"
+  "password": "123456789",
+  "plan": "free",
+  "avatar": "https://algo.png" // Opcional, de no tener un url no enviar campo
 }
 ```
 
