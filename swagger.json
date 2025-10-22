@@ -1,100 +1,65 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
     "title": "API REST de MonyMonty",
+    "version": "1.0.0",
     "description": "plataforma diseñada para la administración financiera personal"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": [
-    "http"
+  "servers": [
+    {
+      "url": "https://api.monteflor.co/",
+      "description": "Servidor principal"
+    },
+    {
+      "url": " http://localhost:3000",
+      "description": "Servidor de desarrollo local"
+    }
   ],
   "paths": {
-    "/user/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/user/{id}": {
-      "get": {
-        "description": "obtiene la info de un usuario por su id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "actualiza un usuario por su id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "description": "borra un usuario a través de su id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/auth/check": {
       "get": {
-        "description": "verifica el token de autenticación",
-        "responses": {
-          "default": {
-            "description": ""
+        "summary": "Verifica el estado de autenticación del usuario",
+        "description": "Comprueba si el usuario tiene una sesión activa",
+        "200": {
+          "description": "Respuesta indicando si el usuario está autenticado",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticated": {
+                    "type": "boolean",
+                    "description": "Indica si el usuario está autenticado"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Mensaje descriptivo sobre el estado de autenticación"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "Token JWT si el usuario está autenticado",
+                    "nullable": true
+                  }
+                },
+                "required": ["authenticated", "message"]
+              },
+              "examples": {
+                "notAuthenticated": {
+                  "summary": "Usuario no autenticado",
+                  "value": {
+                    "authenticated": false,
+                    "message": "Not authenticated"
+                  }
+                },
+                "authenticated": {
+                  "summary": "Usuario autenticado correctamente",
+                  "value": {
+                    "authenticated": true,
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -175,6 +140,84 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/user/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "description": "obtiene la info de un usuario por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "actualiza un usuario por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "borra un usuario a través de su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
