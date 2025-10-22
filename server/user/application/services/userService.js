@@ -6,9 +6,6 @@ class UserService {
   constructor() {
     this.userRepository = new UserRepository();
   }
-  async prueva(req, res) {
-    return {message: "¡entrando a userRepository de ruraqMaki!"};
-  }
   async createUser(data) {
     try {
       // console.log('data.password',data);

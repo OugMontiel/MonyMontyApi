@@ -15,7 +15,13 @@ class UserRepository {
   }
   async getById(id) {
     try {
-      return await this.insUserModelo.findById(id);
+      const user = await this.insUserModelo.findById(id);
+      if (!user) return null;
+
+      return {
+        nombre: user.nombre,
+        email: user.email,
+      };
     } catch (error) {
       throw new Error(JSON.stringify({status: 400, message: "Error retrieving user"}));
     }

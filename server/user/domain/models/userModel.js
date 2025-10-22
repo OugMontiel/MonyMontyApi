@@ -27,7 +27,7 @@ class User {
       const [res] = await collection.find({_id: new ObjectId(id)}).toArray();
       return res;
     } catch (error) {
-      throw new Error(`Error al insertar usuario: ${error.message}`);
+      throw new Error(`Error al Buscar usuario: ${error.message}`);
     } finally {
       await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
     }
