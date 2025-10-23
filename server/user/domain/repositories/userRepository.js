@@ -41,6 +41,13 @@ class UserRepository {
       throw new Error(JSON.stringify({status: 404, message: "Error deleting user"}));
     }
   }
+  async getByEmail(email) {
+    try {
+      return await this.insUserModelo.findByEmail(email);
+    } catch (error) {
+      throw new Error(JSON.stringify({status: 400, message: "Error retrieving user by email"}));
+    }
+  }
   // async getNickByNickAndPassword(nick, password) {
   //   try {
   //     const user = new User();
