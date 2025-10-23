@@ -66,14 +66,133 @@
     },
     "/auth/login": {
       "post": {
-        "description": "autentica un usuario con su email y password",
+        "summary": "Inicia sesión de usuario",
+        "description": "Autentica un usuario con su email y contraseña. Devuelve un token JWT si las credenciales son válidas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "prueba@casa.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "123456789"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Autenticación exitosa. Devuelve el token JWT.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Token JWT generado para el usuario autenticado",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos de entrada inválidos o faltantes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {"type": "string", "example": "field"},
+                          "msg": {"type": "string", "example": "password must be at least 8 characters long"},
+                          "path": {"type": "string", "example": "password"},
+                          "location": {"type": "string", "example": "body"}
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "errors": [
+                      {
+                        "type": "field",
+                        "msg": "send a password",
+                        "path": "password",
+                        "location": "body"
+                      },
+                      {
+                        "type": "field",
+                        "msg": "password must be at least 8 characters long",
+                        "path": "password",
+                        "location": "body"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales inválidas o usuario no autorizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No autorizado, contraseña incorrecta"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
+    "/auth/logout": {
+      "get": {
+        "summary": "Cierra la sesión del usuario",
+        "description": "Finaliza la sesión actual y devuelve un mensaje de confirmación.",
+        "responses": {
+          "200": {
+            "description": "Sesión cerrada correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Sesión cerrada correctamente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/auth/google": {
       "get": {
         "description": "autentica un usuario mediante tercero Google",
@@ -127,16 +246,6 @@
     "/auth/discord/callback": {
       "get": {
         "description": "autentica un usuario mediante tercero Discord, con callback que maneja respuesta",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/logout": {
-      "get": {
-        "description": "cierra sesión de usuario",
         "responses": {
           "default": {
             "description": ""
