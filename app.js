@@ -52,7 +52,7 @@ app.use(passport.session());
 // Rutas API
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRouter);
-app.use("/user", isAuthenticated, userRoutes);
+app.use("/user", userRoutes);
 app.use("/movimiento", isAuthenticated, movRoutes);
 // app.use('/product', isAuthenticated, productRoutes);
 app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: " accedio a Ruta protegida"}));

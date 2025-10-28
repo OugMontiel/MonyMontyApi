@@ -57,6 +57,18 @@ class User {
       await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
     }
   }
+  async findByEmail(email) {
+    try {
+      await this.dbConnection.conectar(); // Abrir la conexión a la BD
+      const collection = this.dbConnection.db.collection("user");
+      const res = await collection.findOne({email});
+      return res;
+    } catch (error) {
+      throw new Error(`Error al Buscar usuario por email: ${error.message}`);
+    } finally {
+      await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
+    } 
+  }
 }
 
 module.exports = User;

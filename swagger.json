@@ -20,6 +20,7 @@
       "get": {
         "summary": "Verifica el estado de autenticación del usuario",
         "description": "Comprueba si el usuario tiene una sesión activa",
+        "tags": ["Auth"],
         "200": {
           "description": "Respuesta indicando si el usuario está autenticado",
           "content": {
@@ -68,6 +69,7 @@
       "post": {
         "summary": "Inicia sesión de usuario",
         "description": "Autentica un usuario con su email y contraseña. Devuelve un token JWT si las credenciales son válidas.",
+        "tags": ["Auth"],
         "requestBody": {
           "required": true,
           "content": {
@@ -172,6 +174,7 @@
       "get": {
         "summary": "Cierra la sesión del usuario",
         "description": "Finaliza la sesión actual y devuelve un mensaje de confirmación.",
+        "tags": ["Auth"],
         "responses": {
           "200": {
             "description": "Sesión cerrada correctamente.",
@@ -188,6 +191,89 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/user/": {
+      "post": {
+        "summary": "Crear un nuevo usuario",
+        "description": "Crea un nuevo usuario en el sistema.",
+        "tags": ["Usuarios"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["nombre", "email", "plan", "password"],
+                "properties": {
+                  "nombre": {
+                    "type": "string",
+                    "example": "Diego prueba Eliminable"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "prueba@gmail.com"
+                  },
+                  "plan": {
+                    "type": "string",
+                    "example": "free"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123456789"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario creado exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "acknowledged": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "insertedCount": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "insertedIds": {
+                      "type": "object",
+                      "example": {
+                        "0": "68f99da32c6e3371b948ee40"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "El correo ya está registrado o datos inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "El correo ya está registrado."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor"
           }
         }
       }
@@ -246,24 +332,6 @@
     "/auth/discord/callback": {
       "get": {
         "description": "autentica un usuario mediante tercero Discord, con callback que maneja respuesta",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/user/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
         "responses": {
           "default": {
             "description": ""

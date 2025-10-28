@@ -6,6 +6,10 @@ class UserService {
   constructor() {
     this.userRepository = new UserRepository();
   }
+  async validarSiExisteUsuarioPorEmail(email) {
+    const usuario = await this.userRepository.getByEmail(email);
+    return !!usuario; // Devuelve true si existe, false si no
+  }
   async createUser(data) {
     try {
       // console.log('data.password',data);

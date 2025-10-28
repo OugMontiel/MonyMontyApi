@@ -6,23 +6,25 @@ const UserController = require("../controllers/userController"); // Importa el c
 const insUserController = new UserController(); // Instancia el controlador de usuarios
 const UserValidator = require("../validator/userValidator"); // Importa el validador
 
+const isAuthenticated = require("../../../../server/auth/infrastructure/middleware/isAuthenticated");
+
 router.get("/", (req, res) => {
   res.send("¡Bienvenido a MonyMonty user!");
 });
 
-// Define la ruta para obtener el usuario actual (por ejemplo, el usuario autenticado).
-router.get("/me", UserValidator.validateUser(), (req, res) => insUserController.getCurrentUser(req, res));
+// obtener el usuario actual (por ejemplo, el usuario autenticado).
+router.get("/me", isAuthenticated, UserValidator.validateUser(), (req, res) => insUserController.getCurrentUser(req, res));
 
-// Define la ruta para obtener un usuario por ID.
-router.get("/:id", UserValidator.validateUserId(), (req, res) => insUserController.getUser(req, res));
+// obtener un usuario por ID.
+router.get("/:id", isAuthenticated, UserValidator.validateUserId(), (req, res) => insUserController.getUser(req, res));
 
-// Define la ruta para crear un nuevo usuario.
+// crear un nuevo usuario.
 router.post("/", UserValidator.validateUserData(), (req, res) => insUserController.createUser(req, res));
 
-// Define la ruta para actualizar un usuario por ID.
-router.put("/:id", UserValidator.validateUserUpdateById(), (req, res) => insUserController.updateUser(req, res));
+// actualizar un usuario por ID.
+router.put("/:id", isAuthenticated, UserValidator.validateUserUpdateById(), (req, res) => insUserController.updateUser(req, res));
 
-// Define la ruta para eliminar un usuario por ID.
-router.delete("/:id", UserValidator.validateUserId(), (req, res) => insUserController.deleteUser(req, res));
+// eliminar un usuario por ID.
+router.delete("/:id", isAuthenticated, UserValidator.validateUserId(), (req, res) => insUserController.deleteUser(req, res));
 
 module.exports = router;
