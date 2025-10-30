@@ -28,6 +28,12 @@ class UserController {
         req.body.avatar = null;
       }
 
+      // Verificar si ya existe el correo
+      const existente = await this.insUserService.validarSiExisteUsuarioPorEmail(req.body.email);
+      if (existente) {
+        return res.status(400).json({message: "El correo ya está registrado."});
+      }
+
       // Crear el usuario
       const user = await this.insUserService.createUser(req.body);
 

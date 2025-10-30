@@ -14,7 +14,9 @@ class authController {
   // Controlador para cerrar sesión
   cerrarSesion = (req, res) => {
     req.logout(() => {
-      res.redirect("/");
+      res.status(200).json({
+        message: "Sesión cerrada correctamente",
+      });
     });
   };
 
