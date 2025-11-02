@@ -72,6 +72,35 @@ class authController {
       }
     }
   }
+
+  async recuperarPassword(req, res) {
+    try {
+      // Verifica que el email exista en la BD
+      // Genera un token aleatorio
+      // Guarda el token y fecha de expiración en el usuario
+      // Envía el email con el enlace
+    } catch (error) {
+      res.status(500).json({message: "Error en el servidor"});
+    }
+  }
+
+  async checkToken(req, res) {
+    try {
+      // Verifica que el token sea válido y no haya expirado
+    } catch (error) {
+      res.status(500).json({message: "Error en el servidor"});
+    }
+  }
+
+  async updatePassword(req, res) {
+    try {
+      // Verifica el token
+      // Hashea la nueva contraseña
+      // Actualiza la contraseña en la BD
+      // Invalida el token de recuperación
+    } catch (error) {
+      res.status(500).json({message: "Error en el servidor"});
+    }
 }
 
-module.exports = authController;
+module.exports = new authController();
