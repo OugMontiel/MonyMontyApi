@@ -1,14 +1,9 @@
 // server/iniciosesion/application/controllers/inicioSesionController.js
 
-const {validationResult} = require("express-validator");
-const AuthService = require("../services/authService.js");
+const authService = require("../services/authService.js");
 const handleError = require("../../../core/application/controllers/handleError.js");
 
 class AuthController {
-  constructor() {
-    this.authService = new AuthService();
-  }
-
   // --- Inicio de sesión con proveedor externo (Google) ---
   iniciarSesion = (_req, res) => {
     try {
@@ -64,7 +59,7 @@ class AuthController {
   async sessionLogin(req, res) {
     try {
       const {email, password} = req.body;
-      const token = await this.authService.getUserByEmail(password, email);
+      const token = await authService.getUserByEmail(password, email);
 
       req.session.token = token;
 
@@ -77,8 +72,12 @@ class AuthController {
   // --- Recuperación de contraseña: solicitar token ---
   async recuperarPassword(req, res) {
     try {
-      // TODO: Implementar lógica (generar token, guardar, enviar email)
-      return res.status(200).json({message: "Proceso de recuperación iniciado"});
+      
+      const token = await authService.generarTokenRecuperacion(req.body.email);
+      
+      if (token) {
+        return res.status(200).json({message: "Proceso de recuperación iniciado"});
+      }
     } catch (error) {
       handleError(res, error);
     }
