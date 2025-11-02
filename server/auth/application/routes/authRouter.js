@@ -6,6 +6,7 @@ const router = express.Router();
 
 const authValidator = require("../validator/authValidator.js");
 const authController = require("../controllers/authController.js");
+const handleValidation = require("../../../core/middlewares/handleValidation");
 
 // --- RUTA RAÍZ ---
 router.get("/", (req, res) => res.send("¡Bienvenido a MonyMonty auth!"));
@@ -15,7 +16,7 @@ router.get("/check", (req, res) => authController.checkSession(req, res));
 router.get("/logout", (req, res) => authController.cerrarSesion(req, res));
 
 // --- LOGIN LOCAL ---
-router.post("/login", authValidator.validatorSessionLogin(), (req, res) => authController.sessionLogin(req, res));
+router.post("/login", authValidator.validatorSessionLogin(), handleValidation, (req, res) => authController.sessionLogin(req, res));
 
 // --- AUTENTICACIÓN CON GOOGLE ---
 router.get("/google", passport.authenticate("google", {scope: ["profile", "email"]}));
@@ -25,8 +26,8 @@ router.get("/google/callback", passport.authenticate("google", {failureRedirect:
 );
 
 // --- RECUPERACIÓN DE CONTRASEÑA ---
-router.post("/recuperar", authValidator.validatorEmail(), (req, res) => authController.recuperar(req, res));
-router.post("/checkToken", authValidator.checkToken(), (req, res) => authController.checkToken(req, res));
-router.post("/updatePassword", authValidator.validatorPassword(), (req, res) => authController.updatePassword(req, res));
+router.post("/recuperar", authValidator.validatorEmail(), handleValidation, (req, res) => authController.recuperar(req, res));
+router.post("/checkToken", authValidator.checkToken(), handleValidation, (req, res) => authController.checkToken(req, res));
+router.post("/updatePassword", authValidator.validatorPassword(), handleValidation, (req, res) => authController.updatePassword(req, res));
 
 module.exports = router;
