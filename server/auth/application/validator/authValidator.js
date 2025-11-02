@@ -1,6 +1,6 @@
 const {body, query} = require("express-validator");
 
-const Validador = require("../../../core/validador/Validador.js");
+const Validador = require("../../../core/application/validador/Validador.js");
 class AuthValidator {
   validatorSessionLogin = () => {
     return [
