@@ -1,18 +1,11 @@
 // --- Utilidad privada para manejo uniforme de errores En el controlador ---
-const handleError = (res, error, defaultStatus = 500, defaultMessage = "Error en el Controlador") => {
-  if (typeof error.message === "string") {
-    try {
-      const errorData = JSON.parse(error.message);
-      return res.status(errorData.status || defaultStatus).json({
-        message: errorData.message || defaultMessage,
-      });
-    } catch (_) {
-      // Si no se puede parsear, sigue abajo
-    }
+const handleError = (res, error) => {
+  if (error.status) {
+    return res.status(error.status).json({message: error.message});
   }
 
   // Error genérico
-  res.status(defaultStatus).json({message: defaultMessage});
+  return res.status(500).json({message: "Internal Server Error"});
 };
 
-module.exports = {handleError};
+module.exports = handleError;

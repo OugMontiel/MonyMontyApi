@@ -2,6 +2,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const AuthRepository = require("../../domain/repositories/authRepository");
+const HttpError = require("../../../core/utils/HttpError");
 
 class authService {
   constructor() {
@@ -52,6 +53,14 @@ class authService {
       }
     }
   }
+  async generarTokenRecuperacion(email) {
+    // Lógica para obtener el usuario desde el repositorio
+      const usuario = await this.authRepository.getUserByEmail(email);
+
+      // Verificar si el usuario existe
+      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+  // TODO: Implementar lógica (generar token, guardar, enviar email)
+  }
 }
 
-module.exports = authService;
+module.exports = new authService();
