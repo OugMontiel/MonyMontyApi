@@ -1,6 +1,6 @@
 const {body} = require("express-validator");
 
-const validador = require("../../../core/validador/Validador"); // Importa el validador genérico
+const validador = require("../../../core/application/validador/Validador");// Importa el validador genérico
 
 class MovimientoValidator {
   validarCreacion() {
