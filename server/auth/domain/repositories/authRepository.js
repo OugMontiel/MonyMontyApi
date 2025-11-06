@@ -1,45 +1,40 @@
-const AuthModel = require("../models/authModel.js");
+const authModel = require("../models/authModel.js");
+const HttpError = require("../../../core/utils/HttpError");
+const RepositoryError = require("../../../core/Domain/Repository/RepositoryError.js");
 
 class authRepository {
-  constructor() {
-    this.authModel = new AuthModel();
-  }
   // Obtener un usuario basado en su 'email' y comparar Su contraseña
   async getUserByEmail(email) {
     try {
       // Ejecutamos el pipeline de agregación en el modelo Auth
-      const usuario = await this.authModel.getUserByEmail(email);
+      const usuario = await authModel.getUserByEmail(email);
 
       // Validamos que el resultado no sea undefined o un array vacío
-      if (!usuario) {
-        return false;
-      }
-      // console.log('resultado Encontrado', usuario.length);
-      if (usuario.length === 0) {
-        throw new Error(JSON.stringify({status: 404, message: "Invalid credentials"}));
-      }
-
-      // validación usuarios duplicados
-      if (usuario.length > 1) {
-        throw new Error(
-          JSON.stringify({
-            status: 500,
-            message: "Multiple users found with the same email. Contact support.",
-          })
-        );
-      }
+      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (usuario.length === 0) throw new HttpError(404, "Credenciales inválidas");
+      if (usuario.length > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
 
       // Si se encontró un usuario, devolvemos el primer (y único) resultado en el array
       return usuario;
     } catch (error) {
-      if (error.message) {
-        throw new Error(error.message); // Re-lanzamos el error original
-      } else {
-        // Si ocurre otro tipo de error, lanzamos uno genérico
-        throw new Error(JSON.stringify({status: 400, message: "Error in auth repository"}));
-      }
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
+    }
+  }
+  async guardarTokenRecuperacion(email, token) {
+    try {
+      const filtro = {email}; // Filtro para buscar el usuario
+      const datosSet = {tokenRecuperacion: token}; // Dato a actualizar
+
+      const resultado = await authModel.upDateUsuario(filtro, datosSet);
+      if (resultado.matched > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
+      
+      return resultado;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
     }
   }
 }
 
-module.exports = new authRepository;
+module.exports = new authRepository();

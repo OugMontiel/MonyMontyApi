@@ -45,12 +45,11 @@ class authService {
       });
 
       // Guardar el token en la base de datos
-      // authRepository.guartdarTokenRecuperacion(email, token);
+      const seGuardo = await authRepository.guardarTokenRecuperacion(email, token);
+      if (!seGuardo) throw new HttpError(500, "Error al guardar el token de recuperación");
 
       // Enviar el email con el enlace de recuperación
-
       const resetLink = `https://monymonty.monteflor.co/reset-password?token=${token}`;
-
       const element = React.createElement(PasswordResetEmail, {usuario, resetLink});
       const envio = await enviosDeCorreo("no-reply", email, "Recuperación de contraseña", element);
 
