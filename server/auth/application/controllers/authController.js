@@ -73,10 +73,10 @@ class AuthController {
   async recuperarPassword(req, res) {
     try {
       
-      const token = await authService.generarTokenRecuperacion(req.body.email);
+      const envio = await authService.generarTokenRecuperacion(req.body.email);
       
-      if (token) {
-        return res.status(200).json({message: "Proceso de recuperación iniciado"});
+      if (envio) {
+        return res.status(200).json({message: "Correo de recuperación enviado"});
       }
     } catch (error) {
       handleError(res, error);

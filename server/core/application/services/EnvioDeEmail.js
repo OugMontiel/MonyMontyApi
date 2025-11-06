@@ -1,25 +1,22 @@
 const { Resend } = require('resend');
+const HttpError = require("../../utils/HttpError");
 
 const resend = new Resend(process.env.EMAIL_API_KEY);
 
-const enviosDeCorreo = async(alias,tos,subject, html) => {
+const enviosDeCorreo = async(alias,tos,subject, reactComponent) => {
 
     try {
       const { data, error } = await resend.emails.send({
         from: `Monteflor <${alias}@monteflor.co>`,
         to: tos,
         subject,
-        html,
+        react: reactComponent,
       });
     
-      if (error) {
-        console.error('❌ Error enviando correo:', error);
-        return;
-      }
-    
-      console.log('✅ Correo enviado:', data);
-    } catch (err) {
-      console.error('❌ Error inesperado:', err);
+      if (error) throw new HttpError(500, "Error enviando correo");
+      return data;
+    } catch (error) {
+      throw new HttpError(500, "Error inesperado enviando correo");
     }
 }
 

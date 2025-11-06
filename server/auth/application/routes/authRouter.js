@@ -26,7 +26,7 @@ router.get("/google/callback", passport.authenticate("google", {failureRedirect:
 );
 
 // --- RECUPERACIÓN DE CONTRASEÑA ---
-router.post("/recuperar", authValidator.validatorEmail(), handleValidation, (req, res) => authController.recuperar(req, res));
+router.post("/recuperar", authValidator.validatorEmail(), handleValidation, (req, res) => authController.recuperarPassword(req, res));
 router.post("/checkToken", authValidator.checkToken(), handleValidation, (req, res) => authController.checkToken(req, res));
 router.post("/updatePassword", authValidator.validatorPassword(), handleValidation, (req, res) => authController.updatePassword(req, res));
 
