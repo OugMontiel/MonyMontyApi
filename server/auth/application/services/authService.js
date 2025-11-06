@@ -23,7 +23,7 @@ class authService {
 
       // Generamos el token
       const token = jwt.sign(usuario, process.env.KEY_SECRET, {
-        expiresIn: `${process.env.EXPRESS_EXPIRE}ms`,
+        expiresIn: process.env.EXPRESS_EXPIRE,
       });
 
       // Retornamos el token
@@ -41,7 +41,7 @@ class authService {
 
       // Generamos el token
       const token = jwt.sign(usuario, process.env.KEY_SECRET, {
-        expiresIn: `${process.env.EXPRESS_EXPIRE}ms`,
+        expiresIn: process.env.EMAIL_EXPIRATION_TIME,
       });
 
       // Guardar el token en la base de datos
