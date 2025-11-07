@@ -39,17 +39,24 @@ class AuthController {
   // --- Validar si hay sesión activa ---
   async checkSession(req, res) {
     try {
-      if (req.session?.token) {
-        return res.status(200).json({
-          authenticated: true,
-          token: req.session.token,
-        });
+      // Obtener el token desde la sesión
+      let token = req.session?.token || null;
+
+      // Si no existe en la sesión, intentamos desde la cabecera Authorization: Bearer <token>
+      const authHeader = req.headers?.authorization || req.get("Authorization");
+      if (!token && authHeader && authHeader.startsWith("Bearer ")) {
+        token = authHeader.slice(7).trim();
       }
 
-      return res.status(401).json({
-        authenticated: false,
-        message: "Not authenticated",
-      });
+      if (!token) {
+        return res.status(401).json({authenticated: false, message: "Not authenticated"});
+      }
+
+      // Verificamos el token JWT
+      const esValido = authService.ValidarUnTocken(token);
+      return esValido
+        ? res.status(200).json({authenticated: true, token})
+        : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
     } catch (error) {
       handleError(res, error);
     }

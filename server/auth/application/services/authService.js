@@ -61,6 +61,15 @@ class authService {
       throw new ServiceError();
     }
   }
+  ValidarUnTocken(token) {
+    try {
+      jwt.verify(token, process.env.KEY_SECRET);
+      return true;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
 }
 
 module.exports = new authService();
