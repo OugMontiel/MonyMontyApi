@@ -16,6 +16,7 @@ const enviosDeCorreo = async(alias,tos,subject, reactComponent) => {
       if (error) throw new HttpError(500, "Error enviando correo");
       return data;
     } catch (error) {
+       if (error instanceof HttpError) throw error;
       throw new HttpError(500, "Error inesperado enviando correo");
     }
 }
