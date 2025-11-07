@@ -7,12 +7,12 @@ const isAuthenticated = (req, res, next) => {
   } else {
     // El usuario NO está autenticado
     console.log("Nooo paso isAuthenticated - Respondiendo con 401");
-    
+
     // 1. Establecer el código de estado HTTP a 401 (Unauthorized)
     res.status(401).json({
       // 2. Enviar una respuesta JSON con un mensaje
       message: "Acceso denegado. No está autenticado.",
-      success: false
+      success: false,
     });
   }
 };

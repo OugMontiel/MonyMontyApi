@@ -2,8 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 // Configuración para login
 const passport = require("passport");
@@ -24,7 +24,7 @@ app.use(express.json());
 // Configuración básica (cors)
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN?.split(',') || "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN?.split(",") || "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: "Content-Type, Authorization",
     credentials: true, // Permitir cookies y autenticación
@@ -57,7 +57,7 @@ app.use("/movimiento", isAuthenticated, movRoutes);
 // app.use('/product', isAuthenticated, productRoutes);
 app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: " accedio a Ruta protegida"}));
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+  res.status(200).json({status: "ok", timestamp: new Date().toISOString()});
 });
 // Ruta raíz (debe ir al final)
 app.use("/", (req, res) => {

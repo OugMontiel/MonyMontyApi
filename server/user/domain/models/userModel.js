@@ -67,7 +67,7 @@ class User {
       throw new Error(`Error al Buscar usuario por email: ${error.message}`);
     } finally {
       await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
-    } 
+    }
   }
 }
 

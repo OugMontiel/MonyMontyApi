@@ -72,9 +72,8 @@ class AuthController {
   // --- Recuperación de contraseña: solicitar token ---
   async recuperarPassword(req, res) {
     try {
-      
       const envio = await authService.generarTokenRecuperacion(req.body.email);
-      
+
       if (envio) {
         return res.status(200).json({message: "Correo de recuperación enviado"});
       }

@@ -1,17 +1,7 @@
 const React = require("react");
-const {
-  Html,
-  Head,
-  Preview,
-  Body,
-  Container,
-  Section,
-  Heading,
-  Text,
-  Button,
-} = require("@react-email/components");
+const {Html, Head, Preview, Body, Container, Section, Heading, Text, Button} = require("@react-email/components");
 
-function PasswordResetEmail({ usuario, resetLink }) {
+function PasswordResetEmail({usuario, resetLink}) {
   return React.createElement(
     Html,
     null,
@@ -19,42 +9,20 @@ function PasswordResetEmail({ usuario, resetLink }) {
     React.createElement(Preview, null, "Recupera tu contraseña en Monteflor"),
     React.createElement(
       Body,
-      { style: main },
+      {style: main},
       React.createElement(
         Container,
-        { style: card },
-        React.createElement(Heading, { style: title }, "Recuperación de contraseña"),
-        React.createElement(
-          Text,
-          { style: text },
-          "Hola ",
-          React.createElement("strong", null, usuario.nombre),
-          ","
-        ),
-        React.createElement(
-          Text,
-          { style: text },
-          "Hemos recibido una solicitud para restablecer tu contraseña."
-        ),
-        React.createElement(
-          Text,
-          { style: text },
-          "Haz clic en el botón de abajo para continuar:"
-        ),
+        {style: card},
+        React.createElement(Heading, {style: title}, "Recuperación de contraseña"),
+        React.createElement(Text, {style: text}, "Hola ", React.createElement("strong", null, usuario.nombre), ","),
+        React.createElement(Text, {style: text}, "Hemos recibido una solicitud para restablecer tu contraseña."),
+        React.createElement(Text, {style: text}, "Haz clic en el botón de abajo para continuar:"),
         React.createElement(
           Section,
-          { style: { textAlign: "center" } },
-          React.createElement(
-            Button,
-            { style: button, href: resetLink },
-            "Restablecer contraseña"
-          )
+          {style: {textAlign: "center"}},
+          React.createElement(Button, {style: button, href: resetLink}, "Restablecer contraseña")
         ),
-        React.createElement(
-          Text,
-          { style: footer },
-          "Si no solicitaste este cambio, puedes ignorar este mensaje."
-        )
+        React.createElement(Text, {style: footer}, "Si no solicitaste este cambio, puedes ignorar este mensaje.")
       )
     )
   );

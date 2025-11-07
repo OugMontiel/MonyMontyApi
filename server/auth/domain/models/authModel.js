@@ -26,10 +26,7 @@ class authModel {
     try {
       await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("user");
-      const resultado = await collection.updateOne(
-        filtro,
-        {$set: datosSet} 
-      );
+      const resultado = await collection.updateOne(filtro, {$set: datosSet});
 
       return {
         matched: resultado.matchedCount,

@@ -28,7 +28,7 @@ class authRepository {
 
       const resultado = await authModel.upDateUsuario(filtro, datosSet);
       if (resultado.matched > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
-      
+
       return resultado;
     } catch (error) {
       if (error instanceof HttpError) throw error;

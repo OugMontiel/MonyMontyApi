@@ -40,11 +40,7 @@ class AuthValidator {
   checkToken = () => {
     return [
       // Validación de token
-      query("token")
-        .notEmpty()
-        .withMessage("send a token")
-        .isString()
-        .withMessage("token must be a string"),
+      query("token").notEmpty().withMessage("send a token").isString().withMessage("token must be a string"),
 
       Validador.noBodyData(),
     ];

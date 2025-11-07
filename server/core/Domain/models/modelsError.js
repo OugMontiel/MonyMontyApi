@@ -1,4 +1,3 @@
-
 const HttpError = require("../../utils/HttpError");
 
 class modelsError extends HttpError {
