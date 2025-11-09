@@ -81,11 +81,12 @@ class authService {
       throw new ServiceError();
     }
   }
-  async updatePassword(email, newPassword) {
+  async updatePassword(email, Password) {
     try {
+    const newpassword = await bcrypt.hash(Password, 10);
 
-    // TODO : Hashear la nueva contraseña
-
+    const resultado = await authRepository.guardarNewContraseña(email, newpassword);
+    return resultado;
 
     } catch (error) {
       if (error instanceof HttpError) throw error;
