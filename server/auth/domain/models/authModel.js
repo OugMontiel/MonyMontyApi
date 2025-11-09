@@ -43,7 +43,7 @@ class authModel {
     try {
       await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("user");
-      const [res] =  await collection.find({tokenRecuperacion: token}).toArray();
+      const [res] = await collection.find({tokenRecuperacion: token}).toArray();
       return res;
     } catch (error) {
       if (error instanceof HttpError) throw error;

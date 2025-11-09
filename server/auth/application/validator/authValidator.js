@@ -29,7 +29,7 @@ class AuthValidator {
     return [
       // Validación de email
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
-      
+
       // Validación de password
       body("password")
         .notEmpty()
