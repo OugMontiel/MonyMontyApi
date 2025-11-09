@@ -64,7 +64,7 @@ class ConnectToDatabase {
       await this.cliente.connect();
       this.db = this.cliente.db(process.env.MONGO_DB_NAME);
 
-      console.log("Conexión a MongoDB establecida correctamente");
+      // console.log("Conexión a MongoDB establecida correctamente");
       return this.db;
     } catch (error) {
       console.error("Error al conectar a MongoDB:", error);
@@ -95,7 +95,7 @@ class ConnectToDatabase {
 
     try {
       await this.cliente.close();
-      console.log("Conexión a MongoDB cerrada correctamente");
+      // console.log("Conexión a MongoDB cerrada correctamente");
     } catch (error) {
       console.error("Error al cerrar conexión con MongoDB:", error);
       throw {

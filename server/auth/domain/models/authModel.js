@@ -1,4 +1,6 @@
 const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
+const HttpError = require("../../../core/utils/HttpError");
+const modelsError = require("../../../core/Domain/models/modelsError.js");
 
 class authModel {
   constructor() {
@@ -14,11 +16,40 @@ class authModel {
       // console.log('en modelo',res);
       return res;
     } catch (error) {
-      throw new Error(`Error al insertar usuario: ${error.message}`);
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
     } finally {
       await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
     }
   }
+  async upDateUsuario(filtro, datosSet) {
+    try {
+      await this.dbConnection.conectar();
+      const collection = this.dbConnection.db.collection("user");
+      const resultado = await collection.updateOne(filtro, {$set: datosSet});
+
+      return {
+        matched: resultado.matchedCount,
+        modified: resultado.modifiedCount,
+      };
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
+    } finally {
+      await this.dbConnection.desconectar();
+    }
+  }
+  async getUserFromToken(token) {
+    try {
+      await this.dbConnection.conectar();
+      const collection = this.dbConnection.db.collection("user");
+      const [res] = await collection.find({tokenRecuperacion: token}).toArray();
+      return res;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
+    }
+  }
 }
 
-module.exports = authModel;
+module.exports = new authModel();
