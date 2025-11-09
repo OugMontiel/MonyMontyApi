@@ -86,11 +86,11 @@ class AuthController {
   // --- Verificar token de recuperación ---
   async checkToken(req, res) {
     try {
-      const {token} = req.body;
+      const {token} = req.query;
       // Verificamos el token JWT
       const esValido = authService.ValidarUnTocken(token);
 
-      const userDelTocken = authService.getUserFromToken(token);
+      const userDelTocken = await authService.getUserFromToken(token);
 
       return esValido
         ? res.status(200).json({authenticated: true, userDelTocken})
