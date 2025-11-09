@@ -27,12 +27,26 @@ class AuthValidator {
   };
   validatorPassword = () => {
     return [
+      // Validación de email
+      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
+      
       // Validación de password
       body("password")
         .notEmpty()
         .withMessage("send a password")
         .isLength({min: 8})
         .withMessage("password must be at least 8 characters long"),
+
+      // Validación de confirmación de password
+      body("confirmPassword")
+        .notEmpty()
+        .withMessage("send a confirmation password")
+        .custom((value, {req}) => {
+          if (value !== req.body.password) {
+            throw new Error("passwords do not match");
+          }
+          return true;
+        }),
 
       Validador.noQueryParams(),
     ];

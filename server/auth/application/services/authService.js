@@ -70,6 +70,17 @@ class authService {
       throw new ServiceError();
     }
   }
+  async getUserFromToken(token) {
+    try {
+      // Optenemos el usuario
+      const usuario = await authRepository.getUserFromToken(token);
+      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      return usuario;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
 }
 
 module.exports = new authService();

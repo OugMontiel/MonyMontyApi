@@ -35,6 +35,17 @@ class authRepository {
       throw new RepositoryError();
     }
   }
+  async getUserFromToken(token) {
+    try {
+      const usuario = await authModel.getUserFromToken(token);
+      if (!usuario) throw new HttpError(404, "Usuario no encontrado para el token proporcionado");
+      delete usuario.password;
+      return usuario;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
+    }
+  }
 }
 
 module.exports = new authRepository();
