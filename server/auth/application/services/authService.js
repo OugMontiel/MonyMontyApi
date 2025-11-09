@@ -81,6 +81,17 @@ class authService {
       throw new ServiceError();
     }
   }
+  async updatePassword(email, newPassword) {
+    try {
+
+    // TODO : Hashear la nueva contraseña
+
+
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
 }
 
 module.exports = new authService();

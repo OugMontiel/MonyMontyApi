@@ -109,8 +109,13 @@ class AuthController {
   // --- Actualizar contraseña ---
   async updatePassword(req, res) {
     try {
-      // TODO: Verificar token, hashear contraseña y actualizar
-      return res.status(200).json({message: "Contraseña actualizada correctamente"});
+      const {email, password} = req.body;
+
+      const SeActualizo = await authService.updatePassword(email, password);
+
+      return SeActualizo
+        ? res.status(200).json({message: "Contraseña actualizada correctamente"})
+        : res.status(500).json({message: "Error al actualizar la contraseña"});
     } catch (error) {
       handleError(res, error);
     }
