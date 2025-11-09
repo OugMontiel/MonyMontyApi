@@ -92,8 +92,13 @@ class AuthController {
   // --- Verificar token de recuperación ---
   async checkToken(req, res) {
     try {
-      // TODO: Verificar que el token sea válido y no esté expirado
-      return res.status(200).json({message: "Token válido"});
+      const {token} = req.body;
+       // Verificamos el token JWT
+      const esValido = authService.ValidarUnTocken(token);
+      
+      return esValido
+        ? res.status(200).json({authenticated: true, token})
+        : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
     } catch (error) {
       handleError(res, error);
     }
