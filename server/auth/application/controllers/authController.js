@@ -40,13 +40,7 @@ class AuthController {
   async checkSession(req, res) {
     try {
       // Obtener el token desde la sesión
-      let token = req.session?.token || null;
-
-      // Si no existe en la sesión, intentamos desde la cabecera Authorization: Bearer <token>
-      const authHeader = req.headers?.authorization || req.get("Authorization");
-      if (!token && authHeader && authHeader.startsWith("Bearer ")) {
-        token = authHeader.slice(7).trim();
-      }
+      const token = req.session?.token;
 
       if (!token) {
         return res.status(401).json({authenticated: false, message: "Not authenticated"});
