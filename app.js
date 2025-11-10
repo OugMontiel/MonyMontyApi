@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const ms = require("ms");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
@@ -24,7 +25,7 @@ app.use(express.json());
 // Configuración básica (cors)
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN?.split(",") || "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN?.split(","),
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: "Content-Type, Authorization",
     credentials: true, // Permitir cookies y autenticación
@@ -40,7 +41,8 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // True en producción
-      maxAge: parseInt(process.env.EXPRESS_EXPIRE),
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: ms(process.env.EXPRESS_EXPIRE),
     },
   })
 );

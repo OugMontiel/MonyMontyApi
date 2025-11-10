@@ -61,10 +61,10 @@ class authService {
       throw new ServiceError();
     }
   }
-  ValidarUnTocken(token) {
+  async ValidarUnTocken(token) {
     try {
-      jwt.verify(token, process.env.KEY_SECRET);
-      return true;
+      const decoded = jwt.verify(token, process.env.KEY_SECRET);
+      return decoded;
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();

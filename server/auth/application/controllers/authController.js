@@ -47,7 +47,7 @@ class AuthController {
       }
 
       // Verificamos el token JWT
-      const esValido = authService.ValidarUnTocken(token);
+      const esValido = await authService.ValidarUnTocken(token);
       return esValido
         ? res.status(200).json({authenticated: true, token})
         : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
@@ -88,7 +88,7 @@ class AuthController {
     try {
       const {token} = req.query;
       // Verificamos el token JWT
-      const esValido = authService.ValidarUnTocken(token);
+      const esValido = await authService.ValidarUnTocken(token);
 
       const userDelTocken = await authService.getUserFromToken(token);
 
