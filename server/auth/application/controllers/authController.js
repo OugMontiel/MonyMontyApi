@@ -1,4 +1,5 @@
 // server/iniciosesion/application/controllers/inicioSesionController.js
+const MaskData = require("maskdata");
 
 const authService = require("../services/authService.js");
 const handleError = require("../../../core/application/controllers/handleError.js");
@@ -89,12 +90,40 @@ class AuthController {
       const {token} = req.query;
       // Verificamos el token JWT
       const esValido = await authService.ValidarUnTocken(token);
-
+      console.log("esValido", esValido);
+      if (!esValido) {
+        return res.status(401).json({
+          authenticated: false,
+          message: "Token inválido o expirado",
+        });
+      }
       const userDelTocken = await authService.getUserFromToken(token);
+      console.log("userDelTocken", userDelTocken);
 
-      return esValido
-        ? res.status(200).json({authenticated: true, userDelTocken})
-        : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
+      const userMasked = {
+        email: MaskData.maskEmail2(userDelTocken.email, {
+          maskWith: "*",
+          unmaskedStartCharactersBeforeAt: 2,
+          unmaskedEndCharactersAfterAt: 200,
+          maskAtTheRate: false,
+        }),
+
+        nombre: userDelTocken.nombre.split(" ").reduce((resultado, palabra, index, arr) => {
+          const masked = MaskData.maskStringV2(palabra, {
+            maskWith: "*",
+            unmaskedStartCharacters: 2,
+            unmaskedEndCharacters: 0,
+            maxMaskedCharacters: palabra.length,
+          });
+          return resultado + masked + (index < arr.length - 1 ? " " : "");
+        }, ""),
+      };
+      console.log("userMasked", userMasked);
+
+      return res.status(200).json({
+        authenticated: true,
+        userDelTocken: userMasked,
+      });
     } catch (error) {
       handleError(res, error);
     }
