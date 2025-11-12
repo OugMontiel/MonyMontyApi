@@ -90,7 +90,7 @@ class AuthController {
       const {token} = req.query;
       // Verificamos el token JWT
       const esValido = await authService.ValidarUnTocken(token);
-      console.log("esValido", esValido);
+      
       if (!esValido) {
         return res.status(401).json({
           authenticated: false,
@@ -98,7 +98,6 @@ class AuthController {
         });
       }
       const userDelTocken = await authService.getUserFromToken(token);
-      console.log("userDelTocken", userDelTocken);
 
       const userMasked = {
         email: MaskData.maskEmail2(userDelTocken.email, {
@@ -118,7 +117,6 @@ class AuthController {
           return resultado + masked + (index < arr.length - 1 ? " " : "");
         }, ""),
       };
-      console.log("userMasked", userMasked);
 
       return res.status(200).json({
         authenticated: true,
