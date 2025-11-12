@@ -1,5 +1,6 @@
 // server/iniciosesion/application/controllers/inicioSesionController.js
 const MaskData = require("maskdata");
+const ms = require("ms");
 
 const authService = require("../services/authService.js");
 const handleError = require("../../../core/application/controllers/handleError.js");
@@ -63,7 +64,13 @@ class AuthController {
       const {email, password} = req.body;
       const token = await authService.getUserByEmail(password, email);
 
-      req.session.token = token;
+      // Guardar cookie segura
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        maxAge: ms(process.env.EXPRESS_EXPIRE)
+      });
 
       return res.status(201).json({token});
     } catch (error) {
@@ -132,7 +139,7 @@ class AuthController {
     try {
       const {token, password} = req.body;
 
-      const { email } = await authService.getUserFromToken(token);
+      const {email} = await authService.getUserFromToken(token);
 
       const SeActualizo = await authService.updatePassword(email, password);
 
