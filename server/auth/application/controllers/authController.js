@@ -90,7 +90,7 @@ class AuthController {
       const {token} = req.query;
       // Verificamos el token JWT
       const esValido = await authService.ValidarUnTocken(token);
-      
+
       if (!esValido) {
         return res.status(401).json({
           authenticated: false,
@@ -130,7 +130,11 @@ class AuthController {
   // --- Actualizar contraseña ---
   async updatePassword(req, res) {
     try {
-      const {email, password} = req.body;
+      const {token, password} = req.body;
+
+      const { email } = await authService.getUserFromToken(token);
+
+      console.log('email', email);
 
       const SeActualizo = await authService.updatePassword(email, password);
 

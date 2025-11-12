@@ -27,8 +27,8 @@ class AuthValidator {
   };
   validatorPassword = () => {
     return [
-      // Validación de email
-      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
+      // Validación de token
+      body("token").notEmpty().withMessage("send a token").isString().withMessage("token must be a string"),
 
       // Validación de password
       body("password")
