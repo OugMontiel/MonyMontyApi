@@ -1,4 +1,5 @@
 // server/iniciosesion/application/controllers/inicioSesionController.js
+const MaskData = require("maskdata");
 
 const authService = require("../services/authService.js");
 const handleError = require("../../../core/application/controllers/handleError.js");
@@ -47,7 +48,7 @@ class AuthController {
       }
 
       // Verificamos el token JWT
-      const esValido = authService.ValidarUnTocken(token);
+      const esValido = await authService.ValidarUnTocken(token);
       return esValido
         ? res.status(200).json({authenticated: true, token})
         : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
@@ -88,13 +89,39 @@ class AuthController {
     try {
       const {token} = req.query;
       // Verificamos el token JWT
-      const esValido = authService.ValidarUnTocken(token);
+      const esValido = await authService.ValidarUnTocken(token);
 
+      if (!esValido) {
+        return res.status(401).json({
+          authenticated: false,
+          message: "Token inválido o expirado",
+        });
+      }
       const userDelTocken = await authService.getUserFromToken(token);
 
-      return esValido
-        ? res.status(200).json({authenticated: true, userDelTocken})
-        : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
+      const userMasked = {
+        email: MaskData.maskEmail2(userDelTocken.email, {
+          maskWith: "*",
+          unmaskedStartCharactersBeforeAt: 2,
+          unmaskedEndCharactersAfterAt: 200,
+          maskAtTheRate: false,
+        }),
+
+        nombre: userDelTocken.nombre.split(" ").reduce((resultado, palabra, index, arr) => {
+          const masked = MaskData.maskStringV2(palabra, {
+            maskWith: "*",
+            unmaskedStartCharacters: 2,
+            unmaskedEndCharacters: 0,
+            maxMaskedCharacters: palabra.length,
+          });
+          return resultado + masked + (index < arr.length - 1 ? " " : "");
+        }, ""),
+      };
+
+      return res.status(200).json({
+        authenticated: true,
+        userDelTocken: userMasked,
+      });
     } catch (error) {
       handleError(res, error);
     }
@@ -103,7 +130,9 @@ class AuthController {
   // --- Actualizar contraseña ---
   async updatePassword(req, res) {
     try {
-      const {email, password} = req.body;
+      const {token, password} = req.body;
+
+      const { email } = await authService.getUserFromToken(token);
 
       const SeActualizo = await authService.updatePassword(email, password);
 
