@@ -40,7 +40,7 @@ class authService {
       if (!usuario) throw new HttpError(404, "Usuario no encontrado");
 
       // Generamos el token
-      const token = jwt.sign(usuario, process.env.KEY_SECRET, {
+      const token = jwt.sign({id: usuario._id.toString()}, process.env.KEY_SECRET, {
         expiresIn: process.env.EMAIL_EXPIRATION_TIME,
       });
 
@@ -49,7 +49,7 @@ class authService {
       if (!seGuardo) throw new HttpError(500, "Error al guardar el token de recuperación");
 
       // Enviar el email con el enlace de recuperación
-      const resetLink = `https://monymonty.monteflor.co/reset-password?token=${token}`;
+      const resetLink = `https://monymonty.monteflor.co/resetPassword?token=${token}`;
       const element = React.createElement(PasswordResetEmail, {usuario, resetLink});
       const envio = await enviosDeCorreo("no-reply", email, "Recuperación de contraseña", element);
 
@@ -61,10 +61,10 @@ class authService {
       throw new ServiceError();
     }
   }
-  ValidarUnTocken(token) {
+  async ValidarUnTocken(token) {
     try {
-      jwt.verify(token, process.env.KEY_SECRET);
-      return true;
+      const decoded = jwt.verify(token, process.env.KEY_SECRET);
+      return decoded;
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();
