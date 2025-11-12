@@ -42,7 +42,7 @@ class AuthController {
   async checkSession(req, res) {
     try {
       // Obtener el token desde la sesión
-      const token = req.session?.token;
+      const token = req.session?.token || req.cookies?.token;
 
       if (!token) {
         return res.status(401).json({authenticated: false, message: "Not authenticated"});
@@ -50,6 +50,7 @@ class AuthController {
 
       // Verificamos el token JWT
       const esValido = await authService.ValidarUnTocken(token);
+      
       return esValido
         ? res.status(200).json({authenticated: true, token})
         : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
