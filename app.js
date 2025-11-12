@@ -35,17 +35,25 @@ app.use(
 // Configurar la sesión
 app.use(
   session({
+    name: process.env.SESSION_NAME || "monymonty.sid",
     secret: process.env.KEY_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // True en producción
+      secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: ms(process.env.EXPRESS_EXPIRE),
     },
   })
 );
+
+// en producción detrás de un proxy (p. ej. nginx in Docker),
+// confiar en el primer proxy permite que express-session detecte correctamente
+// si la conexión es segura y permita establecer `secure` cookies.
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
 
 // Inicialización de Passport.js
 app.use(passport.initialize());

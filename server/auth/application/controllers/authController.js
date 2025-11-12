@@ -42,7 +42,7 @@ class AuthController {
   async checkSession(req, res) {
     try {
       // Obtener el token desde la sesión
-      const token = req.session?.token || req.cookies?.token;
+      const token = req.session?.token;
 
       if (!token) {
         return res.status(401).json({authenticated: false, message: "Not authenticated"});
@@ -50,7 +50,7 @@ class AuthController {
 
       // Verificamos el token JWT
       const esValido = await authService.ValidarUnTocken(token);
-      
+
       return esValido
         ? res.status(200).json({authenticated: true, token})
         : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
@@ -65,15 +65,15 @@ class AuthController {
       const {email, password} = req.body;
       const token = await authService.getUserByEmail(password, email);
 
-      // Guardar cookie segura
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "None",
-        maxAge: ms(process.env.EXPRESS_EXPIRE)
-      });
+      // Guardamos el token en la sesión y forzamos guardado antes de responder.
+      req.session.token = token;
 
-      return res.status(201).json({token});
+      req.session.save((err) => {
+        if (err) {
+          return handleError(res, err, 500, "Error al guardar la sesión");
+        }
+        return res.status(201).json({token});
+      });
     } catch (error) {
       handleError(res, error, 400, "Error al iniciar sesión");
     }
