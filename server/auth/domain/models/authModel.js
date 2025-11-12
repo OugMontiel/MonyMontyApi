@@ -22,11 +22,11 @@ class authModel {
       await this.dbConnection.desconectar(); // Cerrar la conexión en el bloque finally
     }
   }
-  async upDateUsuario(filtro, datosSet) {
+  async upDateUsuario(filtro, datosSet = {}, datosUnset = {}) {
     try {
       await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("user");
-      const resultado = await collection.updateOne(filtro, {$set: datosSet});
+      const resultado = await collection.updateOne(filtro, {$set: datosSet, $unset: datosUnset});
 
       return {
         matched: resultado.matchedCount,

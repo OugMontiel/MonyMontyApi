@@ -134,8 +134,6 @@ class AuthController {
 
       const { email } = await authService.getUserFromToken(token);
 
-      console.log('email', email);
-
       const SeActualizo = await authService.updatePassword(email, password);
 
       return SeActualizo
