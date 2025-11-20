@@ -18,13 +18,6 @@
 Contiene la lógica para manejar flujos de caso de uso. No contiene reglas de negocio, sino coordinación entre las capas y validación de
 datos externos.
 
-### 🔹 `/controllers`
-
-- Reciben las peticiones HTTP desde las rutas.
-- Delegan la lógica al servicio correspondiente.
-- Devuelven la respuesta al cliente (`res.json`, `res.status()`, etc.).
-- No deben tener lógica de negocio ni acceso directo a la base de datos.
-
 ### 🔹 `/routes`
 
 - Define las rutas HTTP expuestas al exterior.
@@ -36,6 +29,13 @@ datos externos.
 - Validan los datos de entrada (`req.body`, `req.params`, `req.query`) antes de que lleguen al servicio o dominio.
 - Usualmente se implementan con `express-validator`, `Joi`, `Yup`, etc.
 - Garantizan que los datos malformados nunca entren al sistema.
+
+### 🔹 `/controllers`
+
+- Reciben las peticiones HTTP desde las rutas.
+- Delegan la lógica al servicio correspondiente.
+- Devuelven la respuesta al cliente (`res.json`, `res.status()`, etc.).
+- No deben tener lógica de negocio ni acceso directo a la base de datos.
 
 ### 🔹 `/services`
 
@@ -50,6 +50,14 @@ datos externos.
 
 Representa el **núcleo del negocio**. Es independiente de la tecnología (framework, DB, protocolo).
 
+### 🔹 `/repositories`
+
+- Actúan como **interfaces** entre la lógica del dominio y la fuente de datos (base de datos, API, etc.).
+- Permiten desacoplar la lógica del negocio de la infraestructura.
+- Implementan métodos como `findById`, `save`, `update`, etc.
+
+📌 Si en el futuro cambias Mongo por PostgreSQL, deberías modificar solo esta parte.
+
 ### 🔹 `/models`
 
 - Representan las **entidades y objetos de valor** de tu dominio.
@@ -58,13 +66,6 @@ Representa el **núcleo del negocio**. Es independiente de la tecnología (frame
 
 📌 Ejemplo: `Movimiento`, `Usuario`, `Cuenta`, etc.
 
-### 🔹 `/repositories`
-
-- Actúan como **interfaces** entre la lógica del dominio y la fuente de datos (base de datos, API, etc.).
-- Permiten desacoplar la lógica del negocio de la infraestructura.
-- Implementan métodos como `findById`, `save`, `update`, etc.
-
-📌 Si en el futuro cambias Mongo por PostgreSQL, deberías modificar solo esta parte.
 
 ## 📁 `/infrastructure` – Capa de infraestructura
 
