@@ -1,6 +1,8 @@
 const {validationResult} = require("express-validator");
 const movimientoService = require("../services/movService");
 
+const handleError = require("../../../core/application/controllers/handleError.js");
+
 class MovimientoController {
   constructor() {
     this.movimientoService = movimientoService;
@@ -135,6 +137,19 @@ class MovimientoController {
     } catch (error) {
       this.manejarError(res, error, "obtener movimientos");
     }
+  }
+
+  async dataParaDashboard(req, res) {
+    try {
+      const { _id } = req.session.usuario;
+
+      console.log('usuario ', _id)
+
+      const estadisticas = await this.movimientoService.estadisticasDashBoard(_id)
+
+      console.log('stadisiticas', estadisticas)
+      // todo 
+    } catch (error) { handleError(res, error);}
   }
 }
 

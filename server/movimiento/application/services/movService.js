@@ -1,4 +1,6 @@
 const movimientoRepository = require("../../domain/repositories/movRepository");
+const HttpError = require("../../../core/utils/HttpError");
+const ServiceError = require("../../../core/application/services/servicesError.js");
 
 class MovimientoService {
   constructor() {
@@ -122,30 +124,19 @@ class MovimientoService {
     }
   }
 
-  /**
-   * Obtiene movimientos por usuario
-   * @param {string} usuarioId - ID del usuario
-   * @returns {Promise<Array>} - Lista de movimientos del usuario
-   * @throws {object} - Error con formato {status, message}
-   */
-  async obtenerPorUsuario(usuarioId) {
-    try {
-      const movimientos = await this.movimientoRepository.obtenerPorUsuario(usuarioId);
-
-      if (!movimientos || movimientos.length === 0) {
-        throw {
-          status: 404,
-          message: "No se encontraron movimientos para este usuario",
-        };
-      }
-
-      return movimientos;
-    } catch (error) {
-      console.error(`Error en servicio - obtener movimientos usuario ID ${usuarioId}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error interno al obtener movimientos del usuario",
-      };
+  /** 
+   * Calculos para Estadisticas 
+   *  
+  */
+  async estadisticasDashBoard(id) {
+    try{
+      //optenemos todo los movimientos
+      const movimiento = await this.movimientoRepository.MovimientosDelUsuario(id)
+      console.log('movimeinto', movimiento)
+      return movimiento
+    }catch(error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
     }
   }
 }

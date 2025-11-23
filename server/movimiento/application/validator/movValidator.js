@@ -52,6 +52,13 @@ class MovimientoValidator {
   validarId() {
     return [validador.isValidObjectId("id")];
   }
+  
+  noBodyNoQuery() {
+    return [
+      validador.noBodyData(),
+      validador.noQueryParams(),
+    ]
+  }
 }
 
 module.exports = new MovimientoValidator();

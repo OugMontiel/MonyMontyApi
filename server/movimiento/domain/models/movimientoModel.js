@@ -1,5 +1,7 @@
 const {ObjectId} = require("mongodb");
 const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
+const HttpError = require("../../../core/utils/HttpError");
+const modelsError = require("../../../core/Domain/models/modelsError.js");
 
 class MovimientoModel {
   constructor() {
@@ -134,19 +136,33 @@ class MovimientoModel {
    * @returns {Promise<Array>} - Lista de movimientos del usuario
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarPorUsuario(usuarioId) {
+  async buscarPorUsuario(IdUsuario) {
     try {
       await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection.find({usuarioId}).toArray();
+      const movimientos = await collection
+        .aggregate([
+          {$match: {IdUsuario}},
+          {
+            $facet: {
+              totales: [
+                {
+                  $group: {
+                    _id: null,
+                    totalIngresos: {$sum: "$ingreso"},
+                    totalGastos: {$sum: "$egreso"},
+                  },
+                },
+              ],
+              ultimo: [{$sort: {fecha: -1}}, {$limit: 1}],
+            },
+          },
+        ])
+        .toArray();
       return movimientos;
     } catch (error) {
-      console.error(`ErrorModelo: buscarPorUsuario ${usuarioId}`, error);
-      throw {
-        status: 500,
-        message: "Error al buscar movimientos del usuario",
-        metadata: {usuarioId, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
     } finally {
       await this.dbConnection.desconectar();
     }
