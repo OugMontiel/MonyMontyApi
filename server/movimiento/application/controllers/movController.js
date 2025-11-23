@@ -141,15 +141,18 @@ class MovimientoController {
 
   async dataParaDashboard(req, res) {
     try {
-      const { _id } = req.session.usuario;
+      const {_id} = req.session.usuario;
 
-      console.log('usuario ', _id)
+      const estadisticas = await this.movimientoService.estadisticasDashBoard(_id);
 
-      const estadisticas = await this.movimientoService.estadisticasDashBoard(_id)
-
-      console.log('stadisiticas', estadisticas)
-      // todo 
-    } catch (error) { handleError(res, error);}
+      res.status(200).json({
+        success: true,
+        message: "Datos del DashBoard obtenidos exitosamente",
+        data: estadisticas,
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
   }
 }
 

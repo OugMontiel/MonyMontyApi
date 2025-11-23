@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const movimientoRepository = require("../../domain/repositories/movRepository");
 const HttpError = require("../../../core/utils/HttpError");
 const ServiceError = require("../../../core/application/services/servicesError.js");
@@ -124,17 +125,26 @@ class MovimientoService {
     }
   }
 
-  /** 
-   * Calculos para Estadisticas 
-   *  
-  */
+  /**
+   * Calculos para Estadisticas
+   *
+   */
   async estadisticasDashBoard(id) {
-    try{
+    try {
       //optenemos todo los movimientos
-      const movimiento = await this.movimientoRepository.MovimientosDelUsuario(id)
-      console.log('movimeinto', movimiento)
-      return movimiento
-    }catch(error) {
+      const {totales, ultimo} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id);
+
+      const totalIngresos = _.get(totales[0], "totalIngresos");
+      const totalGastos = _.get(totales[0], "totalGastos");
+
+      const estadisticas = {
+        ultimoMovimientos: ultimo[0],
+        totalIngresado: totalIngresos,
+        totalEgresado: totalGastos,
+        totalDisponible: totalIngresos - totalGastos,
+      };
+      return estadisticas;
+    } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();
     }

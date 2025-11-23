@@ -9,7 +9,9 @@ const handleValidation = require("../../../core/middlewares/handleValidation");
 router.get("/user/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerTodosLosMovimientos(req, res));
 
 // Data para Dashboard
-router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res)=> movimientoController.dataParaDashboard(req, res))
+router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+  movimientoController.dataParaDashboard(req, res)
+);
 
 // Obtener un movimiento específico
 router.get("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerMovimiento(req, res));

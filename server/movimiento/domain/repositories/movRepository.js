@@ -135,15 +135,15 @@ class MovimientoRepository {
    * @returns {Promise<Array>} - Lista de movimientos del usuario
    * @throws {object} - Error con formato {status, message}
    */
-  async MovimientosDelUsuario(usuarioId) {
+  async estadisticasMovimientosDelUsuario(usuarioId) {
     try {
-      const movimientos = await this.movimientoModel.buscarPorUsuario(usuarioId);
-      
+      const movimientos = await this.movimientoModel.estadisticasMovimientos(usuarioId);
+
       if (!movimientos || movimientos.length === 0) throw new HttpError(404, "No se encontraron movimientos para este usuario");
 
-      return movimientos;
+      return movimientos[0];
     } catch (error) {
-        if (error instanceof HttpError) throw error;
+      if (error instanceof HttpError) throw error;
       throw new RepositoryError();
     }
   }

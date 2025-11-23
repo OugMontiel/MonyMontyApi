@@ -116,12 +116,12 @@ class MovimientoModel {
   }
 
   /**
-   * Busca movimientos por ID de usuario
+   * estadisticas movimientos por ID de usuario
    * @param {string} usuarioId - ID del usuario
-   * @returns {Promise<Array>} - Lista de movimientos del usuario
+   * @returns {Promise<Array>} - estadisticas movimientos del usuario
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarPorUsuario(IdUsuario) {
+  async estadisticasMovimientos(IdUsuario) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection
