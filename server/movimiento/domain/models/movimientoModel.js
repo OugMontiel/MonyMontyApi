@@ -16,7 +16,6 @@ class MovimientoModel {
    */
   async crear(movimientoData) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.insertOne(movimientoData);
       return resultado;
@@ -27,8 +26,6 @@ class MovimientoModel {
         message: "Error al crear el movimiento en la base de datos",
         metadata: {errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -40,7 +37,6 @@ class MovimientoModel {
    */
   async buscarPorId(id) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimiento = await collection.findOne({_id: new ObjectId(id)});
       return movimiento;
@@ -51,8 +47,6 @@ class MovimientoModel {
         message: "Error al buscar el movimiento",
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -65,7 +59,6 @@ class MovimientoModel {
    */
   async actualizar(id, datosActualizacion) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.updateOne({_id: new ObjectId(id)}, {$set: datosActualizacion});
       return resultado;
@@ -76,8 +69,6 @@ class MovimientoModel {
         message: "Error al actualizar el movimiento",
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -89,7 +80,6 @@ class MovimientoModel {
    */
   async eliminar(id) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.deleteOne({_id: new ObjectId(id)});
       return resultado;
@@ -100,8 +90,6 @@ class MovimientoModel {
         message: "Error al eliminar el movimiento",
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -112,7 +100,6 @@ class MovimientoModel {
    */
   async buscarTodos(id) {
     try {
-      await this.dbConnection.conectar();
       const newID = id.toString();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection.find({IdUsuario: newID}).toArray();
@@ -125,8 +112,6 @@ class MovimientoModel {
         message: "Error al obtener los movimientos",
         metadata: {errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -138,7 +123,6 @@ class MovimientoModel {
    */
   async buscarPorUsuario(IdUsuario) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection
         .aggregate([
@@ -163,8 +147,6 @@ class MovimientoModel {
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new modelsError();
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 }
