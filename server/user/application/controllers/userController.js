@@ -67,7 +67,6 @@ class UserController {
       if (!this.validarExpres(req, res)) return;
       // Verificar token y extraer payload
       const decoded = jwt.verify(req.session.token, process.env.KEY_SECRET);
-      console.log("decoded:", decoded);
       // Optner el Usuario
       const user = await this.insUserService.getUserById(decoded._id);
       // respoder con exito

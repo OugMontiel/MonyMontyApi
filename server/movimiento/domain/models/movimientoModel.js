@@ -1,5 +1,7 @@
 const {ObjectId} = require("mongodb");
 const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
+const HttpError = require("../../../core/utils/HttpError");
+const modelsError = require("../../../core/Domain/models/modelsError.js");
 
 class MovimientoModel {
   constructor() {
@@ -14,7 +16,6 @@ class MovimientoModel {
    */
   async crear(movimientoData) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.insertOne(movimientoData);
       return resultado;
@@ -25,8 +26,6 @@ class MovimientoModel {
         message: "Error al crear el movimiento en la base de datos",
         metadata: {errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -38,7 +37,6 @@ class MovimientoModel {
    */
   async buscarPorId(id) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimiento = await collection.findOne({_id: new ObjectId(id)});
       return movimiento;
@@ -49,8 +47,6 @@ class MovimientoModel {
         message: "Error al buscar el movimiento",
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -63,7 +59,6 @@ class MovimientoModel {
    */
   async actualizar(id, datosActualizacion) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.updateOne({_id: new ObjectId(id)}, {$set: datosActualizacion});
       return resultado;
@@ -74,8 +69,6 @@ class MovimientoModel {
         message: "Error al actualizar el movimiento",
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -87,7 +80,6 @@ class MovimientoModel {
    */
   async eliminar(id) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
       const resultado = await collection.deleteOne({_id: new ObjectId(id)});
       return resultado;
@@ -98,8 +90,6 @@ class MovimientoModel {
         message: "Error al eliminar el movimiento",
         metadata: {movimientoId: id, errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
@@ -110,7 +100,6 @@ class MovimientoModel {
    */
   async buscarTodos(id) {
     try {
-      await this.dbConnection.conectar();
       const newID = id.toString();
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection.find({IdUsuario: newID}).toArray();
@@ -123,32 +112,41 @@ class MovimientoModel {
         message: "Error al obtener los movimientos",
         metadata: {errorOriginal: error.message},
       };
-    } finally {
-      await this.dbConnection.desconectar();
     }
   }
 
   /**
-   * Busca movimientos por ID de usuario
+   * estadisticas movimientos por ID de usuario
    * @param {string} usuarioId - ID del usuario
-   * @returns {Promise<Array>} - Lista de movimientos del usuario
+   * @returns {Promise<Array>} - estadisticas movimientos del usuario
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarPorUsuario(usuarioId) {
+  async estadisticasMovimientos(IdUsuario) {
     try {
-      await this.dbConnection.conectar();
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection.find({usuarioId}).toArray();
+      const movimientos = await collection
+        .aggregate([
+          {$match: {IdUsuario}},
+          {
+            $facet: {
+              totales: [
+                {
+                  $group: {
+                    _id: null,
+                    totalIngresos: {$sum: "$ingreso"},
+                    totalGastos: {$sum: "$egreso"},
+                  },
+                },
+              ],
+              ultimo: [{$sort: {fecha: -1}}, {$limit: 1}],
+            },
+          },
+        ])
+        .toArray();
       return movimientos;
     } catch (error) {
-      console.error(`ErrorModelo: buscarPorUsuario ${usuarioId}`, error);
-      throw {
-        status: 500,
-        message: "Error al buscar movimientos del usuario",
-        metadata: {usuarioId, errorOriginal: error.message},
-      };
-    } finally {
-      await this.dbConnection.desconectar();
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
     }
   }
 }

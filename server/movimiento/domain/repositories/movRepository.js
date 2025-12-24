@@ -1,4 +1,6 @@
 const movimientoModel = require("../models/movimientoModel");
+const HttpError = require("../../../core/utils/HttpError");
+const RepositoryError = require("../../../core/Domain/Repository/RepositoryError.js");
 
 class MovimientoRepository {
   constructor() {
@@ -133,22 +135,16 @@ class MovimientoRepository {
    * @returns {Promise<Array>} - Lista de movimientos del usuario
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerPorUsuario(usuarioId) {
+  async estadisticasMovimientosDelUsuario(usuarioId) {
     try {
-      const movimientos = await this.movimientoModel.buscarPorUsuario(usuarioId);
-      if (!movimientos || movimientos.length === 0) {
-        throw {
-          status: 404,
-          message: "No se encontraron movimientos para este usuario",
-        };
-      }
-      return movimientos;
+      const movimientos = await this.movimientoModel.estadisticasMovimientos(usuarioId);
+
+      if (!movimientos || movimientos.length === 0) throw new HttpError(404, "No se encontraron movimientos para este usuario");
+
+      return movimientos[0];
     } catch (error) {
-      console.error(`Error en repositorio - obtener movimientos usuario ID ${usuarioId}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error al buscar movimientos del usuario",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
     }
   }
 }

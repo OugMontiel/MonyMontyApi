@@ -1,4 +1,7 @@
+const _ = require("lodash");
 const movimientoRepository = require("../../domain/repositories/movRepository");
+const HttpError = require("../../../core/utils/HttpError");
+const ServiceError = require("../../../core/application/services/servicesError.js");
 
 class MovimientoService {
   constructor() {
@@ -123,29 +126,27 @@ class MovimientoService {
   }
 
   /**
-   * Obtiene movimientos por usuario
-   * @param {string} usuarioId - ID del usuario
-   * @returns {Promise<Array>} - Lista de movimientos del usuario
-   * @throws {object} - Error con formato {status, message}
+   * Calculos para Estadisticas
+   *
    */
-  async obtenerPorUsuario(usuarioId) {
+  async estadisticasDashBoard(id) {
     try {
-      const movimientos = await this.movimientoRepository.obtenerPorUsuario(usuarioId);
+      //optenemos todo los movimientos
+      const {totales, ultimo} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id);
 
-      if (!movimientos || movimientos.length === 0) {
-        throw {
-          status: 404,
-          message: "No se encontraron movimientos para este usuario",
-        };
-      }
+      const totalIngresos = _.get(totales[0], "totalIngresos");
+      const totalGastos = _.get(totales[0], "totalGastos");
 
-      return movimientos;
-    } catch (error) {
-      console.error(`Error en servicio - obtener movimientos usuario ID ${usuarioId}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error interno al obtener movimientos del usuario",
+      const estadisticas = {
+        ultimoMovimientos: ultimo[0],
+        totalIngresado: totalIngresos,
+        totalEgresado: totalGastos,
+        totalDisponible: totalIngresos - totalGastos,
       };
+      return estadisticas;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
     }
   }
 }

@@ -11,6 +11,9 @@ const passport = require("passport");
 // Cargar las configuraciones de Passport para Google
 require("./server/auth/infrastructure/config/passportGoogle");
 
+//Conecion a base de datos
+const ConnectToDatabase = require("./server/core/infrastructure/connections/mongodb.js");
+
 // Middlewares y routers
 const isAuthenticated = require("./server/auth/infrastructure/middleware/isAuthenticated");
 const authRouter = require("./server/auth/application/routes/authRouter");
@@ -143,7 +146,13 @@ const config = {
   host: process.env.EXPRESS_HOST || "0.0.0.0",
 };
 
-// Iniciar el servidor
-app.listen(config.port, config.host, () => {
-  console.log(`Servidor corriendo en http://${config.host}:${config.port}`);
-});
+async function bootstrap() {
+  await ConnectToDatabase.conectar(); // Aquí conecta al iniciar el servidor solo una vez
+
+  // Iniciar el servidor
+  app.listen(config.port, config.host, () => {
+    console.log(`Servidor corriendo en http://${config.host}:${config.port}`);
+  });
+}
+
+bootstrap();

@@ -3,9 +3,15 @@ const router = express.Router();
 
 const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
+const handleValidation = require("../../../core/middlewares/handleValidation");
 
 // Obtener todos los movimientos de un usuario
 router.get("/user/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerTodosLosMovimientos(req, res));
+
+// Data para Dashboard
+router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+  movimientoController.dataParaDashboard(req, res)
+);
 
 // Obtener un movimiento específico
 router.get("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerMovimiento(req, res));
