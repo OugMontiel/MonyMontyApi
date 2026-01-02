@@ -1,0 +1,37 @@
+/**
+ * ARCHIVO: entidad.schema.jsonc
+ * DESCRIPCIÓN: Estructura de la colección 'Entidades'.
+ * NOTA: Representa las fuentes de dinero (Bancos, Efectivo, Billeteras).
+ */
+{
+  "_id": ObjectId("..."),
+  "usuarioId": ObjectId("..."),
+  "nombre": "Itau",
+  "tipo": "BANCO", // "BANCO" | "EFECTIVO" | "BILLETERA"
+  "numero": "6789", // Últimos dígitos o identificador de cuenta
+
+  /* --- BALANCE Y MONEDA --- */
+  "saldoInicial": 500000, 
+  "divisaId": "COP",
+
+  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
+  "createdAt": ISODate(), // Fecha exacta de registro
+  "updatedAt": ISODate(), // Se actualiza en cada modificación del perfil
+  "deletedAt": ISODate(), // Se llena solo si el usuario solicita baja (Soft Delete)
+
+  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+  "auditoria": {
+    "creadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "editadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "eliminadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    }
+  }
+}

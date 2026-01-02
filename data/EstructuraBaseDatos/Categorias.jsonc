@@ -1,0 +1,42 @@
+/**
+ * ARCHIVO: categoria.schema.jsonc
+ * DESCRIPCIÓN: Define las categorías y subcategorías de gastos/ingresos.
+ * NOTA: Soporta categorías globales (usuarioId: null) y personalizadas.
+ */
+{
+  "_id": ObjectId("..."),
+  "usuarioId": ObjectId("..."), // null = Pública (para todos) | ObjectId = Privada
+  "categoria": "Alimentación",
+  "icono": "fastfood", // Referencia para el Front-end
+  "subcategorias": [
+    { 
+      "_id": ObjectId("..."), 
+      "subcategoria": "Restaurantes"
+    },
+    { 
+      "_id": ObjectId("..."), 
+      "subcategoria": "Supermercado"
+    }
+  ],
+
+  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
+  "createdAt": ISODate(),
+  "updatedAt": ISODate(),
+  "deletedAt": null, // Se llena solo si se marca como eliminada
+
+  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+  "auditoria": {
+    "creadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "editadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "eliminadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    }
+  }
+}

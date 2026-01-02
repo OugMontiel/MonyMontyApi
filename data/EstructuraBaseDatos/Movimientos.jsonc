@@ -1,0 +1,69 @@
+/**
+ * ARCHIVO: movimiento.schema.jsonc
+ * DESCRIPCIÓN: Registro principal de transacciones financieras.
+ * NOTA: Centraliza ingresos, egresos y movimientos internos entre cuentas.
+ */
+{
+  /* --- IDENTIFICACIÓN --- */
+  "_id": ObjectId("..."),
+  "usuarioId": ObjectId("..."),
+  "referencia": "TXN-2025-08-001", // Código de rastreo único
+  "origen": "MANUAL", // [MANUAL | IMPORTADO | SISTEMA | API]
+
+  /* --- CLASIFICACIÓN Y RELACIONES --- */
+  "entidadId": ObjectId("..."), // Si es null es tipo transferencia
+  "divisaId": "COP", // Código ISO de la moneda
+  "categoriaId": ObjectId("..."),
+  "subcategoriaId": ObjectId("..."), 
+
+  /* --- DATOS DE LA TRANSACCIÓN --- */
+  "fecha": ISODate("2025-08-01T00:00:00Z"),
+  "tipo": "INGRESO", // [INGRESO | EGRESO | TRANSFERENCIA]
+  "monto": 1509620, // Negativo para egresos
+  "concepto": {
+    "titulo": "Pago nómina",
+    "detalle": ""
+  },
+
+  /* --- LÓGICA DE TRANSFERENCIA --- */
+  "transferencia": { // Solo existe si tipo === TRANSFERENCIA
+    "origenEntidadId": ObjectId("..."),
+    "destinoEntidadId": ObjectId("...")
+  },
+
+  /* --- METADATOS Y ESTADO --- */
+  "estado": "COMPLETADO", // [PENDIENTE | ANULADO | COMPLETADO]
+  "tags": ["nomina", "fijo", "mensual"],
+  "esRecurrente": true,
+  "adjuntos": [
+    {
+      "url": "https://cdn.app.com/movimientos/tx1/img1.jpg",
+      "tipo": "FACTURA", // FACTURA | RECIBO | TRANSFERENCIA | OTRO
+      "mimeType": "image/jpeg",
+      "size": 234567,
+      "uploadedAt": ISODate()
+    }
+  ],
+  "isDeleted": false, // Nunca se eliminan físicamente los documentos
+
+  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
+  "createdAt": ISODate(), // Fecha exacta de registro
+  "updatedAt": ISODate(), // Se actualiza en cada modificación del perfil
+  "deletedAt": ISODate(), // Se llena solo si el usuario solicita baja (Soft Delete)
+
+  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+  "auditoria": {
+    "creadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "editadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "eliminadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    }
+  }
+}
