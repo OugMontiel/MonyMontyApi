@@ -67,7 +67,7 @@ class MovimientoController {
 
   async crearMovimiento(req, res) {
     try {
-      const movimiento = await this.movimientoService.crear(req.body);
+      const movimiento = await this.movimientoService.crear(req.body, req.session.usuario);
 
       res.status(201).json({
         success: true,

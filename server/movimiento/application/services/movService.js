@@ -11,12 +11,38 @@ class MovimientoService {
   /**
    * Crea un nuevo movimiento
    * @param {object} data - Datos del movimiento a crear
+   * @param {object} usuario - Usuario de la sesión
    * @returns {Promise<object>} - Movimiento creado
    * @throws {object} - Error con formato {status, message}
    */
-  async crear(data) {
+  async crear(data, usuario) {
     try {
-      return await this.movimientoRepository.crear(data);
+      const fechaActual = new Date();
+      const year = fechaActual.getFullYear();
+      const month = fechaActual.getMonth(); // 0-indexed
+
+      // Obtener conteo para generar referencia
+      const count = await this.movimientoRepository.contarMovimientosMes(usuario._id);
+      const sequence = (count + 1).toString().padStart(4, "0");
+
+      // Generar referencia: TXN-YYYYMM-###
+      const referencia = `TXN-${year}${month}-${sequence}`;
+
+      // Preparar datos completos
+      const nuevoMovimiento = {
+        ...data,
+        usuarioId: usuario._id, // Asegurar que el usuarioId venga de la sesión
+        referencia,
+        createdAt: fechaActual,
+        auditoria: {
+          creadoPor: {
+            usuarioId: usuario._id,
+            nombre: usuario.nombre,
+          },
+        },
+      };
+
+      return await this.movimientoRepository.crear(nuevoMovimiento);
     } catch (error) {
       console.error("Error en servicio - crear movimiento:", error);
       throw {

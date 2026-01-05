@@ -159,6 +159,27 @@ class MovimientoModel {
       throw new modelsError();
     }
   }
+  /**
+   * Cuenta los movimientos de un usuario
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<number>} - Cantidad de movimientos
+   */
+  async contarMovimientos(usuarioId) {
+    try {
+      const collection = this.dbConnection.db.collection("movimiento");
+      const count = await collection.countDocuments({
+        usuarioId: new ObjectId(usuarioId),
+      });
+      return count;
+    } catch (error) {
+      console.error("ErrorModelo: contarMovimientos", error);
+      throw {
+        status: 500,
+        message: "Error al contar los movimientos",
+        metadata: {errorOriginal: error.message},
+      };
+    }
+  }
 }
 
 module.exports = new MovimientoModel();
