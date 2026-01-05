@@ -5,33 +5,62 @@ const validador = require("../../../core/application/validador/Validador"); // I
 class MovimientoValidator {
   validarCreacion() {
     return [
-      validador.requiredObjectId("IdUsuario"),
+      validador.requiredObjectId("usuarioId"),
+      // validador.optionalString("referencia"), // Se crea aqui en el back, no se recive desde el front
+      validador.requiredString("origen"),
+
+      // Clasificación
+      validador.requiredString("divisaId"),
+      validador.requiredObjectId("categoriaId"),
+      validador.requiredObjectId("subcategoriaId"),
+
+      // Datos Transacción
       validador.requiredDate("fecha"),
-      validador.requiredObject("categoria"),
-      validador.requiredObject("entidad"),
-      validador.requiredObject("divisa"),
-      validador.noQueryParams(),
+      body("tipo")
+        .exists()
+        .withMessage("tipo es requerido")
+        .isIn(["INGRESO", "EGRESO", "TRANSFERENCIA"])
+        .withMessage("Tipo inválido. Valores permitidos: INGRESO, EGRESO, TRANSFERENCIA"),
+      validador.requiredNumber("monto"),
 
-      // Validación de ingreso/egreso
-      body().custom((body) => {
-        const {ingreso, egreso} = body;
+      // Concepto
+      body("concepto").optional().isObject(),
 
-        if (!ingreso && !egreso) {
-          throw new Error("Debe especificar un ingreso o egreso");
-        }
+      // Lógica de Transferencia
 
-        if (ingreso && egreso) {
-          throw new Error("No puede tener ingreso y egreso simultáneamente");
-        }
+      // ─────────────────────────────────────────────
+      // ES UNA TRANSFERENCIA
+      // ─────────────────────────────────────────────
 
-        const monto = ingreso || egreso;
+      body("transferencia")
+        .if(body("tipo").equals("TRANSFERENCIA"))
+        .exists()
+        .withMessage("Datos de transferencia requeridos para tipo TRANSFERENCIA"),
 
-        if (typeof monto !== "number" || monto <= 0) {
-          throw new Error("El monto debe ser un número positivo");
-        }
+      body("transferencia.origenEntidadId")
+        .if(body("tipo").equals("TRANSFERENCIA"))
+        .custom(validador.requiredObjectId("transferencia.origenEntidadId")),
 
-        return true;
-      }),
+      body("transferencia.destinoEntidadId")
+        .if(body("tipo").equals("TRANSFERENCIA"))
+        .custom(validador.requiredObjectId("transferencia.destinoEntidadId")),
+
+      // ─────────────────────────────────────────────
+      // NO ES UNA TRANSFERENCIA
+      // ─────────────────────────────────────────────
+
+      body("entidadId")
+        .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
+        .exists()
+        .withMessage("entidadId es requerido cuando no es TRANSFERENCIA")
+        .bail()
+        .custom(validador.requiredObjectId("entidadId")),
+
+      // Metadatos
+      body("estado").optional().isString(),
+      body("tags").optional().isArray(),
+      body("esRecurrente").optional().isBoolean(),
+      body("adjuntos").optional().isArray(),
     ];
   }
 
@@ -52,7 +81,7 @@ class MovimientoValidator {
   validarId() {
     return [validador.isValidObjectId("id")];
   }
-  
+
   noBodyNoQuery() {
     return [
       validador.noBodyData(),

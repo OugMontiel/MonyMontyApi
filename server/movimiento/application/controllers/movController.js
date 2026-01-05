@@ -67,8 +67,6 @@ class MovimientoController {
 
   async crearMovimiento(req, res) {
     try {
-      if (!this.validarResultados(req, res)) return;
-
       const movimiento = await this.movimientoService.crear(req.body);
 
       res.status(201).json({

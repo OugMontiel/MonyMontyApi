@@ -72,16 +72,17 @@ class Validador {
     });
 
   /**
-   * Valida que un campo en el cuerpo sea un ObjectId válido.
+   * Valida que un campo obligatorio en el cuerpo sea un ObjectId válido.
    *
    * @param {string} field - Nombre del campo en el cuerpo a validar.
-   * @param {string} [mensaje="Envía un ID válido"] - Mensaje de error personalizado.
+   * @param {string} [mensaje="El campo es obligatorio"] - Mensaje de error personalizado.
+   * @param {string} [mensajeTipo="El campo debe ser ObjectId"] - Mensaje de error personalizado.
    * @returns {import("express-validator").ValidationChain} Cadena de validación para Express.
    */
-  requiredObjectId = (field, mensaje = "Envía un ID válido") =>
-    body(field).custom((value) => {
+  requiredObjectId = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser ObjectId`) =>
+    body(field).notEmpty().withMessage(mensaje).custom((value) => {
       if (!ObjectId.isValid(value)) {
-        throw new Error(mensaje);
+        throw new Error(mensajeTipo);
       }
       return true;
     });
@@ -106,7 +107,7 @@ class Validador {
    * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
    */
   requiredNumber = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser numérico`) =>
-    body(field).notEmpty().withMessage(mensaje).isNumeric().withMessage(mensajeTipo);
+    body(field).notEmpty().withMessage(mensaje).isFloat().withMessage(mensajeTipo);
 
   /**
    * Valida que un campo obligatorio sea un array.

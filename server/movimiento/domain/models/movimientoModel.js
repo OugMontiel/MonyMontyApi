@@ -100,9 +100,11 @@ class MovimientoModel {
    */
   async buscarTodos(id) {
     try {
-      const newID = id.toString();
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection.find({IdUsuario: newID}).toArray();
+      // Buscamos por usuarioId (nuevo schema)
+      // Nota: Si se necesita soporte híbrido, se podría usar $or: [{usuarioId: ...}, {IdUsuario: ...}]
+      // Pero la instrucción dice "adecuación a las consultas o la nueva estructura", así que priorizamos lo nuevo.
+      const movimientos = await collection.find({usuarioId: new ObjectId(id)}).toArray();
 
       return movimientos;
     } catch (error) {
@@ -121,20 +123,28 @@ class MovimientoModel {
    * @returns {Promise<Array>} - estadisticas movimientos del usuario
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async estadisticasMovimientos(IdUsuario) {
+  async estadisticasMovimientos(usuarioId) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
       const movimientos = await collection
         .aggregate([
-          {$match: {IdUsuario}},
+          {$match: {usuarioId: new ObjectId(usuarioId)}},
           {
             $facet: {
               totales: [
                 {
                   $group: {
                     _id: null,
-                    totalIngresos: {$sum: "$ingreso"},
-                    totalGastos: {$sum: "$egreso"},
+                    totalIngresos: {
+                      $sum: {
+                        $cond: [{$eq: ["$tipo", "INGRESO"]}, "$monto", 0],
+                      },
+                    },
+                    totalGastos: {
+                      $sum: {
+                        $cond: [{$eq: ["$tipo", "EGRESO"]}, "$monto", 0],
+                      },
+                    },
                   },
                 },
               ],
