@@ -101,7 +101,74 @@ class MovimientoModel {
   async buscarTodos(id) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection.find({usuarioId: new ObjectId(id)}).toArray();
+      const movimientos = await collection
+        .aggregate([
+          {$match: {usuarioId: new ObjectId(id)}},
+            // Lookup Entidad
+          {
+            $lookup: {
+              from: "entidades",
+              localField: "entidadId",
+              foreignField: "_id",
+              as: "entidadInfo",
+            },
+          },
+          {
+            $unwind: {
+              path: "$entidadInfo",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          // Lookup Categoria
+          {
+            $lookup: {
+              from: "categorias",
+              localField: "categoriaId",
+              foreignField: "_id",
+              as: "categoriaInfo",
+            },
+          },
+          {
+            $unwind: {
+              path: "$categoriaInfo",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          // Extract Subcategoria
+          {
+            $addFields: {
+              subcategoriaInfo: {
+                $arrayElemAt: [
+                  {
+                    $filter: {
+                      input: {$ifNull: ["$categoriaInfo.subcategorias", []]},
+                      as: "sub",
+                      cond: {$eq: ["$$sub._id", "$subcategoriaId"]},
+                    },
+                  },
+                  0,
+                ],
+              },
+            },
+          },
+          // Populate final fields
+          {
+            $addFields: {
+              entidad: "$entidadInfo",
+              categoria: "$categoriaInfo",
+              subcategoria: "$subcategoriaInfo",
+            },
+          },
+          // Cleanup
+          {
+            $project: {
+              entidadInfo: 0,
+              categoriaInfo: 0,
+              subcategoriaInfo: 0,
+            },
+          },
+        ])
+        .toArray();
 
       return movimientos;
     } catch (error) {

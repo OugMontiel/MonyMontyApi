@@ -27,7 +27,7 @@ class MovimientoService {
       const sequence = (count + 1).toString().padStart(4, "0");
 
       // Generar referencia: TXN-YYYYMM-###
-      const referencia = `TXN-${year}${month+1}-${sequence}`;
+      const referencia = `TXN-${year}${month + 1}-${sequence}`;
 
       // Preparar datos completos
       const nuevoMovimiento = {
@@ -51,9 +51,10 @@ class MovimientoService {
             origenEntidadId: new ObjectId(data.transferencia.origenEntidadId),
             destinoEntidadId: new ObjectId(data.transferencia.destinoEntidadId),
           };
-        } else {
-          nuevoMovimiento.entidadId = new ObjectId(data.entidadId);
         }
+      } else {
+        // Corregir entidadId a ObjectId si existe (INGRESO/EGRESO)
+        nuevoMovimiento.entidadId = new ObjectId(data.entidadId);
       }
 
       return await this.movimientoRepository.crear(nuevoMovimiento);
