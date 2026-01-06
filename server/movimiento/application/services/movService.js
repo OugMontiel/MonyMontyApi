@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const {ObjectId} = require("mongodb");
 const movimientoRepository = require("../../domain/repositories/movRepository");
 const HttpError = require("../../../core/utils/HttpError");
 const ServiceError = require("../../../core/application/services/servicesError.js");
@@ -11,12 +12,51 @@ class MovimientoService {
   /**
    * Crea un nuevo movimiento
    * @param {object} data - Datos del movimiento a crear
+   * @param {object} usuario - Usuario de la sesión
    * @returns {Promise<object>} - Movimiento creado
    * @throws {object} - Error con formato {status, message}
    */
-  async crear(data) {
+  async crear(data, usuario) {
     try {
-      return await this.movimientoRepository.crear(data);
+      const fechaActual = new Date();
+      const year = fechaActual.getFullYear();
+      const month = fechaActual.getMonth(); // 0-indexed
+
+      // Obtener conteo para generar referencia
+      const count = await this.movimientoRepository.contarMovimientos(usuario._id);
+      const sequence = (count + 1).toString().padStart(4, "0");
+
+      // Generar referencia: TXN-YYYYMM-###
+      const referencia = `TXN-${year}${month+1}-${sequence}`;
+
+      // Preparar datos completos
+      const nuevoMovimiento = {
+        ...data,
+        usuarioId: new ObjectId(usuario._id), // Asegurar que el usuarioId venga de la sesión como ObjectId
+        categoriaId: new ObjectId(data.categoriaId),
+        subcategoriaId: new ObjectId(data.subcategoriaId),
+        referencia,
+        createdAt: fechaActual,
+        auditoria: {
+          creadoPor: {
+            usuarioId: new ObjectId(usuario._id),
+            nombre: usuario.nombre,
+          },
+        },
+      };
+
+      if (data.tipo === "TRANSFERENCIA") {
+        if (data.transferencia) {
+          nuevoMovimiento.transferencia = {
+            origenEntidadId: new ObjectId(data.transferencia.origenEntidadId),
+            destinoEntidadId: new ObjectId(data.transferencia.destinoEntidadId),
+          };
+        } else {
+          nuevoMovimiento.entidadId = new ObjectId(data.entidadId);
+        }
+      }
+
+      return await this.movimientoRepository.crear(nuevoMovimiento);
     } catch (error) {
       console.error("Error en servicio - crear movimiento:", error);
       throw {
@@ -134,11 +174,11 @@ class MovimientoService {
       //optenemos todo los movimientos
       const {totales, ultimo} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id);
 
-      const totalIngresos = _.get(totales[0], "totalIngresos");
-      const totalGastos = _.get(totales[0], "totalGastos");
+      const totalIngresos = _.get(totales, "[0].totalIngresos", 0);
+      const totalGastos = _.get(totales, "[0].totalGastos", 0);
 
       const estadisticas = {
-        ultimoMovimientos: ultimo[0],
+        ultimoMovimientos: _.get(ultimo, "[0]", null),
         totalIngresado: totalIngresos,
         totalEgresado: totalGastos,
         totalDisponible: totalIngresos - totalGastos,

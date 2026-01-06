@@ -1,0 +1,35 @@
+/**
+ * ARCHIVO: user.schema.jsonc
+ * DESCRIPCIÓN: Estructura de la colección 'Usuarios'.
+ * NOTA: Este esquema soporta auditoría detallada y control de planes SaaS.
+ */
+{
+  "_id": ObjectId("..."), 
+  "nombre": "Montiel",
+  "email": "prueba@casa.com", // Debe ser único e indexado para el Login
+  "password": "$2b$10$3A68Z9lrOMj21G1GPIwLlOlLQObBXUvfjzNuZVnZd4sq8ywO0rMi.", // Hash (Bcrypt/Argon2). Nunca texto plano.
+  
+  "estado": "ACTIVO", // Control de acceso: ACTIVO, SUSPENDIDO, INACTIVO
+  "planId": "BASICO",   // Determina límites de la colección 'planes': BASICO | PRO | PLUS
+
+  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
+  "createdAt": ISODate(), // Fecha exacta de registro
+  "updatedAt": ISODate(), // Se actualiza en cada modificación del perfil
+  "deletedAt": ISODate(), // Se llena solo si el usuario solicita baja (Soft Delete)
+
+  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+  "auditoria": {
+    "creadoPor": {
+      "usuarioId": ObjectId("..."), // Útil en sistemas con registro por administrador
+      "nombre": "Montiel"           // Denormalizado para evitar búsquedas extras
+    },
+    "editadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"           // Tracking de quién realizó el último cambio
+    },
+    "eliminadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"           // Responsable de la baja del registro
+    }
+  }
+}

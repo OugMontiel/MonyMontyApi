@@ -147,6 +147,22 @@ class MovimientoRepository {
       throw new RepositoryError();
     }
   }
+  /**
+   * Cuenta los movimientos de un usuario en un mes específico
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<number>} - Cantidad de movimientos
+   */
+  async contarMovimientos(usuarioId) {
+    try {
+      return await this.movimientoModel.contarMovimientos(usuarioId);
+    } catch (error) {
+      console.error("Error en repositorio - contar movimientos mes:", error);
+      throw {
+        status: 500,
+        message: "Error al contar los movimientos del mes",
+      };
+    }
+  }
 }
 
 module.exports = new MovimientoRepository();
