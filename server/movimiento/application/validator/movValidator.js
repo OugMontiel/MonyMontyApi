@@ -1,4 +1,5 @@
 const {body} = require("express-validator");
+const {ObjectId} = require("mongodb");
 
 const validador = require("../../../core/application/validador/Validador"); // Importa el validador genérico
 
@@ -39,11 +40,21 @@ class MovimientoValidator {
 
       body("transferencia.origenEntidadId")
         .if(body("tipo").equals("TRANSFERENCIA"))
-        .custom(validador.requiredObjectId("transferencia.origenEntidadId")),
+        .notEmpty()
+        .withMessage("La cuenta de origen es obligatoria")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("La cuenta de origen debe ser ObjectId");
+          return true;
+        }),
 
       body("transferencia.destinoEntidadId")
         .if(body("tipo").equals("TRANSFERENCIA"))
-        .custom(validador.requiredObjectId("transferencia.destinoEntidadId")),
+        .notEmpty()
+        .withMessage("La cuenta de destino es obligatoria")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("La cuenta de destino debe ser ObjectId");
+          return true;
+        }),
 
       // ─────────────────────────────────────────────
       // NO ES UNA TRANSFERENCIA
@@ -54,7 +65,10 @@ class MovimientoValidator {
         .exists()
         .withMessage("entidadId es requerido cuando no es TRANSFERENCIA")
         .bail()
-        .custom(validador.requiredObjectId("entidadId")),
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("entidadId debe ser ObjectId");
+          return true;
+        }),
 
       // Metadatos
       body("estado").optional().isString(),

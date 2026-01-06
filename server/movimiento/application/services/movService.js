@@ -22,7 +22,7 @@ class MovimientoService {
       const month = fechaActual.getMonth(); // 0-indexed
 
       // Obtener conteo para generar referencia
-      const count = await this.movimientoRepository.contarMovimientosMes(usuario._id);
+      const count = await this.movimientoRepository.contarMovimientos(usuario._id);
       const sequence = (count + 1).toString().padStart(4, "0");
 
       // Generar referencia: TXN-YYYYMM-###

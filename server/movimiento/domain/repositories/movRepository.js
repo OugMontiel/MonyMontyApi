@@ -154,7 +154,7 @@ class MovimientoRepository {
    */
   async contarMovimientos(usuarioId) {
     try {
-      return await this.movimientoModel.contarMovimientosPorMes(usuarioId);
+      return await this.movimientoModel.contarMovimientos(usuarioId);
     } catch (error) {
       console.error("Error en repositorio - contar movimientos mes:", error);
       throw {
