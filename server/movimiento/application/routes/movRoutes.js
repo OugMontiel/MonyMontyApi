@@ -5,8 +5,10 @@ const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
-// Obtener todos los movimientos de un usuario
-// router.get("/user/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerTodosLosMovimientos(req, res));
+// Obtener todos los movimientos del usuario (usa sesión)
+router.get("/", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+  movimientoController.obtenerTodosLosMovimientos(req, res)
+);
 
 // Data para Dashboard
 router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>

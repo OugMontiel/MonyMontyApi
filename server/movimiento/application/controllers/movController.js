@@ -125,7 +125,8 @@ class MovimientoController {
 
   async obtenerTodosLosMovimientos(req, res) {
     try {
-      const movimientos = await this.movimientoService.obtenerTodos(req.params.id);
+      const {_id} = req.session.usuario;
+      const movimientos = await this.movimientoService.obtenerTodos(_id);
 
       res.status(200).json({
         success: true,

@@ -101,9 +101,6 @@ class MovimientoModel {
   async buscarTodos(id) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
-      // Buscamos por usuarioId (nuevo schema)
-      // Nota: Si se necesita soporte híbrido, se podría usar $or: [{usuarioId: ...}, {IdUsuario: ...}]
-      // Pero la instrucción dice "adecuación a las consultas o la nueva estructura", así que priorizamos lo nuevo.
       const movimientos = await collection.find({usuarioId: new ObjectId(id)}).toArray();
 
       return movimientos;
