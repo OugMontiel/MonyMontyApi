@@ -5,7 +5,7 @@ const validador = require("../../../core/application/validador/Validador"); // I
 class MovimientoValidator {
   validarCreacion() {
     return [
-      validador.requiredObjectId("usuarioId"),
+      // validador.requiredObjectId("usuarioId"), // Usuario injectado desde session
       // validador.optionalString("referencia"), // Se crea aqui en el back, no se recive desde el front
       validador.requiredString("origen"),
 
