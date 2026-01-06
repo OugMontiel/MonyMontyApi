@@ -12,8 +12,14 @@ class MovimientoValidator {
 
       // Clasificación
       validador.requiredString("divisaId"),
-      validador.requiredObjectId("categoriaId"),
-      validador.requiredObjectId("subcategoriaId"),
+
+      body("categoriaId")
+        .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
+        .custom(validador.requiredObjectId("categoriaId")),
+
+      body("subcategoriaId")
+        .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
+        .custom(validador.requiredObjectId("subcategoriaId")),
 
       // Datos Transacción
       validador.requiredDate("fecha"),
