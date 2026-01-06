@@ -21,7 +21,11 @@ class EntidadModel {
               _id: {$toString: "$_id"},
               value: {$toString: "$_id"},
               label: {
-                $concat: ["$tipo", " - ", "$nombre", " - ", "$numero"],
+                $cond: {
+                  if: {$and: [{$ne: ["$numero", null]}, {$ne: ["$numero", ""]}]},
+                  then: {$concat: ["$tipo", " - ", "$nombre", " - ", "$numero"]},
+                  else: "$nombre",
+                },
               },
             },
           },
