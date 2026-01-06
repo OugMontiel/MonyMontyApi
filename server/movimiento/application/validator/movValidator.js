@@ -15,11 +15,21 @@ class MovimientoValidator {
 
       body("categoriaId")
         .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
-        .custom(validador.requiredObjectId("categoriaId")),
+        .notEmpty()
+        .withMessage("El campo categoriaId es obligatorio")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("El campo categoriaId debe ser ObjectId");
+          return true;
+        }),
 
       body("subcategoriaId")
         .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
-        .custom(validador.requiredObjectId("subcategoriaId")),
+        .notEmpty()
+        .withMessage("El campo subcategoriaId es obligatorio")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("El campo subcategoriaId debe ser ObjectId");
+          return true;
+        }),
 
       // Datos Transacción
       validador.requiredDate("fecha"),
