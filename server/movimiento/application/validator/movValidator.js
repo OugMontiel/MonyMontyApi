@@ -97,10 +97,7 @@ class MovimientoValidator {
   }
 
   noBodyNoQuery() {
-    return [
-      validador.noBodyData(),
-      validador.noQueryParams(),
-    ]
+    return [validador.noBodyData(), validador.noQueryParams()];
   }
 }
 
