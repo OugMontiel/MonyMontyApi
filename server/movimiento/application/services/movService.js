@@ -178,8 +178,22 @@ class MovimientoService {
       const totalIngresos = _.get(totales, "[0].totalIngresos", 0);
       const totalGastos = _.get(totales, "[0].totalGastos", 0);
 
+      // Formatear último movimiento
+      let ultimoMovimientoFormateado = "—";
+      const ultimoMov = _.get(ultimo, "[0]", null);
+
+      if (ultimoMov) {
+        const fecha = ultimoMov.fecha ? new Date(ultimoMov.fecha).toLocaleDateString() : null;
+        const amount = ultimoMov.monto ? ultimoMov.monto : null;
+        const currency = ultimoMov.divisaId || "";
+        const amountStr = _.compact([amount, currency]).join(" ");
+        const entidadNombre = _.get(ultimoMov, "entidad.nombre", "Transferencia"); // Default for transfer or missing entity
+
+        ultimoMovimientoFormateado = _.compact([fecha, amountStr, entidadNombre]).join(" - ");
+      }
+
       const estadisticas = {
-        ultimoMovimientos: _.get(ultimo, "[0]", null),
+        ultimoMovimientos: ultimoMovimientoFormateado,
         totalIngresado: totalIngresos,
         totalEgresado: totalGastos,
         totalDisponible: totalIngresos - totalGastos,
