@@ -98,79 +98,102 @@ class MovimientoModel {
    * @returns {Promise<Array>} - Lista de movimientos
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarTodos(id) {
+  async buscarTodos(id, page, limit) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimientos = await collection
+      const skip = (parseInt(page) - 1) * parseInt(limit);
+      const limitParsed = parseInt(limit);
+
+      const resultados = await collection
         .aggregate([
           {$match: {usuarioId: new ObjectId(id)}},
-          // Lookup Entidad
           {
-            $lookup: {
-              from: "entidades",
-              localField: "entidadId",
-              foreignField: "_id",
-              as: "entidadInfo",
-            },
-          },
-          {
-            $unwind: {
-              path: "$entidadInfo",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-          // Lookup Categoria
-          {
-            $lookup: {
-              from: "categorias",
-              localField: "categoriaId",
-              foreignField: "_id",
-              as: "categoriaInfo",
-            },
-          },
-          {
-            $unwind: {
-              path: "$categoriaInfo",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-          // Extract Subcategoria
-          {
-            $addFields: {
-              subcategoriaInfo: {
-                $arrayElemAt: [
-                  {
-                    $filter: {
-                      input: {$ifNull: ["$categoriaInfo.subcategorias", []]},
-                      as: "sub",
-                      cond: {$eq: ["$$sub._id", "$subcategoriaId"]},
+            $facet: {
+              metadata: [{$count: "total"}],
+              data: [
+                {$sort: {fecha: -1}},
+                {$skip: skip},
+                {$limit: limitParsed},
+                // Lookup Entidad
+                {
+                  $lookup: {
+                    from: "entidades",
+                    localField: "entidadId",
+                    foreignField: "_id",
+                    as: "entidadInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$entidadInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                // Lookup Categoria
+                {
+                  $lookup: {
+                    from: "categorias",
+                    localField: "categoriaId",
+                    foreignField: "_id",
+                    as: "categoriaInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$categoriaInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                // Extract Subcategoria
+                {
+                  $addFields: {
+                    subcategoriaInfo: {
+                      $arrayElemAt: [
+                        {
+                          $filter: {
+                            input: {$ifNull: ["$categoriaInfo.subcategorias", []]},
+                            as: "sub",
+                            cond: {$eq: ["$$sub._id", "$subcategoriaId"]},
+                          },
+                        },
+                        0,
+                      ],
                     },
                   },
-                  0,
-                ],
-              },
-            },
-          },
-          // Populate final fields
-          {
-            $addFields: {
-              entidad: "$entidadInfo",
-              categoria: "$categoriaInfo",
-              subcategoria: "$subcategoriaInfo",
-            },
-          },
-          // Cleanup
-          {
-            $project: {
-              entidadInfo: 0,
-              categoriaInfo: 0,
-              subcategoriaInfo: 0,
+                },
+                // Populate final fields
+                {
+                  $addFields: {
+                    entidad: "$entidadInfo",
+                    categoria: "$categoriaInfo",
+                    subcategoria: "$subcategoriaInfo",
+                  },
+                },
+                // Cleanup
+                {
+                  $project: {
+                    entidadInfo: 0,
+                    categoriaInfo: 0,
+                    subcategoriaInfo: 0,
+                  },
+                },
+              ],
             },
           },
         ])
         .toArray();
 
-      return movimientos;
+      const data = resultados[0].data;
+      const total = resultados[0].metadata[0] ? resultados[0].metadata[0].total : 0;
+      const totalPages = Math.ceil(total / limitParsed);
+
+      return {
+        data,
+        total,
+        page: parseInt(page),
+        totalPages,
+        limit: limitParsed,
+      };
     } catch (error) {
       console.error("ErrorModelo: buscarTodos movimientos", error);
       throw {

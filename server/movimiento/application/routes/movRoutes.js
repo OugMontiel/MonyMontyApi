@@ -6,7 +6,7 @@ const movimientoController = require("../controllers/movController");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
 // Obtener todos los movimientos del usuario (usa sesión)
-router.get("/", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+router.get("/", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
   movimientoController.obtenerTodosLosMovimientos(req, res)
 );
 
