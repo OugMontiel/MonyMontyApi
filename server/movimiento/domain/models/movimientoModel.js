@@ -98,15 +98,102 @@ class MovimientoModel {
    * @returns {Promise<Array>} - Lista de movimientos
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarTodos(id) {
+  async buscarTodos(id, page, limit) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
-      // Buscamos por usuarioId (nuevo schema)
-      // Nota: Si se necesita soporte híbrido, se podría usar $or: [{usuarioId: ...}, {IdUsuario: ...}]
-      // Pero la instrucción dice "adecuación a las consultas o la nueva estructura", así que priorizamos lo nuevo.
-      const movimientos = await collection.find({usuarioId: new ObjectId(id)}).toArray();
+      const skip = (parseInt(page) - 1) * parseInt(limit);
+      const limitParsed = parseInt(limit);
 
-      return movimientos;
+      const resultados = await collection
+        .aggregate([
+          {$match: {usuarioId: new ObjectId(id)}},
+          {
+            $facet: {
+              metadata: [{$count: "total"}],
+              data: [
+                {$sort: {fecha: -1}},
+                {$skip: skip},
+                {$limit: limitParsed},
+                // Lookup Entidad
+                {
+                  $lookup: {
+                    from: "entidades",
+                    localField: "entidadId",
+                    foreignField: "_id",
+                    as: "entidadInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$entidadInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                // Lookup Categoria
+                {
+                  $lookup: {
+                    from: "categorias",
+                    localField: "categoriaId",
+                    foreignField: "_id",
+                    as: "categoriaInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$categoriaInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                // Extract Subcategoria
+                {
+                  $addFields: {
+                    subcategoriaInfo: {
+                      $arrayElemAt: [
+                        {
+                          $filter: {
+                            input: {$ifNull: ["$categoriaInfo.subcategorias", []]},
+                            as: "sub",
+                            cond: {$eq: ["$$sub._id", "$subcategoriaId"]},
+                          },
+                        },
+                        0,
+                      ],
+                    },
+                  },
+                },
+                // Populate final fields
+                {
+                  $addFields: {
+                    entidad: "$entidadInfo",
+                    categoria: "$categoriaInfo",
+                    subcategoria: "$subcategoriaInfo",
+                  },
+                },
+                // Cleanup
+                {
+                  $project: {
+                    entidadInfo: 0,
+                    categoriaInfo: 0,
+                    subcategoriaInfo: 0,
+                  },
+                },
+              ],
+            },
+          },
+        ])
+        .toArray();
+
+      const data = resultados[0].data;
+      const total = resultados[0].metadata[0] ? resultados[0].metadata[0].total : 0;
+      const totalPages = Math.ceil(total / limitParsed);
+
+      return {
+        data,
+        total,
+        page: parseInt(page),
+        totalPages,
+        limit: limitParsed,
+      };
     } catch (error) {
       console.error("ErrorModelo: buscarTodos movimientos", error);
       throw {
@@ -148,7 +235,29 @@ class MovimientoModel {
                   },
                 },
               ],
-              ultimo: [{$sort: {fecha: -1}}, {$limit: 1}],
+              ultimo: [
+                {$sort: {fecha: -1}},
+                {$limit: 1},
+                {
+                  $lookup: {
+                    from: "entidades",
+                    localField: "entidadId",
+                    foreignField: "_id",
+                    as: "entidadInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$entidadInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                {
+                  $addFields: {
+                    entidad: "$entidadInfo",
+                  },
+                },
+              ],
             },
           },
         ])

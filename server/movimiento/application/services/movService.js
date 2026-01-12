@@ -27,7 +27,7 @@ class MovimientoService {
       const sequence = (count + 1).toString().padStart(4, "0");
 
       // Generar referencia: TXN-YYYYMM-###
-      const referencia = `TXN-${year}${month+1}-${sequence}`;
+      const referencia = `TXN-${year}${month + 1}-${sequence}`;
 
       // Preparar datos completos
       const nuevoMovimiento = {
@@ -51,9 +51,10 @@ class MovimientoService {
             origenEntidadId: new ObjectId(data.transferencia.origenEntidadId),
             destinoEntidadId: new ObjectId(data.transferencia.destinoEntidadId),
           };
-        } else {
-          nuevoMovimiento.entidadId = new ObjectId(data.entidadId);
         }
+      } else {
+        // Corregir entidadId a ObjectId si existe (INGRESO/EGRESO)
+        nuevoMovimiento.entidadId = new ObjectId(data.entidadId);
       }
 
       return await this.movimientoRepository.crear(nuevoMovimiento);
@@ -149,13 +150,13 @@ class MovimientoService {
   }
 
   /**
-   * Obtiene todos los movimientos
-   * @returns {Promise<Array>} - Lista de movimientos
+   * Obtiene todos los movimientos paginados
+   * @returns {Promise<object>} - Lista de movimientos y metadatos
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerTodos(id) {
+  async obtenerTodos(id, page, limit) {
     try {
-      return await this.movimientoRepository.obtenerTodos(id);
+      return await this.movimientoRepository.obtenerTodos(id, page, limit);
     } catch (error) {
       console.error("Error en servicio - obtener todos los movimientos:", error);
       throw {
@@ -177,8 +178,22 @@ class MovimientoService {
       const totalIngresos = _.get(totales, "[0].totalIngresos", 0);
       const totalGastos = _.get(totales, "[0].totalGastos", 0);
 
+      // Formatear último movimiento
+      let ultimoMovimientoFormateado = "—";
+      const ultimoMov = _.get(ultimo, "[0]", null);
+
+      if (ultimoMov) {
+        const fecha = ultimoMov.fecha ? new Date(ultimoMov.fecha).toLocaleDateString() : null;
+        const amount = ultimoMov.monto ? ultimoMov.monto : null;
+        const currency = ultimoMov.divisaId || "";
+        const amountStr = _.compact([amount, currency]).join(" ");
+        const entidadNombre = _.get(ultimoMov, "entidad.nombre", "Transferencia"); // Default for transfer or missing entity
+
+        ultimoMovimientoFormateado = _.compact([fecha, amountStr, entidadNombre]).join(" - ");
+      }
+
       const estadisticas = {
-        ultimoMovimientos: _.get(ultimo, "[0]", null),
+        ultimoMovimientos: ultimoMovimientoFormateado,
         totalIngresado: totalIngresos,
         totalEgresado: totalGastos,
         totalDisponible: totalIngresos - totalGastos,

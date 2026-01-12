@@ -113,13 +113,13 @@ class MovimientoRepository {
   }
 
   /**
-   * Obtiene todos los movimientos
-   * @returns {Promise<Array>} - Lista de movimientos
+   * Obtiene todos los movimientos paginados
+   * @returns {Promise<object>} - Lista de movimientos y metadatos
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerTodos(id) {
+  async obtenerTodos(id, page, limit) {
     try {
-      return await this.movimientoModel.buscarTodos(id);
+      return await this.movimientoModel.buscarTodos(id, page, limit);
     } catch (error) {
       console.error("Error en repositorio - obtener todos los movimientos:", error);
       throw {

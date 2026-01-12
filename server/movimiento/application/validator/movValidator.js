@@ -1,4 +1,4 @@
-const {body} = require("express-validator");
+const {body, query} = require("express-validator");
 const {ObjectId} = require("mongodb");
 
 const validador = require("../../../core/application/validador/Validador"); // Importa el validador genérico
@@ -114,6 +114,22 @@ class MovimientoValidator {
 
   noBodyNoQuery() {
     return [validador.noBodyData(), validador.noQueryParams()];
+  }
+
+  validarPaginacion() {
+    return [
+      validador.noBodyData(),
+      query("page")
+        .notEmpty()
+        .withMessage("El parametro page es obligatorio")
+        .isInt({min: 1})
+        .withMessage("El parametro page debe ser un numero entero mayor a 0"),
+      query("limit")
+        .notEmpty()
+        .withMessage("El parametro limit es obligatorio")
+        .isInt({min: 1, max: 100})
+        .withMessage("El parametro limit debe ser un numero entero entre 1 y 100"),
+    ];
   }
 }
 

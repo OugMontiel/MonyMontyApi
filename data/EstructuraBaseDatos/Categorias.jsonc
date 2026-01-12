@@ -8,14 +8,19 @@
   "usuarioId": ObjectId("..."), // null = Pública (para todos) | ObjectId = Privada
   "categoria": "Alimentación",
   "icono": "fastfood", // Referencia para el Front-end
+  "nota": "", // Nota o descripción de la categoría
   "subcategorias": [
     { 
       "_id": ObjectId("..."), 
-      "subcategoria": "Restaurantes"
+      "subcategoria": "Restaurantes",
+      "icono": "restaurant",
+      "nota": "" // Nota o descripción de la subcategoría
     },
     { 
       "_id": ObjectId("..."), 
-      "subcategoria": "Supermercado"
+      "subcategoria": "Supermercado",
+      "icono": "supermarket",
+      "nota": "" // Nota o descripción de la subcategoría
     }
   ],
 
