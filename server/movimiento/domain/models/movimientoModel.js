@@ -277,7 +277,7 @@ class MovimientoModel {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
       const count = await collection.countDocuments({
-              usuarioId: new ObjectId(usuarioId),
+        usuarioId: new ObjectId(usuarioId),
       });
       return count;
     } catch (error) {
@@ -299,12 +299,6 @@ class MovimientoModel {
       const collection = this.dbConnection.db.collection("movimiento");
       const ahora = new Date();
       const inicioMesActual = new Date(ahora.getFullYear(), ahora.getMonth(), 1);
-      const inicioMesAnterior = new Date(ahora.getFullYear(), ahora.getMonth() - 1, 1);
-
-      console.log("usuarioId", usuarioId);
-      console.log("ahora", ahora);
-      console.log("inicioMesActual", inicioMesActual);
-      console.log("inicioMesAnterior", inicioMesAnterior);
 
       const ranking = await collection
         .aggregate([
@@ -312,7 +306,7 @@ class MovimientoModel {
             $match: {
               usuarioId: new ObjectId(usuarioId),
               tipo: "EGRESO",
-              fecha: {$gte: inicioMesAnterior},
+              fecha: {$gte: inicioMesActual},
             },
           },
           {
@@ -320,39 +314,18 @@ class MovimientoModel {
               _id: {
                 categoriaId: "$categoriaId",
                 subcategoriaId: "$subcategoriaId",
-                esMesActual: {$gte: ["$fecha", inicioMesActual]},
               },
               monto: {$sum: "$monto"},
-              movimientos: {$sum: 1},
             },
           },
           {
             $group: {
               _id: "$_id.categoriaId",
-              montoMesActual: {
-                $sum: {
-                  $cond: ["$_id.esMesActual", "$monto", 0],
-                },
-              },
-              movimientosMesActual: {
-                $sum: {
-                  $cond: ["$_id.esMesActual", "$movimientos", 0],
-                },
-              },
-              montoMesAnterior: {
-                $sum: {
-                  $cond: [{$not: ["$_id.esMesActual"]}, "$monto", 0],
-                },
-              },
+              monto: {$sum: "$monto"},
               subcategorias: {
                 $push: {
                   subcategoriaId: "$_id.subcategoriaId",
-                  monto: {
-                    $cond: ["$_id.esMesActual", "$monto", 0],
-                  },
-                  movimientos: {
-                    $cond: ["$_id.esMesActual", "$movimientos", 0],
-                  },
+                  monto: "$monto",
                 },
               },
             },
@@ -367,39 +340,30 @@ class MovimientoModel {
             },
           },
           {$unwind: "$categoriaInfo"},
-          // Procesar subcategorías para el mes actual y obtener nombres
+          // Procesar subcategorías y obtener nombres
           {
             $project: {
-              categoria: "$categoriaInfo.categoria",
-              icono: "$categoriaInfo.icono",
-              monto: "$montoMesActual",
-              movimientos: "$movimientosMesActual",
-              montoMesAnterior: "$montoMesAnterior",
+              categoriaId: "$_id",
+              labelCategoria: "$categoriaInfo.categoria",
+              montoCategoria: "$monto",
               subcategorias: {
                 $map: {
                   input: {
                     $slice: [
                       {
                         $sortArray: {
-                          input: {
-                            $filter: {
-                              input: "$subcategorias",
-                              as: "sub",
-                              cond: {$gt: ["$$sub.monto", 0]},
-                            },
-                          },
+                          input: "$subcategorias",
                           sortBy: {monto: -1},
                         },
                       },
-                      5,
+                      3,
                     ],
                   },
                   as: "sub",
                   in: {
                     subcategoriaId: "$$sub.subcategoriaId",
-                    monto: "$$sub.monto",
-                    movimientos: "$$sub.movimientos",
-                    subcategoria: {
+                    montoSubcategoria: "$$sub.monto",
+                    labelSubcategoria: {
                       $let: {
                         vars: {
                           subInfo: {
@@ -426,8 +390,7 @@ class MovimientoModel {
           {$sort: {monto: -1}},
         ])
         .toArray();
-
-        console.log("ranking", ranking);
+      console.log("ranking", ranking);
 
       return ranking;
     } catch (error) {
