@@ -35,6 +35,7 @@ class MovimientoService {
         usuarioId: new ObjectId(usuario._id), // Asegurar que el usuarioId venga de la sesión como ObjectId
         categoriaId: new ObjectId(data.categoriaId),
         subcategoriaId: new ObjectId(data.subcategoriaId),
+        fecha: new Date(data.fecha), // Asegurar que la fecha sea un objeto Date
         referencia,
         createdAt: fechaActual,
         auditoria: {
@@ -202,6 +203,23 @@ class MovimientoService {
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();
+    }
+  }
+
+  /**
+   * Obtiene el ranking de categorías para el usuario
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<Array>} - Ranking de categorías
+   */
+  async rankingCategorias(usuarioId) {
+    try {
+      return await this.movimientoRepository.rankingCategorias(usuarioId);
+    } catch (error) {
+      console.error("Error en servicio - rankingCategorias:", error);
+      throw {
+        status: 500,
+        message: "Error interno al obtener el ranking de categorías",
+      };
     }
   }
 }

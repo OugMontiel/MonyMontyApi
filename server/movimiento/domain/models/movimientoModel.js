@@ -277,7 +277,7 @@ class MovimientoModel {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
       const count = await collection.countDocuments({
-        usuarioId: new ObjectId(usuarioId),
+              usuarioId: new ObjectId(usuarioId),
       });
       return count;
     } catch (error) {
@@ -285,6 +285,156 @@ class MovimientoModel {
       throw {
         status: 500,
         message: "Error al contar los movimientos",
+        metadata: {errorOriginal: error.message},
+      };
+    }
+  }
+  /**
+   * Obtiene el ranking de gastos por categoría para el usuario
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<Array>} - Ranking de categorías
+   */
+  async rankingCategorias(usuarioId) {
+    try {
+      const collection = this.dbConnection.db.collection("movimiento");
+      const ahora = new Date();
+      const inicioMesActual = new Date(ahora.getFullYear(), ahora.getMonth(), 1);
+      const inicioMesAnterior = new Date(ahora.getFullYear(), ahora.getMonth() - 1, 1);
+
+      console.log("usuarioId", usuarioId);
+      console.log("ahora", ahora);
+      console.log("inicioMesActual", inicioMesActual);
+      console.log("inicioMesAnterior", inicioMesAnterior);
+
+      const ranking = await collection
+        .aggregate([
+          {
+            $match: {
+              usuarioId: new ObjectId(usuarioId),
+              tipo: "EGRESO",
+              fecha: {$gte: inicioMesAnterior},
+            },
+          },
+          {
+            $group: {
+              _id: {
+                categoriaId: "$categoriaId",
+                subcategoriaId: "$subcategoriaId",
+                esMesActual: {$gte: ["$fecha", inicioMesActual]},
+              },
+              monto: {$sum: "$monto"},
+              movimientos: {$sum: 1},
+            },
+          },
+          {
+            $group: {
+              _id: "$_id.categoriaId",
+              montoMesActual: {
+                $sum: {
+                  $cond: ["$_id.esMesActual", "$monto", 0],
+                },
+              },
+              movimientosMesActual: {
+                $sum: {
+                  $cond: ["$_id.esMesActual", "$movimientos", 0],
+                },
+              },
+              montoMesAnterior: {
+                $sum: {
+                  $cond: [{$not: ["$_id.esMesActual"]}, "$monto", 0],
+                },
+              },
+              subcategorias: {
+                $push: {
+                  subcategoriaId: "$_id.subcategoriaId",
+                  monto: {
+                    $cond: ["$_id.esMesActual", "$monto", 0],
+                  },
+                  movimientos: {
+                    $cond: ["$_id.esMesActual", "$movimientos", 0],
+                  },
+                },
+              },
+            },
+          },
+          // Lookup Categoria
+          {
+            $lookup: {
+              from: "categorias",
+              localField: "_id",
+              foreignField: "_id",
+              as: "categoriaInfo",
+            },
+          },
+          {$unwind: "$categoriaInfo"},
+          // Procesar subcategorías para el mes actual y obtener nombres
+          {
+            $project: {
+              categoria: "$categoriaInfo.categoria",
+              icono: "$categoriaInfo.icono",
+              monto: "$montoMesActual",
+              movimientos: "$movimientosMesActual",
+              montoMesAnterior: "$montoMesAnterior",
+              subcategorias: {
+                $map: {
+                  input: {
+                    $slice: [
+                      {
+                        $sortArray: {
+                          input: {
+                            $filter: {
+                              input: "$subcategorias",
+                              as: "sub",
+                              cond: {$gt: ["$$sub.monto", 0]},
+                            },
+                          },
+                          sortBy: {monto: -1},
+                        },
+                      },
+                      5,
+                    ],
+                  },
+                  as: "sub",
+                  in: {
+                    subcategoriaId: "$$sub.subcategoriaId",
+                    monto: "$$sub.monto",
+                    movimientos: "$$sub.movimientos",
+                    subcategoria: {
+                      $let: {
+                        vars: {
+                          subInfo: {
+                            $arrayElemAt: [
+                              {
+                                $filter: {
+                                  input: "$categoriaInfo.subcategorias",
+                                  as: "sc",
+                                  cond: {$eq: ["$$sc._id", "$$sub.subcategoriaId"]},
+                                },
+                              },
+                              0,
+                            ],
+                          },
+                        },
+                        in: "$$subInfo.subcategoria",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {$sort: {monto: -1}},
+        ])
+        .toArray();
+
+        console.log("ranking", ranking);
+
+      return ranking;
+    } catch (error) {
+      console.error("ErrorModelo: rankingCategorias", error);
+      throw {
+        status: 500,
+        message: "Error al obtener el ranking de categorías",
         metadata: {errorOriginal: error.message},
       };
     }

@@ -163,6 +163,23 @@ class MovimientoRepository {
       };
     }
   }
+
+  /**
+   * Obtiene el ranking de categorías para el usuario
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<Array>} - Ranking de categorías
+   */
+  async rankingCategorias(usuarioId) {
+    try {
+      return await this.movimientoModel.rankingCategorias(usuarioId);
+    } catch (error) {
+      console.error("Error en repositorio - rankingCategorias:", error);
+      throw {
+        status: 500,
+        message: "Error al obtener el ranking de categorías",
+      };
+    }
+  }
 }
 
 module.exports = new MovimientoRepository();
