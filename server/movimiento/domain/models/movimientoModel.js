@@ -357,6 +357,8 @@ class MovimientoModel {
                   $project: {
                     categoriaId: "$_id",
                     labelCategoria: "$categoriaInfo.categoria",
+                    iconoCategoria: "$categoriaInfo.icono",
+                    colorCategoria: "$categoriaInfo.color",
                     montoCategoria: "$monto",
                     subcategorias: {
                       $map: {
@@ -424,6 +426,8 @@ class MovimientoModel {
                   },
                 ],
               },
+              iconoCategoria: "$rankingCategorias.iconoCategoria",
+              colorCategoria: "$rankingCategorias.colorCategoria",
               subcategorias: "$rankingCategorias.subcategorias",
             },
           },

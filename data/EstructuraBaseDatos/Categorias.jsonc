@@ -8,6 +8,7 @@
   "usuarioId": ObjectId("..."), // null = Pública (para todos) | ObjectId = Privada
   "categoria": "Alimentación",
   "icono": "fastfood", // Referencia para el Front-end
+  "color": "#FF0000", // Referencia para el Front-end
   "nota": "", // Nota o descripción de la categoría
   "subcategorias": [
     { 
