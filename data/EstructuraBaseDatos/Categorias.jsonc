@@ -7,20 +7,20 @@
   "_id": ObjectId("..."),
   "usuarioId": ObjectId("..."), // null = Pública (para todos) | ObjectId = Privada
   "categoria": "Alimentación",
-  "icono": "fastfood", // Referencia para el Front-end
+  "icono": "ion:fast-food-outline", // Referencia para el Front-end
   "color": "#FF0000", // Referencia para el Front-end
   "nota": "", // Nota o descripción de la categoría
   "subcategorias": [
     { 
       "_id": ObjectId("..."), 
       "subcategoria": "Restaurantes",
-      "icono": "restaurant",
+      "icono": "ion:restaurant-outline",
       "nota": "" // Nota o descripción de la subcategoría
     },
     { 
       "_id": ObjectId("..."), 
       "subcategoria": "Supermercado",
-      "icono": "supermarket",
+      "icono": "ion:cart-outline",
       "nota": "" // Nota o descripción de la subcategoría
     }
   ],
