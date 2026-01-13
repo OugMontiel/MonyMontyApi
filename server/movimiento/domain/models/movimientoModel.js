@@ -330,68 +330,106 @@ class MovimientoModel {
               },
             },
           },
-          // Lookup Categoria
+          // Obtener el total general para calcular porcentajes
           {
-            $lookup: {
-              from: "categorias",
-              localField: "_id",
-              foreignField: "_id",
-              as: "categoriaInfo",
-            },
-          },
-          {$unwind: "$categoriaInfo"},
-          // Procesar subcategorías y obtener nombres
-          {
-            $project: {
-              categoriaId: "$_id",
-              labelCategoria: "$categoriaInfo.categoria",
-              montoCategoria: "$monto",
-              subcategorias: {
-                $map: {
-                  input: {
-                    $slice: [
-                      {
-                        $sortArray: {
-                          input: "$subcategorias",
-                          sortBy: {monto: -1},
-                        },
-                      },
-                      3,
-                    ],
+            $facet: {
+              totalGeneral: [
+                {
+                  $group: {
+                    _id: null,
+                    montoTotal: {$sum: "$monto"},
                   },
-                  as: "sub",
-                  in: {
-                    subcategoriaId: "$$sub.subcategoriaId",
-                    montoSubcategoria: "$$sub.monto",
-                    labelSubcategoria: {
-                      $let: {
-                        vars: {
-                          subInfo: {
-                            $arrayElemAt: [
-                              {
-                                $filter: {
-                                  input: "$categoriaInfo.subcategorias",
-                                  as: "sc",
-                                  cond: {$eq: ["$$sc._id", "$$sub.subcategoriaId"]},
+                },
+              ],
+              rankingCategorias: [
+                // Lookup Categoria
+                {
+                  $lookup: {
+                    from: "categorias",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "categoriaInfo",
+                  },
+                },
+                {$unwind: "$categoriaInfo"},
+                // Procesar subcategorías y obtener nombres
+                {
+                  $project: {
+                    categoriaId: "$_id",
+                    labelCategoria: "$categoriaInfo.categoria",
+                    montoCategoria: "$monto",
+                    subcategorias: {
+                      $map: {
+                        input: {
+                          $slice: [
+                            {
+                              $sortArray: {
+                                input: "$subcategorias",
+                                sortBy: {monto: -1},
+                              },
+                            },
+                            3,
+                          ],
+                        },
+                        as: "sub",
+                        in: {
+                          subcategoriaId: "$$sub.subcategoriaId",
+                          montoSubcategoria: "$$sub.monto",
+                          labelSubcategoria: {
+                            $let: {
+                              vars: {
+                                subInfo: {
+                                  $arrayElemAt: [
+                                    {
+                                      $filter: {
+                                        input: "$categoriaInfo.subcategorias",
+                                        as: "sc",
+                                        cond: {$eq: ["$$sc._id", "$$sub.subcategoriaId"]},
+                                      },
+                                    },
+                                    0,
+                                  ],
                                 },
                               },
-                              0,
-                            ],
+                              in: "$$subInfo.subcategoria",
+                            },
                           },
                         },
-                        in: "$$subInfo.subcategoria",
                       },
                     },
                   },
                 },
-              },
+              ],
             },
           },
-          {$sort: {monto: -1}},
+          {$unwind: "$totalGeneral"},
+          {$unwind: "$rankingCategorias"},
+          {
+            $project: {
+              _id: "$rankingCategorias.categoriaId",
+              categoriaId: "$rankingCategorias.categoriaId",
+              labelCategoria: "$rankingCategorias.labelCategoria",
+              montoCategoria: "$rankingCategorias.montoCategoria",
+              porcentajeCategoria: {
+                $cond: [
+                  {$eq: ["$totalGeneral.montoTotal", 0]},
+                  0,
+                  {
+                    $round: [
+                      {
+                        $multiply: [{$divide: ["$rankingCategorias.montoCategoria", "$totalGeneral.montoTotal"]}, 100],
+                      },
+                      0,
+                    ],
+                  },
+                ],
+              },
+              subcategorias: "$rankingCategorias.subcategorias",
+            },
+          },
+          {$sort: {montoCategoria: -1}},
         ])
         .toArray();
-      console.log("ranking", ranking);
-
       return ranking;
     } catch (error) {
       console.error("ErrorModelo: rankingCategorias", error);
