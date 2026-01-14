@@ -15,6 +15,11 @@ router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, 
   movimientoController.dataParaDashboard(req, res)
 );
 
+// Ranking de categorías
+router.get("/ranking", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+  movimientoController.obtenerRankingCategorias(req, res)
+);
+
 // Obtener un movimiento específico
 // router.get("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerMovimiento(req, res));
 

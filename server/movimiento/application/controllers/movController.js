@@ -155,6 +155,21 @@ class MovimientoController {
       handleError(res, error);
     }
   }
+
+  async obtenerRankingCategorias(req, res) {
+    try {
+      const {_id} = req.session.usuario;
+      const ranking = await this.movimientoService.rankingCategorias(_id);
+
+      res.status(200).json({
+        success: true,
+        message: "Ranking de categorías obtenido exitosamente",
+        data: ranking,
+      });
+    } catch (error) {
+      this.manejarError(res, error, "obtener ranking de categorías");
+    }
+  }
 }
 
 module.exports = new MovimientoController();

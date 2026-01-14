@@ -20,12 +20,8 @@ class MovimientoModel {
       const resultado = await collection.insertOne(movimientoData);
       return resultado;
     } catch (error) {
-      console.error("ErrorModelo: crear movimiento", error);
-      throw {
-        status: 500,
-        message: "Error al crear el movimiento en la base de datos",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al crear el movimiento en la base de datos");
     }
   }
 
@@ -41,12 +37,8 @@ class MovimientoModel {
       const movimiento = await collection.findOne({_id: new ObjectId(id)});
       return movimiento;
     } catch (error) {
-      console.error(`ErrorModelo: buscarPorId ${id}`, error);
-      throw {
-        status: 400,
-        message: "Error al buscar el movimiento",
-        metadata: {movimientoId: id, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al buscar el movimiento");
     }
   }
 
@@ -63,12 +55,8 @@ class MovimientoModel {
       const resultado = await collection.updateOne({_id: new ObjectId(id)}, {$set: datosActualizacion});
       return resultado;
     } catch (error) {
-      console.error(`ErrorModelo: actualizar movimiento ${id}`, error);
-      throw {
-        status: 500,
-        message: "Error al actualizar el movimiento",
-        metadata: {movimientoId: id, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al actualizar el movimiento");
     }
   }
 
@@ -84,12 +72,8 @@ class MovimientoModel {
       const resultado = await collection.deleteOne({_id: new ObjectId(id)});
       return resultado;
     } catch (error) {
-      console.error(`ErrorModelo: eliminar movimiento ${id}`, error);
-      throw {
-        status: 500,
-        message: "Error al eliminar el movimiento",
-        metadata: {movimientoId: id, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al eliminar el movimiento");
     }
   }
 
@@ -195,12 +179,8 @@ class MovimientoModel {
         limit: limitParsed,
       };
     } catch (error) {
-      console.error("ErrorModelo: buscarTodos movimientos", error);
-      throw {
-        status: 500,
-        message: "Error al obtener los movimientos",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al obtener los movimientos");
     }
   }
 
@@ -265,7 +245,7 @@ class MovimientoModel {
       return movimientos;
     } catch (error) {
       if (error instanceof HttpError) throw error;
-      throw new modelsError();
+      throw new modelsError("Error al obtener estadísticas de movimientos");
     }
   }
   /**
@@ -281,12 +261,159 @@ class MovimientoModel {
       });
       return count;
     } catch (error) {
-      console.error("ErrorModelo: contarMovimientos", error);
-      throw {
-        status: 500,
-        message: "Error al contar los movimientos",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al contar los movimientos");
+    }
+  }
+  /**
+   * Obtiene el ranking de gastos por categoría para el usuario
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<Array>} - Ranking de categorías
+   */
+  async rankingCategorias(usuarioId) {
+    try {
+      const collection = this.dbConnection.db.collection("movimiento");
+      const ahora = new Date();
+      const inicioMesActual = new Date(ahora.getFullYear(), ahora.getMonth(), 1);
+
+      const ranking = await collection
+        .aggregate([
+          {
+            $match: {
+              usuarioId: new ObjectId(usuarioId),
+              tipo: "EGRESO",
+              fecha: {$gte: inicioMesActual},
+            },
+          },
+          {
+            $group: {
+              _id: {
+                categoriaId: "$categoriaId",
+                subcategoriaId: "$subcategoriaId",
+              },
+              monto: {$sum: "$monto"},
+            },
+          },
+          {
+            $group: {
+              _id: "$_id.categoriaId",
+              monto: {$sum: "$monto"},
+              subcategorias: {
+                $push: {
+                  subcategoriaId: "$_id.subcategoriaId",
+                  monto: "$monto",
+                },
+              },
+            },
+          },
+          // Obtener el total general para calcular porcentajes
+          {
+            $facet: {
+              totalGeneral: [
+                {
+                  $group: {
+                    _id: null,
+                    montoTotal: {$sum: "$monto"},
+                  },
+                },
+              ],
+              rankingCategorias: [
+                // Lookup Categoria
+                {
+                  $lookup: {
+                    from: "categorias",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "categoriaInfo",
+                  },
+                },
+                {$unwind: "$categoriaInfo"},
+                // Procesar subcategorías y obtener nombres
+                {
+                  $project: {
+                    categoriaId: "$_id",
+                    labelCategoria: "$categoriaInfo.categoria",
+                    iconoCategoria: "$categoriaInfo.icono",
+                    colorCategoria: "$categoriaInfo.color",
+                    montoCategoria: "$monto",
+                    subcategorias: {
+                      $map: {
+                        input: {
+                          $slice: [
+                            {
+                              $sortArray: {
+                                input: "$subcategorias",
+                                sortBy: {monto: -1},
+                              },
+                            },
+                            3,
+                          ],
+                        },
+                        as: "sub",
+                        in: {
+                          subcategoriaId: "$$sub.subcategoriaId",
+                          montoSubcategoria: "$$sub.monto",
+                          labelSubcategoria: {
+                            $let: {
+                              vars: {
+                                subInfo: {
+                                  $arrayElemAt: [
+                                    {
+                                      $filter: {
+                                        input: "$categoriaInfo.subcategorias",
+                                        as: "sc",
+                                        cond: {$eq: ["$$sc._id", "$$sub.subcategoriaId"]},
+                                      },
+                                    },
+                                    0,
+                                  ],
+                                },
+                              },
+                              in: "$$subInfo.subcategoria",
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+          {$unwind: "$totalGeneral"},
+          {$unwind: "$rankingCategorias"},
+          {
+            $project: {
+              _id: "$rankingCategorias.categoriaId",
+              categoriaId: "$rankingCategorias.categoriaId",
+              labelCategoria: "$rankingCategorias.labelCategoria",
+              montoCategoria: "$rankingCategorias.montoCategoria",
+              porcentajeCategoria: {
+                $cond: [
+                  {$eq: ["$totalGeneral.montoTotal", 0]},
+                  0,
+                  {
+                    $round: [
+                      {
+                        $multiply: [{$divide: ["$rankingCategorias.montoCategoria", "$totalGeneral.montoTotal"]}, 100],
+                      },
+                      0,
+                    ],
+                  },
+                ],
+              },
+              iconoCategoria: "$rankingCategorias.iconoCategoria",
+              colorCategoria: "$rankingCategorias.colorCategoria",
+              subcategorias: "$rankingCategorias.subcategorias",
+            },
+          },
+          {$sort: {montoCategoria: -1}},
+        ])
+        .toArray();
+      return ranking;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al obtener el ranking de categorías");
     }
   }
 }

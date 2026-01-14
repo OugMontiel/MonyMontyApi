@@ -17,11 +17,8 @@ class MovimientoRepository {
     try {
       return await this.movimientoModel.crear(movimientoData);
     } catch (error) {
-      console.error("Error en repositorio - crear movimiento:", error);
-      throw {
-        status: 500,
-        message: "Error al guardar el movimiento en la base de datos",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError("Error al guardar el movimiento en la base de datos");
     }
   }
 
@@ -41,8 +38,8 @@ class MovimientoRepository {
       }
       return movimiento;
     } catch (error) {
-      console.error(`ErrorRepositorio: obtenerPorId ${id}`, error);
-      throw this.normalizarError(error, `Error al buscar movimiento ID ${id}`);
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError(`Error al buscar movimiento ID ${id}`);
     }
   }
 
@@ -72,18 +69,12 @@ class MovimientoRepository {
     try {
       const resultado = await this.movimientoModel.actualizar(id, datosActualizacion);
       if (!resultado) {
-        throw {
-          status: 404,
-          message: "Movimiento no encontrado o no se pudo actualizar",
-        };
+        throw new HttpError(404, "Movimiento no encontrado o no se pudo actualizar");
       }
       return resultado;
     } catch (error) {
-      console.error(`Error en repositorio - actualizar movimiento ID ${id}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error al actualizar el movimiento",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError("Error al actualizar el movimiento");
     }
   }
 
@@ -97,18 +88,12 @@ class MovimientoRepository {
     try {
       const resultado = await this.movimientoModel.eliminar(id);
       if (!resultado) {
-        throw {
-          status: 404,
-          message: "Movimiento no encontrado o no se pudo eliminar",
-        };
+        throw new HttpError(404, "Movimiento no encontrado o no se pudo eliminar");
       }
       return resultado;
     } catch (error) {
-      console.error(`Error en repositorio - eliminar movimiento ID ${id}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error al eliminar el movimiento",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError("Error al eliminar el movimiento");
     }
   }
 
@@ -121,11 +106,8 @@ class MovimientoRepository {
     try {
       return await this.movimientoModel.buscarTodos(id, page, limit);
     } catch (error) {
-      console.error("Error en repositorio - obtener todos los movimientos:", error);
-      throw {
-        status: 500,
-        message: "Error al obtener los movimientos de la base de datos",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError("Error al obtener los movimientos de la base de datos");
     }
   }
 
@@ -156,11 +138,22 @@ class MovimientoRepository {
     try {
       return await this.movimientoModel.contarMovimientos(usuarioId);
     } catch (error) {
-      console.error("Error en repositorio - contar movimientos mes:", error);
-      throw {
-        status: 500,
-        message: "Error al contar los movimientos del mes",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError("Error al contar los movimientos del mes");
+    }
+  }
+
+  /**
+   * Obtiene el ranking de categorías para el usuario
+   * @param {string} usuarioId - ID del usuario
+   * @returns {Promise<Array>} - Ranking de categorías
+   */
+  async rankingCategorias(usuarioId) {
+    try {
+      return await this.movimientoModel.rankingCategorias(usuarioId);
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError("Error al obtener el ranking de categorías");
     }
   }
 }
