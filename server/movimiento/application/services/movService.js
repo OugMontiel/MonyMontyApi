@@ -60,11 +60,8 @@ class MovimientoService {
 
       return await this.movimientoRepository.crear(nuevoMovimiento);
     } catch (error) {
-      console.error("Error en servicio - crear movimiento:", error);
-      throw {
-        status: 500,
-        message: "Error interno al crear el movimiento",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError("Error al intentar crear el movimiento");
     }
   }
 
@@ -79,19 +76,13 @@ class MovimientoService {
       const movimiento = await this.movimientoRepository.obtenerPorId(id);
 
       if (!movimiento) {
-        throw {
-          status: 404,
-          message: "Movimiento no encontrado",
-        };
+        throw new HttpError(404, "Movimiento no encontrado");
       }
 
       return movimiento;
     } catch (error) {
-      console.error(`Error en servicio - obtener movimiento ID ${id}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error interno al obtener el movimiento",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError("Error al obtener el movimiento");
     }
   }
 
@@ -107,19 +98,13 @@ class MovimientoService {
       const resultado = await this.movimientoRepository.actualizar(id, data);
 
       if (!resultado) {
-        throw {
-          status: 404,
-          message: "Movimiento no encontrado o no se pudo actualizar",
-        };
+        throw new HttpError(404, "Movimiento no encontrado o no se pudo actualizar");
       }
 
       return resultado;
     } catch (error) {
-      console.error(`Error en servicio - actualizar movimiento ID ${id}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error interno al actualizar el movimiento",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError("Error al actualizar el movimiento");
     }
   }
 
@@ -134,19 +119,13 @@ class MovimientoService {
       const resultado = await this.movimientoRepository.eliminar(id);
 
       if (!resultado) {
-        throw {
-          status: 404,
-          message: "Movimiento no encontrado o no se pudo eliminar",
-        };
+        throw new HttpError(404, "Movimiento no encontrado o no se pudo eliminar");
       }
 
       return resultado;
     } catch (error) {
-      console.error(`Error en servicio - eliminar movimiento ID ${id}:`, error);
-      throw {
-        status: error.status || 500,
-        message: error.message || "Error interno al eliminar el movimiento",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError("Error al eliminar el movimiento");
     }
   }
 
@@ -159,11 +138,8 @@ class MovimientoService {
     try {
       return await this.movimientoRepository.obtenerTodos(id, page, limit);
     } catch (error) {
-      console.error("Error en servicio - obtener todos los movimientos:", error);
-      throw {
-        status: 500,
-        message: "Error interno al obtener los movimientos",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError("Error al obtener la lista de movimientos");
     }
   }
 
@@ -202,7 +178,7 @@ class MovimientoService {
       return estadisticas;
     } catch (error) {
       if (error instanceof HttpError) throw error;
-      throw new ServiceError();
+      throw new ServiceError("Error al generar las estadísticas del dashboard");
     }
   }
 
@@ -215,11 +191,8 @@ class MovimientoService {
     try {
       return await this.movimientoRepository.rankingCategorias(usuarioId);
     } catch (error) {
-      console.error("Error en servicio - rankingCategorias:", error);
-      throw {
-        status: 500,
-        message: "Error interno al obtener el ranking de categorías",
-      };
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError("Error al obtener el ranking de categorías");
     }
   }
 }

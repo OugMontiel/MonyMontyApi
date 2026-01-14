@@ -20,12 +20,8 @@ class MovimientoModel {
       const resultado = await collection.insertOne(movimientoData);
       return resultado;
     } catch (error) {
-      console.error("ErrorModelo: crear movimiento", error);
-      throw {
-        status: 500,
-        message: "Error al crear el movimiento en la base de datos",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al crear el movimiento en la base de datos");
     }
   }
 
@@ -41,12 +37,8 @@ class MovimientoModel {
       const movimiento = await collection.findOne({_id: new ObjectId(id)});
       return movimiento;
     } catch (error) {
-      console.error(`ErrorModelo: buscarPorId ${id}`, error);
-      throw {
-        status: 400,
-        message: "Error al buscar el movimiento",
-        metadata: {movimientoId: id, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al buscar el movimiento");
     }
   }
 
@@ -63,12 +55,8 @@ class MovimientoModel {
       const resultado = await collection.updateOne({_id: new ObjectId(id)}, {$set: datosActualizacion});
       return resultado;
     } catch (error) {
-      console.error(`ErrorModelo: actualizar movimiento ${id}`, error);
-      throw {
-        status: 500,
-        message: "Error al actualizar el movimiento",
-        metadata: {movimientoId: id, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al actualizar el movimiento");
     }
   }
 
@@ -84,12 +72,8 @@ class MovimientoModel {
       const resultado = await collection.deleteOne({_id: new ObjectId(id)});
       return resultado;
     } catch (error) {
-      console.error(`ErrorModelo: eliminar movimiento ${id}`, error);
-      throw {
-        status: 500,
-        message: "Error al eliminar el movimiento",
-        metadata: {movimientoId: id, errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al eliminar el movimiento");
     }
   }
 
@@ -195,12 +179,8 @@ class MovimientoModel {
         limit: limitParsed,
       };
     } catch (error) {
-      console.error("ErrorModelo: buscarTodos movimientos", error);
-      throw {
-        status: 500,
-        message: "Error al obtener los movimientos",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al obtener los movimientos");
     }
   }
 
@@ -265,7 +245,7 @@ class MovimientoModel {
       return movimientos;
     } catch (error) {
       if (error instanceof HttpError) throw error;
-      throw new modelsError();
+      throw new modelsError("Error al obtener estadísticas de movimientos");
     }
   }
   /**
@@ -281,12 +261,8 @@ class MovimientoModel {
       });
       return count;
     } catch (error) {
-      console.error("ErrorModelo: contarMovimientos", error);
-      throw {
-        status: 500,
-        message: "Error al contar los movimientos",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al contar los movimientos");
     }
   }
   /**
@@ -436,12 +412,8 @@ class MovimientoModel {
         .toArray();
       return ranking;
     } catch (error) {
-      console.error("ErrorModelo: rankingCategorias", error);
-      throw {
-        status: 500,
-        message: "Error al obtener el ranking de categorías",
-        metadata: {errorOriginal: error.message},
-      };
+      if (error instanceof HttpError) throw error;
+      throw new modelsError("Error al obtener el ranking de categorías");
     }
   }
 }
