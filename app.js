@@ -11,11 +11,17 @@ const passport = require("passport");
 // Cargar las configuraciones de Passport para Google
 require("./server/auth/infrastructure/config/passportGoogle");
 
+//Conecion a base de datos
+const ConnectToDatabase = require("./server/core/infrastructure/connections/mongodb.js");
+
 // Middlewares y routers
 const isAuthenticated = require("./server/auth/infrastructure/middleware/isAuthenticated");
 const authRouter = require("./server/auth/application/routes/authRouter");
 const userRoutes = require("./server/user/application/routes/userRoutes");
 const movRoutes = require("./server/movimiento/application/routes/movRoutes");
+const entidadRoutes = require("./server/entidad/application/routes/entidadRoutes");
+const categoriaRoutes = require("./server/categoria/application/routes/categoriaRoutes");
+const divisaRoutes = require("./server/divisa/application/routes/divisaRoutes");
 // const productRoutes = require('./product/application/routes/productRoutes');
 
 // Inicializar la app Express
@@ -64,6 +70,9 @@ app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRouter);
 app.use("/user", userRoutes);
 app.use("/movimiento", isAuthenticated, movRoutes);
+app.use("/entidad", isAuthenticated, entidadRoutes);
+app.use("/categoria", isAuthenticated, categoriaRoutes);
+app.use("/divisa", isAuthenticated, divisaRoutes);
 // app.use('/product', isAuthenticated, productRoutes);
 app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: " accedio a Ruta protegida"}));
 app.get("/health", (req, res) => {
@@ -143,7 +152,13 @@ const config = {
   host: process.env.EXPRESS_HOST || "0.0.0.0",
 };
 
-// Iniciar el servidor
-app.listen(config.port, config.host, () => {
-  console.log(`Servidor corriendo en http://${config.host}:${config.port}`);
-});
+async function bootstrap() {
+  await ConnectToDatabase.conectar(); // Aquí conecta al iniciar el servidor solo una vez
+
+  // Iniciar el servidor
+  app.listen(config.port, config.host, () => {
+    console.log(`Servidor corriendo en http://${config.host}:${config.port}`);
+  });
+}
+
+bootstrap();

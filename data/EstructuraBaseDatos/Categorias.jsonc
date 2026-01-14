@@ -1,0 +1,48 @@
+/**
+ * ARCHIVO: categoria.schema.jsonc
+ * DESCRIPCIÓN: Define las categorías y subcategorías de gastos/ingresos.
+ * NOTA: Soporta categorías globales (usuarioId: null) y personalizadas.
+ */
+{
+  "_id": ObjectId("..."),
+  "usuarioId": ObjectId("..."), // null = Pública (para todos) | ObjectId = Privada
+  "categoria": "Alimentación",
+  "icono": "ion:fast-food-outline", // Referencia para el Front-end
+  "color": "#FF0000", // Referencia para el Front-end
+  "nota": "", // Nota o descripción de la categoría
+  "subcategorias": [
+    { 
+      "_id": ObjectId("..."), 
+      "subcategoria": "Restaurantes",
+      "icono": "ion:restaurant-outline",
+      "nota": "" // Nota o descripción de la subcategoría
+    },
+    { 
+      "_id": ObjectId("..."), 
+      "subcategoria": "Supermercado",
+      "icono": "ion:cart-outline",
+      "nota": "" // Nota o descripción de la subcategoría
+    }
+  ],
+
+  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
+  "createdAt": ISODate(),
+  "updatedAt": ISODate(),
+  "deletedAt": null, // Se llena solo si se marca como eliminada
+
+  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+  "auditoria": {
+    "creadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "editadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "eliminadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    }
+  }
+}

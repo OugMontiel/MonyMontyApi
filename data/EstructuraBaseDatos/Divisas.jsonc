@@ -1,0 +1,32 @@
+/**
+ * ARCHIVO: divisa.schema.jsonc
+ * DESCRIPCIÓN: Estructura de la colección 'Divisas'.
+ * NOTA: Almacena las monedas soportadas por el sistema. El _id es el código ISO (ej: COP, USD).
+ */
+{
+  "_id": "COP", // Código ISO de la moneda como identificador único
+  "nombre": "Pesos Colombianos",
+  "simbolo": "$",
+  "tipo": "DIVISA",
+
+  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
+  "createdAt": ISODate(),
+  "updatedAt": ISODate(),
+  "deletedAt": ISODate(), // Solo se llena si se deshabilita la moneda
+
+  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+  "auditoria": {
+    "creadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "editadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    },
+    "eliminadoPor": {
+      "usuarioId": ObjectId("..."),
+      "nombre": "Montiel"
+    }
+  }
+}

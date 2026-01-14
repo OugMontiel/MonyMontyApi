@@ -1,6 +1,8 @@
 const {validationResult} = require("express-validator");
 const movimientoService = require("../services/movService");
 
+const handleError = require("../../../core/application/controllers/handleError.js");
+
 class MovimientoController {
   constructor() {
     this.movimientoService = movimientoService;
@@ -65,9 +67,7 @@ class MovimientoController {
 
   async crearMovimiento(req, res) {
     try {
-      if (!this.validarResultados(req, res)) return;
-
-      const movimiento = await this.movimientoService.crear(req.body);
+      const movimiento = await this.movimientoService.crear(req.body, req.session.usuario);
 
       res.status(201).json({
         success: true,
@@ -125,15 +125,49 @@ class MovimientoController {
 
   async obtenerTodosLosMovimientos(req, res) {
     try {
-      const movimientos = await this.movimientoService.obtenerTodos(req.params.id);
+      const {_id} = req.session.usuario;
+      const {page, limit} = req.query;
+
+      const resultado = await this.movimientoService.obtenerTodos(_id, page, limit);
 
       res.status(200).json({
         success: true,
         message: "Movimientos obtenidos exitosamente",
-        data: movimientos,
+        data: resultado,
       });
     } catch (error) {
       this.manejarError(res, error, "obtener movimientos");
+    }
+  }
+
+  async dataParaDashboard(req, res) {
+    try {
+      const {_id} = req.session.usuario;
+
+      const estadisticas = await this.movimientoService.estadisticasDashBoard(_id);
+
+      res.status(200).json({
+        success: true,
+        message: "Datos del DashBoard obtenidos exitosamente",
+        data: estadisticas,
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  }
+
+  async obtenerRankingCategorias(req, res) {
+    try {
+      const {_id} = req.session.usuario;
+      const ranking = await this.movimientoService.rankingCategorias(_id);
+
+      res.status(200).json({
+        success: true,
+        message: "Ranking de categorías obtenido exitosamente",
+        data: ranking,
+      });
+    } catch (error) {
+      this.manejarError(res, error, "obtener ranking de categorías");
     }
   }
 }

@@ -63,10 +63,11 @@ class AuthController {
   async sessionLogin(req, res) {
     try {
       const {email, password} = req.body;
-      const token = await authService.getUserByEmail(password, email);
+      const {token, usuario} = await authService.getUserByEmail(password, email);
 
       // Guardamos el token en la sesión y forzamos guardado antes de responder.
       req.session.token = token;
+      req.session.usuario = usuario
 
       req.session.save((err) => {
         if (err) {
