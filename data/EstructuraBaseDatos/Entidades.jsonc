@@ -7,7 +7,7 @@
   "_id": ObjectId("..."),
   "usuarioId": ObjectId("..."),
   "nombre": "Itau",
-  "tipo": "BANCO", // "BANCO" | "EFECTIVO" | "BILLETERA"
+  "tipo": "BANCO", // "BANCO" | "EFECTIVO" | "COOPERATIVA"
   "numero": "6789", // Últimos dígitos o identificador de cuenta
 
   /* --- BALANCE Y MONEDA --- */
