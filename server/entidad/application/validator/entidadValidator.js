@@ -8,7 +8,7 @@ class EntidadValidator {
   validarCreacion() {
     return [
       validador.requiredString("nombre"),
-      validador.requiredString("tipo"),
+      validador.requiredEnum("tipo", ["BANCO", "EFECTIVO", "COOPERATIVA"]),
       validador.requiredNumber("saldoInicial"),
       validador.requiredString("divisaId"),
     ];
