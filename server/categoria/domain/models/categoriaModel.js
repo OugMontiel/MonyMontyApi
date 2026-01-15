@@ -14,6 +14,7 @@ class CategoriaModel {
           {
             $match: {
               $or: [{usuarioId: new ObjectId(usuarioId)}, {usuarioId: null}],
+              esSistema: {$ne: true},
             },
           },
           {
@@ -23,7 +24,13 @@ class CategoriaModel {
               label: "$categoria",
               subcategorias: {
                 $map: {
-                  input: "$subcategorias",
+                  input: {
+                    $filter: {
+                      input: "$subcategorias",
+                      as: "sub",
+                      cond: {$ne: ["$$sub.esSistema", true]},
+                    },
+                  },
                   as: "sub",
                   in: {
                     value: {$toString: "$$sub._id"},
