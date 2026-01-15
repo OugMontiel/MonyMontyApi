@@ -1,5 +1,6 @@
 const {ObjectId} = require("mongodb");
 const entidadRepository = require("../../domain/repositories/entidadRepository");
+const movimientoService = require("../../../movimiento/application/services/movService");
 
 class EntidadService {
   constructor() {
@@ -35,7 +36,23 @@ class EntidadService {
         },
       };
 
-      return await this.entidadRepository.crear(nuevaEntidad);
+      const entidadCreada = await this.entidadRepository.crear(nuevaEntidad);
+
+      if (entidadCreada && data.saldoInicial > 0) {
+        const movData = {
+          tipo: "INGRESO",
+          esSistema: true,
+          categoriaId: "696969bb499c876540c43603",
+          subcategoriaId: "696969bb499c876540c43601",
+          entidadId: entidadCreada._id,
+          monto: data.saldoInicial,
+          fecha: fechaActual,
+          divisaId: data.divisaId,
+        };
+        await movimientoService.crear(movData, usuario);
+      }
+
+      return entidadCreada;
     } catch (error) {
       console.error("Error en servicio - crear entidad:", error);
       throw {
