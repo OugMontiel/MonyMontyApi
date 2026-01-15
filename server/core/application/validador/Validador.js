@@ -141,6 +141,22 @@ class Validador {
    */
   requiredObject = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser un objeto`) =>
     body(field).notEmpty().withMessage(mensaje).isObject().withMessage(mensajeTipo);
+
+  /**
+   * Valida que un campo obligatorio esté dentro de una lista de valores permitidos.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {Array} allowedValues - Lista de valores permitidos.
+   * @param {string} [mensaje=`El campo ${field} es obligatorio`] - Mensaje si está vacío.
+   * @param {string} [mensajeTipo=`El valor no es válido para ${field}`] - Mensaje si no está en la lista.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación.
+   */
+  requiredEnum = (
+    field,
+    allowedValues,
+    mensaje = `El campo ${field} es obligatorio`,
+    mensajeTipo = `El valor no es válido para ${field}`
+  ) => body(field).notEmpty().withMessage(mensaje).isIn(allowedValues).withMessage(mensajeTipo);
 }
 // Exportamos una sola instancia (Singleton)
 module.exports = new Validador();

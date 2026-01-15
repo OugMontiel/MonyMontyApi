@@ -6,6 +6,7 @@
 {
   "_id": ObjectId("..."),
   "usuarioId": ObjectId("..."), // null = Pública (para todos) | ObjectId = Privada
+  "esSistema": true, // true = Sistema | null = Usuario | false = No Incluir
   "categoria": "Alimentación",
   "icono": "ion:fast-food-outline", // Referencia para el Front-end
   "color": "#FF0000", // Referencia para el Front-end
