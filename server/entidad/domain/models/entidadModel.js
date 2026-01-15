@@ -41,6 +41,21 @@ class EntidadModel {
       };
     }
   }
+
+  async insertar(datos) {
+    try {
+      const collection = this.dbConnection.db.collection("entidades");
+      const result = await collection.insertOne(datos);
+      return result.acknowledged ? {...datos, _id: result.insertedId.toString()} : null;
+    } catch (error) {
+      console.error("ErrorModelo: insertar entidad", error);
+      throw {
+        status: 500,
+        message: "Error al crear la entidad",
+        metadata: {errorOriginal: error.message},
+      };
+    }
+  }
 }
 
 module.exports = new EntidadModel();

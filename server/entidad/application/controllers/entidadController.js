@@ -22,6 +22,21 @@ class EntidadController {
       handleError(res, error);
     }
   }
+
+  async crearEntidad(req, res) {
+    try {
+      const {usuario} = req.session;
+      const entidad = await this.entidadService.crear(req.body, usuario);
+
+      res.status(201).json({
+        success: true,
+        message: "Entidad creada exitosamente",
+        data: entidad,
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  }
 }
 
 module.exports = new EntidadController();

@@ -1,4 +1,505 @@
-[{
+[
+  {
+    "_id": {
+      "$oid": "69607db450ecedeadda7895d"
+    },
+    "usuarioId": null,
+    "categoria": "Eventos y Regalos",
+    "icono": "ion:gift-outline",
+    "color": "#FF6B9D",
+    "nota": "Gastos asociados a celebraciones, compromisos sociales, obsequios y aportes voluntarios.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607db450ecedeadda7895e"
+        },
+        "subcategoria": "Cumpleaños",
+        "nota": "Gastos realizados para celebrar cumpleaños propios o de terceros."
+      },
+      {
+        "_id": {
+          "$oid": "69607db450ecedeadda7895f"
+        },
+        "subcategoria": "Celebraciones",
+        "nota": "Gastos en festividades, reuniones y celebraciones especiales."
+      },
+      {
+        "_id": {
+          "$oid": "69607db450ecedeadda78960"
+        },
+        "subcategoria": "Regalos",
+        "nota": "Compra de obsequios para otras personas."
+      },
+      {
+        "_id": {
+          "$oid": "69607db450ecedeadda78961"
+        },
+        "subcategoria": "Donaciones",
+        "nota": "Aportes voluntarios a personas, fundaciones u organizaciones."
+      },
+      {
+        "_id": {
+          "$oid": "69607db450ecedeadda78962"
+        },
+        "subcategoria": "Eventos especiales",
+        "nota": "Gastos asociados a eventos únicos como bodas, graduaciones u otros actos relevantes."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T04:01:56.318Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "69607c2150ecedeadda78950"
+    },
+    "usuarioId": null,
+    "categoria": "Cuidado Personal",
+    "icono": "ion:sparkles-outline",
+    "color": "#FF9FF3",
+    "nota": "Gastos destinados a la higiene, apariencia personal y bienestar físico.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607c2150ecedeadda78951"
+        },
+        "subcategoria": "Peluquería",
+        "nota": "Servicios de corte, arreglo o cuidado del cabello."
+      },
+      {
+        "_id": {
+          "$oid": "69607c2150ecedeadda78952"
+        },
+        "subcategoria": "Ropa",
+        "nota": "Compra de prendas de vestir para uso personal."
+      },
+      {
+        "_id": {
+          "$oid": "69607c2150ecedeadda78953"
+        },
+        "subcategoria": "Calzado",
+        "nota": "Compra de zapatos y otros tipos de calzado."
+      },
+      {
+        "_id": {
+          "$oid": "69607c2150ecedeadda78954"
+        },
+        "subcategoria": "Artículos de aseo",
+        "nota": "Productos de higiene personal y cuidado diario."
+      },
+      {
+        "_id": {
+          "$oid": "69607c2150ecedeadda78955"
+        },
+        "subcategoria": "Cosméticos",
+        "nota": "Productos de cuidado estético y cosmética personal."
+      },
+      {
+        "_id": {
+          "$oid": "69607c2150ecedeadda78956"
+        },
+        "subcategoria": "Gimnasio o actividad física",
+        "nota": "Pagos relacionados con ejercicio físico o actividad deportiva."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T03:55:13.139Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "69607d9d50ecedeadda78957"
+    },
+    "usuarioId": null,
+    "categoria": "Entretenimiento y Ocio",
+    "icono": "ion:funnel-outline",
+    "color": "#FFD93D",
+    "nota": "Gastos destinados al disfrute personal, recreación, descanso y actividades realizadas en el tiempo libre.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607d9d50ecedeadda78958"
+        },
+        "subcategoria": "Salidas",
+        "nota": "Gastos asociados a actividades sociales fuera del hogar."
+      },
+      {
+        "_id": {
+          "$oid": "69607d9d50ecedeadda78959"
+        },
+        "subcategoria": "Plataformas digitales",
+        "nota": "Suscripciones o pagos por servicios digitales de entretenimiento."
+      },
+      {
+        "_id": {
+          "$oid": "69607d9d50ecedeadda7895a"
+        },
+        "subcategoria": "Viajes o Vacaciones",
+        "nota": "Gastos relacionados con desplazamientos, alojamiento y actividades turísticas."
+      },
+      {
+        "_id": {
+          "$oid": "69607d9d50ecedeadda7895b"
+        },
+        "subcategoria": "Actividades al aire libre",
+        "nota": "Gastos vinculados a actividades recreativas realizadas en espacios abiertos."
+      },
+      {
+        "_id": {
+          "$oid": "69607d9d50ecedeadda7895c"
+        },
+        "subcategoria": "Visitas sociales",
+        "nota": "Gastos ocasionados por encuentros con amigos, familiares u otras personas."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T04:01:33.792Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "6960797d50ecedeadda78939"
+    },
+    "usuarioId": null,
+    "categoria": "Finanzas y Obligaciones",
+    "icono": "ion:card-outline",
+    "color": "#4D96FF",
+    "nota": "Compromisos financieros, productos bancarios, deudas y gestión del dinero.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda7893a"
+        },
+        "subcategoria": "Tarjeta de crédito",
+        "nota": "Pagos o consumos realizados mediante tarjetas de crédito."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda7893b"
+        },
+        "subcategoria": "Préstamos",
+        "nota": "Pagos de créditos personales, familiares o institucionales."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda7893c"
+        },
+        "subcategoria": "Cuotas de manejo",
+        "nota": "Costos asociados al mantenimiento de productos financieros."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda7893d"
+        },
+        "subcategoria": "Intereses",
+        "nota": "Intereses generados por deudas o productos financieros."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda7893e"
+        },
+        "subcategoria": "Ahorro",
+        "nota": "Dinero destinado a reserva o ahorro personal."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda7893f"
+        },
+        "subcategoria": "Inversiones",
+        "nota": "Colocación de dinero con el objetivo de generar rentabilidad."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda78940"
+        },
+        "subcategoria": "CDT",
+        "nota": "Certificados de depósito a término u otros instrumentos similares."
+      },
+      {
+        "_id": {
+          "$oid": "6960797d50ecedeadda78941"
+        },
+        "subcategoria": "Fondos",
+        "nota": "Aportes a fondos de inversión o ahorro colectivo."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T03:43:57.391Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "69607e0450ecedeadda78969"
+    },
+    "usuarioId": null,
+    "categoria": "Obligaciones Legales",
+    "icono": "ion:gavel-outline",
+    "color": "#FFB86C",
+    "nota": "Pagos exigidos por entidades gubernamentales, laborales o institucionales, derivados de leyes, normas o contratos obligatorios.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607e0450ecedeadda7896a"
+        },
+        "subcategoria": "Impuestos",
+        "nota": "Pagos obligatorios al estado por ingresos, bienes o actividades económicas."
+      },
+      {
+        "_id": {
+          "$oid": "69607e0450ecedeadda7896b"
+        },
+        "subcategoria": "Deducciones de nómina",
+        "nota": "Descuentos aplicados directamente al salario por conceptos legales o contractuales."
+      },
+      {
+        "_id": {
+          "$oid": "69607e0450ecedeadda7896c"
+        },
+        "subcategoria": "Multas",
+        "nota": "Pagos por sanciones derivadas del incumplimiento de normas o leyes."
+      },
+      {
+        "_id": {
+          "$oid": "69607e0450ecedeadda7896d"
+        },
+        "subcategoria": "Cuotas obligatorias",
+        "nota": "Pagos periódicos exigidos por instituciones, gremios o entidades reguladoras."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T04:03:16.799Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "6960793650ecedeadda78933"
+    },
+    "usuarioId": null,
+    "categoria": "Alimentación",
+    "icono": "ion:restaurant-outline",
+    "color": "#FF6B6B",
+    "nota": "Gastos relacionados con la compra y consumo de alimentos y bebidas, tanto dentro como fuera del hogar.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "6960793650ecedeadda78934"
+        },
+        "subcategoria": "Supermercado",
+        "nota": "Compra de alimentos y productos básicos en grandes superficies o supermercados."
+      },
+      {
+        "_id": {
+          "$oid": "6960793650ecedeadda78935"
+        },
+        "subcategoria": "Mercado o Plaza",
+        "nota": "Compra de alimentos frescos en mercados locales o plazas."
+      },
+      {
+        "_id": {
+          "$oid": "6960793650ecedeadda78936"
+        },
+        "subcategoria": "Tienda de barrio",
+        "nota": "Compras pequeñas o urgentes en tiendas cercanas."
+      },
+      {
+        "_id": {
+          "$oid": "6960793650ecedeadda78937"
+        },
+        "subcategoria": "Restaurantes",
+        "nota": "Consumo de comidas en restaurantes formales o informales."
+      },
+      {
+        "_id": {
+          "$oid": "6960793650ecedeadda78938"
+        },
+        "subcategoria": "Suplementos alimenticios",
+        "nota": "Compra de suplementos nutricionales o productos dietéticos."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T03:42:46.060Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "69607dda50ecedeadda78963"
+    },
+    "usuarioId": null,
+    "categoria": "Ingresos",
+    "icono": "ion:cash-outline",
+    "color": "#6BCB77",
+    "nota": "Entradas de dinero provenientes de actividades laborales, financieras u ocasionales.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607dda50ecedeadda78964"
+        },
+        "subcategoria": "Salario",
+        "nota": "Ingreso periódico recibido por trabajo dependiente o empleo formal."
+      },
+      {
+        "_id": {
+          "$oid": "69607dda50ecedeadda78965"
+        },
+        "subcategoria": "Bonos",
+        "nota": "Pagos adicionales recibidos por desempeño, metas u otros incentivos."
+      },
+      {
+        "_id": {
+          "$oid": "69607dda50ecedeadda78966"
+        },
+        "subcategoria": "Auxilios",
+        "nota": "Ingresos recibidos como apoyo económico o subsidios."
+      },
+      {
+        "_id": {
+          "$oid": "69607dda50ecedeadda78967"
+        },
+        "subcategoria": "Intereses",
+        "nota": "Ingresos generados por ahorros, inversiones o productos financieros."
+      },
+      {
+        "_id": {
+          "$oid": "69607dda50ecedeadda78968"
+        },
+        "subcategoria": "Ingresos ocasionales",
+        "nota": "Entradas de dinero no periódicas o esporádicas."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T04:02:34.319Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "69607e2450ecedeadda7896e"
+    },
+    "usuarioId": null,
+    "categoria": "Gastos Varios",
+    "icono": "ion:ellipsis-horizontal-outline",
+    "color": "#95B8FF",
+    "nota": "Gastos que no encajan claramente en otras categorías o que requieren una clasificación flexible.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607e2450ecedeadda7896f"
+        },
+        "subcategoria": "Misceláneos",
+        "nota": "Gastos diversos de naturaleza variada o poco frecuente."
+      },
+      {
+        "_id": {
+          "$oid": "69607e2450ecedeadda78970"
+        },
+        "subcategoria": "Ajustes",
+        "nota": "Correcciones contables o ajustes de registros financieros."
+      },
+      {
+        "_id": {
+          "$oid": "69607e2450ecedeadda78971"
+        },
+        "subcategoria": "Gastos no clasificados",
+        "nota": "Gastos pendientes de clasificación o sin información suficiente."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T04:03:48.867Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
+    "_id": {
+      "$oid": "69607bb150ecedeadda78942"
+    },
+    "usuarioId": null,
+    "categoria": "Salud y Bienestar",
+    "icono": "ion:medical-outline",
+    "color": "#6BCB77",
+    "nota": "Gastos relacionados con la atención médica, el cuidado de la salud física y mental, y la prevención de enfermedades.",
+    "subcategorias": [
+      {
+        "_id": {
+          "$oid": "69607bb150ecedeadda78943"
+        },
+        "subcategoria": "Consultas médicas",
+        "nota": "Pagos por consultas con médicos generales o especialistas."
+      },
+      {
+        "_id": {
+          "$oid": "69607bb150ecedeadda78944"
+        },
+        "subcategoria": "Medicamentos",
+        "nota": "Compra de medicamentos recetados o de venta libre."
+      },
+      {
+        "_id": {
+          "$oid": "69607bb150ecedeadda78945"
+        },
+        "subcategoria": "Exámenes",
+        "nota": "Pruebas diagnósticas, laboratorios o estudios médicos."
+      },
+      {
+        "_id": {
+          "$oid": "69607bb150ecedeadda78946"
+        },
+        "subcategoria": "Procedimientos",
+        "nota": "Intervenciones médicas, quirúrgicas o terapéuticas."
+      },
+      {
+        "_id": {
+          "$oid": "69607bb150ecedeadda78947"
+        },
+        "subcategoria": "Salud preventiva",
+        "nota": "Gastos orientados a la prevención y cuidado continuo de la salud."
+      },
+      {
+        "_id": {
+          "$oid": "69607bb150ecedeadda78948"
+        },
+        "subcategoria": "Emergencias médicas",
+        "nota": "Atenciones médicas urgentes o imprevistas."
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-09T03:53:21.694Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T22:54:19.463Z"
+    },
+    "deletedAt": null
+  },
+  {
     "_id": {
       "$oid": "696073db50ecedeadda78932"
     },
@@ -90,197 +591,7 @@
       "$date": "2026-01-09T03:19:55.186Z"
     },
     "updatedAt": {
-      "$date": "2026-01-09T03:19:55.186Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "6960793650ecedeadda78933"
-    },
-    "usuarioId": null,
-    "categoria": "Alimentación",
-    "icono": "ion:restaurant-outline",
-    "color": "#FF6B6B",
-    "nota": "Gastos relacionados con la compra y consumo de alimentos y bebidas, tanto dentro como fuera del hogar.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "6960793650ecedeadda78934"
-        },
-        "subcategoria": "Supermercado",
-        "nota": "Compra de alimentos y productos básicos en grandes superficies o supermercados."
-      },
-      {
-        "_id": {
-          "$oid": "6960793650ecedeadda78935"
-        },
-        "subcategoria": "Mercado o Plaza",
-        "nota": "Compra de alimentos frescos en mercados locales o plazas."
-      },
-      {
-        "_id": {
-          "$oid": "6960793650ecedeadda78936"
-        },
-        "subcategoria": "Tienda de barrio",
-        "nota": "Compras pequeñas o urgentes en tiendas cercanas."
-      },
-      {
-        "_id": {
-          "$oid": "6960793650ecedeadda78937"
-        },
-        "subcategoria": "Restaurantes",
-        "nota": "Consumo de comidas en restaurantes formales o informales."
-      },
-      {
-        "_id": {
-          "$oid": "6960793650ecedeadda78938"
-        },
-        "subcategoria": "Suplementos alimenticios",
-        "nota": "Compra de suplementos nutricionales o productos dietéticos."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T03:42:46.060Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T03:42:46.060Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "6960797d50ecedeadda78939"
-    },
-    "usuarioId": null,
-    "categoria": "Finanzas y Obligaciones",
-    "icono": "ion:card-outline",
-    "color": "#4D96FF",
-    "nota": "Compromisos financieros, productos bancarios, deudas y gestión del dinero.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda7893a"
-        },
-        "subcategoria": "Tarjeta de crédito",
-        "nota": "Pagos o consumos realizados mediante tarjetas de crédito."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda7893b"
-        },
-        "subcategoria": "Préstamos",
-        "nota": "Pagos de créditos personales, familiares o institucionales."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda7893c"
-        },
-        "subcategoria": "Cuotas de manejo",
-        "nota": "Costos asociados al mantenimiento de productos financieros."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda7893d"
-        },
-        "subcategoria": "Intereses",
-        "nota": "Intereses generados por deudas o productos financieros."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda7893e"
-        },
-        "subcategoria": "Ahorro",
-        "nota": "Dinero destinado a reserva o ahorro personal."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda7893f"
-        },
-        "subcategoria": "Inversiones",
-        "nota": "Colocación de dinero con el objetivo de generar rentabilidad."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda78940"
-        },
-        "subcategoria": "CDT",
-        "nota": "Certificados de depósito a término u otros instrumentos similares."
-      },
-      {
-        "_id": {
-          "$oid": "6960797d50ecedeadda78941"
-        },
-        "subcategoria": "Fondos",
-        "nota": "Aportes a fondos de inversión o ahorro colectivo."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T03:43:57.391Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T03:43:57.391Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "69607bb150ecedeadda78942"
-    },
-    "usuarioId": null,
-    "categoria": "Salud y Bienestar",
-    "icono": "ion:medical-outline",
-    "color": "#6BCB77",
-    "nota": "Gastos relacionados con la atención médica, el cuidado de la salud física y mental, y la prevención de enfermedades.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "69607bb150ecedeadda78943"
-        },
-        "subcategoria": "Consultas médicas",
-        "nota": "Pagos por consultas con médicos generales o especialistas."
-      },
-      {
-        "_id": {
-          "$oid": "69607bb150ecedeadda78944"
-        },
-        "subcategoria": "Medicamentos",
-        "nota": "Compra de medicamentos recetados o de venta libre."
-      },
-      {
-        "_id": {
-          "$oid": "69607bb150ecedeadda78945"
-        },
-        "subcategoria": "Exámenes",
-        "nota": "Pruebas diagnósticas, laboratorios o estudios médicos."
-      },
-      {
-        "_id": {
-          "$oid": "69607bb150ecedeadda78946"
-        },
-        "subcategoria": "Procedimientos",
-        "nota": "Intervenciones médicas, quirúrgicas o terapéuticas."
-      },
-      {
-        "_id": {
-          "$oid": "69607bb150ecedeadda78947"
-        },
-        "subcategoria": "Salud preventiva",
-        "nota": "Gastos orientados a la prevención y cuidado continuo de la salud."
-      },
-      {
-        "_id": {
-          "$oid": "69607bb150ecedeadda78948"
-        },
-        "subcategoria": "Emergencias médicas",
-        "nota": "Atenciones médicas urgentes o imprevistas."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T03:53:21.694Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T03:53:21.694Z"
+      "$date": "2026-01-13T22:54:19.463Z"
     },
     "deletedAt": null
   },
@@ -341,317 +652,44 @@
       "$date": "2026-01-09T03:54:52.073Z"
     },
     "updatedAt": {
-      "$date": "2026-01-09T03:54:52.073Z"
+      "$date": "2026-01-13T22:54:19.463Z"
     },
     "deletedAt": null
   },
   {
     "_id": {
-      "$oid": "69607c2150ecedeadda78950"
+      "$oid": "696969bb499c876540c43603"
     },
     "usuarioId": null,
-    "categoria": "Cuidado Personal",
-    "icono": "ion:sparkles-outline",
-    "color": "#FF9FF3",
-    "nota": "Gastos destinados a la higiene, apariencia personal y bienestar físico.",
+    "esSistema": true,
+    "categoria": "Sistema",
+    "icono": "ion:settings-outline",
+    "color": "#6B7280",
+    "nota": "Categoría reservada para movimientos internos del sistema.",
     "subcategorias": [
       {
         "_id": {
-          "$oid": "69607c2150ecedeadda78951"
+          "$oid": "696969bb499c876540c43601"
         },
-        "subcategoria": "Peluquería",
-        "nota": "Servicios de corte, arreglo o cuidado del cabello."
+        "subcategoria": "Saldo inicial",
+        "icono": "ion:wallet-outline",
+        "nota": "Movimiento generado automáticamente al crear una entidad con monto inicial."
       },
       {
         "_id": {
-          "$oid": "69607c2150ecedeadda78952"
+          "$oid": "696969bb499c876540c43602"
         },
-        "subcategoria": "Ropa",
-        "nota": "Compra de prendas de vestir para uso personal."
-      },
-      {
-        "_id": {
-          "$oid": "69607c2150ecedeadda78953"
-        },
-        "subcategoria": "Calzado",
-        "nota": "Compra de zapatos y otros tipos de calzado."
-      },
-      {
-        "_id": {
-          "$oid": "69607c2150ecedeadda78954"
-        },
-        "subcategoria": "Artículos de aseo",
-        "nota": "Productos de higiene personal y cuidado diario."
-      },
-      {
-        "_id": {
-          "$oid": "69607c2150ecedeadda78955"
-        },
-        "subcategoria": "Cosméticos",
-        "nota": "Productos de cuidado estético y cosmética personal."
-      },
-      {
-        "_id": {
-          "$oid": "69607c2150ecedeadda78956"
-        },
-        "subcategoria": "Gimnasio o actividad física",
-        "nota": "Pagos relacionados con ejercicio físico o actividad deportiva."
+        "subcategoria": "Ajuste",
+        "icono": "ion:swap-horizontal-outline",
+        "nota": "Correcciones o conciliaciones de saldo realizadas por el sistema."
       }
     ],
     "createdAt": {
-      "$date": "2026-01-09T03:55:13.139Z"
+      "$date": "2026-01-15T22:27:07.081Z"
     },
     "updatedAt": {
-      "$date": "2026-01-09T03:55:13.139Z"
+      "$date": "2026-01-15T22:27:07.081Z"
     },
     "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "69607d9d50ecedeadda78957"
-    },
-    "usuarioId": null,
-    "categoria": "Entretenimiento y Ocio",
-    "icono": "ion:funnel-outline",
-    "color": "#FFD93D",
-    "nota": "Gastos destinados al disfrute personal, recreación, descanso y actividades realizadas en el tiempo libre.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "69607d9d50ecedeadda78958"
-        },
-        "subcategoria": "Salidas",
-        "nota": "Gastos asociados a actividades sociales fuera del hogar."
-      },
-      {
-        "_id": {
-          "$oid": "69607d9d50ecedeadda78959"
-        },
-        "subcategoria": "Plataformas digitales",
-        "nota": "Suscripciones o pagos por servicios digitales de entretenimiento."
-      },
-      {
-        "_id": {
-          "$oid": "69607d9d50ecedeadda7895a"
-        },
-        "subcategoria": "Viajes o Vacaciones",
-        "nota": "Gastos relacionados con desplazamientos, alojamiento y actividades turísticas."
-      },
-      {
-        "_id": {
-          "$oid": "69607d9d50ecedeadda7895b"
-        },
-        "subcategoria": "Actividades al aire libre",
-        "nota": "Gastos vinculados a actividades recreativas realizadas en espacios abiertos."
-      },
-      {
-        "_id": {
-          "$oid": "69607d9d50ecedeadda7895c"
-        },
-        "subcategoria": "Visitas sociales",
-        "nota": "Gastos ocasionados por encuentros con amigos, familiares u otras personas."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T04:01:33.792Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T04:01:33.792Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "69607db450ecedeadda7895d"
-    },
-    "usuarioId": null,
-    "categoria": "Eventos y Regalos",
-    "icono": "ion:gift-outline",
-    "color": "#FF6B9D",
-    "nota": "Gastos asociados a celebraciones, compromisos sociales, obsequios y aportes voluntarios.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "69607db450ecedeadda7895e"
-        },
-        "subcategoria": "Cumpleaños",
-        "nota": "Gastos realizados para celebrar cumpleaños propios o de terceros."
-      },
-      {
-        "_id": {
-          "$oid": "69607db450ecedeadda7895f"
-        },
-        "subcategoria": "Celebraciones",
-        "nota": "Gastos en festividades, reuniones y celebraciones especiales."
-      },
-      {
-        "_id": {
-          "$oid": "69607db450ecedeadda78960"
-        },
-        "subcategoria": "Regalos",
-        "nota": "Compra de obsequios para otras personas."
-      },
-      {
-        "_id": {
-          "$oid": "69607db450ecedeadda78961"
-        },
-        "subcategoria": "Donaciones",
-        "nota": "Aportes voluntarios a personas, fundaciones u organizaciones."
-      },
-      {
-        "_id": {
-          "$oid": "69607db450ecedeadda78962"
-        },
-        "subcategoria": "Eventos especiales",
-        "nota": "Gastos asociados a eventos únicos como bodas, graduaciones u otros actos relevantes."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T04:01:56.318Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T04:01:56.318Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "69607dda50ecedeadda78963"
-    },
-    "usuarioId": null,
-    "categoria": "Ingresos",
-    "icono": "ion:cash-outline",
-    "color": "#6BCB77",
-    "nota": "Entradas de dinero provenientes de actividades laborales, financieras u ocasionales.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "69607dda50ecedeadda78964"
-        },
-        "subcategoria": "Salario",
-        "nota": "Ingreso periódico recibido por trabajo dependiente o empleo formal."
-      },
-      {
-        "_id": {
-          "$oid": "69607dda50ecedeadda78965"
-        },
-        "subcategoria": "Bonos",
-        "nota": "Pagos adicionales recibidos por desempeño, metas u otros incentivos."
-      },
-      {
-        "_id": {
-          "$oid": "69607dda50ecedeadda78966"
-        },
-        "subcategoria": "Auxilios",
-        "nota": "Ingresos recibidos como apoyo económico o subsidios."
-      },
-      {
-        "_id": {
-          "$oid": "69607dda50ecedeadda78967"
-        },
-        "subcategoria": "Intereses",
-        "nota": "Ingresos generados por ahorros, inversiones o productos financieros."
-      },
-      {
-        "_id": {
-          "$oid": "69607dda50ecedeadda78968"
-        },
-        "subcategoria": "Ingresos ocasionales",
-        "nota": "Entradas de dinero no periódicas o esporádicas."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T04:02:34.319Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T04:02:34.319Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "69607e0450ecedeadda78969"
-    },
-    "usuarioId": null,
-    "categoria": "Obligaciones Legales",
-    "icono": "ion:gavel-outline",
-    "color": "#FFB86C",
-    "nota": "Pagos exigidos por entidades gubernamentales, laborales o institucionales, derivados de leyes, normas o contratos obligatorios.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "69607e0450ecedeadda7896a"
-        },
-        "subcategoria": "Impuestos",
-        "nota": "Pagos obligatorios al estado por ingresos, bienes o actividades económicas."
-      },
-      {
-        "_id": {
-          "$oid": "69607e0450ecedeadda7896b"
-        },
-        "subcategoria": "Deducciones de nómina",
-        "nota": "Descuentos aplicados directamente al salario por conceptos legales o contractuales."
-      },
-      {
-        "_id": {
-          "$oid": "69607e0450ecedeadda7896c"
-        },
-        "subcategoria": "Multas",
-        "nota": "Pagos por sanciones derivadas del incumplimiento de normas o leyes."
-      },
-      {
-        "_id": {
-          "$oid": "69607e0450ecedeadda7896d"
-        },
-        "subcategoria": "Cuotas obligatorias",
-        "nota": "Pagos periódicos exigidos por instituciones, gremios o entidades reguladoras."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T04:03:16.799Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T04:03:16.799Z"
-    },
-    "deletedAt": null
-  },
-  {
-    "_id": {
-      "$oid": "69607e2450ecedeadda7896e"
-    },
-    "usuarioId": null,
-    "categoria": "Gastos Varios",
-    "icono": "ion:ellipsis-horizontal-outline",
-    "color": "#95B8FF",
-    "nota": "Gastos que no encajan claramente en otras categorías o que requieren una clasificación flexible.",
-    "subcategorias": [
-      {
-        "_id": {
-          "$oid": "69607e2450ecedeadda7896f"
-        },
-        "subcategoria": "Misceláneos",
-        "nota": "Gastos diversos de naturaleza variada o poco frecuente."
-      },
-      {
-        "_id": {
-          "$oid": "69607e2450ecedeadda78970"
-        },
-        "subcategoria": "Ajustes",
-        "nota": "Correcciones contables o ajustes de registros financieros."
-      },
-      {
-        "_id": {
-          "$oid": "69607e2450ecedeadda78971"
-        },
-        "subcategoria": "Gastos no clasificados",
-        "nota": "Gastos pendientes de clasificación o sin información suficiente."
-      }
-    ],
-    "createdAt": {
-      "$date": "2026-01-09T04:03:48.867Z"
-    },
-    "updatedAt": {
-      "$date": "2026-01-09T04:03:48.867Z"
-    },
-    "deletedAt": null
-}]
+  }
+]
