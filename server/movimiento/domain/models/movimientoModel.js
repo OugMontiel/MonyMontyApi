@@ -34,8 +34,86 @@ class MovimientoModel {
   async buscarPorId(id) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
-      const movimiento = await collection.findOne({_id: new ObjectId(id)});
-      return movimiento;
+      const resultados = await collection
+        .aggregate([
+          {$match: {_id: new ObjectId(id)}},
+          // Lookup Entidad
+          {
+            $lookup: {
+              from: "entidades",
+              localField: "entidadId",
+              foreignField: "_id",
+              as: "entidadInfo",
+            },
+          },
+          {
+            $unwind: {
+              path: "$entidadInfo",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          // Lookup Categoria
+          {
+            $lookup: {
+              from: "categorias",
+              localField: "categoriaId",
+              foreignField: "_id",
+              as: "categoriaInfo",
+            },
+          },
+          {
+            $unwind: {
+              path: "$categoriaInfo",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          // Extract Subcategoria
+          {
+            $addFields: {
+              subcategoriaInfo: {
+                $arrayElemAt: [
+                  {
+                    $filter: {
+                      input: {$ifNull: ["$categoriaInfo.subcategorias", []]},
+                      as: "sub",
+                      cond: {$eq: ["$$sub._id", "$subcategoriaId"]},
+                    },
+                  },
+                  0,
+                ],
+              },
+            },
+          },
+          // Populate final fields
+          {
+            $addFields: {
+              entidad: {
+                _id: "$entidadInfo._id",
+                nombre: "$entidadInfo.nombre",
+                tipo: "$entidadInfo.tipo",
+                numero: "$entidadInfo.numero",
+              },
+              categoria: {
+                _id: "$categoriaInfo._id",
+                categoria: "$categoriaInfo.categoria",
+                icono: "$categoriaInfo.icono",
+                color: "$categoriaInfo.color",
+              },
+              subcategoria: "$subcategoriaInfo",
+            },
+          },
+          // Cleanup
+          {
+            $project: {
+              entidadInfo: 0,
+              categoriaInfo: 0,
+              subcategoriaInfo: 0,
+            },
+          },
+        ])
+        .toArray();
+
+      return resultados.length > 0 ? resultados[0] : null;
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new modelsError("Error al buscar el movimiento");
@@ -148,8 +226,18 @@ class MovimientoModel {
                 // Populate final fields
                 {
                   $addFields: {
-                    entidad: "$entidadInfo",
-                    categoria: "$categoriaInfo",
+                    entidad: {
+                      _id: "$entidadInfo._id",
+                      nombre: "$entidadInfo.nombre",
+                      tipo: "$entidadInfo.tipo",
+                      numero: "$entidadInfo.numero",
+                    },
+                    categoria: {
+                      _id: "$categoriaInfo._id",
+                      categoria: "$categoriaInfo.categoria",
+                      icono: "$categoriaInfo.icono",
+                      color: "$categoriaInfo.color",
+                    },
                     subcategoria: "$subcategoriaInfo",
                   },
                 },
