@@ -21,11 +21,12 @@ router.get("/ranking", movimientoValidator.noBodyNoQuery(), handleValidation, (r
 );
 
 // Obtener un movimiento específico
-// router.get("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerMovimiento(req, res));
+router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
 
 // Crear nuevo movimiento
-router.post("/", movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) => 
-  movimientoController.crearMovimiento(req, res));
+router.post("/", movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) =>
+  movimientoController.crearMovimiento(req, res)
+);
 
 // Actualizar movimiento
 router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) =>
@@ -33,8 +34,7 @@ router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarC
 );
 
 // Eliminar movimiento
-router.delete("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => 
-  movimientoController.eliminarMovimiento(req, res));
+router.delete("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.eliminarMovimiento(req, res));
 
 // Ruta raíz al Final siempre
 router.get("/", (req, res) => {

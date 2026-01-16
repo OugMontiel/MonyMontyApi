@@ -81,8 +81,6 @@ class MovimientoController {
 
   async obtenerMovimiento(req, res) {
     try {
-      if (!this.validarResultados(req, res)) return;
-
       const movimiento = await this.movimientoService.obtenerPorId(req.params.id);
 
       res.status(200).json({
