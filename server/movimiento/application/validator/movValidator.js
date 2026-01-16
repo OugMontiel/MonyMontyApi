@@ -4,7 +4,7 @@ const {ObjectId} = require("mongodb");
 const validador = require("../../../core/application/validador/Validador"); // Importa el validador genérico
 
 class MovimientoValidator {
-  validarCreacion() {
+  validarCreacionyActualizacion() {
     return [
       // validador.requiredObjectId("usuarioId"), // Usuario injectado desde session
       // validador.optionalString("referencia"), // Se crea aqui en el back, no se recive desde el front
@@ -91,20 +91,6 @@ class MovimientoValidator {
       body("tags").optional().isArray(),
       body("esRecurrente").optional().isBoolean(),
       body("adjuntos").optional().isArray(),
-    ];
-  }
-
-  validarActualizacionMovimiento() {
-    return [
-      validador.requiredString("usuario"),
-      validador.requiredDate("fecha"),
-
-      body().custom((body) => {
-        if (body.ingreso && body.egreso) {
-          throw new Error("No puede actualizar a ingreso y egreso simultáneamente");
-        }
-        return true;
-      }),
     ];
   }
 
