@@ -105,11 +105,9 @@ class MovimientoService {
         divisaId: data.divisaId,
         monto: data.monto,
         updatedAt: new Date(),
-        auditoria: {
-          actualizadoPor: {
-            usuarioId: new ObjectId(usuario._id),
-            nombre: usuario.nombre,
-          },
+        "auditoria.actualizadoPor": {
+          usuarioId: new ObjectId(usuario._id),
+          nombre: usuario.nombre,
         },
       };
 

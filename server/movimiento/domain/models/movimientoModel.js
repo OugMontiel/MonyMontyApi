@@ -87,8 +87,18 @@ class MovimientoModel {
           // Populate final fields
           {
             $addFields: {
-              entidad: "$entidadInfo",
-              categoria: "$categoriaInfo",
+              entidad: {
+                _id: "$entidadInfo._id",
+                nombre: "$entidadInfo.nombre",
+                tipo: "$entidadInfo.tipo",
+                numero: "$entidadInfo.numero",
+              },
+              categoria: {
+                _id: "$categoriaInfo._id",
+                categoria: "$categoriaInfo.categoria",
+                icono: "$categoriaInfo.icono",
+                color: "$categoriaInfo.color",
+              },
               subcategoria: "$subcategoriaInfo",
             },
           },
@@ -216,8 +226,18 @@ class MovimientoModel {
                 // Populate final fields
                 {
                   $addFields: {
-                    entidad: "$entidadInfo",
-                    categoria: "$categoriaInfo",
+                    entidad: {
+                      _id: "$entidadInfo._id",
+                      nombre: "$entidadInfo.nombre",
+                      tipo: "$entidadInfo.tipo",
+                      numero: "$entidadInfo.numero",
+                    },
+                    categoria: {
+                      _id: "$categoriaInfo._id",
+                      categoria: "$categoriaInfo.categoria",
+                      icono: "$categoriaInfo.icono",
+                      color: "$categoriaInfo.color",
+                    },
                     subcategoria: "$subcategoriaInfo",
                   },
                 },
