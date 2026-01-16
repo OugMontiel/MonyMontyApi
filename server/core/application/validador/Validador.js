@@ -81,11 +81,11 @@ class Validador {
    */
   requiredObjectId = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser ObjectId`) =>
     body(field).notEmpty().withMessage(mensaje).custom((value) => {
-      if (!ObjectId.isValid(value)) {
-        throw new Error(mensajeTipo);
-      }
-      return true;
-    });
+        if (!ObjectId.isValid(value)) {
+          throw new Error(mensajeTipo);
+        }
+        return true;
+      });
 
   /**
    * Valida que un campo obligatorio sea de tipo string y no esté vacío.
@@ -97,6 +97,15 @@ class Validador {
    */
   requiredString = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser texto`) =>
     body(field).notEmpty().withMessage(mensaje).isString().withMessage(mensajeTipo);
+
+  /**
+   * Valida que un campo sea de tipo string si está presente.
+   *
+   * @param {string} field - Nombre del campo a validar.
+   * @param {string} [mensajeTipo=`El campo ${field} debe ser texto`] - Mensaje de error si el valor no es string.
+   * @returns {import("express-validator").ValidationChain} Cadena de validación de express-validator.
+   */
+  optionalString = (field, mensajeTipo = `El campo ${field} debe ser texto`) => body(field).optional().isString().withMessage(mensajeTipo);
 
   /**
    * Valida que un campo obligatorio sea numérico.
