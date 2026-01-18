@@ -21,6 +21,38 @@ class CategoriaController {
       handleError(res, error);
     }
   }
+
+  async crearCategoria(req, res) {
+    try {
+      const {_id, nombre} = req.session.usuario;
+      const datos = {...req.body, usuarioNombre: nombre};
+      const categoriaId = await this.categoriaService.crearCategoria(_id, datos);
+
+      res.status(201).json({
+        success: true,
+        message: "Categoría creada exitosamente",
+        data: {categoriaId},
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  }
+
+  async crearSubcategoria(req, res) {
+    try {
+      const {id} = req.params;
+      const {_id, nombre} = req.session.usuario;
+      const datos = {...req.body, usuarioNombre: nombre};
+      await this.categoriaService.crearSubcategoria(_id, id, datos);
+
+      res.status(201).json({
+        success: true,
+        message: "Subcategoría agregada exitosamente",
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  }
 }
 
 module.exports = new CategoriaController();
