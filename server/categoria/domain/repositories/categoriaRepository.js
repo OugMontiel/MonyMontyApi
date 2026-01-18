@@ -16,6 +16,24 @@ class CategoriaRepository {
       };
     }
   }
+
+  async crear(datos) {
+    try {
+      return await this.categoriaModel.crear(datos);
+    } catch (error) {
+      console.error("Error en repositorio - crear categoría:", error);
+      throw error;
+    }
+  }
+
+  async agregarSubcategoria(categoriaId, subcategoria) {
+    try {
+      return await this.categoriaModel.agregarSubcategoria(categoriaId, subcategoria);
+    } catch (error) {
+      console.error("Error en repositorio - agregar subcategoría:", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = new CategoriaRepository();

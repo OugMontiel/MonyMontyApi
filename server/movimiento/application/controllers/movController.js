@@ -81,8 +81,6 @@ class MovimientoController {
 
   async obtenerMovimiento(req, res) {
     try {
-      if (!this.validarResultados(req, res)) return;
-
       const movimiento = await this.movimientoService.obtenerPorId(req.params.id);
 
       res.status(200).json({
@@ -97,9 +95,7 @@ class MovimientoController {
 
   async actualizarMovimiento(req, res) {
     try {
-      if (!this.validarResultados(req, res)) return;
-
-      const movimiento = await this.movimientoService.actualizar(req.params.id, req.body);
+      const movimiento = await this.movimientoService.actualizar(req.params.id, req.body, req.session.usuario);
 
       res.status(200).json({
         success: true,
@@ -113,8 +109,6 @@ class MovimientoController {
 
   async eliminarMovimiento(req, res) {
     try {
-      if (!this.validarResultados(req, res)) return;
-
       await this.movimientoService.eliminar(req.params.id);
 
       res.status(204).end();

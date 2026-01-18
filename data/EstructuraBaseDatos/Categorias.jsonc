@@ -16,13 +16,49 @@
       "_id": ObjectId("..."), 
       "subcategoria": "Restaurantes",
       "icono": "ion:restaurant-outline",
-      "nota": "" // Nota o descripción de la subcategoría
+      "color": "#FF0000", // Referencia para el Front-end
+      "nota": "", // Nota o descripción de la subcategoría
+      "createdAt": new Date(),
+      "updatedAt": new Date(),
+      "deletedAt": null,
+      "auditoria": {
+          "creadoPor": {
+            "usuarioId": ObjectId("..."),
+            "nombre": "Montiel",
+          },
+          "editadoPor": {
+            "usuarioId": ObjectId("..."),
+            "nombre": "Montiel"
+          },
+          "eliminadoPor": {
+            "usuarioId": ObjectId("..."),
+            "nombre": "Montiel"
+          }
+        }
     },
     { 
       "_id": ObjectId("..."), 
       "subcategoria": "Supermercado",
       "icono": "ion:cart-outline",
-      "nota": "" // Nota o descripción de la subcategoría
+      "color": "#FF0000", // Referencia para el Front-end
+      "nota": "", // Nota o descripción de la subcategoría
+      "createdAt": new Date(),
+      "updatedAt": new Date(),
+      "deletedAt": null,
+      "auditoria": {
+          "creadoPor": {
+            "usuarioId": ObjectId("..."),
+            "nombre": "Montiel",
+          },
+          "editadoPor": {
+            "usuarioId": ObjectId("..."),
+            "nombre": "Montiel"
+          },
+          "eliminadoPor": {
+            "usuarioId": ObjectId("..."),
+            "nombre": "Montiel"
+          }
+        }
     }
   ],
 

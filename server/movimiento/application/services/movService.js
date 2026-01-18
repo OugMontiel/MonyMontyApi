@@ -90,12 +90,48 @@ class MovimientoService {
    * Actualiza un movimiento existente
    * @param {string} id - ID del movimiento a actualizar
    * @param {object} data - Datos a actualizar
+   * @param {object} usuario - Usuario de la sesión
    * @returns {Promise<object>} - Movimiento actualizado
    * @throws {object} - Error con formato {status, message}
    */
-  async actualizar(id, data) {
+  async actualizar(id, data, usuario) {
     try {
-      const resultado = await this.movimientoRepository.actualizar(id, data);
+      // Preparar datos para actualización
+      const datosActualizacion = {
+        ...data,
+        fecha: new Date(data.fecha),
+        categoriaId: new ObjectId(data.categoriaId),
+        subcategoriaId: new ObjectId(data.subcategoriaId),
+        divisaId: data.divisaId,
+        monto: data.monto,
+        updatedAt: new Date(),
+        "auditoria.actualizadoPor": {
+          usuarioId: new ObjectId(usuario._id),
+          nombre: usuario.nombre,
+        },
+      };
+
+      if (data.tipo === "TRANSFERENCIA") {
+        if (data.transferencia) {
+          datosActualizacion.transferencia = {
+            origenEntidadId: new ObjectId(data.transferencia.origenEntidadId),
+            destinoEntidadId: new ObjectId(data.transferencia.destinoEntidadId),
+          };
+        }
+        delete datosActualizacion.entidadId;
+      } else {
+        datosActualizacion.entidadId = new ObjectId(data.entidadId);
+        delete datosActualizacion.transferencia;
+      }
+
+      // Eliminar campos undefined para no sobrescribir con null/undefined accidentalmente
+      Object.keys(datosActualizacion).forEach((key) => {
+        if (datosActualizacion[key] === undefined) {
+          delete datosActualizacion[key];
+        }
+      });
+
+      const resultado = await this.movimientoRepository.actualizar(id, datosActualizacion);
 
       if (!resultado) {
         throw new HttpError(404, "Movimiento no encontrado o no se pudo actualizar");
