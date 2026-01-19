@@ -9,7 +9,8 @@
     "dev": "node --watch --env-file .env app.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "fix:entidad-ids": "node --env-file .env scripts/fix_entidad_ids.js"
   },
   "dependencies": {
     "@react-email/components": "0.5.7",

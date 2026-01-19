@@ -3,23 +3,38 @@ const router = express.Router();
 
 const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
+const handleValidation = require("../../../core/middlewares/handleValidation");
 
-// Obtener todos los movimientos de un usuario
-router.get("/user/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerTodosLosMovimientos(req, res));
+// Obtener todos los movimientos del usuario (usa sesión)
+router.get("/", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
+  movimientoController.obtenerTodosLosMovimientos(req, res)
+);
+
+// Data para Dashboard
+router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+  movimientoController.dataParaDashboard(req, res)
+);
+
+// Ranking de categorías
+router.get("/ranking", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+  movimientoController.obtenerRankingCategorias(req, res)
+);
 
 // Obtener un movimiento específico
-router.get("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.obtenerMovimiento(req, res));
+router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
 
 // Crear nuevo movimiento
-router.post("/", movimientoValidator.validarCreacion(), (req, res) => movimientoController.crearMovimiento(req, res));
+router.post("/", movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) =>
+  movimientoController.crearMovimiento(req, res)
+);
 
 // Actualizar movimiento
-router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarActualizacionMovimiento(), (req, res) =>
+router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) =>
   movimientoController.actualizarMovimiento(req, res)
 );
 
 // Eliminar movimiento
-router.delete("/:id", movimientoValidator.validarId(), (req, res) => movimientoController.eliminarMovimiento(req, res));
+router.delete("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.eliminarMovimiento(req, res));
 
 // Ruta raíz al Final siempre
 router.get("/", (req, res) => {

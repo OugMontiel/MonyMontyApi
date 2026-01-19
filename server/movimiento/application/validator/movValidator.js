@@ -1,56 +1,121 @@
-const {body} = require("express-validator");
+const {body, query} = require("express-validator");
+const {ObjectId} = require("mongodb");
 
 const validador = require("../../../core/application/validador/Validador"); // Importa el validador genérico
 
 class MovimientoValidator {
-  validarCreacion() {
+  validarCreacionyActualizacion() {
     return [
-      validador.requiredObjectId("IdUsuario"),
+      // validador.requiredObjectId("usuarioId"), // Usuario injectado desde session
+      // validador.optionalString("referencia"), // Se crea aqui en el back, no se recive desde el front
+      validador.requiredString("origen"),
+
+      // Clasificación
+      validador.requiredString("divisaId"),
+
+      body("categoriaId")
+        .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
+        .notEmpty()
+        .withMessage("El campo categoriaId es obligatorio")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("El campo categoriaId debe ser ObjectId");
+          return true;
+        }),
+
+      body("subcategoriaId")
+        .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
+        .notEmpty()
+        .withMessage("El campo subcategoriaId es obligatorio")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("El campo subcategoriaId debe ser ObjectId");
+          return true;
+        }),
+
+      // Datos Transacción
       validador.requiredDate("fecha"),
-      validador.requiredObject("categoria"),
-      validador.requiredObject("entidad"),
-      validador.requiredObject("divisa"),
-      validador.noQueryParams(),
+      body("tipo")
+        .exists()
+        .withMessage("tipo es requerido")
+        .isIn(["INGRESO", "EGRESO", "TRANSFERENCIA"])
+        .withMessage("Tipo inválido. Valores permitidos: INGRESO, EGRESO, TRANSFERENCIA"),
+      validador.requiredNumber("monto"),
 
-      // Validación de ingreso/egreso
-      body().custom((body) => {
-        const {ingreso, egreso} = body;
+      // Concepto
+      body("concepto").optional().isObject(),
 
-        if (!ingreso && !egreso) {
-          throw new Error("Debe especificar un ingreso o egreso");
-        }
+      // Lógica de Transferencia
 
-        if (ingreso && egreso) {
-          throw new Error("No puede tener ingreso y egreso simultáneamente");
-        }
+      // ─────────────────────────────────────────────
+      // ES UNA TRANSFERENCIA
+      // ─────────────────────────────────────────────
 
-        const monto = ingreso || egreso;
+      body("transferencia")
+        .if(body("tipo").equals("TRANSFERENCIA"))
+        .exists()
+        .withMessage("Datos de transferencia requeridos para tipo TRANSFERENCIA"),
 
-        if (typeof monto !== "number" || monto <= 0) {
-          throw new Error("El monto debe ser un número positivo");
-        }
+      body("transferencia.origenEntidadId")
+        .if(body("tipo").equals("TRANSFERENCIA"))
+        .notEmpty()
+        .withMessage("La cuenta de origen es obligatoria")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("La cuenta de origen debe ser ObjectId");
+          return true;
+        }),
 
-        return true;
-      }),
-    ];
-  }
+      body("transferencia.destinoEntidadId")
+        .if(body("tipo").equals("TRANSFERENCIA"))
+        .notEmpty()
+        .withMessage("La cuenta de destino es obligatoria")
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("La cuenta de destino debe ser ObjectId");
+          return true;
+        }),
 
-  validarActualizacionMovimiento() {
-    return [
-      validador.requiredString("usuario"),
-      validador.requiredDate("fecha"),
+      // ─────────────────────────────────────────────
+      // NO ES UNA TRANSFERENCIA
+      // ─────────────────────────────────────────────
 
-      body().custom((body) => {
-        if (body.ingreso && body.egreso) {
-          throw new Error("No puede actualizar a ingreso y egreso simultáneamente");
-        }
-        return true;
-      }),
+      body("entidadId")
+        .if((value, {req}) => req.body.tipo !== "TRANSFERENCIA")
+        .exists()
+        .withMessage("entidadId es requerido cuando no es TRANSFERENCIA")
+        .bail()
+        .custom((value) => {
+          if (!ObjectId.isValid(value)) throw new Error("entidadId debe ser ObjectId");
+          return true;
+        }),
+
+      // Metadatos
+      body("estado").optional().isString(),
+      body("tags").optional().isArray(),
+      body("esRecurrente").optional().isBoolean(),
+      body("adjuntos").optional().isArray(),
     ];
   }
 
   validarId() {
     return [validador.isValidObjectId("id")];
+  }
+
+  noBodyNoQuery() {
+    return [validador.noBodyData(), validador.noQueryParams()];
+  }
+
+  validarPaginacion() {
+    return [
+      validador.noBodyData(),
+      query("page")
+        .notEmpty()
+        .withMessage("El parametro page es obligatorio")
+        .isInt({min: 1})
+        .withMessage("El parametro page debe ser un numero entero mayor a 0"),
+      query("limit")
+        .notEmpty()
+        .withMessage("El parametro limit es obligatorio")
+        .isInt({min: 1, max: 100})
+        .withMessage("El parametro limit debe ser un numero entero entre 1 y 100"),
+    ];
   }
 }
 

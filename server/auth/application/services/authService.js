@@ -27,7 +27,7 @@ class authService {
       });
 
       // Retornamos el token
-      return token;
+      return {token, usuario};
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();

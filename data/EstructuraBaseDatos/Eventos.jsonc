@@ -1,0 +1,30 @@
+/**
+ * ARCHIVO: evento.schema.jsonc
+ * DESCRIPCIÓN: Log de auditoría global del sistema.
+ * NOTA: Registra cada cambio sensible en la base de datos para permitir trazabilidad y reversión de datos.
+ */
+{
+  "_id": "ObjectId('...')",
+  
+  /* --- CLASIFICACIÓN DEL EVENTO --- */
+  "tipo": "EDITADO", // [CREADO | EDITADO | ELIMINADO | RESTAURADO]
+  "coleccion": "MOVIMIENTO", // [MOVIMIENTO | USUARIO | CATEGORIA | ENTIDAD | DIVISA]
+  
+  /* --- REFERENCIAS --- */
+  "documentoId": "ObjectId('...')", // ID del registro afectado
+  "usuarioId": "ObjectId('...')",    // Quién realizó la acción
+  "createdAt": "ISODate()",         // Cuándo ocurrió exactamente
+
+  /* --- DIFERENCIA DE DATOS (Diff) --- */
+  "payload": {
+    "antes": {},
+    "despues": {}
+  },
+
+  /* --- METADATOS ADICIONALES --- */
+  "metadata": {
+    "ip": "...",
+    "dispositivo": "...",
+    "razon": "..."
+  }
+}
