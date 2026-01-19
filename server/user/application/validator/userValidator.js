@@ -43,7 +43,11 @@ class UserValidator {
         .withMessage("Plan debe ser una Opcion valida"),
 
       // para el genero
-      body("genero").exists().withMessage("genero is required").isIn(["Mujer", "Hombre"]).withMessage("Género debe ser Mujer u Hombre"),
+      body("genero")
+        .exists()
+        .withMessage("genero is required")
+        .isIn(["Femenino", "Masculino"])
+        .withMessage("Género debe ser Femenino o Masculino"),
 
       // para la fecha de nacimiento
       body("fechaNacimiento")
