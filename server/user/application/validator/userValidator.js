@@ -36,9 +36,9 @@ class UserValidator {
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
       // para el plan
-      body("plan")
+      body("planId")
         .exists()
-        .withMessage("plan is required")
+        .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
         .withMessage("Plan debe ser una Opcion valida"),
 
@@ -94,9 +94,9 @@ class UserValidator {
       body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
 
       // para el plan
-      body("plan")
+      body("planId")
         .exists()
-        .withMessage("plan is required")
+        .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
         .withMessage("Plan debe ser una Opcion valida"),
 
