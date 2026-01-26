@@ -67,6 +67,10 @@ class UserValidator {
         .isLength({min: 8})
         .withMessage("password must be at least 8 characters long"),
 
+      body("acceptLegal")
+        .isBoolean()
+        .withMessage("Debes aceptar la política de privacidad y términos y condiciones"),
+
       // Reglas reutilizables desde el Validador global
       Validador.noQueryParams(),
     ];
