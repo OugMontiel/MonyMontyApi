@@ -38,12 +38,16 @@ class UserValidator {
       // Validación para el plan de usuario
       body("plan")
         .exists()
-        .withMessage("plan is required")
+        .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
         .withMessage("Plan debe ser una opcion valida"),
 
       // para el genero
-      body("genero").exists().withMessage("El genero es requerido").isIn(["Mujer", "Hombre"]).withMessage("Género debe ser Mujer u Hombre"),
+      body("genero")
+        .exists()
+        .withMessage("El genero es requerido")
+        .isIn(["Femenino", "Masculino"])
+        .withMessage("Género debe ser Femenino o Masculino"),
 
       // Validación para la fecha de nacimiento
       body("fechaNacimiento")
@@ -92,9 +96,9 @@ class UserValidator {
       body("email").notEmpty().withMessage("Agregar un correo electrónico").isEmail().withMessage("Por favor, introduce una dirección de correo electrónico válida"),
 
       // para el plan
-      body("plan")
+      body("planId")
         .exists()
-        .withMessage("plan is required")
+        .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
         .withMessage("Plan debe ser una opcion valida"),
 
