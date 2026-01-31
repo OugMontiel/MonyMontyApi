@@ -36,7 +36,7 @@ class UserValidator {
       body("email").notEmpty().withMessage("Agregar un correo electrónico").isEmail().withMessage("Por favor, introduce una dirección de correo electrónico válida"),
 
       // Validación para el plan de usuario
-      body("plan")
+      body("planId")
         .exists()
         .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
