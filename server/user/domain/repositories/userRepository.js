@@ -20,7 +20,12 @@ class UserRepository {
 
       return {
         nombre: user.nombre,
+        apellido: user.apellido,
+        genero: user.genero,
         email: user.email,
+        avatar: user.avatar,
+        estado: user.estado,
+        planId: user.planId,
       };
     } catch (error) {
       throw new Error(JSON.stringify({status: 400, message: "Error retrieving user"}));
