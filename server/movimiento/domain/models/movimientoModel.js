@@ -302,8 +302,6 @@ class MovimientoModel {
                     },
                   },
                 },
-                  },
-                },
               ],
             },
           },
