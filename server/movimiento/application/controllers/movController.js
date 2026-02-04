@@ -120,9 +120,12 @@ class MovimientoController {
   async obtenerTodosLosMovimientos(req, res) {
     try {
       const {_id} = req.session.usuario;
-      const {page, limit} = req.query;
+      const {page, limit, tipo} = req.query;
 
-      const resultado = await this.movimientoService.obtenerTodos(_id, page, limit);
+      const filter = {};
+      if (tipo) filter.tipo = tipo;
+
+      const resultado = await this.movimientoService.obtenerTodos(_id, page, limit, filter);
 
       res.status(200).json({
         success: true,

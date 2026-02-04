@@ -170,9 +170,9 @@ class MovimientoService {
    * @returns {Promise<object>} - Lista de movimientos y metadatos
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerTodos(id, page, limit) {
+  async obtenerTodos(id, page, limit, filter) {
     try {
-      return await this.movimientoRepository.obtenerTodos(id, page, limit);
+      return await this.movimientoRepository.obtenerTodos(id, page, limit, filter);
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError("Error al obtener la lista de movimientos");

@@ -160,15 +160,21 @@ class MovimientoModel {
    * @returns {Promise<Array>} - Lista de movimientos
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async buscarTodos(id, page, limit) {
+  async buscarTodos(id, page, limit, filter) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
       const skip = (parseInt(page) - 1) * parseInt(limit);
       const limitParsed = parseInt(limit);
 
+      // Combinar filtro de usuario y filtro adicional (si existe)
+      const matchStage = {usuarioId: new ObjectId(id)};
+      if (filter) {
+        Object.assign(matchStage, filter);
+      }
+
       const resultados = await collection
         .aggregate([
-          {$match: {usuarioId: new ObjectId(id)}},
+          {$match: matchStage},
           {
             $facet: {
               metadata: [{$count: "total"}],
@@ -176,7 +182,7 @@ class MovimientoModel {
                 {$sort: {fecha: -1}},
                 {$skip: skip},
                 {$limit: limitParsed},
-                // Lookup Entidad
+                // Lookup Entidad (Valid for Income/Expense)
                 {
                   $lookup: {
                     from: "entidades",
@@ -188,6 +194,36 @@ class MovimientoModel {
                 {
                   $unwind: {
                     path: "$entidadInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                // Lookup Transferencia Origen (Valid for Transfer)
+                {
+                  $lookup: {
+                    from: "entidades",
+                    localField: "transferencia.origenEntidadId",
+                    foreignField: "_id",
+                    as: "origenInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$origenInfo",
+                    preserveNullAndEmptyArrays: true,
+                  },
+                },
+                // Lookup Transferencia Destino (Valid for Transfer)
+                {
+                  $lookup: {
+                    from: "entidades",
+                    localField: "transferencia.destinoEntidadId",
+                    foreignField: "_id",
+                    as: "destinoInfo",
+                  },
+                },
+                {
+                  $unwind: {
+                    path: "$destinoInfo",
                     preserveNullAndEmptyArrays: true,
                   },
                 },
@@ -232,6 +268,17 @@ class MovimientoModel {
                       tipo: "$entidadInfo.tipo",
                       numero: "$entidadInfo.numero",
                     },
+                    // Add transfer details to result if they exist
+                    transferenciaDetalle: {
+                      origen: {
+                        _id: "$origenInfo._id",
+                        nombre: "$origenInfo.nombre",
+                      },
+                      destino: {
+                        _id: "$destinoInfo._id",
+                        nombre: "$destinoInfo.nombre",
+                      },
+                    },
                     categoria: {
                       _id: "$categoriaInfo._id",
                       categoria: "$categoriaInfo.categoria",
@@ -247,6 +294,8 @@ class MovimientoModel {
                     entidadInfo: 0,
                     categoriaInfo: 0,
                     subcategoriaInfo: 0,
+                    origenInfo: 0,
+                    destinoInfo: 0,
                   },
                 },
               ],
