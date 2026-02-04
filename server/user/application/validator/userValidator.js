@@ -27,45 +27,51 @@ class UserValidator {
   validateUserData = () => {
     return [
       // Validación de FullName
-      body("nombre").notEmpty().withMessage("The name is mandatory").isString(),
+      body("nombre").notEmpty().withMessage("El nombre es obligatorio").isString(),
 
       // Validación de Apellido
-      body("apellido").notEmpty().withMessage("The last name is mandatory").isString(),
+      body("apellido").notEmpty().withMessage("El apellido es obligatorio").isString(),
 
       // Validación de email
-      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
+      body("email").notEmpty().withMessage("Agregar un correo electrónico").isEmail().withMessage("Por favor, introduce una dirección de correo electrónico válida"),
 
-      // para el plan
-      body("plan")
+      // Validación para el plan de usuario
+      body("planId")
         .exists()
-        .withMessage("plan is required")
+        .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
-        .withMessage("Plan debe ser una Opcion valida"),
+        .withMessage("Plan debe ser una opcion valida"),
 
       // para el genero
-      body("genero").exists().withMessage("genero is required").isIn(["Mujer", "Hombre"]).withMessage("Género debe ser Mujer u Hombre"),
+      body("genero")
+        .exists()
+        .withMessage("El genero es requerido")
+        .isIn(["Femenino", "Masculino"])
+        .withMessage("Género debe ser Femenino o Masculino"),
 
-      // para la fecha de nacimiento
+      // Validación para la fecha de nacimiento
       body("fechaNacimiento")
         .notEmpty()
-        .withMessage("fechaNacimiento is required")
+        .withMessage("La fecha nacimiento es requerida")
         .isISO8601()
-        .withMessage("fechaNacimiento must be a valid date"),
+        .withMessage("La fecha Nacimiento debe ser una fecha válida"),
 
-      // para el avatar
+      // Validación para el avatar
       body("avatar")
         .optional()
         .isURL({protocols: ["http", "https"], require_protocol: true})
-        .withMessage("avatar must be a valid URL")
+        .withMessage("El avatar debe ser una URL válida")
         .matches(/\.(jpg|jpeg|png|gif|webp)$/i)
-        .withMessage("avatar must be an image link"),
+        .withMessage("El avatar debe ser un formato de imagen valido"),
 
       // Validación de password (asegurarse que la contraseña no esté en texto plano)
       body("password")
         .notEmpty()
-        .withMessage("send a password")
+        .withMessage("Agregar una contraseña")
         .isLength({min: 8})
-        .withMessage("password must be at least 8 characters long"),
+        .withMessage("La contraseña debe tener al menos 8 caracteres"),
+
+      body("acceptLegal").isBoolean().withMessage("Debes aceptar la política de privacidad y términos y condiciones"),
 
       // Reglas reutilizables desde el Validador global
       Validador.noQueryParams(),
@@ -84,17 +90,17 @@ class UserValidator {
   validateUserUpdateById = () => {
     return [
       // Validación de FullName
-      body("nombre").notEmpty().withMessage("The name is mandatory").isString(),
+      body("nombre").notEmpty().withMessage("El nombre es obligatorio").isString(),
 
       // Validación de email
-      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
+      body("email").notEmpty().withMessage("Agregar un correo electrónico").isEmail().withMessage("Por favor, introduce una dirección de correo electrónico válida"),
 
       // para el plan
-      body("plan")
+      body("planId")
         .exists()
-        .withMessage("plan is required")
+        .withMessage("planId is required")
         .custom((value) => ["free", "basic", "premium"].includes(value?.toLowerCase()))
-        .withMessage("Plan debe ser una Opcion valida"),
+        .withMessage("Plan debe ser una opcion valida"),
 
       // para el avatar
       body("avatar")
@@ -102,14 +108,14 @@ class UserValidator {
         .isURL({protocols: ["http", "https"], require_protocol: true})
         .withMessage("avatar must be a valid URL")
         .matches(/\.(jpg|jpeg|png|gif|webp)$/i)
-        .withMessage("avatar must be an image link"),
+        .withMessage("El avatar debe ser un enlace de imagen"),
 
       // Validación de password (asegurarse que la contraseña no esté en texto plano)
       body("password")
         .notEmpty()
-        .withMessage("send a password")
+        .withMessage("Agregar una contraseña")
         .isLength({min: 8})
-        .withMessage("password must be at least 8 characters long"),
+        .withMessage("La contraseña debe tener al menos 8 caracteres"),
 
       // Reglas reutilizables desde el Validador global
       Validador.isValidObjectId(),

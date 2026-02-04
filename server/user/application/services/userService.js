@@ -14,6 +14,11 @@ class UserService {
     try {
       // console.log('data.password',data);
 
+      // Convertir fecha de nacimiento a Date
+      if (data.fechaNacimiento) {
+        data.fechaNacimiento = new Date(data.fechaNacimiento);
+      }
+
       // Encriptar la contraseña
       const newpassword = await bcrypt.hash(data.password, 10);
       // Reemplazar la contraseña original con el hash

@@ -5,12 +5,17 @@
  */
 {
   "_id": ObjectId("..."), 
-  "nombre": "Montiel",
+  "nombre": "Montiel", // nombre del Usuario
+  "apellido": "Montiel", // apellido del Usuario
+  "fechaNacimiento": ISODate(), // fecha de nacimiento del Usuario
+  "genero": "Masculino", // genero del Usuario
   "email": "prueba@casa.com", // Debe ser único e indexado para el Login
   "password": "$2b$10$3A68Z9lrOMj21G1GPIwLlOlLQObBXUvfjzNuZVnZd4sq8ywO0rMi.", // Hash (Bcrypt/Argon2). Nunca texto plano.
   
   "estado": "ACTIVO", // Control de acceso: ACTIVO, SUSPENDIDO, INACTIVO
   "planId": "BASICO",   // Determina límites de la colección 'planes': BASICO | PRO | PLUS
+
+  "avatar": null, // URL del avatar del usuario
 
   /* --- TIMESTAMPS DE CICLO DE VIDA --- */
   "createdAt": ISODate(), // Fecha exacta de registro
