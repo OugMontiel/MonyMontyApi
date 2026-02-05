@@ -15,11 +15,11 @@ class authService {
     try {
       // Verificar si el usuario existe
       const usuario = await authRepository.getUserByEmail(email);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(404, "Usuario o contraseña incorrecta.");
 
       // Verificar si la contraseña es correcta
       const isMatch = await bcrypt.compare(password, usuario.password);
-      if (!isMatch) throw new HttpError(401, "No autorizado, contraseña incorrecta");
+      if (!isMatch) throw new HttpError(401, "Usuario o contraseña incorrecta.");
 
       // Generamos el token
       const token = jwt.sign(usuario, process.env.KEY_SECRET, {
@@ -37,7 +37,7 @@ class authService {
     try {
       // Verificar si el usuario existe
       const usuario = await authRepository.getUserByEmail(email);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(404, "Usuario o contraseña incorrecta.");
 
       // Generamos el token
       const token = jwt.sign({id: usuario._id.toString()}, process.env.KEY_SECRET, {
@@ -74,7 +74,7 @@ class authService {
     try {
       // Optenemos el usuario
       const usuario = await authRepository.getUserFromToken(token);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(404, "Usuario o contraseña incorrecta.");
       return usuario;
     } catch (error) {
       if (error instanceof HttpError) throw error;
