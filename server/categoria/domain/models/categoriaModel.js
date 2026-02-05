@@ -22,6 +22,7 @@ class CategoriaModel {
               _id: {$toString: "$_id"},
               value: {$toString: "$_id"},
               label: "$categoria",
+              isPrivate: {$ne: ["$usuarioId", null]},
               subcategorias: {
                 $map: {
                   input: {
