@@ -303,29 +303,6 @@ class MovimientoModel {
                   },
                 },
               ],
-              ultimo: [
-                {$sort: {fecha: -1}},
-                {$limit: 1},
-                {
-                  $lookup: {
-                    from: "entidades",
-                    localField: "entidadId",
-                    foreignField: "_id",
-                    as: "entidadInfo",
-                  },
-                },
-                {
-                  $unwind: {
-                    path: "$entidadInfo",
-                    preserveNullAndEmptyArrays: true,
-                  },
-                },
-                {
-                  $addFields: {
-                    entidad: "$entidadInfo",
-                  },
-                },
-              ],
             },
           },
         ])
