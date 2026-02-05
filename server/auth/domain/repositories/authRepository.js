@@ -10,7 +10,7 @@ class authRepository {
       const usuario = await authModel.getUserByEmail(email);
 
       // Validamos que el resultado no sea undefined o un array vacío
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(404, "Usuario o contraseña incorrecta.");
       if (usuario.length === 0) throw new HttpError(404, "Credenciales inválidas");
       if (usuario.length > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
 
