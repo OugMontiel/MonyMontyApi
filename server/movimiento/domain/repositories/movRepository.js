@@ -102,9 +102,9 @@ class MovimientoRepository {
    * @returns {Promise<object>} - Lista de movimientos y metadatos
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerTodos(id, page, limit) {
+  async obtenerTodos(id, page, limit, filter) {
     try {
-      return await this.movimientoModel.buscarTodos(id, page, limit);
+      return await this.movimientoModel.buscarTodos(id, page, limit, filter);
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new RepositoryError("Error al obtener los movimientos de la base de datos");
