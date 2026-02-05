@@ -115,6 +115,7 @@ class MovimientoValidator {
         .withMessage("El parametro limit es obligatorio")
         .isInt({min: 1, max: 100})
         .withMessage("El parametro limit debe ser un numero entero entre 1 y 100"),
+      query("tipo").optional().isString().isIn(["INGRESO", "EGRESO", "TRANSFERENCIA", "STANDARD"]),
     ];
   }
 }
