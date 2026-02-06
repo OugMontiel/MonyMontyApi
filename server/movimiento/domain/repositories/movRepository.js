@@ -1,6 +1,6 @@
 const movimientoModel = require("../models/movimientoModel");
 const HttpError = require("../../../core/utils/HttpError");
-const RepositoryError = require("../../../core/Domain/Repository/RepositoryError.js");
+const RepositoryError = require("../../../core/domain/Repository/RepositoryError.js");
 
 class MovimientoRepository {
   constructor() {
