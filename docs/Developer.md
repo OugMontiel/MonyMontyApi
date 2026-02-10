@@ -1,6 +1,14 @@
-# Arquitectura hexagonal y vertical _Slecer_
+# Arquitectura Hexagonal + Vertical Slices
 
-```bash
+Esta estructura combina:
+
+* Arquitectura Hexagonal (Ports & Adapters)
+* Organización vertical por módulo
+* Enfoque práctico para APIs Node.js escalables
+
+## 📦 Estructura base
+
+```text
 /application
 │   ├── controllers      # Controladores: manejan las solicitudes HTTP
 │   ├── routes           # Rutas: definen las URLs y enlazan con los controladores
@@ -13,71 +21,102 @@
     └── mongodb.js       # Conexión técnica a la base de datos (MongoDB)
 ```
 
-## 📁 `/application` – Capa de aplicación
+## 1. Capa Application (Entrada)
 
-Contiene la lógica para manejar flujos de caso de uso. No contiene reglas de negocio, sino coordinación entre las capas y validación de
-datos externos.
+Gestiona la comunicación con el mundo exterior (HTTP).
+Aquí **no vive la lógica del negocio**, solo coordinación.
 
-### 🔹 `/routes`
+### `routes/`
 
-- Define las rutas HTTP expuestas al exterior.
-- Asocia cada endpoint con su controlador y validador.
-- Se mantiene libre de lógica de negocio.
+* Define rutas HTTP
+* Conecta endpoint → validator → controller
 
-### 🔹 `/validator`
+### `validator/`
 
-- Validan los datos de entrada (`req.body`, `req.params`, `req.query`) antes de que lleguen al servicio o dominio.
-- Usualmente se implementan con `express-validator`, `Joi`, `Yup`, etc.
-- Garantizan que los datos malformados nunca entren al sistema.
+* Valida `req.body`, `req.params`, `req.query`
+* Evita que datos inválidos entren al sistema
 
-### 🔹 `/controllers`
+### `controllers/`
 
-- Reciben las peticiones HTTP desde las rutas.
-- Delegan la lógica al servicio correspondiente.
-- Devuelven la respuesta al cliente (`res.json`, `res.status()`, etc.).
-- No deben tener lógica de negocio ni acceso directo a la base de datos.
+* Reciben la petición HTTP
+* Llaman al servicio
+* Devuelven la respuesta
+* No acceden a la base de datos
+* No contienen reglas de negocio
 
-### 🔹 `/services`
+### `services/`
 
-- Contienen la lógica de coordinación de casos de uso.
-- Orquestan llamadas a los repositorios del dominio.
-- Aplican reglas de negocio a nivel de flujo (no de entidad).
-- Sirven de puente entre los controladores (entrada) y los repositorios/modelos (dominio).
+* Implementan casos de uso
+* Coordinan repositorios y modelos
+* Manejan flujos y decisiones
 
 📌 Si tu lógica involucra múltiples pasos, reglas o decisiones, debería vivir aquí, no en el controlador.
 
-## 📁 `/domain` – Capa del dominio
+## 2. Capa Domain (Núcleo del negocio)
 
-Representa el **núcleo del negocio**. Es independiente de la tecnología (framework, DB, protocolo).
+Es independiente de tecnología.
 
-### 🔹 `/repositories`
+### `models/`
 
-- Actúan como **interfaces** entre la lógica del dominio y la fuente de datos (base de datos, API, etc.).
-- Permiten desacoplar la lógica del negocio de la infraestructura.
-- Implementan métodos como `findById`, `save`, `update`, etc.
+* Entidades del negocio (`Usuario`, `Movimiento`, etc.)
+* Contienen reglas propias
 
-📌 Si en el futuro cambias Mongo por PostgreSQL, deberías modificar solo esta parte.
+### `repositories/`
 
-### 🔹 `/models`
+* Son interfaces hacia los datos
+* Definen operaciones como:
 
-- Representan las **entidades y objetos de valor** de tu dominio.
-- En Mongo, pueden incluir la definición del esquema (si usas Mongoose).
-- Contienen reglas de validación internas o métodos propios del modelo.
+```text
+findById
+save
+update
+delete
+```
 
-📌 Ejemplo: `Movimiento`, `Usuario`, `Cuenta`, etc.
+Aquí no se escribe Mongo, SQL ni detalles técnicos.
 
+## 🟡 3. Capa Infrastructure (Adaptadores técnicos)
 
-## 📁 `/infrastructure` – Capa de infraestructura
+Implementa lo que el dominio necesita, pero sin lógica de negocio.
 
-Contiene la implementación de recursos técnicos que se usan en el sistema.
+### `mongodb.js`
 
-### 🔹 `mongodb.js`
+* Configura conexión a MongoDB
+* Maneja cliente y configuración
 
-- Configura la conexión a la base de datos (MongoDB en este caso).
-- Exporta la instancia del cliente o base de datos para ser usada por los repositorios.
-- Puede incluir lógica para reconexión, logging o configuración avanzada.
+Si se cambia la base de datos, el impacto se queda aquí.
 
-## 🧠 Notas
+## 🔄 Flujo de una petición
 
-- Esta estructura combina principios de **arquitectura hexagonal (puertos y adaptadores)** y **arquitectura vertical por módulo**.
-- Permite **escalar el proyecto** sin perder el orden, facilitando testing, mantenimiento y separación de responsabilidades.
+```text
+HTTP Request
+   ↓
+Route
+   ↓
+Validator
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+Infrastructure (DB)
+```
+
+## 🚫 Reglas importantes
+
+| Capa           | No debe hacer               |
+| -------------- | --------------------------- |
+| Controller     | Lógica de negocio           |
+| Service        | Acceso directo a Mongo      |
+| Domain         | Depender de Express o Mongo |
+| Infrastructure | Reglas del negocio          |
+
+## 🎯 Beneficios
+
+* Escalable
+* Mantenible
+* Bajo acoplamiento
+* Fácil de testear
+* Cambios tecnológicos sin romper negocio
