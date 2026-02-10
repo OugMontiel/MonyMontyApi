@@ -1,216 +1,144 @@
-# 📘 Plantilla Completa de Documentación para API REST
+# 📘 Guía de Estándares para APIs REST
 
-## 🧾 Descripción general
+> Este documento define las **reglas, convenciones y buenas prácticas** para el diseño de APIs dentro del proyecto.
+> No describe endpoints específicos. El código es la fuente de verdad.
 
-Breve descripción de lo que hace la API.
+## 🧱 1. Principios Generales
 
-- **Base URL:** `https://api.ejemplo.com/v1`
-- **Formato de respuesta:** JSON
-- **Versión:** 1.0.0
-- **Autenticación requerida:** Sí (Bearer Token)
+* La API sigue el estilo **REST**
+* Comunicación vía **HTTP + JSON**
+* Las rutas representan **recursos**, no acciones
+* Las respuestas deben ser **consistentes** en estructura
+* El backend es la fuente de verdad, la documentación describe normas
 
----
+## 🌍 2. Base de la API
 
-## 🔐 Autenticación
+| Elemento             | Regla                            |
+| -------------------- | -------------------------------- |
+| Formato de respuesta | `application/json`               |
+| Versionado           | `/v1/` cuando la API sea pública |
+| Protocolo            | Siempre HTTPS en producción      |
+| Codificación         | UTF-8                            |
 
-- **Método:** Token Bearer
-- **Header:** `Authorization: Bearer <token>`
+## 🔐 3. Autenticación
 
-```http
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
-```
+| Elemento         | Estándar                      |
+| ---------------- | ----------------------------- |
+| Método           | Sesión (Cookie + JWT interno) |
+| Header requerido | `Cookie: connect.sid=...`     |
+| Dónde se valida  | Middleware por rutas          |
 
----
+> **Nota:** El sistema utiliza `express-session` para manejar la autenticación. Internamente se genera un JWT, pero este se almacena en la sesión del servidor (`req.session.token`) y no requiere ser enviado manualmente por el cliente en un header `Authorization`.
 
-## 📌 Endpoints
+## 📦 4. Estructura de Respuestas
 
-### 🟢 `GET /recurso`
-
-- **Descripción:** Recupera una lista de recursos.
-- **Autenticación:** ✅ Sí
-
-#### Parámetros de URL
-
-| Parámetro | Tipo   | Requerido | Descripción               |
-| --------- | ------ | --------- | ------------------------- |
-| `id`      | string | ❌        | ID específico del recurso |
-
-#### Parámetros de consulta (Query Params)
-
-| Parámetro | Tipo | Requerido | Descripción                      |
-| --------- | ---- | --------- | -------------------------------- |
-| `page`    | int  | ❌        | Página actual                    |
-| `limit`   | int  | ❌        | Cantidad de elementos por página |
-
-#### Headers
-
-| Nombre          | Valor            | Requerido |
-| --------------- | ---------------- | --------- |
-| `Authorization` | Bearer `<token>` | ✅        |
-| `Accept`        | application/json | ❌        |
-
-#### Ejemplo de solicitud
-
-```http
-GET /recurso?page=1&limit=10 HTTP/1.1
-Host: api.ejemplo.com
-Authorization: Bearer <token>
-```
-
-#### Ejemplo de respuesta
+### ✅ Respuesta exitosa
 
 ```json
 {
-  "data": [
-    {
-      "id": "1",
-      "nombre": "Ejemplo"
-    }
-  ],
-  "meta": {
-    "total": 100,
-    "page": 1
+  "data": {},
+  "meta": {}
+}
+```
+
+| Campo  | Uso                                      |
+| ------ | ---------------------------------------- |
+| `data` | Información solicitada                   |
+| `meta` | Paginación, conteos, info extra opcional |
+
+### ❌ Respuesta de error
+
+```json
+{
+  "error": {
+    "message": "Descripción del error",
+    "code": 400
   }
 }
 ```
 
-#### Códigos de estado
+| Campo     | Uso                         |
+| --------- | --------------------------- |
+| `message` | Mensaje claro para frontend |
+| `code`    | Código HTTP                 |
 
-| Código | Descripción                |
-| ------ | -------------------------- |
-| 200    | OK                         |
-| 401    | No autorizado              |
-| 404    | No encontrado              |
-| 500    | Error interno del servidor |
+## 🔢 5. Uso de Status Codes
 
----
+| Código | Uso                                     |
+| ------ | --------------------------------------- |
+| 200    | Operación exitosa                       |
+| 201    | Recurso creado                          |
+| 204    | Operación exitosa sin contenido         |
+| 400    | Error de validación o datos incorrectos |
+| 401    | No autenticado                          |
+| 403    | Sin permisos                            |
+| 404    | Recurso no encontrado                   |
+| 409    | Conflicto de datos                      |
+| 422    | Validación de negocio fallida           |
+| 500    | Error interno                           |
 
-### 🟡 `POST /recurso`
+## 🧾 6. Convenciones de Rutas
 
-- **Descripción:** Crea un nuevo recurso.
-- **Autenticación:** ✅ Sí
+| Correcto                | Incorrecto          |
+| ----------------------- | ------------------- |
+| `/users`                | `/getUsers`         |
+| `/movimientos/123`      | `/deleteMovimiento` |
+| `/users/45/movimientos` | `/userMovements`    |
 
-#### Headers
+Reglas:
 
-| Nombre          | Valor            | Requerido |
-| --------------- | ---------------- | --------- |
-| `Content-Type`  | application/json | ✅        |
-| `Authorization` | Bearer `<token>` | ✅        |
+* Usar sustantivos, no verbos
+* Usar plural para colecciones
+* IDs como parámetros de ruta
+* Filtros en query params
 
-#### Cuerpo de la solicitud (JSON)
+## 🔍 7. Query Params
 
-| Campo    | Tipo    | Requerido | Descripción         |
-| -------- | ------- | --------- | ------------------- |
-| `nombre` | string  | ✅        | Nombre del recurso  |
-| `activo` | boolean | ❌        | Si está activo o no |
+Usados para:
 
-#### Ejemplo de solicitud
+* Paginación → `?page=1&limit=10`
+* Filtros → `?status=active`
+* Búsquedas → `?search=diego`
 
-```http
-POST /recurso HTTP/1.1
-Host: api.ejemplo.com
-Content-Type: application/json
-Authorization: Bearer <token>
+Nunca usar query params para operaciones destructivas.
 
-{
-  "nombre": "Nuevo Recurso",
-  "activo": true
-}
-```
+## 🧠 8. Validaciones
 
-#### Ejemplo de respuesta
+* Validar datos **antes** de llegar a la lógica de negocio
+* Errores de validación → `400`
+* Errores de reglas de negocio → `422`
 
-```json
-{
-  "id": "abc123",
-  "nombre": "Nuevo Recurso",
-  "activo": true,
-  "fecha_creacion": "2025-07-19T15:00:00Z"
-}
-```
+## 🧼 9. Buenas Prácticas Obligatorias
 
-#### Códigos de estado
+* No exponer datos sensibles
+* No devolver stack traces
+* Manejo de errores centralizado
+* Respuestas consistentes
+* Logs solo en backend, no en respuestas
 
-| Código | Descripción                |
-| ------ | -------------------------- |
-| 201    | Creado exitosamente        |
-| 400    | Solicitud mal formada      |
-| 401    | No autorizado              |
-| 409    | Conflicto (ya existe)      |
-| 422    | Error de validación        |
-| 500    | Error interno del servidor |
+## 📁 10. Fuente de Verdad
 
----
+| Elemento                     | Fuente oficial                 |
+| ---------------------------- | ------------------------------ |
+| Estructura real de endpoints | Código                         |
+| Reglas de diseño             | Este documento                 |
+| Swagger/OpenAPI              | Solo cuando la API sea pública |
 
-### 🔴 `DELETE /recurso/:id`
+## 🚦 11. Cuándo se generará documentación Swagger
 
-- **Descripción:** Elimina un recurso específico.
-- **Autenticación:** ✅ Sí
+Swagger se implementará cuando:
 
-#### Ejemplo de solicitud
+* La API sea pública o usada por terceros
+* Exista versión estable
+* Se requiera contrato formal
 
-```http
-DELETE /recurso/123 HTTP/1.1
-Host: api.ejemplo.com
-Authorization: Bearer <token>
-```
+Hasta entonces, **no se mantiene OpenAPI** para evitar documentación falsa.
 
-#### Ejemplo de respuesta
+## 🎯 Objetivo de este documento
 
-```json
-{
-  "mensaje": "Recurso eliminado correctamente"
-}
-```
+Este archivo existe para:
 
-#### Códigos de estado
-
-| Código | Descripción                |
-| ------ | -------------------------- |
-| 200    | Eliminado exitosamente     |
-| 404    | Recurso no encontrado      |
-| 401    | No autorizado              |
-| 500    | Error interno del servidor |
-
----
-
-## ❌ Códigos de error comunes
-
-| Código | Error          | Descripción                             |
-| ------ | -------------- | --------------------------------------- |
-| 400    | Bad Request    | El cuerpo de la solicitud tiene errores |
-| 401    | Unauthorized   | Token inválido o ausente                |
-| 403    | Forbidden      | No tienes permiso                       |
-| 404    | Not Found      | Recurso no encontrado                   |
-| 409    | Conflict       | Ya existe un recurso igual              |
-| 422    | Unprocessable  | Validación fallida de campos            |
-| 500    | Internal Error | Error inesperado del servidor           |
-
----
-
-## 🧪 Ejemplos con curl
-
-```bash
-curl -X POST https://api.ejemplo.com/v1/recurso \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <tu_token>" \
-  -d '{ "nombre": "Nuevo", "activo": true }'
-```
-
----
-
-## 🧼 Buenas prácticas
-
-- Usa HTTPS siempre.
-- Usa status codes adecuados.
-- No expongas datos sensibles.
-- Valida el input del cliente.
-- Usa paginación y filtros en consultas masivas.
-
----
-
-## 📞 Contacto del desarrollador
-
-- Email: [soporte@ejemplo.com](mailto:soporte@ejemplo.com)
-- Teléfono: +57 300 000 0000
-- Documentación adicional: [docs.api.ejemplo.com](https://docs.api.ejemplo.com)
+* Mantener coherencia entre equipos
+* Evitar discusiones sobre formatos
+* Reducir deuda técnica
+* Facilitar escalabilidad futura
