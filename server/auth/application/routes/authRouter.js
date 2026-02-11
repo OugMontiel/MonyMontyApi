@@ -8,9 +8,6 @@ const authValidator = require("../validator/authValidator.js");
 const authController = require("../controllers/authController.js");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
-// --- RUTA RAÍZ ---
-router.get("/", (req, res) => res.send("¡Bienvenido a MonyMonty auth!"));
-
 // --- SESIÓN ---
 router.get("/check", (req, res) => authController.checkSession(req, res));
 router.get("/logout", (req, res) => authController.cerrarSesion(req, res));
