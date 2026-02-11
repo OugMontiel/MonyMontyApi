@@ -61,7 +61,7 @@ class authService {
       throw new ServiceError();
     }
   }
-  async ValidarUnTocken(token) {
+  async validarToken(token) {
     try {
       const decoded = jwt.verify(token, process.env.KEY_SECRET);
       return decoded;
@@ -76,6 +76,46 @@ class authService {
       await authRepository.eliminarTokenSesion(userId);
       return true;
     } catch (error) {
+      throw new ServiceError();
+    }
+  }
+
+  async validarSesion(token) {
+    try {
+      // 1. Validar firma y expiración del JWT
+      const decoded = await this.validarToken(token);
+      if (!decoded) throw new HttpError(401, "Token inválido o expirado");
+
+      // 2. Validar existencia en Base de Datos (Integridad y Revocación)
+      const usuario = await authRepository.validarTokenSesion(decoded.id, token);
+      if (!usuario) throw new HttpError(401, "Sesión revocada o inválida");
+
+      // 3. Renovación Silenciosa (Silent Refresh)
+      // Si el token está próximo a vencer (ej. < 15 minutos), generamos uno nuevo
+      const expTimestamp = decoded.exp * 1000; // Convertir a ms
+      const now = Date.now();
+      const timeUntilExp = expTimestamp - now;
+      const refreshThreshold = ms(process.env.JWT_REFRESH_THRESHOLD || "15m");
+
+      let newToken = token;
+
+      if (timeUntilExp < refreshThreshold) {
+        // Generar nuevo token
+        const newPayload = {id: decoded.id, role: decoded.role};
+        newToken = jwt.sign(newPayload, process.env.KEY_SECRET, {
+          expiresIn: process.env.EXPRESS_EXPIRE,
+        });
+
+        // Actualizar en BD
+        await authRepository.guardarTokenSesion(decoded.id, newToken);
+      }
+
+      // Retornar usuario y el token (puede ser el mismo o uno renovado)
+      // Eliminamos password por seguridad
+      delete usuario.password;
+      return {usuario, token: newToken, renewed: newToken !== token};
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
       throw new ServiceError();
     }
   }

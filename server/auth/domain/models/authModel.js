@@ -43,6 +43,18 @@ class authModel {
       throw new modelsError();
     }
   }
+  async getUserByIdAndSessionToken(userId, token) {
+    try {
+      const collection = this.dbConnection.db.collection("user");
+      const {ObjectId} = require("mongodb");
+
+      const [res] = await collection.find({_id: new ObjectId(userId), tokenSesion: token}).toArray();
+      return res;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
+    }
+  }
 }
 
 module.exports = new authModel();

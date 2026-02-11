@@ -75,6 +75,29 @@ class authRepository {
       throw new RepositoryError();
     }
   }
+  async guardarTokenSesion(userId, token) {
+    try {
+      const {ObjectId} = require("mongodb");
+      const filtro = {_id: new ObjectId(userId)};
+      const datosSet = {tokenSesion: token};
+
+      const resultado = await authModel.upDateUsuario(filtro, datosSet);
+      return resultado;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
+    }
+  }
+
+  async validarTokenSesion(userId, token) {
+    try {
+      const usuario = await authModel.getUserByIdAndSessionToken(userId, token);
+      return usuario;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
+    }
+  }
 }
 
 module.exports = new authRepository();

@@ -58,14 +58,24 @@ class AuthController {
         return res.status(401).json({authenticated: false, message: "Not authenticated"});
       }
 
-      // Verificamos el token JWT
-      const esValido = await authService.ValidarUnTocken(token);
+      // Verificamos el token JWT y estado en BD (incluye renovación)
+      const resultado = await authService.validarSesion(token);
 
-      return esValido
-        ? res.status(200).json({authenticated: true, token})
-        : res.status(401).json({authenticated: false, message: "Token inválido o expirado"});
+      if (resultado.renewed) {
+        // Si se renovó, actualizar sesión
+        req.session.token = resultado.token;
+        req.session.save();
+      }
+
+      return res.status(200).json({
+        authenticated: true,
+        token: resultado.token,
+        user: resultado.usuario,
+      });
     } catch (error) {
-      handleError(res, error);
+      // Si falla validación (token inválido, expirado, revocado)
+      req.session.destroy();
+      return res.status(401).json({authenticated: false, message: "Sesión inválida o expirada"});
     }
   }
 
