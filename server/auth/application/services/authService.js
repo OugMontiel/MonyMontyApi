@@ -1,6 +1,7 @@
 // Implementa la lógica de negocio y coordina las interacciones entre el dominio y la infraestructura.
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const ms = require("ms");
 const React = require("react");
 
 const authRepository = require("../../domain/repositories/authRepository");
@@ -21,13 +22,25 @@ class authService {
       const isMatch = await bcrypt.compare(password, usuario.password);
       if (!isMatch) throw new HttpError(401, "No autorizado, contraseña incorrecta");
 
-      // Generamos el token
-      const token = jwt.sign(usuario, process.env.KEY_SECRET, {
+      // Generamos el token con payload mínimo
+      const payload = {
+        id: usuario._id.toString(),
+        role: usuario.role, // Si existe, útil para RBAC
+      };
+
+      const token = jwt.sign(payload, process.env.KEY_SECRET, {
         expiresIn: process.env.EXPRESS_EXPIRE,
       });
 
-      // Retornamos el token
-      return {token, usuario};
+      // Guardamos el token en la base de datos (Single Session)
+      await authRepository.guardarTokenSesion(usuario._id, token);
+
+      // Eliminamos la contraseña antes de devolver el usuario
+      const usuarioSafe = {...usuario};
+      delete usuarioSafe.password;
+
+      // Retornamos el token y usuario seguro
+      return {token, usuario: usuarioSafe};
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();

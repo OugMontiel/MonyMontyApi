@@ -31,8 +31,8 @@ class AuthController {
 
         req.session.destroy((err) => {
           if (err) return handleError(res, err);
-        return res.status(200).json({message: "Sesión cerrada correctamente"});
-      });
+          return res.status(200).json({message: "Sesión cerrada correctamente"});
+        });
       });
     } catch (error) {
       handleError(res, error);
@@ -87,7 +87,7 @@ class AuthController {
 
       // Guardamos el token en la sesión y forzamos guardado antes de responder.
       req.session.token = token;
-      req.session.usuario = usuario
+      req.session.usuario = usuario;
 
       req.session.save((err) => {
         if (err) {
@@ -117,8 +117,8 @@ class AuthController {
   async checkToken(req, res) {
     try {
       const {token} = req.query;
-      // Verificamos el token JWT
-      const esValido = await authService.ValidarUnTocken(token);
+      // Verificamos el token JWT (Firma solamente)
+      const esValido = await authService.validarToken(token);
 
       if (!esValido) {
         return res.status(401).json({
