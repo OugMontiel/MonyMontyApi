@@ -15,12 +15,16 @@ class AuthValidator {
       // Validación de password
       body("password")
         .notEmpty()
-        .withMessage("send a password")
+        .withMessage("La contraseña es obligatoria")
         .isLength({min: 8})
-        .withMessage("password must be at least 8 characters long"),
+        .withMessage("Credenciales inválidas"),
 
       // Validación de email
-      body("email").notEmpty().withMessage("send a email").isEmail().withMessage("Please enter a valid email address"),
+      body("email")
+        .notEmpty()
+        .withMessage("El correo electrónico es obligatorio")
+        .isEmail()
+        .withMessage("Por favor ingresa un correo electrónico válido"),
 
       Validador.noQueryParams(),
     ];

@@ -24,9 +24,8 @@ class authRepository {
       const usuario = await authModel.getUserByEmail(email);
 
       // Validamos que el resultado no sea undefined o un array vacío
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
-      if (usuario.length === 0) throw new HttpError(404, "Credenciales inválidas");
-      if (usuario.length > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
+      if (!usuario || usuario.length === 0) throw new HttpError(401, "Credenciales inválidas");
+      if (usuario.length > 1) throw new HttpError(500, "Ocurrió un error inesperado. Intenta nuevamente más tarde.");
 
       // Si se encontró un usuario, devolvemos el primer (y único) resultado en el array
       return usuario;
@@ -41,7 +40,7 @@ class authRepository {
       const datosSet = {tokenRecuperacion: token}; // Dato a actualizar
 
       const resultado = await authModel.upDateUsuario(filtro, datosSet);
-      if (resultado.matched > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
+      if (resultado.matched > 1) throw new HttpError(500, "Ocurrió un error inesperado. Intenta nuevamente más tarde.");
 
       return resultado;
     } catch (error) {

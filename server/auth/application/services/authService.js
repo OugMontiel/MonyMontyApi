@@ -12,20 +12,20 @@ const {enviosDeCorreo} = require("../../../core/application/services/EnvioDeEmai
 const PasswordResetEmail = require("../../../core/infrastructure/emails/PasswordResetEmail.jsx");
 
 class authService {
-  async getUserByEmail(password, email) {
+  async loginWithCredentials(email, password) {
     try {
       // Verificar si el usuario existe
       const usuario = await authRepository.getUserByEmail(email);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(401, "Credenciales inválidas");
 
       // Verificar si la contraseña es correcta
       const isMatch = await bcrypt.compare(password, usuario.password);
-      if (!isMatch) throw new HttpError(401, "No autorizado, contraseña incorrecta");
+      if (!isMatch) throw new HttpError(401, "Credenciales inválidas");
 
       // Generamos el token con payload mínimo
       const payload = {
         id: usuario._id.toString(),
-        role: usuario.role, // Si existe, útil para RBAC
+        email: usuario.email,
       };
 
       const token = jwt.sign(payload, process.env.KEY_SECRET, {
@@ -35,12 +35,8 @@ class authService {
       // Guardamos el token en la base de datos (Single Session)
       await authRepository.guardarTokenSesion(usuario._id, token);
 
-      // Eliminamos la contraseña antes de devolver el usuario
-      const usuarioSafe = {...usuario};
-      delete usuarioSafe.password;
-
       // Retornamos el token y usuario seguro
-      return {token, usuario: usuarioSafe};
+      return {token, usuario};
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();

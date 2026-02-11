@@ -86,7 +86,7 @@ class AuthController {
   async sessionLogin(req, res) {
     try {
       const {email, password} = req.body;
-      const {token, usuario} = await authService.getUserByEmail(password, email);
+      const {token, usuario} = await authService.loginWithCredentials(email, password);
 
       // Guardamos el token en la sesión y forzamos guardado antes de responder.
       req.session.token = token;
@@ -94,12 +94,12 @@ class AuthController {
 
       req.session.save((err) => {
         if (err) {
-          return handleError(res, err, 500, "Error al guardar la sesión");
+          return handleError(res, err, 500, "Ocurrió un error inesperado. Intenta nuevamente más tarde.");
         }
         return res.status(201).json({token});
       });
     } catch (error) {
-      handleError(res, error, 400, "Error al iniciar sesión");
+      handleError(res, error, 500, "Ocurrió un error inesperado. Intenta nuevamente más tarde.");
     }
   }
 
