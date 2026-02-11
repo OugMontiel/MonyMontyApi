@@ -6,6 +6,10 @@ class AuthValidator {
     return [Validador.noQueryParams(), Validador.noBodyData()];
   };
 
+  validatorLogout = () => {
+    return [Validador.noQueryParams(), Validador.noBodyData()];
+  };
+
   validatorSessionLogin = () => {
     return [
       // Validación de password
