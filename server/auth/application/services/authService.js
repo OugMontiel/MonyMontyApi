@@ -123,10 +123,8 @@ class authService {
         await authRepository.guardarTokenSesion(decoded.id, newToken);
       }
 
-      // Retornar usuario y el token (puede ser el mismo o uno renovado)
-      // Eliminamos password por seguridad
-      delete usuario.password;
-      return {usuario, token: newToken, renewed: newToken !== token};
+      // Retornar el token (puede ser el mismo o uno renovado)
+      return {token: newToken, renewed: newToken !== token};
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();

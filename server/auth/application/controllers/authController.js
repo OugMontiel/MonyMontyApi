@@ -54,6 +54,7 @@ class AuthController {
       // Obtener el token desde la sesión
       const token = req.session?.token;
 
+      // Validar existencia del token
       if (!token) {
         return res.status(401).json({authenticated: false, message: "Not authenticated"});
       }
@@ -61,16 +62,17 @@ class AuthController {
       // Verificamos el token JWT y estado en BD (incluye renovación)
       const resultado = await authService.validarSesion(token);
 
+      // Manejar renovación de token si aplica
       if (resultado.renewed) {
         // Si se renovó, actualizar sesión
         req.session.token = resultado.token;
         req.session.save();
       }
 
+      // Responder con éxito
       return res.status(200).json({
         authenticated: true,
         token: resultado.token,
-        user: resultado.usuario,
       });
     } catch (error) {
       // Si falla validación (token inválido, expirado, revocado)

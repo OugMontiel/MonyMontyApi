@@ -1,3 +1,5 @@
+const {ObjectId} = require("mongodb");
+
 const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
 const HttpError = require("../../../core/utils/HttpError");
 const modelsError = require("../../../core/domain/models/modelsError.js");
@@ -46,9 +48,18 @@ class authModel {
   async getUserByIdAndSessionToken(userId, token) {
     try {
       const collection = this.dbConnection.db.collection("user");
-      const {ObjectId} = require("mongodb");
 
-      const [res] = await collection.find({_id: new ObjectId(userId), tokenSesion: token}).toArray();
+      const [res] = await collection.find(
+        {
+          _id: new ObjectId(userId),
+          tokenSesion: token,
+        },
+        {
+          projection: {
+            tokenSesion: 1,
+          },
+        },
+      ).toArray();
       return res;
     } catch (error) {
       if (error instanceof HttpError) throw error;

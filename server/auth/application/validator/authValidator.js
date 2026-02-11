@@ -2,6 +2,10 @@ const {body, query} = require("express-validator");
 
 const Validador = require("../../../core/application/validador/Validador.js");
 class AuthValidator {
+  validatorCheckSession = () => {
+    return [Validador.noQueryParams(), Validador.noBodyData()];
+  };
+
   validatorSessionLogin = () => {
     return [
       // Validación de password

@@ -9,7 +9,7 @@ const authController = require("../controllers/authController.js");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
 // --- SESIÓN ---
-router.get("/check", (req, res) => authController.checkSession(req, res));
+router.get("/check", authValidator.validatorCheckSession(), handleValidation, (req, res) => authController.checkSession(req, res));
 router.get("/logout", (req, res) => authController.cerrarSesion(req, res));
 
 // --- LOGIN LOCAL ---
