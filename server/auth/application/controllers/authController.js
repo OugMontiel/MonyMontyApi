@@ -16,13 +16,23 @@ class AuthController {
   };
 
   // --- Cierre de sesión ---
-  cerrarSesion = (req, res) => {
+  cerrarSesion = async (req, res) => {
     try {
+      const idUser = req.session?.usuario?._id;
+      if (idUser) {
+        // Invalidar sesión en BD logic
+        await authService.logout(idUser);
+      }
+
       req.logout((err) => {
         if (err) {
           return handleError(res, err);
         }
+
+        req.session.destroy((err) => {
+          if (err) return handleError(res, err);
         return res.status(200).json({message: "Sesión cerrada correctamente"});
+      });
       });
     } catch (error) {
       handleError(res, error);

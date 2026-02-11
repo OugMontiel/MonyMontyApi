@@ -3,6 +3,20 @@ const HttpError = require("../../../core/utils/HttpError");
 const RepositoryError = require("../../../core/domain/Repository/RepositoryError.js");
 
 class authRepository {
+  // Eliminar el token de sesión del usuario
+  async eliminarTokenSesion(userId) {
+    try {
+      const {ObjectId} = require("mongodb");
+      const filtro = {_id: new ObjectId(userId)};
+      const datosUnset = {tokenSesion: 1};
+
+      const resultado = await authModel.upDateUsuario(filtro, {}, datosUnset);
+      return resultado;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new RepositoryError();
+    }
+  }
   // Obtener un usuario basado en su 'email' y comparar Su contraseña
   async getUserByEmail(email) {
     try {

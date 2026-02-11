@@ -70,6 +70,15 @@ class authService {
       throw new ServiceError();
     }
   }
+
+  async logout(userId) {
+    try {
+      await authRepository.eliminarTokenSesion(userId);
+      return true;
+    } catch (error) {
+      throw new ServiceError();
+    }
+  }
   async getUserFromToken(token) {
     try {
       // Optenemos el usuario
