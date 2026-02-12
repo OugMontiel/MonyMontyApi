@@ -18,7 +18,6 @@ class authModel {
           {email: Email},
           {
             projection: {
-              password: 0,
               auditoria: 0,
               tokenRecuperacion: 0,
               tokenSesion: 0,
