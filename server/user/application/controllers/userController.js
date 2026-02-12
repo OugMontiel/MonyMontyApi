@@ -68,7 +68,7 @@ class UserController {
       // Verificar token y extraer payload
       const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
       // Optner el Usuario
-      const user = await this.insUserService.getUserById(decoded._id);
+      const user = await this.insUserService.getUserById(decoded.id);
       // respoder con exito
       res.status(200).json(user);
     } catch (error) {
