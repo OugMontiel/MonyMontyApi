@@ -28,8 +28,8 @@ class authService {
         email: usuario.email,
       };
 
-      const token = jwt.sign(payload, process.env.KEY_SECRET, {
-        expiresIn: process.env.EXPRESS_EXPIRE,
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
       });
 
       // Guardamos el token en la base de datos (Single Session)
@@ -49,8 +49,8 @@ class authService {
       if (!usuario) throw new HttpError(404, "Usuario no encontrado");
 
       // Generamos el token
-      const token = jwt.sign({id: usuario._id.toString()}, process.env.KEY_SECRET, {
-        expiresIn: process.env.EMAIL_EXPIRATION_TIME,
+      const token = jwt.sign({id: usuario._id.toString()}, process.env.JWT_EMAIL_SECRET, {
+        expiresIn: process.env.JWT_EMAIL_EXPIRES_IN,
       });
 
       // Guardar el token en la base de datos
@@ -70,9 +70,19 @@ class authService {
       throw new ServiceError();
     }
   }
-  async validarToken(token) {
+  async validarTokenLogin(token) {
     try {
-      const decoded = jwt.verify(token, process.env.KEY_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      return decoded;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
+
+  async validarTokenRecuperacion(token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_EMAIL_SECRET);
       return decoded;
     } catch (error) {
       if (error instanceof HttpError) throw error;
@@ -92,7 +102,7 @@ class authService {
   async validarSesion(token) {
     try {
       // 1. Validar firma y expiración del JWT
-      const decoded = await this.validarToken(token);
+      const decoded = await this.validarTokenLogin(token);
       if (!decoded) throw new HttpError(401, "Token inválido o expirado");
 
       // 2. Validar existencia en Base de Datos (Integridad y Revocación)
@@ -104,15 +114,15 @@ class authService {
       const expTimestamp = decoded.exp * 1000; // Convertir a ms
       const now = Date.now();
       const timeUntilExp = expTimestamp - now;
-      const refreshThreshold = ms(process.env.JWT_REFRESH_THRESHOLD || "15m");
+      const refreshThreshold = ms(process.env.JWT_REFRESH_THRESHOLD);
 
       let newToken = token;
 
       if (timeUntilExp < refreshThreshold) {
         // Generar nuevo token
         const newPayload = {id: decoded.id, role: decoded.role};
-        newToken = jwt.sign(newPayload, process.env.KEY_SECRET, {
-          expiresIn: process.env.EXPRESS_EXPIRE,
+        newToken = jwt.sign(newPayload, process.env.JWT_SECRET, {
+          expiresIn: process.env.JWT_EXPIRES_IN,
         });
 
         // Actualizar en BD

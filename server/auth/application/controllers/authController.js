@@ -121,7 +121,7 @@ class AuthController {
     try {
       const {token} = req.query;
       // Verificamos el token JWT (Firma solamente)
-      const esValido = await authService.validarToken(token);
+      const esValido = await authService.validarTokenRecuperacion(token);
 
       if (!esValido) {
         return res.status(401).json({
