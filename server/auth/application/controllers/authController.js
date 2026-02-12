@@ -1,6 +1,5 @@
 // server/iniciosesion/application/controllers/inicioSesionController.js
 const MaskData = require("maskdata");
-const ms = require("ms");
 
 const authService = require("../services/authService.js");
 const handleError = require("../../../core/application/controllers/handleError.js");
@@ -31,7 +30,7 @@ class AuthController {
         // Session destroy
         req.session.destroy((err) => {
           if (err) return handleError(res, err);
-          res.clearCookie("connect.sid"); // Explicitly clear cookie
+          res.clearCookie(process.env.SESSION_COOKIE_NAME); // Explicitly clear cookie
           return res.status(200).json({message: "Sesión cerrada correctamente"});
         });
       });

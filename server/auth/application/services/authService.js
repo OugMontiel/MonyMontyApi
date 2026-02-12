@@ -95,6 +95,7 @@ class authService {
       await authRepository.eliminarTokenSesion(userId);
       return true;
     } catch (error) {
+      if (error instanceof HttpError) throw error;
       throw new ServiceError();
     }
   }
