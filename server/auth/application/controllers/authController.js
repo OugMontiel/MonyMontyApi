@@ -74,7 +74,7 @@ class AuthController {
         authenticated: true,
         token: resultado.token,
       });
-    } catch (error) {
+    } catch {
       // Si falla validación (token inválido, expirado, revocado)
       req.session.destroy();
       return res.status(401).json({authenticated: false, message: "Sesión inválida o expirada"});
