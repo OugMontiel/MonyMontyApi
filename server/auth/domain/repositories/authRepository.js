@@ -1,6 +1,6 @@
 const authModel = require("../models/authModel.js");
 const HttpError = require("../../../core/utils/HttpError");
-const RepositoryError = require("../../../core/Domain/Repository/RepositoryError.js");
+const RepositoryError = require("../../../core/domain/Repository/RepositoryError.js");
 
 class authRepository {
   // Obtener un usuario basado en su 'email' y comparar Su contraseña
@@ -39,7 +39,7 @@ class authRepository {
     try {
       const filtro = {email}; // Filtro para buscar el usuario
       const datosSet = {password: newpassword}; // Dato a actualizar
-      const datosUnset = { tokenRecuperacion: 1 }; // Campo a eliminar
+      const datosUnset = {tokenRecuperacion: 1}; // Campo a eliminar
 
       const resultado = await authModel.upDateUsuario(filtro, datosSet, datosUnset);
       if (resultado.matched > 1) throw new HttpError(500, "Múltiples usuarios encontrados con el mismo email. Contacte al soporte.");
