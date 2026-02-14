@@ -3,8 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const ms = require("ms");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
 
 // Configuración para login
 const passport = require("passport");
@@ -40,15 +38,15 @@ app.use(
 // Configurar la sesión
 app.use(
   session({
-    name: process.env.SESSION_NAME || "monymonty.sid",
-    secret: process.env.KEY_SECRET,
+    name: process.env.SESSION_COOKIE_NAME,
+    secret: process.env.SESSION_COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: ms(process.env.EXPRESS_EXPIRE),
+      maxAge: ms(process.env.SESSION_COOKIE_MAX_AGE),
     },
   })
 );
@@ -65,7 +63,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Rutas API
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRouter);
 app.use("/user", userRoutes);
 app.use("/movimiento", isAuthenticated, movRoutes);
@@ -146,8 +143,8 @@ app.use("/", (req, res) => {
 
 // Configuración del servidor
 const config = {
-  port: process.env.EXPRESS_PORT || 3000,
-  host: process.env.EXPRESS_HOST || "0.0.0.0",
+  port: process.env.EXPRESS_PORT,
+  host: process.env.EXPRESS_HOST,
 };
 
 async function bootstrap() {
