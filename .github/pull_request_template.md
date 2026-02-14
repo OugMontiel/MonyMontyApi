@@ -18,6 +18,4 @@ Marca si este cambio afecta algo sensible:
 
 Pega el enlace de la tarjeta:
 
-```
-https://trello.com/c/XXXXX
-```
+* https://trello.com/c/XXXXX

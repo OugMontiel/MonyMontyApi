@@ -1,3 +1,5 @@
+const {ObjectId} = require("mongodb");
+
 const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
 const HttpError = require("../../../core/utils/HttpError");
 const modelsError = require("../../../core/domain/models/modelsError.js");
@@ -11,8 +13,21 @@ class authModel {
   async getUserByEmail(Email) {
     try {
       const collection = this.dbConnection.db.collection("user");
-      const [res] = await collection.find({email: Email}).toArray();
-      // console.log('en modelo',res);
+      const [res] = await collection
+        .find(
+          {email: Email},
+          {
+            projection: {
+              auditoria: 0,
+              tokenRecuperacion: 0,
+              tokenSesion: 0,
+              createdAt: 0,
+              deletedAt: 0,
+              updatedAt: 0,
+            },
+          }
+        )
+        .toArray();
       return res;
     } catch (error) {
       if (error instanceof HttpError) throw error;
@@ -37,6 +52,29 @@ class authModel {
     try {
       const collection = this.dbConnection.db.collection("user");
       const [res] = await collection.find({tokenRecuperacion: token}).toArray();
+      return res;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new modelsError();
+    }
+  }
+  async getUserByIdAndSessionToken(userId, token) {
+    try {
+      const collection = this.dbConnection.db.collection("user");
+
+      const [res] = await collection
+        .find(
+          {
+            _id: new ObjectId(userId),
+            tokenSesion: token,
+          },
+          {
+            projection: {
+              tokenSesion: 1,
+            },
+          }
+        )
+        .toArray();
       return res;
     } catch (error) {
       if (error instanceof HttpError) throw error;
