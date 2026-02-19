@@ -8,18 +8,18 @@ const handleValidation = require("../../../core/middlewares/handleValidation");
 // Obtener un movimiento específico
 router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
 
-// Obtener todos los movimientos del usuario (usa sesión)
-router.get("/", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
+// Obtener todos los movimientos del usuario
+router.post("/list", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
   movimientoController.obtenerTodosLosMovimientos(req, res)
 );
 
 // Data para Dashboard
-router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+router.post("/Dashboard", movimientoValidator.validarFiltros(), handleValidation, (req, res) =>
   movimientoController.dataParaDashboard(req, res)
 );
 
 // Ranking de categorías
-router.get("/ranking", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+router.post("/ranking", movimientoValidator.validarFiltros(), handleValidation, (req, res) =>
   movimientoController.obtenerRankingCategorias(req, res)
 );
 
