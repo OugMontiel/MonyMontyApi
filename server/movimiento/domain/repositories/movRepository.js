@@ -112,21 +112,21 @@ class MovimientoRepository {
   }
 
   /**
-   * Obtiene movimientos por usuario
+   * Obtiene estadísticas de los movimientos de un usuario
    * @param {string} usuarioId - ID del usuario
-   * @returns {Promise<Array>} - Lista de movimientos del usuario
-   * @throws {object} - Error con formato {status, message}
+   * @param {object} filter - Filtros adicionales
+   * @returns {Promise<Array>} - Estadísticas
    */
-  async estadisticasMovimientosDelUsuario(usuarioId) {
+  async estadisticasMovimientosDelUsuario(usuarioId, filter = {}) {
     try {
-      const movimientos = await this.movimientoModel.estadisticasMovimientos(usuarioId);
+      const movimientos = await this.movimientoModel.estadisticasMovimientos(usuarioId, filter);
 
       if (!movimientos || movimientos.length === 0) throw new HttpError(404, "No se encontraron movimientos para este usuario");
 
       return movimientos[0];
     } catch (error) {
       if (error instanceof HttpError) throw error;
-      throw new RepositoryError();
+      throw new RepositoryError("Error al obtener estadísticas de movimientos del usuario");
     }
   }
   /**
@@ -144,16 +144,17 @@ class MovimientoRepository {
   }
 
   /**
-   * Obtiene el ranking de categorías para el usuario
+   * Obtiene el ranking de gastos por categoría para el usuario
    * @param {string} usuarioId - ID del usuario
+   * @param {object} filter - Filtros adicionales
    * @returns {Promise<Array>} - Ranking de categorías
    */
-  async rankingCategorias(usuarioId) {
+  async rankingCategorias(usuarioId, filter = {}) {
     try {
-      return await this.movimientoModel.rankingCategorias(usuarioId);
+      return await this.movimientoModel.rankingCategorias(usuarioId, filter);
     } catch (error) {
       if (error instanceof HttpError) throw error;
-      throw new RepositoryError("Error al obtener el ranking de categorías");
+      throw new RepositoryError("Error al obtener el ranking de categorías del usuario");
     }
   }
 }

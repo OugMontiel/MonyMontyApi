@@ -183,10 +183,10 @@ class MovimientoService {
    * Calculos para Estadisticas
    *
    */
-  async estadisticasDashBoard(id) {
+  async estadisticasDashBoard(id, filter = {}) {
     try {
       //optenemos todo los movimientos
-      const {totales} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id);
+      const {totales} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id, filter);
 
       const totalIngresos = _.get(totales, "[0].totalIngresos", 0);
       const totalGastos = _.get(totales, "[0].totalGastos", 0);
@@ -206,11 +206,12 @@ class MovimientoService {
   /**
    * Obtiene el ranking de categorías para el usuario
    * @param {string} usuarioId - ID del usuario
+   * @param {object} filter - Filtros adicionales
    * @returns {Promise<Array>} - Ranking de categorías
    */
-  async rankingCategorias(usuarioId) {
+  async rankingCategorias(usuarioId, filter = {}) {
     try {
-      return await this.movimientoRepository.rankingCategorias(usuarioId);
+      return await this.movimientoRepository.rankingCategorias(usuarioId, filter);
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError("Error al obtener el ranking de categorías");
