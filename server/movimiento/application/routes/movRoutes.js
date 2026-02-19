@@ -5,6 +5,9 @@ const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
+// Obtener un movimiento específico
+router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
+
 // Obtener todos los movimientos del usuario (usa sesión)
 router.get("/", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
   movimientoController.obtenerTodosLosMovimientos(req, res)
@@ -20,9 +23,6 @@ router.get("/ranking", movimientoValidator.noBodyNoQuery(), handleValidation, (r
   movimientoController.obtenerRankingCategorias(req, res)
 );
 
-// Obtener un movimiento específico
-router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
-
 // Crear nuevo movimiento
 router.post("/", movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) =>
   movimientoController.crearMovimiento(req, res)
@@ -35,10 +35,5 @@ router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarC
 
 // Eliminar movimiento
 router.delete("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.eliminarMovimiento(req, res));
-
-// Ruta raíz al Final siempre
-router.get("/", (req, res) => {
-  res.send("¡Bienvenido a MonyMonty Movimientos!");
-});
 
 module.exports = router;
