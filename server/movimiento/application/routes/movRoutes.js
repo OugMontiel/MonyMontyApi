@@ -14,7 +14,7 @@ router.post("/list", movimientoValidator.validarPaginacion(), handleValidation, 
 );
 
 // Data para Dashboard
-router.post("/Dashboard", movimientoValidator.validarFiltros(), handleValidation, (req, res) =>
+router.post("/dashboard", movimientoValidator.validarFiltros(), handleValidation, (req, res) =>
   movimientoController.dataParaDashboard(req, res)
 );
 

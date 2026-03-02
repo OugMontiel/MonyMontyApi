@@ -324,15 +324,23 @@ class MovimientoModel {
   /**
    * estadisticas movimientos por ID de usuario
    * @param {string} usuarioId - ID del usuario
+   * @param {object} filter - Filtros adicionales
    * @returns {Promise<Array>} - estadisticas movimientos del usuario
    * @throws {object} - Error con formato {status, message, metadata}
    */
-  async estadisticasMovimientos(usuarioId) {
+  async estadisticasMovimientos(usuarioId, filter) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
+
+      // Combinar filtro de usuario y filtro adicional (si existe)
+      const matchStage = {usuarioId: new ObjectId(usuarioId)};
+      if (filter) {
+        Object.assign(matchStage, filter);
+      }
+
       const movimientos = await collection
         .aggregate([
-          {$match: {usuarioId: new ObjectId(usuarioId)}},
+          {$match: matchStage},
           {
             $facet: {
               totales: [
@@ -382,22 +390,29 @@ class MovimientoModel {
   /**
    * Obtiene el ranking de gastos por categoría para el usuario
    * @param {string} usuarioId - ID del usuario
+   * @param {object} filter - Filtros adicionales
    * @returns {Promise<Array>} - Ranking de categorías
    */
-  async rankingCategorias(usuarioId) {
+  async rankingCategorias(usuarioId, filter) {
     try {
       const collection = this.dbConnection.db.collection("movimiento");
-      const ahora = new Date();
-      const inicioMesActual = new Date(ahora.getFullYear(), ahora.getMonth(), 1);
+
+      // Combinar filtro de usuario y filtro adicional (si existe)
+      const matchStage = {
+        usuarioId: new ObjectId(usuarioId),
+        tipo: "EGRESO",
+      };
+
+      if (filter) {
+        Object.assign(matchStage, filter);
+        // Asegurar que tipo sea EGRESO para ranking (aunque el filtro traiga otro)
+        matchStage.tipo = "EGRESO";
+      }
 
       const ranking = await collection
         .aggregate([
           {
-            $match: {
-              usuarioId: new ObjectId(usuarioId),
-              tipo: "EGRESO",
-              fecha: {$gte: inicioMesActual},
-            },
+            $match: matchStage,
           },
           {
             $group: {
