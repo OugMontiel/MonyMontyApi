@@ -11,7 +11,9 @@
   "genero": "Masculino", // genero del Usuario
   "email": "prueba@casa.com", // Debe ser único e indexado para el Login
   "password": "$2b$10$3A68Z9lrOMj21G1GPIwLlOlLQObBXUvfjzNuZVnZd4sq8ywO0rMi.", // Hash (Bcrypt/Argon2). Nunca texto plano.
-  
+  "tokenSesion": "", // Token de sesion 
+  "tokenRecuperacion": "", // Token de recuperacion
+
   "estado": "ACTIVO", // Control de acceso: ACTIVO, SUSPENDIDO, INACTIVO
   "planId": "BASICO",   // Determina límites de la colección 'planes': BASICO | PRO | PLUS
 

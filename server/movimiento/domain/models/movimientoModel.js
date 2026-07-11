@@ -1,7 +1,7 @@
 const {ObjectId} = require("mongodb");
 const ConnectToDatabase = require("../../../core/infrastructure/connections/mongodb");
 const HttpError = require("../../../core/utils/HttpError");
-const modelsError = require("../../../core/Domain/models/modelsError.js");
+const modelsError = require("../../../core/domain/models/modelsError.js");
 
 class MovimientoModel {
   constructor() {

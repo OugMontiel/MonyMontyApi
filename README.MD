@@ -64,3 +64,7 @@ http://localhost:3000
 - La API utiliza **códigos de estado HTTP estándar** para indicar el resultado de las operaciones (ej. `200 OK`, `201 Created`,
   `204 No Content`, `400 Bad Request`, `401 Unauthorized`, `404 Not Found`, etc.).
 - Las respuestas incluyen, cuando aplica, un mensaje descriptivo o datos relevantes del recurso afectado.
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).

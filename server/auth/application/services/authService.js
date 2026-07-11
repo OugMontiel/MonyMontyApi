@@ -1,6 +1,7 @@
 // Implementa la lógica de negocio y coordina las interacciones entre el dominio y la infraestructura.
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const ms = require("ms");
 const React = require("react");
 
 const authRepository = require("../../domain/repositories/authRepository");
@@ -11,22 +12,30 @@ const {enviosDeCorreo} = require("../../../core/application/services/EnvioDeEmai
 const PasswordResetEmail = require("../../../core/infrastructure/emails/PasswordResetEmail.jsx");
 
 class authService {
-  async getUserByEmail(password, email) {
+  async loginWithCredentials(email, password) {
     try {
       // Verificar si el usuario existe
       const usuario = await authRepository.getUserByEmail(email);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(401, "Credenciales inválidas");
 
       // Verificar si la contraseña es correcta
       const isMatch = await bcrypt.compare(password, usuario.password);
-      if (!isMatch) throw new HttpError(401, "No autorizado, contraseña incorrecta");
+      if (!isMatch) throw new HttpError(401, "Credenciales inválidas");
 
-      // Generamos el token
-      const token = jwt.sign(usuario, process.env.KEY_SECRET, {
-        expiresIn: process.env.EXPRESS_EXPIRE,
+      // Generamos el token con payload mínimo
+      const payload = {
+        id: usuario._id.toString(),
+        email: usuario.email,
+      };
+
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
       });
 
-      // Retornamos el token
+      // Guardamos el token en la base de datos (Single Session)
+      await authRepository.guardarTokenSesion(usuario._id, token);
+
+      // Retornamos el token y usuario seguro
       return {token, usuario};
     } catch (error) {
       if (error instanceof HttpError) throw error;
@@ -40,8 +49,8 @@ class authService {
       if (!usuario) throw new HttpError(404, "Usuario no encontrado");
 
       // Generamos el token
-      const token = jwt.sign({id: usuario._id.toString()}, process.env.KEY_SECRET, {
-        expiresIn: process.env.EMAIL_EXPIRATION_TIME,
+      const token = jwt.sign({id: usuario._id.toString()}, process.env.JWT_EMAIL_SECRET, {
+        expiresIn: process.env.JWT_EMAIL_EXPIRES_IN,
       });
 
       // Guardar el token en la base de datos
@@ -61,10 +70,68 @@ class authService {
       throw new ServiceError();
     }
   }
-  async ValidarUnTocken(token) {
+  async validarTokenLogin(token) {
     try {
-      const decoded = jwt.verify(token, process.env.KEY_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       return decoded;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
+
+  async validarTokenRecuperacion(token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_EMAIL_SECRET);
+      return decoded;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
+
+  async logout(userId) {
+    try {
+      await authRepository.eliminarTokenSesion(userId);
+      return true;
+    } catch (error) {
+      if (error instanceof HttpError) throw error;
+      throw new ServiceError();
+    }
+  }
+
+  async validarSesion(token) {
+    try {
+      // 1. Validar firma y expiración del JWT
+      const decoded = await this.validarTokenLogin(token);
+      if (!decoded) throw new HttpError(401, "Token inválido o expirado");
+
+      // 2. Validar existencia en Base de Datos (Integridad y Revocación)
+      const usuario = await authRepository.validarTokenSesion(decoded.id, token);
+      if (!usuario) throw new HttpError(401, "Sesión revocada o inválida");
+
+      // 3. Renovación Silenciosa (Silent Refresh)
+      // Si el token está próximo a vencer (ej. < 15 minutos), generamos uno nuevo
+      const expTimestamp = decoded.exp * 1000; // Convertir a ms
+      const now = Date.now();
+      const timeUntilExp = expTimestamp - now;
+      const refreshThreshold = ms(process.env.JWT_REFRESH_THRESHOLD);
+
+      let newToken = token;
+
+      if (timeUntilExp < refreshThreshold) {
+        // Generar nuevo token
+        const newPayload = {id: decoded.id, role: decoded.role};
+        newToken = jwt.sign(newPayload, process.env.JWT_SECRET, {
+          expiresIn: process.env.JWT_EXPIRES_IN,
+        });
+
+        // Actualizar en BD
+        await authRepository.guardarTokenSesion(decoded.id, newToken);
+      }
+
+      // Retornar el token (puede ser el mismo o uno renovado)
+      return {token: newToken, renewed: newToken !== token};
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError();
