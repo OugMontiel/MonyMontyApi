@@ -52,34 +52,44 @@ class ConnectToDatabase {
 
     try {
       const usaSrv = process.env.MONGO_ACCESS.includes("+srv");
-      const urlConexion = usaSrv
-        ? `${process.env.MONGO_ACCESS}${this.#usuario}:${this.#contraseña}@${process.env.MONGO_HOST}`
-        : `${process.env.MONGO_ACCESS}${this.#usuario}:${this.#contraseña}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
+      const usuarioEncoded = encodeURIComponent(this.#usuario || "");
+      const pwdEncoded = encodeURIComponent(this.#contraseña || "");
+      const host = process.env.MONGO_HOST;
+      const port = process.env.MONGO_PORT;
+      const dbName = process.env.MONGO_DB_NAME;
 
-      this.cliente = new MongoClient(urlConexion, {
+      const urlConexion = usaSrv
+        ? `${process.env.MONGO_ACCESS}${usuarioEncoded}:${pwdEncoded}@${host}/${dbName || ""}?retryWrites=true&w=majority`
+        : `${process.env.MONGO_ACCESS}${usuarioEncoded}:${pwdEncoded}@${host}:${port}/${dbName || ""}`;
+
+      // Configuración de conexión segura (TLS/SSL) y pool de conexiones para MongoDB Atlas
+      const clientOptions = {
         connectTimeoutMS: 5000,
         serverSelectionTimeoutMS: 5000,
-      });
+        minPoolSize: 5,
+        maxPoolSize: 50,
+        tls: process.env.MONGO_TLS !== "false", // TLS obligatorio por defecto para Atlas
+        tlsAllowInvalidCertificates: false, // Prevenir ataques MITM (no permitir certificados inválidos)
+      };
+
+      this.cliente = new MongoClient(urlConexion, clientOptions);
 
       await this.cliente.connect();
-      this.db = this.cliente.db(process.env.MONGO_DB_NAME);
+      this.db = this.cliente.db(dbName);
 
-      // console.log("Conexión a MongoDB establecida correctamente");
       return this.db;
     } catch (error) {
-      console.error("Error al conectar a MongoDB:", error);
+      console.error("Error al conectar a MongoDB:", error.message);
       this.cliente = undefined;
       this.db = undefined;
-
-      throw {
-        status: 503,
-        message: "Error al conectar con la base de datos",
-        metadata: {
-          tipo: "conexion_bd",
-          errorOriginal: error.message,
-          host: process.env.MONGO_HOST,
-        },
+      const dbError = new Error("Error al conectar con la base de datos");
+      dbError.status = 503;
+      dbError.metadata = {
+        tipo: "conexion_bd",
+        errorOriginal: process.env.NODE_ENV === "production" ? "Fallo de conexión" : error.message,
       };
+
+      throw dbError;
     }
   }
 
@@ -98,14 +108,14 @@ class ConnectToDatabase {
       // console.log("Conexión a MongoDB cerrada correctamente");
     } catch (error) {
       console.error("Error al cerrar conexión con MongoDB:", error);
-      throw {
-        status: 500,
-        message: "Error al cerrar la conexión con la base de datos",
-        metadata: {
-          tipo: "desconexion_bd",
-          errorOriginal: error.message,
-        },
+      const disconnectError = new Error("Error al cerrar la conexión con la base de datos");
+      disconnectError.status = 500;
+      disconnectError.metadata = {
+        tipo: "desconexion_bd",
+        errorOriginal: error.message,
       };
+
+      throw disconnectError;
     } finally {
       this.cliente = undefined;
       this.db = undefined;
