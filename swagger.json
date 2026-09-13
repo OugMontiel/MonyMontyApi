@@ -1,0 +1,421 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API REST de MonyMonty",
+    "version": "1.0.0",
+    "description": "plataforma diseñada para la administración financiera personal"
+  },
+  "servers": [
+    {
+      "url": "https://api.monteflor.co/",
+      "description": "Servidor principal"
+    },
+    {
+      "url": " http://localhost:3000",
+      "description": "Servidor de desarrollo local"
+    }
+  ],
+  "paths": {
+    "/auth/check": {
+      "get": {
+        "summary": "Verifica el estado de autenticación del usuario",
+        "description": "Comprueba si el usuario tiene una sesión activa",
+        "200": {
+          "description": "Respuesta indicando si el usuario está autenticado",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticated": {
+                    "type": "boolean",
+                    "description": "Indica si el usuario está autenticado"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Mensaje descriptivo sobre el estado de autenticación"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "Token JWT si el usuario está autenticado",
+                    "nullable": true
+                  }
+                },
+                "required": ["authenticated", "message"]
+              },
+              "examples": {
+                "notAuthenticated": {
+                  "summary": "Usuario no autenticado",
+                  "value": {
+                    "authenticated": false,
+                    "message": "Not authenticated"
+                  }
+                },
+                "authenticated": {
+                  "summary": "Usuario autenticado correctamente",
+                  "value": {
+                    "authenticated": true,
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Inicia sesión de usuario",
+        "description": "Autentica un usuario con su email y contraseña. Devuelve un token JWT si las credenciales son válidas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "prueba@casa.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "123456789"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Autenticación exitosa. Devuelve el token JWT.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Token JWT generado para el usuario autenticado",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos de entrada inválidos o faltantes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {"type": "string", "example": "field"},
+                          "msg": {"type": "string", "example": "password must be at least 8 characters long"},
+                          "path": {"type": "string", "example": "password"},
+                          "location": {"type": "string", "example": "body"}
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "errors": [
+                      {
+                        "type": "field",
+                        "msg": "send a password",
+                        "path": "password",
+                        "location": "body"
+                      },
+                      {
+                        "type": "field",
+                        "msg": "password must be at least 8 characters long",
+                        "path": "password",
+                        "location": "body"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales inválidas o usuario no autorizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "No autorizado, contraseña incorrecta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "summary": "Cierra la sesión del usuario",
+        "description": "Finaliza la sesión actual y devuelve un mensaje de confirmación.",
+        "responses": {
+          "200": {
+            "description": "Sesión cerrada correctamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Sesión cerrada correctamente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/google": {
+      "get": {
+        "description": "autentica un usuario mediante tercero Google",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "description": "autentica un usuario mediante tercero Google, con callback que maneja respuesta",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/github": {
+      "get": {
+        "description": "autentica un usuario mediante tercero Github",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "description": "autentica un usuario mediante tercero Github, con callback que maneja respuesta",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/discord": {
+      "get": {
+        "description": "autentica un usuario mediante tercero Discord",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/discord/callback": {
+      "get": {
+        "description": "autentica un usuario mediante tercero Discord, con callback que maneja respuesta",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "description": "obtiene la info de un usuario por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "actualiza un usuario por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "borra un usuario a través de su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/movimiento/": {
+      "get": {
+        "description": "obtiene todos los movimientos/tranferencias",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "guarda un movimiento",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/movimiento/user/{id}": {
+      "get": {
+        "description": "obtiene todos los movimientos de un usuario por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/movimiento/{id}": {
+      "get": {
+        "description": "obtiene un movimiento por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "modifica un movimiento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "borra un movimiento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}
