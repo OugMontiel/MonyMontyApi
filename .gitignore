@@ -35,4 +35,6 @@ dist-ssr
 
 # variables de entonro 
 .env
+.envDesarrollo
+.envProduccion
 UserVpsNew.pem
