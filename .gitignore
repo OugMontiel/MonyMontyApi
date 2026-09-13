@@ -1,6 +1,6 @@
 # Logs
-logs
 *.log
+logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -37,4 +37,8 @@ dist-ssr
 .env
 .envDesarrollo
 .envProduccion
+
+# Certificados
+*.pem
 UserVpsNew.pem
+

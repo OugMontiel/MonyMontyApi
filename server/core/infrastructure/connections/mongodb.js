@@ -54,7 +54,7 @@ class ConnectToDatabase {
     try {
       const modoAutenticacion = process.env.MONGO_AUTH_MODE?.toLowerCase();
       const host = process.env.MONGO_HOST;
-      const port = process.env.MONGO_PORT;
+      
       const dbName = process.env.MONGO_DB_NAME;
       const nombreBaseDatos = dbName || "";
 
@@ -74,6 +74,7 @@ class ConnectToDatabase {
 
       if (modoAutenticacion === "password") {
         const usaSrv = process.env.MONGO_ACCESS.includes("+srv");
+        const port = process.env.MONGO_PORT;
         const usuarioEncoded = encodeURIComponent(this.#usuario || "");
         const pwdEncoded = encodeURIComponent(this.#contraseña || "");
 
