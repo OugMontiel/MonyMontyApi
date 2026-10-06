@@ -120,18 +120,10 @@ class MovimientoController {
   async obtenerTodosLosMovimientos(req, res) {
     try {
       const {_id} = req.session.usuario;
-      const {page, limit, tipo} = req.query;
+      const {page, limit} = req.body;
+      const rawFilter = req.body;
 
-      const filter = {};
-      if (tipo) {
-        if (tipo === "STANDARD") {
-          filter.tipo = {$ne: "TRANSFERENCIA"};
-        } else {
-          filter.tipo = tipo;
-        }
-      }
-
-      const resultado = await this.movimientoService.obtenerTodos(_id, page, limit, filter);
+      const resultado = await this.movimientoService.obtenerTodos(_id, page, limit, rawFilter);
 
       res.status(200).json({
         success: true,
@@ -146,8 +138,9 @@ class MovimientoController {
   async dataParaDashboard(req, res) {
     try {
       const {_id} = req.session.usuario;
+      const rawFilter = req.body;
 
-      const estadisticas = await this.movimientoService.estadisticasDashBoard(_id);
+      const estadisticas = await this.movimientoService.estadisticasDashBoard(_id, rawFilter);
 
       res.status(200).json({
         success: true,
@@ -162,7 +155,9 @@ class MovimientoController {
   async obtenerRankingCategorias(req, res) {
     try {
       const {_id} = req.session.usuario;
-      const ranking = await this.movimientoService.rankingCategorias(_id);
+      const rawFilter = req.body;
+
+      const ranking = await this.movimientoService.rankingCategorias(_id, rawFilter);
 
       res.status(200).json({
         success: true,
