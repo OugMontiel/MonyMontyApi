@@ -1,6 +1,7 @@
 // server/app.js
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
 const session = require("express-session");
 const ms = require("ms");
 
@@ -9,10 +10,11 @@ const passport = require("passport");
 // Cargar las configuraciones de Passport para Google
 require("./server/auth/infrastructure/config/passportGoogle");
 
-//Conecion a base de datos
+// Conexión a base de datos
 const ConnectToDatabase = require("./server/core/infrastructure/connections/mongodb.js");
 
 // Middlewares y routers
+const mongoSanitize = require("./server/core/middlewares/mongoSanitize");
 const isAuthenticated = require("./server/auth/infrastructure/middleware/isAuthenticated");
 const authRouter = require("./server/auth/application/routes/authRouter");
 const userRoutes = require("./server/user/application/routes/userRoutes");
@@ -23,15 +25,64 @@ const divisaRoutes = require("./server/divisa/application/routes/divisaRoutes");
 
 // Inicializar la app Express
 const app = express();
-app.use(express.json());
 
-// Configuración básica (cors)
+// Seguridad de cabeceras HTTP con Helmet y ocultación de tecnología
+app.disable("x-powered-by");
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'"],
+        fontSrc: ["'self'", "https:", "data:"],
+        objectSrc: ["'none'"],
+        frameAncestors: ["'none'"],
+        baseUri: ["'self'"],
+      },
+    },
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+    frameguard: {action: "deny"},
+    referrerPolicy: {policy: "strict-origin-when-cross-origin"},
+    noSniff: true,
+  })
+);
+
+// Parsing de peticiones con límite de tamaño para mitigar DoS
+app.use(express.json({limit: "100kb"}));
+app.use(express.urlencoded({extended: true, limit: "100kb"}));
+
+// Sanitización contra inyección NoSQL (operadores $ y notación de puntos)
+app.use(mongoSanitize);
+
+// Configuración segura de CORS
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN?.split(","),
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (
+        allowedOrigins.includes(origin) ||
+        (process.env.NODE_ENV !== "production" && (origin.includes("localhost") || origin.includes("127.0.0.1")))
+      ) {
+        return callback(null, true);
+      }
+      return callback(new Error("Origen no permitido por la política CORS"), false);
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: "Content-Type, Authorization",
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // Permitir cookies y autenticación
+    maxAge: 86400,
   })
 );
 
@@ -62,6 +113,17 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Documentación Swagger (Protegida: requiere autenticación y solo habilitada en desarrollo o explícitamente)
+if (process.env.SWAGGER_ENABLED === "true" || process.env.NODE_ENV !== "production") {
+  try {
+    const swaggerUi = require("swagger-ui-express");
+    const swaggerDocument = require("./swagger.json");
+    app.use("/swagger", isAuthenticated, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  } catch (err) {
+    console.warn("Documentación Swagger no disponible:", err.message);
+  }
+}
+
 // Rutas API
 app.use("/auth", authRouter);
 app.use("/user", userRoutes);
@@ -69,76 +131,18 @@ app.use("/movimiento", isAuthenticated, movRoutes);
 app.use("/entidad", isAuthenticated, entidadRoutes);
 app.use("/categoria", isAuthenticated, categoriaRoutes);
 app.use("/divisa", isAuthenticated, divisaRoutes);
-app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: " accedio a Ruta protegida"}));
+app.use("/rutaProtegida", isAuthenticated, (req, res) => res.json({message: "accedio a Ruta protegida"}));
 app.get("/health", (req, res) => {
   res.status(200).json({status: "ok", timestamp: new Date().toISOString()});
 });
-// Ruta raíz (debe ir al final)
-app.use("/", (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Bienvenido a MonyMonty API</title>
-      <style>
-        body {
-          margin: 0;
-          font-family: 'Segoe UI', Roboto, sans-serif;
-          background-color: #121212;
-          color: #f5f5f5;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          text-align: center;
-        }
 
-        h1 {
-          font-size: 2.2rem;
-          margin-bottom: 1rem;
-          color: #00d1b2;
-        }
-
-        p {
-          font-size: 1.1rem;
-          margin-bottom: 2rem;
-          color: #ccc;
-        }
-
-        a {
-          text-decoration: none;
-          background: #00d1b2;
-          color: #121212;
-          padding: 0.8rem 1.6rem;
-          border-radius: 8px;
-          font-weight: bold;
-          transition: 0.3s;
-        }
-
-        a:hover {
-          background: #00b09b;
-          transform: scale(1.05);
-        }
-
-        footer {
-          position: absolute;
-          bottom: 1rem;
-          font-size: 0.9rem;
-          color: #777;
-        }
-      </style>
-    </head>
-    <body>
-      <h1> Bienvenido a la API de MonyMonty</h1>
-      <p>Tu backend está funcionando correctamente.</p>
-      <a href="/swagger" target="_blank">Ver Documentación Swagger</a>
-      <footer>© ${new Date().getFullYear()} MonyMonty</footer>
-    </body>
-    </html>
-  `);
+// Ruta raíz segura (no expone información sensible ni enlaces de Swagger no autenticados)
+app.get("/", (req, res) => {
+  res.status(200).json({
+    name: "MonyMonty API",
+    status: "online",
+    version: "1.0.0",
+  });
 });
 
 // Configuración del servidor
