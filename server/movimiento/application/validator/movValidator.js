@@ -102,20 +102,30 @@ class MovimientoValidator {
     return [validador.noBodyData(), validador.noQueryParams()];
   }
 
+  validarFiltros() {
+    return [
+      body("dateStart").optional().isISO8601().withMessage("dateStart debe ser una fecha válida").toDate(),
+      body("dateEnd").optional().isISO8601().withMessage("dateEnd debe ser una fecha válida").toDate(),
+      body("accounts").optional().isArray().withMessage("accounts debe ser un array"),
+      body("currencies").optional().isArray().withMessage("currencies debe ser un array"),
+      body("categories").optional().isArray().withMessage("categories debe ser un array"),
+    ];
+  }
+
   validarPaginacion() {
     return [
-      validador.noBodyData(),
-      query("page")
+      body("page")
         .notEmpty()
         .withMessage("El parametro page es obligatorio")
         .isInt({min: 1})
         .withMessage("El parametro page debe ser un numero entero mayor a 0"),
-      query("limit")
+      body("limit")
         .notEmpty()
         .withMessage("El parametro limit es obligatorio")
         .isInt({min: 1, max: 100})
         .withMessage("El parametro limit debe ser un numero entero entre 1 y 100"),
-      query("tipo").optional().isString().isIn(["INGRESO", "EGRESO", "TRANSFERENCIA", "STANDARD"]),
+      body("tipo").optional().isString().isIn(["INGRESO", "EGRESO", "TRANSFERENCIA", "STANDARD"]),
+      ...this.validarFiltros(),
     ];
   }
 }
