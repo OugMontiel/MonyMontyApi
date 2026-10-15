@@ -6,11 +6,12 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "node --watch --inspect --env-file .env app.js",
+    "dev": "node --watch --inspect --env-file .envDesarrollo app.js",
+    "start": "node --env-file .envProduccion app.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "fix:entidad-ids": "node --env-file .env scripts/fix_entidad_ids.js"
+    "fix:entidad-ids": "node --env-file .envDesarrollo scripts/fix_entidad_ids.js"
   },
   "dependencies": {
     "@react-email/components": "0.5.7",
