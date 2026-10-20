@@ -46,7 +46,7 @@ class authService {
     try {
       // Verificar si el usuario existe
       const usuario = await authRepository.getUserByEmail(email);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(401, "Credenciales inválidas");
 
       // Generamos el token
       const token = jwt.sign({id: usuario._id.toString()}, process.env.JWT_EMAIL_SECRET, {
@@ -141,7 +141,7 @@ class authService {
     try {
       // Optenemos el usuario
       const usuario = await authRepository.getUserFromToken(token);
-      if (!usuario) throw new HttpError(404, "Usuario no encontrado");
+      if (!usuario) throw new HttpError(401, "Credenciales inválidas");
       return usuario;
     } catch (error) {
       if (error instanceof HttpError) throw error;
