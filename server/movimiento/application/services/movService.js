@@ -167,11 +167,18 @@ class MovimientoService {
 
   /**
    * Obtiene todos los movimientos paginados
+   * @param {string} id - ID del usuario
+   * @param {number} page - Página a obtener
+   * @param {number} limit - Límite de movimientos por página
+   * @param {object} rawFilter - Filtros adicionales
    * @returns {Promise<object>} - Lista de movimientos y metadatos
    * @throws {object} - Error con formato {status, message}
    */
-  async obtenerTodos(id, page, limit, filter) {
+  async obtenerTodos(id, page, limit, rawFilter) {
     try {
+      // Construccion del filtro base
+      const filter = this.construirFiltros(rawFilter);
+
       return await this.movimientoRepository.obtenerTodos(id, page, limit, filter);
     } catch (error) {
       if (error instanceof HttpError) throw error;
@@ -181,12 +188,18 @@ class MovimientoService {
 
   /**
    * Calculos para Estadisticas
-   *
+   * @param {string} id - ID del usuario
+   * @param {object} rawFilter - Filtros adicionales
+   * @returns {Promise<object>} - Estadísticas del dashboard
+   * @throws {object} - Error con formato {status, message}
    */
-  async estadisticasDashBoard(id) {
+  async estadisticasDashBoard(id, rawFilter) {
     try {
-      //optenemos todo los movimientos
-      const {totales} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id);
+      // Construccion del filtro base
+      const filter = this.construirFiltros(rawFilter);
+
+      //obtenemos todos los movimientos
+      const {totales} = await this.movimientoRepository.estadisticasMovimientosDelUsuario(id, filter);
 
       const totalIngresos = _.get(totales, "[0].totalIngresos", 0);
       const totalGastos = _.get(totales, "[0].totalGastos", 0);
@@ -206,15 +219,68 @@ class MovimientoService {
   /**
    * Obtiene el ranking de categorías para el usuario
    * @param {string} usuarioId - ID del usuario
+   * @param {object} rawFilter - Filtros adicionales
    * @returns {Promise<Array>} - Ranking de categorías
+   * @throws {object} - Error con formato {status, message}
    */
-  async rankingCategorias(usuarioId) {
+  async rankingCategorias(usuarioId, rawFilter) {
     try {
-      return await this.movimientoRepository.rankingCategorias(usuarioId);
+      // Construccion del filtro base
+      const filter = this.construirFiltros(rawFilter);
+
+      return await this.movimientoRepository.rankingCategorias(usuarioId, filter);
     } catch (error) {
       if (error instanceof HttpError) throw error;
       throw new ServiceError("Error al obtener el ranking de categorías");
     }
+  }
+
+  /**
+   * Helper para construir el objeto de filtros de Mongoose
+   * @param {object} rawFilter - Filtros adicionales
+   * @returns {object} - Objeto de filtros para Mongoose
+   */
+  construirFiltros({tipo, fechaInicio, fechaFin, cuentas, monedas, categorias}) {
+    const filter = {};
+
+    // Filtro por Tipo
+    if (tipo) {
+      if (tipo === "STANDARD") {
+        filter.tipo = {$ne: "TRANSFERENCIA"};
+      } else {
+        filter.tipo = tipo;
+      }
+    }
+
+    // Filtro por Fecha
+    if (fechaInicio || fechaFin) {
+      filter.fecha = {};
+      if (fechaInicio) filter.fecha.$gte = new Date(fechaInicio);
+      if (fechaFin) filter.fecha.$lte = new Date(fechaFin);
+    }
+
+    // Filtro por Cuentas (EntidadId o Transferencia)
+    if (cuentas && cuentas.length > 0) {
+      const accountIds = cuentas.map((id) => new ObjectId(id));
+      filter.$or = [
+        {entidadId: {$in: accountIds}},
+        {"transferencia.origenEntidadId": {$in: accountIds}},
+        {"transferencia.destinoEntidadId": {$in: accountIds}},
+      ];
+    }
+
+    // Filtro por Divisa
+    if (monedas && monedas.length > 0) {
+      filter.divisaId = {$in: monedas};
+    }
+
+    // Filtro por Categoría
+    if (categorias && categorias.length > 0) {
+      const categoryIds = categorias.map((id) => new ObjectId(id));
+      filter.categoriaId = {$in: categoryIds};
+    }
+
+    return filter;
   }
 }
 

@@ -5,23 +5,23 @@ const movimientoValidator = require("../validator/movValidator");
 const movimientoController = require("../controllers/movController");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
-// Obtener todos los movimientos del usuario (usa sesión)
-router.get("/", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
+// Obtener un movimiento específico
+router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
+
+// Obtener todos los movimientos del usuario
+router.post("/list", movimientoValidator.validarPaginacion(), handleValidation, (req, res) =>
   movimientoController.obtenerTodosLosMovimientos(req, res)
 );
 
 // Data para Dashboard
-router.get("/Dashboard", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+router.post("/dashboard", movimientoValidator.validarFiltros(), handleValidation, (req, res) =>
   movimientoController.dataParaDashboard(req, res)
 );
 
 // Ranking de categorías
-router.get("/ranking", movimientoValidator.noBodyNoQuery(), handleValidation, (req, res) =>
+router.post("/ranking", movimientoValidator.validarFiltros(), handleValidation, (req, res) =>
   movimientoController.obtenerRankingCategorias(req, res)
 );
-
-// Obtener un movimiento específico
-router.get("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.obtenerMovimiento(req, res));
 
 // Crear nuevo movimiento
 router.post("/", movimientoValidator.validarCreacionyActualizacion(), handleValidation, (req, res) =>
@@ -35,10 +35,5 @@ router.put("/:id", movimientoValidator.validarId(), movimientoValidator.validarC
 
 // Eliminar movimiento
 router.delete("/:id", movimientoValidator.validarId(), handleValidation, (req, res) => movimientoController.eliminarMovimiento(req, res));
-
-// Ruta raíz al Final siempre
-router.get("/", (req, res) => {
-  res.send("¡Bienvenido a MonyMonty Movimientos!");
-});
 
 module.exports = router;
