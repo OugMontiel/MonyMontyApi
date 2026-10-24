@@ -10,7 +10,7 @@ services:
     networks:
       - proxy
     env_file:
-      - .env
+      - .envProduccion
     volumes:
       - ./logs:/app/logs
     healthcheck:
