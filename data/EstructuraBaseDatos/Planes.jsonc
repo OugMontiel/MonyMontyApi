@@ -5,33 +5,33 @@
  */
 {
   "_id": "BASICO", // Identificador semántico: [BASICO | PRO | PLUS]
-  "nombre": "Plan Básico", 
-  
+  "nombre": "Plan Básico",
+
   /* --- REGLAS Y LÍMITES --- */
   "limites": {
     "maxMovimientosMes": 500, // Límite de transacciones permitidas por mes
-    "maxCategorias": 10,       // Límite de categorías personalizadas por usuario
-    "adjuntos": true          // Permiso para subir imágenes/recibos (imgUrl)
+    "maxCategorias": 10, // Límite de categorías personalizadas por usuario
+    "adjuntos": true, // Permiso para subir imágenes/recibos (imgUrl)
   },
 
   /* --- TIMESTAMPS DE CICLO DE VIDA --- */
-  "createdAt": ISODate(), // Fecha exacta de registro
-  "updatedAt": ISODate(), // Se actualiza en cada modificación del perfil
-  "deletedAt": ISODate(), // Se llena solo si el usuario solicita baja (Soft Delete)
+  "createdAt": "ISODate()", // Fecha exacta de registro
+  "updatedAt": "ISODate()", // Se actualiza en cada modificación del perfil
+  "deletedAt": "ISODate()", // Se llena solo si el usuario solicita baja (Soft Delete)
 
   /* --- TRAZABILIDAD Y AUDITORÍA --- */
   "auditoria": {
     "creadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "SISTEMA"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "SISTEMA",
     },
     "editadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "SISTEMA"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "SISTEMA",
     },
     "eliminadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "SISTEMA"
-    }
-  }
+      "usuarioId": "ObjectId('...')",
+      "nombre": "SISTEMA",
+    },
+  },
 }

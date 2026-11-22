@@ -5,30 +5,31 @@
  */
 {
   /* --- IDENTIFICACIÓN --- */
-  "_id": ObjectId("..."),
-  "usuarioId": ObjectId("..."),
+  "_id": "ObjectId('...')",
+  "usuarioId": "ObjectId('...')",
   "referencia": "TXN-2025-08-001", // Código de rastreo único
   "origen": "MANUAL", // [MANUAL | IMPORTADO | SISTEMA | API]
 
   /* --- CLASIFICACIÓN Y RELACIONES --- */
-  "entidadId": ObjectId("..."), // Si es null es tipo transferencia
+  "entidadId": "ObjectId('...')", // Si es null es tipo transferencia
   "divisaId": "COP", // Código ISO de la moneda
-  "categoriaId": ObjectId("..."),
-  "subcategoriaId": ObjectId("..."), 
+  "categoriaId": "ObjectId('...')",
+  "subcategoriaId": "ObjectId('...')",
 
   /* --- DATOS DE LA TRANSACCIÓN --- */
-  "fecha": ISODate("2025-08-01T00:00:00Z"),
+  "fecha": "ISODate('2025-08-01T00:00:00Z')",
   "tipo": "INGRESO", // [INGRESO | EGRESO | TRANSFERENCIA]
   "monto": 1509620, // Negativo para egresos
   "concepto": {
     "titulo": "Pago nómina",
-    "detalle": ""
+    "detalle": "",
   },
 
   /* --- LÓGICA DE TRANSFERENCIA --- */
-  "transferencia": { // Solo existe si tipo === TRANSFERENCIA
-    "origenEntidadId": ObjectId("..."),
-    "destinoEntidadId": ObjectId("...")
+  "transferencia": {
+    // Solo existe si tipo === TRANSFERENCIA
+    "origenEntidadId": "ObjectId('...')",
+    "destinoEntidadId": "ObjectId('...')",
   },
 
   /* --- METADATOS Y ESTADO --- */
@@ -41,29 +42,29 @@
       "tipo": "FACTURA", // FACTURA | RECIBO | TRANSFERENCIA | OTRO
       "mimeType": "image/jpeg",
       "size": 234567,
-      "uploadedAt": ISODate()
-    }
+      "uploadedAt": "ISODate()",
+    },
   ],
   "isDeleted": false, // Nunca se eliminan físicamente los documentos
 
   /* --- TIMESTAMPS DE CICLO DE VIDA --- */
-  "createdAt": ISODate(), // Fecha exacta de registro
-  "updatedAt": ISODate(), // Se actualiza en cada modificación del perfil
-  "deletedAt": ISODate(), // Se llena solo si el usuario solicita baja (Soft Delete)
+  "createdAt": "ISODate()", // Fecha exacta de registro
+  "updatedAt": "ISODate()", // Se actualiza en cada modificación del perfil
+  "deletedAt": "ISODate()", // Se llena solo si el usuario solicita baja (Soft Delete)
 
   /* --- TRAZABILIDAD Y AUDITORÍA --- */
   "auditoria": {
     "creadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "Montiel"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "Montiel",
     },
     "editadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "Montiel"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "Montiel",
     },
     "eliminadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "Montiel"
-    }
-  }
+      "usuarioId": "ObjectId('...')",
+      "nombre": "Montiel",
+    },
+  },
 }

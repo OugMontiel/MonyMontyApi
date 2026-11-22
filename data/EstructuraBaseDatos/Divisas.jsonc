@@ -10,23 +10,23 @@
   "tipo": "DIVISA",
 
   /* --- TIMESTAMPS DE CICLO DE VIDA --- */
-  "createdAt": ISODate(),
-  "updatedAt": ISODate(),
-  "deletedAt": ISODate(), // Solo se llena si se deshabilita la moneda
+  "createdAt": "ISODate()",
+  "updatedAt": "ISODate()",
+  "deletedAt": "ISODate()", // Solo se llena si se deshabilita la moneda
 
   /* --- TRAZABILIDAD Y AUDITORÍA --- */
   "auditoria": {
     "creadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "Montiel"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "Montiel",
     },
     "editadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "Montiel"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "Montiel",
     },
     "eliminadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "Montiel"
-    }
-  }
+      "usuarioId": "ObjectId('...')",
+      "nombre": "Montiel",
+    },
+  },
 }
