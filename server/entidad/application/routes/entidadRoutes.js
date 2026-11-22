@@ -5,10 +5,8 @@ const entidadValidator = require("../validator/entidadValidator");
 const entidadController = require("../controllers/entidadController");
 const handleValidation = require("../../../core/middlewares/handleValidation");
 
-router.get("/", entidadValidator.noBodyNoQuery(), handleValidation,
-    (req, res) => entidadController.obtenerEntidades(req, res));
+router.get("/", entidadValidator.noBodyNoQuery(), handleValidation, (req, res) => entidadController.obtenerEntidades(req, res));
 
-router.post("/", entidadValidator.validarCreacion(), handleValidation,
-    (req, res) => entidadController.crearEntidad(req, res));
+router.post("/", entidadValidator.validarCreacion(), handleValidation, (req, res) => entidadController.crearEntidad(req, res));
 
 module.exports = router;

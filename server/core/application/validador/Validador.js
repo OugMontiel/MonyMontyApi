@@ -80,7 +80,10 @@ class Validador {
    * @returns {import("express-validator").ValidationChain} Cadena de validación para Express.
    */
   requiredObjectId = (field, mensaje = `El campo ${field} es obligatorio`, mensajeTipo = `El campo ${field} debe ser ObjectId`) =>
-    body(field).notEmpty().withMessage(mensaje).custom((value) => {
+    body(field)
+      .notEmpty()
+      .withMessage(mensaje)
+      .custom((value) => {
         if (!ObjectId.isValid(value)) {
           throw new Error(mensajeTipo);
         }

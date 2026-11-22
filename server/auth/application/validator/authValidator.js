@@ -13,11 +13,7 @@ class AuthValidator {
   validatorSessionLogin = () => {
     return [
       // Validación de password
-      body("password")
-        .notEmpty()
-        .withMessage("La contraseña es obligatoria")
-        .isLength({min: 8})
-        .withMessage("Credenciales inválidas"),
+      body("password").notEmpty().withMessage("La contraseña es obligatoria").isLength({min: 8}).withMessage("Credenciales inválidas"),
 
       // Validación de email
       body("email")
