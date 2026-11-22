@@ -2,8 +2,7 @@
 
 Este documento define el **flujo oficial de trabajo con Git** para el proyecto.
 
-> ⚠️ Este equipo **no utiliza Git Flow CLI**.
-> El flujo se basa en ramas manuales + Pull Requests.
+> ⚠️ Este equipo **no utiliza Git Flow CLI**. El flujo se basa en ramas manuales + Pull Requests.
 
 ## 🧠 1. Ramas permanentes
 
@@ -40,7 +39,7 @@ docs/swagger-endpoints
 
 Cada rama sigue este ciclo:
 
-**Se crea → Se trabaja →  Se hace Pull Request → Se merge → Se elimina**
+**Se crea → Se trabaja → Se hace Pull Request → Se merge → Se elimina**
 
 > ❌ Una rama no debe vivir más de un Pull Request.
 
@@ -88,12 +87,13 @@ git checkout -b hotfix/error-critico
 
 Después se debe hacer PR hacia:
 
-* `main`
-* `develop`
+- `main`
+- `develop`
 
 Luego la rama se elimina.
 
 ## 🧹 6. Limpieza periódica
+
 Revisión recomendada semanal:
 
 ```bash
@@ -105,13 +105,13 @@ Toda rama mergeada que no sea `main` o `develop` debe eliminarse.
 
 ## 🧭 7. Reglas de oro
 
-* ✔ Nombre claro y corto
-* ✔ Una tarea por rama
-* ✔ Pull Request obligatorio
-* ✔ No hacer commits directos a `main`
-* ✔ Borrar la rama después del merge
+- ✔ Nombre claro y corto
+- ✔ Una tarea por rama
+- ✔ Pull Request obligatorio
+- ✔ No hacer commits directos a `main`
+- ✔ Borrar la rama después del merge
 
 ## ℹ️ Nota sobre Git Flow
 
-El modelo Git Flow clásico y la herramienta `git-flow` **no forman parte del flujo oficial** del proyecto.
-Si un desarrollador decide usar esa herramienta localmente, debe respetar estas mismas reglas y estructura de ramas.
+El modelo Git Flow clásico y la herramienta `git-flow` **no forman parte del flujo oficial** del proyecto. Si un desarrollador decide usar
+esa herramienta localmente, debe respetar estas mismas reglas y estructura de ramas.
