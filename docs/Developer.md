@@ -2,9 +2,9 @@
 
 Esta estructura combina:
 
-* Arquitectura Hexagonal (Ports & Adapters)
-* Organización vertical por módulo
-* Enfoque práctico para APIs Node.js escalables
+- Arquitectura Hexagonal (Ports & Adapters)
+- Organización vertical por módulo
+- Enfoque práctico para APIs Node.js escalables
 
 ## 📦 Estructura base
 
@@ -23,32 +23,31 @@ Esta estructura combina:
 
 ## 1. Capa Application (Entrada)
 
-Gestiona la comunicación con el mundo exterior (HTTP).
-Aquí **no vive la lógica del negocio**, solo coordinación.
+Gestiona la comunicación con el mundo exterior (HTTP). Aquí **no vive la lógica del negocio**, solo coordinación.
 
 ### `routes/`
 
-* Define rutas HTTP
-* Conecta endpoint → validator → controller
+- Define rutas HTTP
+- Conecta endpoint → validator → controller
 
 ### `validator/`
 
-* Valida `req.body`, `req.params`, `req.query`
-* Evita que datos inválidos entren al sistema
+- Valida `req.body`, `req.params`, `req.query`
+- Evita que datos inválidos entren al sistema
 
 ### `controllers/`
 
-* Reciben la petición HTTP
-* Llaman al servicio
-* Devuelven la respuesta
-* No acceden a la base de datos
-* No contienen reglas de negocio
+- Reciben la petición HTTP
+- Llaman al servicio
+- Devuelven la respuesta
+- No acceden a la base de datos
+- No contienen reglas de negocio
 
 ### `services/`
 
-* Implementan casos de uso
-* Coordinan repositorios y modelos
-* Manejan flujos y decisiones
+- Implementan casos de uso
+- Coordinan repositorios y modelos
+- Manejan flujos y decisiones
 
 📌 Si tu lógica involucra múltiples pasos, reglas o decisiones, debería vivir aquí, no en el controlador.
 
@@ -58,13 +57,13 @@ Es independiente de tecnología.
 
 ### `models/`
 
-* Entidades del negocio (`Usuario`, `Movimiento`, etc.)
-* Contienen reglas propias
+- Entidades del negocio (`Usuario`, `Movimiento`, etc.)
+- Contienen reglas propias
 
 ### `repositories/`
 
-* Son interfaces hacia los datos
-* Definen operaciones como:
+- Son interfaces hacia los datos
+- Definen operaciones como:
 
 ```text
 findById
@@ -81,8 +80,8 @@ Implementa lo que el dominio necesita, pero sin lógica de negocio.
 
 ### `mongodb.js`
 
-* Configura conexión a MongoDB
-* Maneja cliente y configuración
+- Configura conexión a MongoDB
+- Maneja cliente y configuración
 
 Si se cambia la base de datos, el impacto se queda aquí.
 
@@ -115,8 +114,8 @@ Infrastructure (DB)
 
 ## 🎯 Beneficios
 
-* Escalable
-* Mantenible
-* Bajo acoplamiento
-* Fácil de testear
-* Cambios tecnológicos sin romper negocio
+- Escalable
+- Mantenible
+- Bajo acoplamiento
+- Fácil de testear
+- Cambios tecnológicos sin romper negocio

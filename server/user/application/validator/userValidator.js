@@ -33,7 +33,11 @@ class UserValidator {
       body("apellido").notEmpty().withMessage("El apellido es obligatorio").isString(),
 
       // Validación de email
-      body("email").notEmpty().withMessage("Agregar un correo electrónico").isEmail().withMessage("Por favor, introduce una dirección de correo electrónico válida"),
+      body("email")
+        .notEmpty()
+        .withMessage("Agregar un correo electrónico")
+        .isEmail()
+        .withMessage("Por favor, introduce una dirección de correo electrónico válida"),
 
       // Validación para el plan de usuario
       body("planId")
@@ -93,7 +97,11 @@ class UserValidator {
       body("nombre").notEmpty().withMessage("El nombre es obligatorio").isString(),
 
       // Validación de email
-      body("email").notEmpty().withMessage("Agregar un correo electrónico").isEmail().withMessage("Por favor, introduce una dirección de correo electrónico válida"),
+      body("email")
+        .notEmpty()
+        .withMessage("Agregar un correo electrónico")
+        .isEmail()
+        .withMessage("Por favor, introduce una dirección de correo electrónico válida"),
 
       // para el plan
       body("planId")

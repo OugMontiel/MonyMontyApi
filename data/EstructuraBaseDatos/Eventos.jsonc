@@ -5,26 +5,26 @@
  */
 {
   "_id": "ObjectId('...')",
-  
+
   /* --- CLASIFICACIÓN DEL EVENTO --- */
   "tipo": "EDITADO", // [CREADO | EDITADO | ELIMINADO | RESTAURADO]
   "coleccion": "MOVIMIENTO", // [MOVIMIENTO | USUARIO | CATEGORIA | ENTIDAD | DIVISA]
-  
+
   /* --- REFERENCIAS --- */
   "documentoId": "ObjectId('...')", // ID del registro afectado
-  "usuarioId": "ObjectId('...')",    // Quién realizó la acción
-  "createdAt": "ISODate()",         // Cuándo ocurrió exactamente
+  "usuarioId": "ObjectId('...')", // Quién realizó la acción
+  "createdAt": "ISODate()", // Cuándo ocurrió exactamente
 
   /* --- DIFERENCIA DE DATOS (Diff) --- */
   "payload": {
     "antes": {},
-    "despues": {}
+    "despues": {},
   },
 
   /* --- METADATOS ADICIONALES --- */
   "metadata": {
     "ip": "...",
     "dispositivo": "...",
-    "razon": "..."
-  }
+    "razon": "...",
+  },
 }

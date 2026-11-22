@@ -1,15 +1,15 @@
 # 📘 Guía de Estándares para APIs REST
 
-> Este documento define las **reglas, convenciones y buenas prácticas** para el diseño de APIs dentro del proyecto.
-> No describe endpoints específicos. El código es la fuente de verdad.
+> Este documento define las **reglas, convenciones y buenas prácticas** para el diseño de APIs dentro del proyecto. No describe endpoints
+> específicos. El código es la fuente de verdad.
 
 ## 🧱 1. Principios Generales
 
-* La API sigue el estilo **REST**
-* Comunicación vía **HTTP + JSON**
-* Las rutas representan **recursos**, no acciones
-* Las respuestas deben ser **consistentes** en estructura
-* El backend es la fuente de verdad, la documentación describe normas
+- La API sigue el estilo **REST**
+- Comunicación vía **HTTP + JSON**
+- Las rutas representan **recursos**, no acciones
+- Las respuestas deben ser **consistentes** en estructura
+- El backend es la fuente de verdad, la documentación describe normas
 
 ## 🌍 2. Base de la API
 
@@ -28,7 +28,8 @@
 | Header requerido | `Cookie: connect.sid=...`     |
 | Dónde se valida  | Middleware por rutas          |
 
-> **Nota:** El sistema utiliza `express-session` para manejar la autenticación. Internamente se genera un JWT, pero este se almacena en la sesión del servidor (`req.session.token`) y no requiere ser enviado manualmente por el cliente en un header `Authorization`.
+> **Nota:** El sistema utiliza `express-session` para manejar la autenticación. Internamente se genera un JWT, pero este se almacena en la
+> sesión del servidor (`req.session.token`) y no requiere ser enviado manualmente por el cliente en un header `Authorization`.
 
 ## 📦 4. Estructura de Respuestas
 
@@ -87,34 +88,34 @@
 
 Reglas:
 
-* Usar sustantivos, no verbos
-* Usar plural para colecciones
-* IDs como parámetros de ruta
-* Filtros en query params
+- Usar sustantivos, no verbos
+- Usar plural para colecciones
+- IDs como parámetros de ruta
+- Filtros en query params
 
 ## 🔍 7. Query Params
 
 Usados para:
 
-* Paginación → `?page=1&limit=10`
-* Filtros → `?status=active`
-* Búsquedas → `?search=diego`
+- Paginación → `?page=1&limit=10`
+- Filtros → `?status=active`
+- Búsquedas → `?search=diego`
 
 Nunca usar query params para operaciones destructivas.
 
 ## 🧠 8. Validaciones
 
-* Validar datos **antes** de llegar a la lógica de negocio
-* Errores de validación → `400`
-* Errores de reglas de negocio → `422`
+- Validar datos **antes** de llegar a la lógica de negocio
+- Errores de validación → `400`
+- Errores de reglas de negocio → `422`
 
 ## 🧼 9. Buenas Prácticas Obligatorias
 
-* No exponer datos sensibles
-* No devolver stack traces
-* Manejo de errores centralizado
-* Respuestas consistentes
-* Logs solo en backend, no en respuestas
+- No exponer datos sensibles
+- No devolver stack traces
+- Manejo de errores centralizado
+- Respuestas consistentes
+- Logs solo en backend, no en respuestas
 
 ## 📁 10. Fuente de Verdad
 
@@ -128,9 +129,9 @@ Nunca usar query params para operaciones destructivas.
 
 Swagger se implementará cuando:
 
-* La API sea pública o usada por terceros
-* Exista versión estable
-* Se requiera contrato formal
+- La API sea pública o usada por terceros
+- Exista versión estable
+- Se requiera contrato formal
 
 Hasta entonces, **no se mantiene OpenAPI** para evitar documentación falsa.
 
@@ -138,7 +139,7 @@ Hasta entonces, **no se mantiene OpenAPI** para evitar documentación falsa.
 
 Este archivo existe para:
 
-* Mantener coherencia entre equipos
-* Evitar discusiones sobre formatos
-* Reducir deuda técnica
-* Facilitar escalabilidad futura
+- Mantener coherencia entre equipos
+- Evitar discusiones sobre formatos
+- Reducir deuda técnica
+- Facilitar escalabilidad futura

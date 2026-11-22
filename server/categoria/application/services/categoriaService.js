@@ -64,6 +64,4 @@ class CategoriaService {
   }
 }
 
-
-
 module.exports = new CategoriaService();

@@ -54,7 +54,7 @@ class ConnectToDatabase {
     try {
       const modoAutenticacion = process.env.MONGO_AUTH_MODE?.toLowerCase();
       const host = process.env.MONGO_HOST;
-      
+
       const dbName = process.env.MONGO_DB_NAME;
       const nombreBaseDatos = dbName || "";
 
@@ -83,8 +83,8 @@ class ConnectToDatabase {
         }
 
         urlConexion = usaSrv
-        ? `${process.env.MONGO_ACCESS}${usuarioEncoded}:${pwdEncoded}@${host}/${nombreBaseDatos}?retryWrites=true&w=majority`
-        : `${process.env.MONGO_ACCESS}${usuarioEncoded}:${pwdEncoded}@${host}:${port}/${nombreBaseDatos}`;
+          ? `${process.env.MONGO_ACCESS}${usuarioEncoded}:${pwdEncoded}@${host}/${nombreBaseDatos}?retryWrites=true&w=majority`
+          : `${process.env.MONGO_ACCESS}${usuarioEncoded}:${pwdEncoded}@${host}:${port}/${nombreBaseDatos}`;
       } else if (modoAutenticacion === "certificate") {
         const rutaCertificado = process.env.MONGO_CERT_PATH;
 
@@ -111,9 +111,10 @@ class ConnectToDatabase {
 
       return this.db;
     } catch (error) {
-      const detalle = error.code === "ENOENT"
-        ? `No se encontró el certificado configurado en MONGO_CERT_PATH: ${process.env.MONGO_CERT_PATH}`
-        : error.message;
+      const detalle =
+        error.code === "ENOENT"
+          ? `No se encontró el certificado configurado en MONGO_CERT_PATH: ${process.env.MONGO_CERT_PATH}`
+          : error.message;
       console.error(`Error al conectar a MongoDB (${process.env.MONGO_AUTH_MODE || "modo no configurado"}): ${detalle}`);
       this.cliente = undefined;
       this.db = undefined;
