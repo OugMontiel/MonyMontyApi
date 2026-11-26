@@ -1,0 +1,31 @@
+/**
+ * ARCHIVO: facturacion.schema.jsonc
+ * DESCRIPCIÓN: Historial de pagos y vigencias por usuario.
+ */
+{
+  "_id": "ObjectId('...')",
+  "usuarioId": "ObjectId('...')",  // Referencia a 'Usuarios'
+  "planId": "BASICO_ANUAL",        // Referencia al _id de 'Planes'
+
+  /* --- DETALLE DEL COBRO --- */
+  "monto": 59900,
+  "moneda": "COP",                 // Recomendado usar estándar ISO: "COP" | "USD"
+  "estado": "PAGADO",              // PENDIENTE | PAGADO | FALLIDO | REEMBOLSADO
+  "pasarela": "WOMPI",             // WOMPI | PAYU | STRIPE | MANUAL
+  "referenciaExterna": "tx_98765",
+
+  /* --- VIGENCIA  --- */
+  "periodoInicio": "ISODate()",
+  "periodoFin": "ISODate()",       // periodoInicio + plan.diasPlan
+  "fechaPago": "ISODate()",
+
+  /* --- TIMESTAMPS Y AUDITORÍA --- */
+  "createdAt": "ISODate()",
+  "updatedAt": "ISODate()",
+  "deletedAt": null,
+  "auditoria": {
+    "creadoPor": { "usuarioId": "ObjectId('...')", "nombre": "SISTEMA" },
+    "editadoPor": { "usuarioId": "ObjectId('...')", "nombre": "SISTEMA" },
+    "eliminadoPor": { "usuarioId": null, "nombre": null }
+  }
+}

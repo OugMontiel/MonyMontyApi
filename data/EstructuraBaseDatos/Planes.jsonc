@@ -1,37 +1,57 @@
 /**
  * ARCHIVO: plan.schema.jsonc
- * DESCRIPCIÓN: Estructura de la colección 'Planes'.
+ * DESCRIPCIÓN: Estructura del Documento de planes.
  * NOTA: Define las reglas de negocio y límites técnicos para cada nivel de suscripción (SaaS).
  */
 {
-  "_id": "BASICO", // Identificador semántico: [BASICO | PRO | PLUS]
-  "nombre": "Plan Básico", 
+  "_id": "ObjectId('...')", // Identificador único de esta Plan
+  "nombre": "BASICO", // Identificador semántico (Plan Básico, plan Prueba)
+  "descripcion": "", // Descripción del plan
   
-  /* --- REGLAS Y LÍMITES --- */
+  /* --- COMERCIAL Y PERIODO --- */
+  "esGratis": false, // true solo en FREE
+  "diasDelPlan": 14, // Dias de duracion del plan 
+  "periodoFacturacion": null, // MENSUAL | ANUAL | null (null en FREE y TRIAL)
+  "Precios":[
+    {
+      "precio": 0,
+      "moneda": "COP"
+    },
+    {
+      "precio": 0,
+      "moneda": "dolar"
+    }
+  ], 
+
+  /* --- REGLAS Y LÍMITES TÉCNICOS --- */
   "limites": {
     "maxMovimientosMes": 500, // Límite de transacciones permitidas por mes
-    "maxCategorias": 10,       // Límite de categorías personalizadas por usuario
-    "adjuntos": true          // Permiso para subir imágenes/recibos (imgUrl)
+    "maxCategorias": 10, // Límite de categorías personalizadas por usuario
+    "adjuntos": true, // Permiso para subir imágenes/recibos (imgUrl)
   },
 
-  /* --- TIMESTAMPS DE CICLO DE VIDA --- */
-  "createdAt": ISODate(), // Fecha exacta de registro
-  "updatedAt": ISODate(), // Se actualiza en cada modificación del perfil
-  "deletedAt": ISODate(), // Se llena solo si el usuario solicita baja (Soft Delete)
+  /* --- PARA UI --- */
+  "disponible": true, // true para Planes Disponibles
+  "caracteristicas": ["Todo lo de Free, con cuentas ilimitadas", "Presupuesto, deudas y préstamos", "Metas y 1 natillera"],
 
-  /* --- TRAZABILIDAD Y AUDITORÍA --- */
+
+  /* --- TIMESTAMPS Y AUDITORÍA --- */
+  "createdAt": "ISODate()", // Fecha exacta de registro
+  "updatedAt": "ISODate()", // Se actualiza en cada modificación del perfil
+  "deletedAt": "ISODate()", // Se llena solo si el usuario solicita baja (Soft Delete)
+
   "auditoria": {
     "creadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "SISTEMA"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "SISTEMA",
     },
     "editadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "SISTEMA"
+      "usuarioId": "ObjectId('...')",
+      "nombre": "SISTEMA",
     },
     "eliminadoPor": {
-      "usuarioId": ObjectId("..."),
-      "nombre": "SISTEMA"
-    }
-  }
+      "usuarioId": "ObjectId('...')",
+      "nombre": "SISTEMA",
+    },
+  },
 }
