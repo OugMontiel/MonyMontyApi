@@ -13,11 +13,18 @@
   "password": "$2b$10$3A68Z9lrOMj21G1GPIwLlOlLQObBXUvfjzNuZVnZd4sq8ywO0rMi.", // Hash (Bcrypt/Argon2). Nunca texto plano.
   "tokenSesion": "", // Token de sesion
   "tokenRecuperacion": "", // Token de recuperacion
-
+  "avatar": null, // URL del avatar del usuario
+  
+  /* --- PLAN Y CONTROL--- */
   "estado": "ACTIVO", // Control de acceso: ACTIVO, SUSPENDIDO, INACTIVO
   "planId": "BASICO", // Determina límites de la colección 'planes': BASICO | PRO | PLUS
 
-  "avatar": null, // URL del avatar del usuario
+    /* --- AUDITORÍA LEGAL --- */
+  "legal": {
+    "aceptado": true,
+    "version": "2026-01",
+    "fechaAceptacion": "ISODate()"
+  },  
 
   /* --- TIMESTAMPS DE CICLO DE VIDA --- */
   "createdAt": "ISODate()", // Fecha exacta de registro
